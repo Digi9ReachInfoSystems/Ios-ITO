@@ -475,7 +475,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                     ),
                   ),
-                  if (FFAppState().userInfo.showresult == 1)
+                  if (FFAppState().userInfo.showresult == 2)
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),

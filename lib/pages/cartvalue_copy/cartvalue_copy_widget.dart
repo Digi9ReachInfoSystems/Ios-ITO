@@ -38,29 +38,21 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('CARTVALUE_COPY_CartvalueCopy_ON_INIT_STA');
       logFirebaseEvent('CartvalueCopy_update_app_state');
-      FFAppState().update(() {
-        FFAppState().combocart = valueOrDefault<double>(
-          functions.finalcartamountCopy(FFAppState().totalcombocart.toList()),
-          0.0,
-        );
-        FFAppState().combodedliveryfee = valueOrDefault<double>(
-          functions.deliveryfee(FFAppState().totalcombocart.toList()),
-          0.0,
-        );
-        FFAppState().combofinalamount = functions.doubletoString(
-            functions.discountedamount(
-                functions
-                    .stringToInt(FFAppState().noofselected.length.toString())
-                    .toString(),
-                functions
-                    .payableamount(
-                        FFAppState().combocart, FFAppState().combodedliveryfee)
-                    .toString()));
-        FFAppState().deliverablecount =
-            functions.deliverablecount(FFAppState().totalcombocart.toList());
-        FFAppState().discountamount = functions.minusdiscountamount(
-            FFAppState().combocart, FFAppState().combofinalamount)!;
-      });
+     FFAppState().combocart = valueOrDefault<double>(
+        functions.finalcartamountCopy(FFAppState().totalcombocart.toList()),
+        0.0,
+      );
+      FFAppState().combodedliveryfee = valueOrDefault<double>(
+        functions.deliveryfee(FFAppState().totalcombocart.toList()),
+        0.0,
+      );
+      FFAppState().deliverablecount =
+          functions.deliverablecount(FFAppState().totalcombocart.toList());
+      FFAppState().discountamount =
+          functions.discountfee(FFAppState().totalcombocart.toList());
+      FFAppState().combofinalamount = functions.payableamount(
+          FFAppState().combocart, FFAppState().combodedliveryfee);
+      FFAppState().update(() {});
     });
   }
 

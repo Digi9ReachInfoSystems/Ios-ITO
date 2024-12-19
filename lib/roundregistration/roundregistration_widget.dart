@@ -79,6 +79,13 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
         scienceItem,
         r'''$.combo_id''',
       ).toString());
+      FFAppState().discountamount =
+          functions.discountfee(FFAppState().totalcombocart.toList());
+      FFAppState().combodedliveryfee = valueOrDefault<double>(
+        functions.deliveryfee(FFAppState().totalcombocart.toList()),
+        0.0,
+      );
+        FFAppState().update(() {});
     });
 
     // Show snack bar
@@ -437,9 +444,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
           style: TextStyle(),
         ),
         TextSpan(
-          text: FFLocalizations.of(context).getText(
-            'y0oa6vw9' /* / */,
-          ),
+          text: "/",
           style: TextStyle(
             color: Color(0x95FF0000),
             
@@ -711,9 +716,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                         ),
                                       ),
                                       Text(
-                                        FFLocalizations.of(context).getText(
-                                          'rjobuwqa' /* 80 / subject */,
-                                        ),
+                                        "₹ 80 / subject",
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                       ),
@@ -822,6 +825,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                       ).toString(),
                                                       deliverablecount: '1',
                                                     ));
+                                                    
                                                     FFAppState()
                                                         .addToCertificateId(
                                                             getJsonField(

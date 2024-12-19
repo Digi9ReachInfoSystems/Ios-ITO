@@ -185,7 +185,7 @@ DateTime? timeup(
 double finalcartamountCopy(List<Round2cartStruct>? cartitems) {
   double value = 0.0;
   for (var item in cartitems!) {
-    double? parsedValue = double.tryParse(item.discountamout);
+    double? parsedValue = double.tryParse(item.productamount);
     if (parsedValue != null) {
       print(value);
       value = value + parsedValue;
@@ -233,16 +233,28 @@ int calculatetotalamount(
 }
 
 double discountfee(List<Round2cartStruct>? cartitems) {
-  double value = 0.0;
-  for (var item in cartitems!) {
-    double? parsedValue = double.tryParse(item.discountamout);
-    if (parsedValue != null) {
-      print(value);
-      value = value + parsedValue;
-      print(value);
+   double totalDiscount = 0.0;
+
+  // Check for null cart items
+  if (cartitems == null) return totalDiscount;
+
+  for (var item in cartitems) {
+    // Safely parse discount and product amounts with null checks
+    double discountAmount = double.tryParse(item.discountamout ?? '0') ?? 0.0;
+    double productAmount = double.tryParse(item.productamount ?? '0') ?? 0.0;
+
+    // Calculate the discount difference
+    // Skip the minus operation if discountAmount is 0 or productAmount is 80
+    if (discountAmount == 0 || productAmount == 80) {
+      continue; // Skip this iteration
     }
+    double discountDifference = discountAmount - productAmount;
+
+    // Accumulate the discount value
+    totalDiscount += discountDifference;
   }
-  return value;
+
+  return totalDiscount;
 }
 
 String discountedamount(
