@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "453770555722",
+    "firebase_url": "https://indian-talent-olympaid-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "indian-talent-olympaid",
+    "storage_bucket": "indian-talent-olympaid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453770555722:android:e4fba0bdb6217c2d5ed1b3",
+        "android_client_info": {
+          "package_name": "com.ito.onlineexam.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453770555722-s18sqn0uhakc62t0ha9tbdlfoothbhk3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdXAOI7Sh2eCcUCkMe04Y5AvJPoPkj5oY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453770555722-s18sqn0uhakc62t0ha9tbdlfoothbhk3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "453770555722-hncblh312vughe608ht2dsfsna3red5l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ito.onlineexam.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
