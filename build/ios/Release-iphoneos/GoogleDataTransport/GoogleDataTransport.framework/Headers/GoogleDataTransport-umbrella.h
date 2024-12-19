@@ -1,26 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "GDTCORClock.h"
-#import "GDTCORConsoleLogger.h"
-#import "GDTCOREndpoints.h"
-#import "GDTCOREvent.h"
-#import "GDTCOREventDataObject.h"
-#import "GDTCOREventTransformer.h"
-#import "GDTCORProductData.h"
-#import "GDTCORTargets.h"
-#import "GDTCORTransport.h"
-#import "GoogleDataTransport.h"
-
-FOUNDATION_EXPORT double GoogleDataTransportVersionNumber;
-FOUNDATION_EXPORT const unsigned char GoogleDataTransportVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:9849057a8330f67afe304b52828230495b0de050c4fec9cb7c188fb2918ec594
+size 623

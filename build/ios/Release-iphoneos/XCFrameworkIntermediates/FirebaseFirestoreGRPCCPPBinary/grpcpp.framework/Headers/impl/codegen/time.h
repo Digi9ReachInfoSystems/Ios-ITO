@@ -1,27 +1,3 @@
-//
-//
-// Copyright 2015 gRPC authors.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-//
-
-#ifndef GRPCPP_IMPL_CODEGEN_TIME_H
-#define GRPCPP_IMPL_CODEGEN_TIME_H
-
-// IWYU pragma: private
-
-/// TODO(chengyuc): Remove this file after solving compatibility.
-#include <grpcpp/support/time.h>
-
-#endif  // GRPCPP_IMPL_CODEGEN_TIME_H
+version https://git-lfs.github.com/spec/v1
+oid sha256:2482dd5148ad1031e84ddef282b237f670ad1c503829aa84914a52fa1d50e919
+size 837

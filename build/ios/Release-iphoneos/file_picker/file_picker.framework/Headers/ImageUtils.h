@@ -1,13 +1,3 @@
-//
-//  ImageUtils.h
-//  Pods
-//
-//  Created by Miguel Ruivo on 05/03/2019.
-//
-
-@interface ImageUtils : NSObject
-+ (BOOL)hasAlpha:(UIImage *)image;
-+ (NSURL*)saveTmpImage:(UIImage *)image;
-+ (NSDictionary *)getMetaDataFromImageData:(NSData *)imageData;
-+ (NSData *)imageFromImage:(NSData *)imageData withMetaData:(NSDictionary *)metadata;
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:cabe70549f097bdd760fbf3e66e7aaca2e06d1d07bf97a53765576f2e3770155
+size 343

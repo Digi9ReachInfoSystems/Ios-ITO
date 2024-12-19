@@ -1,27 +1,3 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-#import <Foundation/Foundation.h>
-#import <webview_flutter_wkwebview/FLTWebViewFlutterPlugin.h>
-#import <webview_flutter_wkwebview/FWFDataConverters.h>
-#import <webview_flutter_wkwebview/FWFGeneratedWebKitApis.h>
-#import <webview_flutter_wkwebview/FWFHTTPCookieStoreHostApi.h>
-#import <webview_flutter_wkwebview/FWFInstanceManager.h>
-#import <webview_flutter_wkwebview/FWFNavigationDelegateHostApi.h>
-#import <webview_flutter_wkwebview/FWFObjectHostApi.h>
-#import <webview_flutter_wkwebview/FWFPreferencesHostApi.h>
-#import <webview_flutter_wkwebview/FWFScriptMessageHandlerHostApi.h>
-#import <webview_flutter_wkwebview/FWFScrollViewDelegateHostApi.h>
-#import <webview_flutter_wkwebview/FWFScrollViewHostApi.h>
-#import <webview_flutter_wkwebview/FWFUIDelegateHostApi.h>
-#import <webview_flutter_wkwebview/FWFUIViewHostApi.h>
-#import <webview_flutter_wkwebview/FWFURLAuthenticationChallengeHostApi.h>
-#import <webview_flutter_wkwebview/FWFURLCredentialHostApi.h>
-#import <webview_flutter_wkwebview/FWFURLHostApi.h>
-#import <webview_flutter_wkwebview/FWFURLProtectionSpaceHostApi.h>
-#import <webview_flutter_wkwebview/FWFUserContentControllerHostApi.h>
-#import <webview_flutter_wkwebview/FWFWebViewConfigurationHostApi.h>
-#import <webview_flutter_wkwebview/FWFWebViewFlutterWKWebViewExternalAPI.h>
-#import <webview_flutter_wkwebview/FWFWebViewHostApi.h>
-#import <webview_flutter_wkwebview/FWFWebsiteDataStoreHostApi.h>
+version https://git-lfs.github.com/spec/v1
+oid sha256:87a17db21ed8cc57f771127dc327853952bd080d9c38eed839d24d428663b6b7
+size 1582

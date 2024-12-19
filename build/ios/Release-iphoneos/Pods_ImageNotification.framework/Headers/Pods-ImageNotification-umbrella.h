@@ -1,16 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-
-FOUNDATION_EXPORT double Pods_ImageNotificationVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_ImageNotificationVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:97ad6eb11734feeb2c38a38f51036332b850d55583fdc100b50351edd94014e0
+size 336

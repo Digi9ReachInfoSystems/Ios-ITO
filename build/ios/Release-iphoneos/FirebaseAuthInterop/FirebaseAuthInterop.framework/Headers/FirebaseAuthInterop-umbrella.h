@@ -1,17 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FIRAuthInterop.h"
-
-FOUNDATION_EXPORT double FirebaseAuthInteropVersionNumber;
-FOUNDATION_EXPORT const unsigned char FirebaseAuthInteropVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:eba8665f8d50319c711a5b9ad07e08b4bcef66cdfe29f37e7206c6ad1654261d
+size 357

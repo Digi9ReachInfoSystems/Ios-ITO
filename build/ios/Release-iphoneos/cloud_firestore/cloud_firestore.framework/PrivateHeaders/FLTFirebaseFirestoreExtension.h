@@ -1,15 +1,3 @@
-// Copyright 2023 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-#import <FirebaseFirestore/FirebaseFirestore.h>
-#import <Foundation/Foundation.h>
-
-@interface FLTFirebaseFirestoreExtension : NSObject
-
-@property(nonatomic, strong, readonly) FIRFirestore *instance;
-@property(nonatomic, strong, readonly) NSString *databaseURL;
-
-- (instancetype)initWithFirestoreInstance:(FIRFirestore *)instance
-                              databaseURL:(NSString *)databaseURL;
-
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:44073366a8dd0550ce67168af96081b38531cdca2bf0568b0b378ece1deee4b9
+size 567

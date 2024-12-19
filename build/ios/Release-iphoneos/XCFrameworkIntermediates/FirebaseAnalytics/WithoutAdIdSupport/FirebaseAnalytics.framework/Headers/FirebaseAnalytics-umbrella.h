@@ -1,24 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FIRAnalytics+AppDelegate.h"
-#import "FIRAnalytics+Consent.h"
-#import "FIRAnalytics+OnDevice.h"
-#import "FIRAnalytics.h"
-#import "FirebaseAnalytics.h"
-#import "FIREventNames.h"
-#import "FIRParameterNames.h"
-#import "FIRUserPropertyNames.h"
-
-FOUNDATION_EXPORT double FirebaseAnalyticsVersionNumber;
-FOUNDATION_EXPORT const unsigned char FirebaseAnalyticsVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:2ce8b2c0c1c487ad0cb30184cecf6533c3fa9b7a28858a7e2166a266d6f05553
+size 574

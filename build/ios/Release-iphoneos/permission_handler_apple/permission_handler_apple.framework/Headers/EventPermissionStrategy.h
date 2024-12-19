@@ -1,22 +1,3 @@
-//
-// Created by Razvan Lung(long1eu) on 2019-02-15.
-// Copyright (c) 2019 The Chromium Authors. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-#if PERMISSION_EVENTS | PERMISSION_EVENTS_FULL_ACCESS | PERMISSION_REMINDERS
-
-#import <EventKit/EventKit.h>
-
-@interface EventPermissionStrategy : NSObject <PermissionStrategy>
-@end
-
-#else
-
-#import "UnknownPermissionStrategy.h"
-@interface EventPermissionStrategy : UnknownPermissionStrategy
-@end
-
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:46221afa0188bf414740c307e34ddd6cfd77f8214665a93359c5f8bd4465375e
+size 491

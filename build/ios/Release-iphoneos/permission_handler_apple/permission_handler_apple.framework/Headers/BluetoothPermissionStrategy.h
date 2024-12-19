@@ -1,26 +1,3 @@
-//
-//  BluetoothPermissionStrategy.h
-//  permission_handler
-//
-//  Created by Rene Floor on 12/03/2021.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-#if PERMISSION_BLUETOOTH
-
-#import <CoreBluetooth/CoreBluetooth.h>
-
-@interface BluetoothPermissionStrategy : NSObject <PermissionStrategy, CBCentralManagerDelegate>
-- (void)initManagerIfNeeded;
-@end
-
-#else
-
-#import "UnknownPermissionStrategy.h"
-
-@interface BluetoothPermissionStrategy : UnknownPermissionStrategy
-@end
-
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:bd944f803bd14b65dda95d596dfe2b83aa68720f2dad7bcd33d68d15b809424e
+size 499

@@ -1,25 +1,3 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-#import <WebKit/WebKit.h>
-
-#if TARGET_OS_OSX
-#import <FlutterMacOS/FlutterMacOS.h>
-#else
-#import <Flutter/Flutter.h>
-#endif
-
-#import "FWFGeneratedWebKitApis.h"
-#import "FWFInstanceManager.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-/// Host api implementation for WKHTTPCookieStore.
-///
-/// Handles creating WKHTTPCookieStore that intercommunicate with a paired Dart object.
-@interface FWFHTTPCookieStoreHostApiImpl : NSObject <FWFWKHttpCookieStoreHostApi>
-- (instancetype)initWithInstanceManager:(FWFInstanceManager *)instanceManager;
-@end
-
-NS_ASSUME_NONNULL_END
+version https://git-lfs.github.com/spec/v1
+oid sha256:cdb3c4f9cc19282582a93a58182b82cfffb82134fd7082a86fb73e08271a8bf4
+size 714

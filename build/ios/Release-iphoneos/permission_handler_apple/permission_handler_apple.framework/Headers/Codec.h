@@ -1,17 +1,3 @@
-//
-// Created by Razvan Lung on 2019-02-15.
-// Copyright (c) 2019 The Chromium Authors. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionHandlerEnums.h"
-
-@interface Codec : NSObject
-+ (PermissionGroup)decodePermissionGroupFrom:(NSNumber *_Nonnull)event;
-
-+ (NSArray*_Nullable)decodePermissionGroupsFrom:(NSArray<NSNumber *> *_Nullable)event;
-
-+ (NSNumber *_Nullable)encodePermissionStatus:(enum PermissionStatus)permissionStatus;
-
-+ (NSNumber *_Nullable)encodeServiceStatus:(enum ServiceStatus)serviceStatus;
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:b94fbee9cf0709d600fd481edc63f0433cbbfdf3a4aaf5421e857f6f164c6994
+size 543

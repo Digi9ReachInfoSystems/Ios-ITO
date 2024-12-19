@@ -1,17 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FLTFirebaseFunctionsPlugin.h"
-
-FOUNDATION_EXPORT double cloud_functionsVersionNumber;
-FOUNDATION_EXPORT const unsigned char cloud_functionsVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:30230837b4a97e0fadccf2bbaf1e3876e736476d7db9a79f41d2e37d86a92a2f
+size 361

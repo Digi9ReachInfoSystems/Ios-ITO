@@ -1,19 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FLTIntegrationTestRunner.h"
-#import "IntegrationTestIosTest.h"
-#import "IntegrationTestPlugin.h"
-
-FOUNDATION_EXPORT double integration_testVersionNumber;
-FOUNDATION_EXPORT const unsigned char integration_testVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:9a172505392b4bca3c2b4440099f0e4a2b0cf57c517db999c4eb62dc67294db8
+size 430

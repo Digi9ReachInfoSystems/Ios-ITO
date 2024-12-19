@@ -1,14 +1,3 @@
-//
-//  SqfliteDarwinImport.h
-//  Shared import for SqfliteDarwinDB
-//
-// Not a header file as XCode might complain.
-//
-//  Created by Alexandre Roux on 03/12/2022.
-//
-#ifndef SqfliteDarwinImport_h
-#define SqfliteDarwinImport_h
-
-#import "SqfliteDarwinDB.h"
-
-#endif /* SqfliteDarwinImport_h */
+version https://git-lfs.github.com/spec/v1
+oid sha256:5845e9f2126557da9199d5ca716e6b571ef6a31aa7ed85fbd2f3420b4ad1eac8
+size 292

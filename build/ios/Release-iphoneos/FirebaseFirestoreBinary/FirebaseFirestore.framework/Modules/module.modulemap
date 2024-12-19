@@ -1,11 +1,3 @@
-framework module FirebaseFirestore {
-  umbrella header "FirebaseFirestoreBinary-umbrella.h"
-
-  export *
-  module * { export * }
-}
-
-module FirebaseFirestore.Swift {
-  header "FirebaseFirestore-Swift.h"
-  requires objc
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:fc3deb27685a31e5bdbe42617e127f25a087d3a45a90adf0c020446652f6c6d0
+size 219

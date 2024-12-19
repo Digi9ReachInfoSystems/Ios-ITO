@@ -1,23 +1,3 @@
-//
-// Created by Razvan Lung(long1eu) on 2019-02-15.
-// Copyright (c) 2019 The Chromium Authors. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-#if PERMISSION_LOCATION || PERMISSION_LOCATION_WHENINUSE || PERMISSION_LOCATION_ALWAYS
-
-#import <CoreLocation/CoreLocation.h>
-
-@interface LocationPermissionStrategy : NSObject <PermissionStrategy, CLLocationManagerDelegate>
-- (instancetype)initWithLocationManager;
-@end
-
-#else
-
-#import "UnknownPermissionStrategy.h"
-@interface LocationPermissionStrategy : UnknownPermissionStrategy
-@end
-
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:9b23516002beca462f063323e77a09d70209451e313943fb4c5404c096661cf7
+size 583

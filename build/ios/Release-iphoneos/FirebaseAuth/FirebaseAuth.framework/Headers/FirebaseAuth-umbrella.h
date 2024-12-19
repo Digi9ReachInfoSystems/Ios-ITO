@@ -1,30 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FIRAuth.h"
-#import "FIRAuthErrors.h"
-#import "FirebaseAuth.h"
-#import "FIREmailAuthProvider.h"
-#import "FIRFacebookAuthProvider.h"
-#import "FIRFederatedAuthProvider.h"
-#import "FIRGameCenterAuthProvider.h"
-#import "FIRGitHubAuthProvider.h"
-#import "FIRGoogleAuthProvider.h"
-#import "FIRMultiFactor.h"
-#import "FIRPhoneAuthProvider.h"
-#import "FIRRecaptchaBridge.h"
-#import "FIRTwitterAuthProvider.h"
-#import "FIRUser.h"
-
-FOUNDATION_EXPORT double FirebaseAuthVersionNumber;
-FOUNDATION_EXPORT const unsigned char FirebaseAuthVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:ff3a5abc8c72366c122e47a73bafa4b90664cbd83fd56e4a09f55e69f55fd863
+size 745

@@ -1,19 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FirebaseABTesting.h"
-#import "FIRExperimentController.h"
-#import "FIRLifecycleEvents.h"
-
-FOUNDATION_EXPORT double FirebaseABTestingVersionNumber;
-FOUNDATION_EXPORT const unsigned char FirebaseABTestingVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:8a3e058cfdee7aeefaa5a135449a35d5d84ef33975dd7b3f84d8348733ba1c5b
+size 423

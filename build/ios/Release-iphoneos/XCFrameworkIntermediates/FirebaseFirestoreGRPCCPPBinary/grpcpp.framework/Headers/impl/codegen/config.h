@@ -1,27 +1,3 @@
-//
-//
-// Copyright 2016 gRPC authors.
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-//
-//
-
-#ifndef GRPCPP_IMPL_CODEGEN_CONFIG_H
-#define GRPCPP_IMPL_CODEGEN_CONFIG_H
-
-// IWYU pragma: private
-
-/// TODO(chengyuc): Remove this file after solving compatibility.
-#include <grpcpp/support/config.h>
-
-#endif  // GRPCPP_IMPL_CODEGEN_CONFIG_H
+version https://git-lfs.github.com/spec/v1
+oid sha256:6fcd3b025dc11e1e88807ad33b3433f0c63bb61a3967a4ea8b4d740150b01f60
+size 845

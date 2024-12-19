@@ -1,22 +1,3 @@
-//
-// Created by Razvan Lung(long1eu) on 2019-02-15.
-// Copyright (c) 2019 The Chromium Authors. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-#if PERMISSION_SENSORS
-
-#import <CoreMotion/CoreMotion.h>
-
-@interface SensorPermissionStrategy : NSObject <PermissionStrategy>
-@end
-
-#else
-
-#import "UnknownPermissionStrategy.h"
-@interface SensorPermissionStrategy : UnknownPermissionStrategy
-@end
-
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:e79e6c16b1d91396884a73b1b346ffcbff04680a2ab0a58aa7f46da13a7fd1e1
+size 443

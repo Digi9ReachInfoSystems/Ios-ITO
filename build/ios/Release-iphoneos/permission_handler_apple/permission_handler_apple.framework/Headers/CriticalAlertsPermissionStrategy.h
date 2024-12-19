@@ -1,25 +1,3 @@
-//
-//  CriticalAlertsPermissionStrategy.h
-//  permission_handler
-//
-//  Created by Neal Soni on 2021/6/8.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-#if PERMISSION_CRITICAL_ALERTS
-
-#import <UserNotifications/UserNotifications.h>
-
-@interface CriticalAlertsPermissionStrategy : NSObject <PermissionStrategy>
-
-@end
-
-#else
-
-#import "UnknownPermissionStrategy.h"
-@interface CriticalAlertsPermissionStrategy : UnknownPermissionStrategy
-@end
-
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:af7220fe544716d1eedf4a04570c95423287b40bd0efed38dad511e3a1299dca
+size 470

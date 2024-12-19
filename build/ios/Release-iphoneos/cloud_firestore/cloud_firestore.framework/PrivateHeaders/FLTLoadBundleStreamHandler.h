@@ -1,36 +1,3 @@
-/*
- * Copyright 2022, the Chromium project authors.  Please see the AUTHORS file
- * for details. All rights reserved. Use of this source code is governed by a
- * BSD-style license that can be found in the LICENSE file.
- */
-
-//
-//  FLTLoadBundleStreamHandler.h
-//  Pods
-//
-//  Created by Russell Wheatley on 05/05/2021.
-//
-#import <TargetConditionals.h>
-
-#if TARGET_OS_OSX
-#import <FlutterMacOS/FlutterMacOS.h>
-#else
-#import <Flutter/Flutter.h>
-#endif
-
-@import FirebaseFirestore;
-
-#import <Foundation/Foundation.h>
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface FLTLoadBundleStreamHandler : NSObject <FlutterStreamHandler>
-@property(nonatomic, strong) FIRFirestore *firestore;
-@property(nonatomic, strong) FlutterStandardTypedData *bundle;
-
-- (instancetype)initWithFirestore:(FIRFirestore *)firestore
-                           bundle:(FlutterStandardTypedData *)bundle;
-
-@end
-
-NS_ASSUME_NONNULL_END
+version https://git-lfs.github.com/spec/v1
+oid sha256:90a0c2c739d5e8ab00be22bd64c93f75d9e71cfbe164027b833a11c88d799565
+size 889

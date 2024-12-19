@@ -1,15 +1,3 @@
-// Copyright 2020 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-#if TARGET_OS_OSX
-#import <FlutterMacOS/FlutterMacOS.h>
-#else
-#import <Flutter/Flutter.h>
-#endif
-
-#import <Foundation/Foundation.h>
-#import <firebase_core/FLTFirebasePlugin.h>
-
-@interface FLTFirebaseCrashlyticsPlugin : FLTFirebasePlugin <FlutterPlugin, FLTFirebasePlugin>
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:808a2d4a757c951927c82f74ed26b591a2416c0cedb686e190ae61ba8e2b4ea4
+size 443

@@ -1,25 +1,3 @@
-//
-//  AppTrackingTransparency.h
-//  permission_handler
-//
-//  Created by Jan-Derk on 21/05/2021.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-#if PERMISSION_APP_TRACKING_TRANSPARENCY
-
-#import <AppTrackingTransparency/AppTrackingTransparency.h>
-
-@interface AppTrackingTransparencyPermissionStrategy : NSObject <PermissionStrategy>
-@end
-
-#else
-
-#import "UnknownPermissionStrategy.h"
-
-@interface AppTrackingTransparencyPermissionStrategy : UnknownPermissionStrategy
-@end
-
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:1438aa142ae97157bc07035ed0854676091fc51fc5af88d6d22830ed1cf0e30d
+size 502

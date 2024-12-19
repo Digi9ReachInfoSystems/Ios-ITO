@@ -1,30 +1,3 @@
-/*
- *
- * Copyright 2016 gRPC authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-#ifndef GRPC_IMPL_CODEGEN_CONNECTIVITY_STATE_H
-#define GRPC_IMPL_CODEGEN_CONNECTIVITY_STATE_H
-
-// IWYU pragma: private, include <grpc/grpc.h>
-// IWYU pragma: friend "src/.*"
-
-#include <grpc/support/port_platform.h>
-
-/// TODO(chengyuc): Remove this file after solving compatibility.
-#include <grpc/impl/connectivity_state.h>
-
-#endif /* GRPC_IMPL_CODEGEN_CONNECTIVITY_STATE_H */
+version https://git-lfs.github.com/spec/v1
+oid sha256:a3279a1d98ab513d6379a4a7434b41d784185a07de29864f60eb2cb8bee0b07a
+size 981

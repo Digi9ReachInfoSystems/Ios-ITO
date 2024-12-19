@@ -1,16 +1,3 @@
-// Copyright 2020 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-#import <TargetConditionals.h>
-
-#if TARGET_OS_OSX
-#import <FlutterMacOS/FlutterMacOS.h>
-#else
-#import <Flutter/Flutter.h>
-#endif
-
-#import <Foundation/Foundation.h>
-
-@interface FLTFirebaseFirestoreWriter : FlutterStandardWriter
-- (void)writeValue:(id)value;
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:6be962caf98a12f4e74c4b6b338f7b5f86f872f2ab592dc64f3bea87df4169bb
+size 427

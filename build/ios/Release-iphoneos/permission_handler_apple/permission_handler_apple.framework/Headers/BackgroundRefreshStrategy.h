@@ -1,17 +1,3 @@
-//
-//  BackgroundRefreshStrategy.h
-//  permission_handler_apple
-//
-//  Created by Sebastian Roth on 28/09/2023.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-NS_ASSUME_NONNULL_BEGIN
-
-@interface BackgroundRefreshStrategy : NSObject<PermissionStrategy>
-
-@end
-
-NS_ASSUME_NONNULL_END
+version https://git-lfs.github.com/spec/v1
+oid sha256:13b66a61fbc5de99fc4c9f57fdc2b5ccc69989601cc1074e62bb82a6757683d9
+size 304

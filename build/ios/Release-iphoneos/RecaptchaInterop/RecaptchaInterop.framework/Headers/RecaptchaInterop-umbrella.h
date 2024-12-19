@@ -1,20 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "RCAActionProtocol.h"
-#import "RCARecaptchaClientProtocol.h"
-#import "RCARecaptchaProtocol.h"
-#import "RecaptchaInterop.h"
-
-FOUNDATION_EXPORT double RecaptchaInteropVersionNumber;
-FOUNDATION_EXPORT const unsigned char RecaptchaInteropVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:a209e6573d973b9a38e126f37a3c57f62ca3682a49c0c0b36f1ab7946c7520d6
+size 455

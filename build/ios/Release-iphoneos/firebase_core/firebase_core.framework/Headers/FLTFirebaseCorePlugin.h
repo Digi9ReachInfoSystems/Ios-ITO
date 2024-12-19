@@ -1,20 +1,3 @@
-// Copyright 2020 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-#import <TargetConditionals.h>
-
-#if TARGET_OS_OSX
-#import <FlutterMacOS/FlutterMacOS.h>
-#else
-#import <Flutter/Flutter.h>
-#endif
-
-#import "FLTFirebasePlugin.h"
-#import "messages.g.h"
-
-@interface FLTFirebaseCorePlugin
-    : FLTFirebasePlugin <FlutterPlugin, FLTFirebasePlugin, FirebaseCoreHostApi, FirebaseAppHostApi>
-
-+ (NSString *)getCustomDomain:(NSString *)appName;
-
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:2518ac035833c2b84d4522417ab51fdeb20b9dfe8cd7fdde8056057e9e8fb86b
+size 540

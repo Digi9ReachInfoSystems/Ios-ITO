@@ -1,30 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-        <key>NSPrivacyTracking</key>
-        <false/>
-        <key>NSPrivacyTrackingDomains</key>
-        <array>
-        </array>
-        <key>NSPrivacyCollectedDataTypes</key>
-        <array>
-                <dict>
-                        <key>NSPrivacyCollectedDataType</key>
-                        <string>NSPrivacyCollectedDataTypeOtherDiagnosticData</string>
-                        <key>NSPrivacyCollectedDataTypeLinked</key>
-                        <false/>
-                        <key>NSPrivacyCollectedDataTypeTracking</key>
-                        <false/>
-                        <key>NSPrivacyCollectedDataTypePurposes</key>
-                        <array>
-                                <string>NSPrivacyCollectedDataTypePurposeAnalytics</string>
-                        </array>
-                </dict>
-        </array>
-        <key>NSPrivacyAccessedAPITypes</key>
-        <array>
-        </array>
-</dict>
-</plist>
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:cfbb3c4f76a66d53698bae91f7110c00f2148e6e6f13ad7d32592909bc010e51
+size 1105

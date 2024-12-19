@@ -1,11 +1,3 @@
-/* inffast.h -- header to use inffast.c
- * Copyright (C) 1995-2003, 2010 Mark Adler
- * For conditions of distribution and use, see copyright notice in zlib.h
- */
-
-/* WARNING: this file should *not* be used by applications. It is
-   part of the implementation of the compression library and is
-   subject to change. Applications should only use zlib.h.
- */
-
-void ZLIB_INTERNAL inflate_fast(z_streamp strm, unsigned start);
+version https://git-lfs.github.com/spec/v1
+oid sha256:05cc5dc9ff1da7b8b52a4bd8bda0d8a5c236a2f39efe84b941516ea13857e6c5
+size 422

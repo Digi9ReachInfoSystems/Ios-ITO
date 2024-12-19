@@ -1,22 +1,3 @@
-//
-// Created by Razvan Lung(long1eu) on 2019-02-15.
-// Copyright (c) 2019 The Chromium Authors. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionStrategy.h"
-
-#if PERMISSION_SPEECH_RECOGNIZER
-
-#import <Speech/Speech.h>
-
-@interface SpeechPermissionStrategy : NSObject <PermissionStrategy>
-@end
-
-#else
-
-#import "UnknownPermissionStrategy.h"
-@interface SpeechPermissionStrategy : UnknownPermissionStrategy
-@end
-
-#endif
+version https://git-lfs.github.com/spec/v1
+oid sha256:92179d3cfd49b582e2f13ad2e3e94a6ceef316d3f57edb186bfa8dc6a4c7bc7f
+size 445

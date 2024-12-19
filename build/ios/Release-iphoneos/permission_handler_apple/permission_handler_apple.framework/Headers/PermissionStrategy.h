@@ -1,19 +1,3 @@
-//
-// Created by Razvan Lung(long1eu) on 2019-02-15.
-// Copyright (c) 2019 The Chromium Authors. All rights reserved.
-//
-
-#import <Foundation/Foundation.h>
-#import "PermissionHandlerEnums.h"
-
-typedef void (^ServiceStatusHandler)(ServiceStatus serviceStatus);
-typedef void (^PermissionStatusHandler)(PermissionStatus permissionStatus);
-typedef void (^PermissionErrorHandler)(NSString* errorCode, NSString* errorDescription);
-
-@protocol PermissionStrategy <NSObject>
-- (PermissionStatus)checkPermissionStatus:(PermissionGroup)permission;
-
-- (void)checkServiceStatus:(PermissionGroup)permission completionHandler:(ServiceStatusHandler)completionHandler;
-
-- (void)requestPermission:(PermissionGroup)permission completionHandler:(PermissionStatusHandler)completionHandler errorHandler:(PermissionErrorHandler)errorHandler;
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:41988d16a64043c9a09b9b00f169ef269009fb199377a0e1746f93df8b76a178
+size 823

@@ -1,23 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FIRApp.h"
-#import "FIRConfiguration.h"
-#import "FirebaseCore.h"
-#import "FIRLoggerLevel.h"
-#import "FIROptions.h"
-#import "FIRTimestamp.h"
-#import "FIRVersion.h"
-
-FOUNDATION_EXPORT double FirebaseCoreVersionNumber;
-FOUNDATION_EXPORT const unsigned char FirebaseCoreVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:ce317d31fc5f4d28cf73fd8d3e59eddb0718931a2deda7e2fbabfe129aeaab50
+size 487

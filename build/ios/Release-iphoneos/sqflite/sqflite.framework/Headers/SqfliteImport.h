@@ -1,16 +1,3 @@
-//
-//  SqfliteImport.h
-//  sqflite
-//
-//  Created by Alexandre Roux on 24/10/2022.
-//
-#ifndef SqfliteImport_h
-#define SqfliteImport_h
-
-#if TARGET_OS_IPHONE
-#import <Flutter/Flutter.h>
-#else
-#import <FlutterMacOS/FlutterMacOS.h>
-#endif
-
-#endif // SqfliteImport_h
+version https://git-lfs.github.com/spec/v1
+oid sha256:621a8fc9bb1985b6664a21d25640e246110c59bb3ef249f51975c73da603237c
+size 262

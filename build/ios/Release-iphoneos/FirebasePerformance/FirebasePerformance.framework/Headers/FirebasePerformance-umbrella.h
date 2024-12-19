@@ -1,21 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FirebasePerformance.h"
-#import "FIRHTTPMetric.h"
-#import "FIRPerformance.h"
-#import "FIRPerformanceAttributable.h"
-#import "FIRTrace.h"
-
-FOUNDATION_EXPORT double FirebasePerformanceVersionNumber;
-FOUNDATION_EXPORT const unsigned char FirebasePerformanceVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:b1ff66ec0eeee0f3e9900fa0d61c40c11d1905fab58c9ca4ee695b283e91a9db
+size 475

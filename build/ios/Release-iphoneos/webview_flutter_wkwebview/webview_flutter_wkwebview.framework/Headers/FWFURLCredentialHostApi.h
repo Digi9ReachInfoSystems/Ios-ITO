@@ -1,27 +1,3 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-#import <Foundation/Foundation.h>
-#import "FWFDataConverters.h"
-#import "FWFGeneratedWebKitApis.h"
-#import "FWFInstanceManager.h"
-
-#if TARGET_OS_OSX
-#import <FlutterMacOS/FlutterMacOS.h>
-#else
-#import <Flutter/Flutter.h>
-#endif
-
-NS_ASSUME_NONNULL_BEGIN
-
-/// Host API implementation for `NSURLCredential`.
-///
-/// This class may handle instantiating and adding native object instances that are attached to a
-/// Dart instance or method calls on the associated native class or an instance of the class.
-@interface FWFURLCredentialHostApiImpl : NSObject <FWFNSUrlCredentialHostApi>
-- (instancetype)initWithBinaryMessenger:(id<FlutterBinaryMessenger>)binaryMessenger
-                        instanceManager:(FWFInstanceManager *)instanceManager;
-@end
-
-NS_ASSUME_NONNULL_END
+version https://git-lfs.github.com/spec/v1
+oid sha256:fe5a6f622667939473427e7da553f2cb872d22e86e9a5023abd289eff7317992
+size 935

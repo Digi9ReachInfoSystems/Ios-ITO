@@ -1,23 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FLTAuthStateChannelStreamHandler.h"
-#import "FLTIdTokenChannelStreamHandler.h"
-#import "FLTPhoneNumberVerificationStreamHandler.h"
-#import "PigeonParser.h"
-#import "CustomPigeonHeader.h"
-#import "firebase_auth_messages.g.h"
-#import "FLTFirebaseAuthPlugin.h"
-
-FOUNDATION_EXPORT double firebase_authVersionNumber;
-FOUNDATION_EXPORT const unsigned char firebase_authVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:6099d25caa1b28b79ed5a586fd9876f0b3dca0be784dbbf32a5332edc1549811
+size 585

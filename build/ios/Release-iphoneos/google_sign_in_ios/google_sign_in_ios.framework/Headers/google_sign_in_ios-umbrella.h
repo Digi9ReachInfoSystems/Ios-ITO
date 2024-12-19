@@ -1,9 +1,3 @@
-// Copyright 2013 The Flutter Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-#import <Foundation/Foundation.h>
-#import <google_sign_in_ios/FLTGoogleSignInPlugin.h>
-
-FOUNDATION_EXPORT double google_sign_inVersionNumber;
-FOUNDATION_EXPORT const unsigned char google_sign_inVersionString[];
+version https://git-lfs.github.com/spec/v1
+oid sha256:a618da2f966f9cde075a1f9c0620c8744c34e58ab56a0e78afa7a138e3db3835
+size 376

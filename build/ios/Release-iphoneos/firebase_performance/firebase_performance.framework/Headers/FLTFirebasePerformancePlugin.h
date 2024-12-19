@@ -1,12 +1,3 @@
-// Copyright 2021 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-@import FirebasePerformance;
-#import <Flutter/Flutter.h>
-#import <TargetConditionals.h>
-#import <firebase_core/FLTFirebasePlugin.h>
-
-@interface FLTFirebasePerformancePlugin : FLTFirebasePlugin <FlutterPlugin, FLTFirebasePlugin>
-
-@end
+version https://git-lfs.github.com/spec/v1
+oid sha256:b5a82722c7e122346c739ba90819022de15d02d19635e4d482ba8c3ceed27b6c
+size 400

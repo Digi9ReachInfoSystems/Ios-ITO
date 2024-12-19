@@ -1,18 +1,3 @@
-#ifdef __OBJC__
-#import <UIKit/UIKit.h>
-#else
-#ifndef FOUNDATION_EXPORT
-#if defined(__cplusplus)
-#define FOUNDATION_EXPORT extern "C"
-#else
-#define FOUNDATION_EXPORT extern
-#endif
-#endif
-#endif
-
-#import "FIRSESNanoPBHelpers.h"
-#import "sessions.nanopb.h"
-
-FOUNDATION_EXPORT double FirebaseSessionsVersionNumber;
-FOUNDATION_EXPORT const unsigned char FirebaseSessionsVersionString[];
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:59a677af6c6f201bcdac26ea40e21b669a45c9f80e917f385a51a2de8cc6e2ca
+size 384
