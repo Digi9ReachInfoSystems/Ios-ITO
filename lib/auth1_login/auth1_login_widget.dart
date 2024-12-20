@@ -600,6 +600,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                         ?.jsonBody ??
                                                     ''),
                                               ),
+                                              password: _model.passwordController.text,
                                               schoolState:
                                                   LoginOutsideCall.schoolstate(
                                                 (_model.apiResult3td

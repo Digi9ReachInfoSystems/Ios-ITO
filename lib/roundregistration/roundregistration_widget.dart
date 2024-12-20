@@ -467,13 +467,11 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                               ),
                                                             ),
                                                           ),
-                                                          if (functions
-                                                                  .jsontostringlist(
-                                                                      getJsonField(
-                                                                scienceItem,
-                                                                r'''$.discount_in_percentage''',
-                                                              )) !=
-                                                              '\"\"')
+                                                          if (getJsonField(
+      scienceItem,
+      r'''$.discount_in_percentage''',
+    ) !=
+    "")
                                                             Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional

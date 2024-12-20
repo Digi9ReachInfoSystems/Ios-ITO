@@ -14,7 +14,7 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-
+ ApiCallResponse? apiResult83f;
   /// Initialization and disposal methods.
    ApiCallResponse? subApi;
 

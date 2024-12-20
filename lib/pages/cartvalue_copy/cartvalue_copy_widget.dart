@@ -303,8 +303,8 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                       .payableamount(FFAppState().combocart,
                           FFAppState().combodedliveryfee)
                       .toString()));
-          FFAppState().discountamount = functions.minusdiscountamount(
-              FFAppState().combocart, FFAppState().combofinalamount)!;
+          FFAppState().discountamount =
+            functions.discountfee(FFAppState().totalcombocart.toList());
           FFAppState().deliverablecount = functions
               .deliverablecount(FFAppState().totalcombocart.toList());
           FFAppState().removeFromComboid(allproductsItem.productId);

@@ -1,3 +1,5 @@
+import 'package:flutter/scheduler.dart';
+
 import '../../backend/api_requests/api_calls.dart';
 import '/auth/firebase_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -29,8 +31,28 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     _model = createModel(context, () => ProfileModel());
 
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'profile'});
-  }
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('PROFILE_PAGE_profile_ON_INIT_STATE');
+      logFirebaseEvent('profile_backend_call');
+      _model.apiResult83f = await LoginOutsideCall.call(
+        mobile: FFAppState().userInfo.mobileNo,
+        password: FFAppState().userInfo.password,
+      );
 
+      if ((_model.apiResult83f?.succeeded ?? true)) {
+        logFirebaseEvent('profile_update_app_state');
+        FFAppState().updateUserInfoStruct(
+          (e) => e
+            ..showresult = LoginOutsideCall.showResult(
+              (_model.apiResult83f?.jsonBody ?? ''),
+            ),
+        );
+        safeSetState(() {});
+      }
+    });
+  }
+  
   @override
   void dispose() {
     _model.dispose();
@@ -475,7 +497,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                     ),
                   ),
-                  if (FFAppState().userInfo.showresult == 2)
+                  // s
+                  if (FFAppState().userInfo.showresult == 1)
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
