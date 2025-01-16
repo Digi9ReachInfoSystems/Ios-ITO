@@ -235,10 +235,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                 .toString(); // Make sure this is the correct JSON field for package ID
                             return Padding(
                               padding: EdgeInsets.all(10.0),
-                              child: Container(
-                                width: MediaQuery.sizeOf(context).width * 1.0,
-                                height: MediaQuery.sizeOf(context).height * 0.9,
-                                decoration: BoxDecoration(),
+                              child: Card(
                                 child: SingleChildScrollView(
                                   primary: false,
                                   child: Column(
@@ -316,7 +313,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                                   .productId ==
                                                               selectedCombosPerPackage[
                                                                   packageId]);
-
+                                                                
                                               return Card(
                                                 clipBehavior:
                                                     Clip.antiAliasWithSaveLayer,
@@ -425,42 +422,42 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                                           context)
                                                                       .textScaleFactor,
                                                               text: TextSpan(
-      children: [
-        TextSpan(
-          text: FFLocalizations.of(context).getText(
-            '85xacx66' /* ₹  */,
-          ),
-          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                fontFamily: 'Readex Pro',
-                color: FlutterFlowTheme.of(context).primaryText,
-                fontWeight: FontWeight.normal,
-              ),
-        ),
-        TextSpan(
-          text: getJsonField(
-            scienceItem,
-            r'''$.inr_discount_amt''',
-          ).toString(),
-          style: TextStyle(),
-        ),
-        TextSpan(
-          text: "/",
-          style: TextStyle(
-            color: Color(0x95FF0000),
-            
-          ),
-        ),
-        TextSpan(
-          text: getJsonField(
-            scienceItem,
-            r'''$.inr_amount''',
-          ).toString(),
-          style: TextStyle(
-            color: Color(0xDDB82929),
-            decoration: TextDecoration.lineThrough,
-          ),
-        )
-      ],
+                                    children: [
+                                      TextSpan(
+                                        text: FFLocalizations.of(context).getText(
+                                          '85xacx66' /* ₹  */,
+                                        ),
+                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                              fontFamily: 'Readex Pro',
+                                              color: FlutterFlowTheme.of(context).primaryText,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                      TextSpan(
+                                        text: getJsonField(
+                                          scienceItem,
+                                          r'''$.inr_discount_amt''',
+                                        ).toString(),
+                                        style: TextStyle(),
+                                      ),
+                                      TextSpan(
+                                        text: "/",
+                                        style: TextStyle(
+                                          color: Color(0x95FF0000),
+                                          
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: getJsonField(
+                                          scienceItem,
+                                          r'''$.inr_amount''',
+                                        ).toString(),
+                                        style: TextStyle(
+                                          color: Color(0xDDB82929),
+                                          decoration: TextDecoration.lineThrough,
+                                        ),
+                                      )
+                                    ],
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyMedium,
@@ -468,10 +465,10 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                             ),
                                                           ),
                                                           if (getJsonField(
-      scienceItem,
-      r'''$.discount_in_percentage''',
-    ) !=
-    "")
+                                    scienceItem,
+                                    r'''$.discount_in_percentage''',
+                                  ) !=
+                                  "")
                                                             Padding(
                                                               padding:
                                                                   EdgeInsetsDirectional

@@ -6,4 +6,5 @@ export 'jsonto_string_action.dart' show jsontoStringAction;
 export 'jsonto_string.dart' show jsontoString;
 export 'generate_sha.dart' show generateSha;
 export 'checkstatus.dart' show checkstatus;
+export 'upgrader.dart' show upgrader;
 

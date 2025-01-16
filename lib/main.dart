@@ -1,3 +1,4 @@
+import 'package:indian_talent_olympiad/flutter_flow/firebase_remote_config_util.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ await Upgrader.clearSavedSettings();
   if (!kIsWeb) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   }
-
+await initializeFirebaseRemoteConfig();
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
     child: MyApp(),

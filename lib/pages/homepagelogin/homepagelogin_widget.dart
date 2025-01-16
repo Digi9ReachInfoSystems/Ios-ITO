@@ -1,4 +1,7 @@
+import 'package:indian_talent_olympiad/components/upgrader_widget.dart';
+
 import '../../components/notification_popup_widget.dart';
+import '../../flutter_flow/firebase_remote_config_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -7,6 +10,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/homeshimmer/homeshimmer_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
+
+import '/custom_code/actions/upgrader.dart' as upgrader;
 import 'package:badges/badges.dart' as badges;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:carousel_slider/carousel_slider.dart';
@@ -99,6 +104,66 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
             );
           },
         ).then((value) => setState(() {}));
+
+        logFirebaseEvent('Homepagelogin_custom_action');
+      _model.appversion = await actions.upgrader();
+      if (isAndroid) {
+        if (getRemoteConfigString('androidversion') != _model.appversion) {
+          logFirebaseEvent('Homepagelogin_bottom_sheet');
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            isDismissible: false,
+            enableDrag: false,
+            context: context,
+            builder: (context) {
+              return WebViewAware(
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  child: Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      child: const UpgraderWidget(),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ).then((value) => safeSetState(() {}));
+        }
+      } else {
+        if (getRemoteConfigString('iosversion') != _model.appversion) {
+          logFirebaseEvent('Homepagelogin_bottom_sheet');
+          await showModalBottomSheet(
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            isDismissible: false,
+            enableDrag: false,
+            context: context,
+            builder: (context) {
+              return WebViewAware(
+                child: GestureDetector(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  child: Padding(
+                    padding: MediaQuery.viewInsetsOf(context),
+                    child: SizedBox(
+                      height: MediaQuery.sizeOf(context).height * 0.5,
+                      child: const UpgraderWidget(),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ).then((value) => safeSetState(() {}));
+        }
+      }
 
         logFirebaseEvent('Homepagelogin_custom_action');
         _model.servicer = await actions.jsontodata(

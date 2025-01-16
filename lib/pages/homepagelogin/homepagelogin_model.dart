@@ -26,6 +26,7 @@ class HomepageloginModel extends FlutterFlowModel<HomepageloginWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (getServices)] action in Homepagelogin widget.
   ApiCallResponse? apiResulti35;
+   String? appversion;
   // Stores action output result for [Custom Action - jsontodata] action in Homepagelogin widget.
   List<ServicesStruct>? servicer;
   // State field(s) for Carousel widget.
