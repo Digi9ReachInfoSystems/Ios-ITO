@@ -1,3 +1,5 @@
+import 'package:indian_talent_olympiad/backend/schema/update_alert_record.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -20,8 +22,11 @@ class CartvalueCopyModel extends FlutterFlowModel<CartvalueCopyWidget> {
   final unfocusNode = FocusNode();
   // State field(s) for Checkbox widget.
   bool? checkboxValue;
+   int? version;
+   String? oldversion;
   // Stores action output result for [Backend Call - API (submitregistration)] action in Button widget.
   ApiCallResponse? apiResult3ma;
+  UpdateAlertRecord? newversion;
   // Stores action output result for [Custom Action - generateSha] action in Button widget.
   String? sha256;
   // Stores action output result for [Backend Call - API (phonepe)] action in Button widget.

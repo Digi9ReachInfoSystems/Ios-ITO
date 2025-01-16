@@ -1,3 +1,5 @@
+import 'package:indian_talent_olympiad/backend/backend.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -606,6 +608,28 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                   logFirebaseEvent(
                                       'CARTVALUE_COPY_PAGE_PAY_NOW_BTN_ON_TAP');
                                   if (_model.checkboxValue == true) {
+                                    logFirebaseEvent('Button_firestore_query');
+              _model.newversion = await queryUpdateAlertRecordOnce(
+                singleRecord: true,
+              ).then((s) => s.firstOrNull);
+              logFirebaseEvent('Button_custom_action');
+              _model.oldversion = await actions.upgrader();
+              logFirebaseEvent('Button_update_page_state');
+              _model.version = () {
+                if (isAndroid) {
+                  return (_model.oldversion ==
+                          _model.newversion?.androidversion
+                      ? 1
+                      : 0);
+                } else if (isiOS) {
+                  return (_model.oldversion == _model.newversion?.iosVersion
+                      ? 1
+                      : 0);
+                } else {
+                  return 0;
+                }
+              }();
+              safeSetState(() {});
                                     logFirebaseEvent('Button_backend_call');
                                     _model.apiResult3ma =
                                         await SubmitregistrationCall.call(
@@ -624,6 +648,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                       deliverycharges: FFAppState()
                                           .combodedliveryfee
                                           .toString(),
+                                          isUpdated: _model.version,
                                     );
                                     if ((_model.apiResult3ma?.succeeded ??
                                         true)) {

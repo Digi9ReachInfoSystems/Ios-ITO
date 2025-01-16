@@ -276,7 +276,11 @@ class FFAppState extends ChangeNotifier {
     _otp1 = _value;
     prefs.setString('ff_otp1', _value);
   }
-
+String _appcheck = '';
+  String get appcheck => _appcheck;
+  set appcheck(String _value) {
+    _appcheck = _value;
+  }
   SubscriptionsStruct _subs =
       SubscriptionsStruct.fromSerializableMap(jsonDecode('{}'));
   SubscriptionsStruct get subs => _subs;
@@ -547,6 +551,14 @@ class FFAppState extends ChangeNotifier {
     _isChecked = _value;
     prefs.setBool('ff_isChecked', _value);
   }
+
+  bool _isupdateAvailable = false;
+  bool get isupdateAvailable => _isupdateAvailable;
+  set isupdateAvailable(bool _value) {
+    _isupdateAvailable = _value;
+    prefs.setBool('ff_isupdateAvailable', _value);
+  }
+
 
   List<TimelinedocumentStruct> _slot1 = [];
   List<TimelinedocumentStruct> get slot1 => _slot1;

@@ -549,76 +549,49 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                         ],
                                                       ),
                                                       Builder(
-                                                        builder: (context) {
-                                                          final products =
-                                                              getJsonField(
-                                                            scienceItem,
-                                                            r'''$.products''',
-                                                          ).toList();
-                                                          return ListView
-                                                              .builder(
-                                                            padding:
-                                                                EdgeInsets.zero,
-                                                            shrinkWrap: true,
-                                                            scrollDirection:
-                                                                Axis.vertical,
-                                                            itemCount:
-                                                                products.length,
-                                                            itemBuilder: (context,
-                                                                productsIndex) {
-                                                              final productsItem =
-                                                                  products[
-                                                                      productsIndex];
-                                                              return Row(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            2.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Icon(
-                                                                      Icons
-                                                                          .check,
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .secondaryText,
-                                                                      size:
-                                                                          20.0,
-                                                                    ),
-                                                                  ),
-                                                                  Flexible(
-                                                                    child:
-                                                                        Container(
-                                                                      decoration:
-                                                                          BoxDecoration(),
-                                                                      child:
-                                                                          Padding(
-                                                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                                                            10.0,
-                                                                            0.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                        child:
-                                                                            Text(
-                                                                          productsItem
-                                                                              .toString(),
-                                                                          style:
-                                                                              FlutterFlowTheme.of(context).bodyMedium,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              );
-                                                            },
-                                                          );
-                                                        },
-                                                      ),
+  builder: (context) {
+    final products = getJsonField(
+      scienceItem,
+      r'''$.products''',
+    ).toList();
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: List.generate(
+        products.length,
+        (productsIndex) {
+          final productsItem = products[productsIndex];
+          return Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
+                child: Icon(
+                  Icons.check,
+                  color: FlutterFlowTheme.of(context).secondaryText,
+                  size: 20.0,
+                ),
+              ),
+              Flexible(
+                child: Container(
+                  decoration: BoxDecoration(),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                    child: Text(
+                      productsItem.toString(),
+                      style: FlutterFlowTheme.of(context).bodyMedium,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  },
+),
+
                                                     ],
                                                   ),
                                                 ),

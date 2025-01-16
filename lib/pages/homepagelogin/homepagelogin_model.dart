@@ -1,3 +1,5 @@
+import 'package:indian_talent_olympiad/backend/schema/update_alert_record.dart';
+
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/notification_popup_widget.dart';
@@ -29,6 +31,7 @@ class HomepageloginModel extends FlutterFlowModel<HomepageloginWidget> {
    String? appversion;
   // Stores action output result for [Custom Action - jsontodata] action in Homepagelogin widget.
   List<ServicesStruct>? servicer;
+  ApiCallResponse? newversion;
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController;
 

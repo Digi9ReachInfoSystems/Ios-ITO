@@ -1344,6 +1344,7 @@ class ProductsSubscriptionCall {
     String? powerpackid = '',
     String? purchaseType = '',
     String? productId = '',
+    int? isUpdated,
     List<String>? comboIdList,
   }) async {
     final products = _serializeList(productsList);
@@ -1362,6 +1363,7 @@ class ProductsSubscriptionCall {
           'purchaseType': purchaseType,
           'productId': productId,
           'comboId': comboId,
+          
         },
       },
     );
@@ -1610,6 +1612,7 @@ class SubmitregistrationCall {
     String? totaldiscount = '',
     String? finalamount = '',
     String? deliverycharges = '',
+    int? isUpdated,
   }) async {
     final comboId = _serializeList(comboIdList);
     final certificates = _serializeList(certificatesList);
@@ -1627,6 +1630,7 @@ class SubmitregistrationCall {
           'totaldiscount': totaldiscount,
           'finalamount': finalamount,
           'deliverycharges': deliverycharges,
+          'isUpdated': isUpdated,
         },
       },
     );
@@ -1637,6 +1641,35 @@ class SubmitregistrationCall {
       castToType<String>(getJsonField(
         response,
         r'''$.payment_data.merchantTransactionId''',
+      ));
+}
+class AppcheckCall {
+  static Future<ApiCallResponse> call({
+    String? appId = '',
+    String? platform = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'appcheck',
+      apiUrl: 'https://get-appversion.vercel.app/app-version',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {
+        'appId': appId,
+        'platform': platform,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? androidversion(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.version''',
       ));
 }
 

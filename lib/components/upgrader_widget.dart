@@ -63,9 +63,7 @@ class _UpgraderWidgetState extends State<UpgraderWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              FFLocalizations.of(context).getText(
-                'gkb43sv2' /* New Update Available !!! */,
-              ),
+              "New Update Available",
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Readex Pro',
                     letterSpacing: 0.0,
@@ -73,9 +71,7 @@ class _UpgraderWidgetState extends State<UpgraderWidget> {
                   ),
             ),
             Text(
-              FFLocalizations.of(context).getText(
-                '4ji4gz0o' /* Please click on download to up... */,
-              ),
+              "Please click on download to update the app",
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).bodyMedium.override(
                     fontFamily: 'Readex Pro',
@@ -97,9 +93,7 @@ class _UpgraderWidgetState extends State<UpgraderWidget> {
                         'https://apps.apple.com/in/app/ito-indian-talent-olympiad/id6443736601');
                   }
                 },
-                text: FFLocalizations.of(context).getText(
-                  'awwpqvzz' /* Download */,
-                ),
+                text: "Download",
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 60.0,

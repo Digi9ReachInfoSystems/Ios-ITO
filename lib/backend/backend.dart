@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:indian_talent_olympiad/backend/schema/update_alert_record.dart';
 import '../auth/firebase_auth/auth_util.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
@@ -90,7 +91,41 @@ Future<List<DeletionrequestRecord>> queryDeletionrequestRecordOnce({
       limit: limit,
       singleRecord: singleRecord,
     );
+Future<int> queryUpdateAlertRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      UpdateAlertRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
 
+Stream<List<UpdateAlertRecord>> queryUpdateAlertRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      UpdateAlertRecord.collection,
+      UpdateAlertRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<UpdateAlertRecord>> queryUpdateAlertRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      UpdateAlertRecord.collection,
+      UpdateAlertRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
 Future<int> queryCollectionCount(
   Query collection, {
   Query Function(Query)? queryBuilder,

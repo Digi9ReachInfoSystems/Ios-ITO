@@ -1,3 +1,5 @@
+import 'package:indian_talent_olympiad/CustomUpgrader.dart';
+import 'package:indian_talent_olympiad/backend/backend.dart';
 import 'package:indian_talent_olympiad/components/upgrader_widget.dart';
 
 import '../../components/notification_popup_widget.dart';
@@ -25,6 +27,8 @@ import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'homepagelogin_model.dart';
 export 'homepagelogin_model.dart';
+import 'package:upgrader/upgrader.dart';
+
 
 class HomepageloginWidget extends StatefulWidget {
   const HomepageloginWidget({super.key});
@@ -75,127 +79,119 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('HOMEPAGELOGIN_Homepagelogin_ON_INIT_STAT');
+      
       logFirebaseEvent('Homepagelogin_backend_call');
       _model.apiResulti35 = await GetServicesCall.call();
-     if ((_model.apiResulti35?.succeeded ?? true)) {
-        logFirebaseEvent('Homepagelogin_alert_dialog');
-        await showAlignedDialog(
-          context: context,
-          isGlobal: false,
-          avoidOverflow: true,
-          targetAnchor:
-              AlignmentDirectional(0, -1).resolve(Directionality.of(context)),
-          followerAnchor:
-              AlignmentDirectional(0, -1).resolve(Directionality.of(context)),
-          builder: (dialogContext) {
-            return Material(
-              color: Colors.transparent,
-              child: WebViewAware(
-                child: GestureDetector(
-                  onTap: () => _model.unfocusNode.canRequestFocus
-                      ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-                      : FocusScope.of(context).unfocus(),
-                  child: Container(
-                    height: 200,
-                    child: NotificationPopupWidget(),
-                  ),
-                ),
-              ),
-            );
-          },
-        ).then((value) => setState(() {}));
+     logFirebaseEvent('Homepagelogin_backend_call');
+      _model.newversion = await AppcheckCall.call(
+        appId: 'com.ito.onlineexam.app',
+        platform: () {
+          if (isAndroid) {
+            return 'android';
+          } else if (isiOS) {
+            return 'ios';
+          } else {
+            return '';
+          }
+        }(),
+      );
 
-        logFirebaseEvent('Homepagelogin_custom_action');
+      logFirebaseEvent('Homepagelogin_custom_action');
       _model.appversion = await actions.upgrader();
-      if (isAndroid) {
-        if (getRemoteConfigString('androidversion') != _model.appversion) {
-          logFirebaseEvent('Homepagelogin_bottom_sheet');
-          await showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            isDismissible: false,
-            enableDrag: false,
+      logFirebaseEvent('Homepagelogin_update_app_state');
+      FFAppState().appcheck = _model.appversion!;
+      safeSetState(() {});
+      if (FFAppState().appcheck ==
+          AppcheckCall.androidversion(
+            (_model.newversion?.jsonBody ?? ''),
+          )) {
+        if ((_model.apiResulti35?.succeeded ?? true)) {
+          logFirebaseEvent('Homepagelogin_alert_dialog');
+          await showAlignedDialog(
             context: context,
-            builder: (context) {
-              return WebViewAware(
-                child: GestureDetector(
-                  onTap: () {
-                    FocusScope.of(context).unfocus();
-                    FocusManager.instance.primaryFocus?.unfocus();
-                  },
-                  child: Padding(
-                    padding: MediaQuery.viewInsetsOf(context),
-                    child: SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.5,
-                      child: const UpgraderWidget(),
+            isGlobal: false,
+            avoidOverflow: true,
+            targetAnchor: const AlignmentDirectional(0.0, -1.0)
+                .resolve(Directionality.of(context)),
+            followerAnchor: const AlignmentDirectional(0.0, -1.0)
+                .resolve(Directionality.of(context)),
+            builder: (dialogContext) {
+              return Material(
+                color: Colors.transparent,
+                child: WebViewAware(
+                  child: GestureDetector(
+                    onTap: () {
+                      FocusScope.of(dialogContext).unfocus();
+                      FocusManager.instance.primaryFocus?.unfocus();
+                    },
+                    child: const SizedBox(
+                      height: 200.0,
+                      child: NotificationPopupWidget(),
                     ),
                   ),
                 ),
               );
             },
-          ).then((value) => safeSetState(() {}));
-        }
-      } else {
-        if (getRemoteConfigString('iosversion') != _model.appversion) {
-          logFirebaseEvent('Homepagelogin_bottom_sheet');
-          await showModalBottomSheet(
-            isScrollControlled: true,
-            backgroundColor: Colors.transparent,
-            isDismissible: false,
-            enableDrag: false,
-            context: context,
-            builder: (context) {
-              return WebViewAware(
-                child: GestureDetector(
-                  onTap: () {
-                    FocusScope.of(context).unfocus();
-                    FocusManager.instance.primaryFocus?.unfocus();
-                  },
-                  child: Padding(
-                    padding: MediaQuery.viewInsetsOf(context),
-                    child: SizedBox(
-                      height: MediaQuery.sizeOf(context).height * 0.5,
-                      child: const UpgraderWidget(),
-                    ),
-                  ),
-                ),
-              );
-            },
-          ).then((value) => safeSetState(() {}));
-        }
-      }
-
-        logFirebaseEvent('Homepagelogin_custom_action');
-        _model.servicer = await actions.jsontodata(
-          GetServicesCall.serviceName(
-            (_model.apiResulti35?.jsonBody ?? ''),
-          )!
-              .toList(),
-        );
-        logFirebaseEvent('Homepagelogin_update_app_state');
-        setState(() {
+          );
+print("appcheck");
+print("appcheck");
+          logFirebaseEvent('Homepagelogin_custom_action');
+          _model.servicer = await actions.jsontodata(
+            GetServicesCall.serviceName(
+              (_model.apiResulti35?.jsonBody ?? ''),
+            )!
+                .toList(),
+          );
+          logFirebaseEvent('Homepagelogin_update_app_state');
           FFAppState().allservices =
               _model.servicer!.toList().cast<ServicesStruct>();
-        });
+          safeSetState(() {});
+        } else {
+          logFirebaseEvent('Homepagelogin_alert_dialog');
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return WebViewAware(
+                child: AlertDialog(
+                  title: const Text('message'),
+                  content: const Text('Check Your Internet Connection'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        }
       } else {
-        logFirebaseEvent('Homepagelogin_alert_dialog');
-        await showDialog(
+        logFirebaseEvent('Homepagelogin_bottom_sheet');
+        await showModalBottomSheet(
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          isDismissible: false,
+          enableDrag: false,
           context: context,
-          builder: (alertDialogContext) {
+          builder: (context) {
             return WebViewAware(
-              child: AlertDialog(
-                title: Text('message'),
-                content: Text('Check Your Internet Connection'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('Ok'),
+              child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                  FocusManager.instance.primaryFocus?.unfocus();
+                },
+                child: Padding(
+                  padding: MediaQuery.viewInsetsOf(context),
+                  child: SizedBox(
+                    height: MediaQuery.sizeOf(context).height * 0.5,
+                    child: const UpgraderWidget(),
                   ),
-                ],
+                ),
               ),
             );
           },
-        );
+        ).then((value) => safeSetState(() {}));
       }
     });
   }
