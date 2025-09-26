@@ -15,7 +15,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 8.3.3+3
+version: 8.3.6+6
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
@@ -120,15 +120,15 @@ dependencies:
   sign_in_with_apple_web: 2.1.0
   smooth_page_indicator: 1.1.0
   sqflite: 2.3.3+1
-  sqflite_common: 2.5.4+3
+  sqflite_common: ^2.5.4
   stop_watch_timer: 3.0.2
   stream_transform: 2.1.0
   styled_divider: 1.0.4
   
   timeago: 3.6.1
   url_launcher: 6.3.0
-  url_launcher_android: 6.3.10
-  upgrader: ^11.3.1
+  url_launcher_android: 6.3.9
+  upgrader: ^10.0.0
   url_launcher_ios: 6.3.1
   url_launcher_linux: 3.2.0
   url_launcher_macos: 3.2.1
@@ -136,10 +136,10 @@ dependencies:
   url_launcher_web: 2.3.3
   url_launcher_windows: 3.1.2
   uuid: ^4.0.0
-  webview_flutter: 4.9.0
+  webview_flutter: ^4.8.0
   webview_flutter_android: 3.16.7
   webview_flutter_platform_interface: 2.10.0
-  webview_flutter_wkwebview: 3.15.0
+  webview_flutter_wkwebview: ^3.14.0
   webviewx_plus: 0.5.0
   widget_zoom: ^0.0.3
 

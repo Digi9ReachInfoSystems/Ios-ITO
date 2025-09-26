@@ -386,6 +386,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
+          name: 'outOfversion',
+          path: '/outOfversion',
+          builder: (context, params) => const OutOfversionWidget(),
+        ),
+        FFRoute(
           name: 'testDetails',
           path: '/testDetails',
           builder: (context, params) => TestDetailsWidget(
@@ -431,6 +436,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
             )
           ),
         )
+        
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

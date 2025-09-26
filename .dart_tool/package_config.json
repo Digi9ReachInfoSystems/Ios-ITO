@@ -135,9 +135,9 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/collection-1.19.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/collection-1.18.0",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.18"
     },
     {
       "name": "cross_file",
@@ -351,7 +351,7 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/packages/flutter",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -369,7 +369,7 @@
     },
     {
       "name": "flutter_driver",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/packages/flutter_driver",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/packages/flutter_driver",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -387,7 +387,7 @@
     },
     {
       "name": "flutter_localizations",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/packages/flutter_localizations",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/packages/flutter_localizations",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -411,13 +411,13 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/packages/flutter_test",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/packages/flutter_test",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -435,7 +435,7 @@
     },
     {
       "name": "fuchsia_remote_debug_protocol",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/packages/fuchsia_remote_debug_protocol",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/packages/fuchsia_remote_debug_protocol",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -513,7 +513,7 @@
     },
     {
       "name": "integration_test",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/packages/integration_test",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/packages/integration_test",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -543,13 +543,13 @@
     },
     {
       "name": "leak_tracker",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/leak_tracker-10.0.7",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/leak_tracker-10.0.4",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_flutter_testing",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.8",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.3",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -585,7 +585,7 @@
     },
     {
       "name": "material_color_utilities",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/material_color_utilities-0.11.1",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/material_color_utilities-0.8.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -597,7 +597,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/meta-1.15.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/meta-1.12.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -741,9 +741,9 @@
     },
     {
       "name": "platform",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/platform-3.1.5",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/platform-3.1.4",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.0"
     },
     {
       "name": "plugin_platform_interface",
@@ -861,7 +861,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///Users/ashutoshmuraskar/Desktop/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -891,15 +891,15 @@
     },
     {
       "name": "sqflite_common",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/sqflite_common-2.5.4+3",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/sqflite_common-2.5.4",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.3"
     },
     {
       "name": "stack_trace",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/stack_trace-1.12.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/stack_trace-1.11.1",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "2.18"
     },
     {
       "name": "stop_watch_timer",
@@ -921,9 +921,9 @@
     },
     {
       "name": "string_scanner",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/string_scanner-1.3.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/string_scanner-1.2.0",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "2.18"
     },
     {
       "name": "styled_divider",
@@ -957,9 +957,9 @@
     },
     {
       "name": "synchronized",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/synchronized-3.3.0+3",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/synchronized-3.1.0+1",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.0"
     },
     {
       "name": "term_glyph",
@@ -969,9 +969,9 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/test_api-0.7.3",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/test_api-0.7.0",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "3.0"
     },
     {
       "name": "timeago",
@@ -987,15 +987,15 @@
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/typed_data-1.4.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "2.17"
     },
     {
       "name": "upgrader",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/upgrader-11.3.1",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/upgrader-10.3.0",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.1"
     },
     {
       "name": "url_launcher",
@@ -1005,9 +1005,9 @@
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.10",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/url_launcher_android-6.3.9",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.4"
     },
     {
       "name": "url_launcher_ios",
@@ -1065,7 +1065,7 @@
     },
     {
       "name": "vm_service",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/vm_service-14.3.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/vm_service-14.2.1",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -1077,15 +1077,15 @@
     },
     {
       "name": "webdriver",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/webdriver-3.0.4",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/webdriver-3.0.3",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "2.18"
     },
     {
       "name": "webview_flutter",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/webview_flutter-4.9.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/webview_flutter-4.8.0",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.2"
     },
     {
       "name": "webview_flutter_android",
@@ -1101,9 +1101,9 @@
     },
     {
       "name": "webview_flutter_wkwebview",
-      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.15.0",
+      "rootUri": "file:///Users/ashutoshmuraskar/.pub-cache/hosted/pub.dev/webview_flutter_wkwebview-3.14.0",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.2"
     },
     {
       "name": "webviewx_plus",
@@ -1154,10 +1154,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-01-17T07:27:10.388479Z",
+  "generated": "2025-09-26T12:12:56.377298Z",
   "generator": "pub",
-  "generatorVersion": "3.6.0",
-  "flutterRoot": "file:///opt/homebrew/Caskroom/flutter/3.24.5/flutter",
-  "flutterVersion": "3.27.1",
+  "generatorVersion": "3.4.0",
+  "flutterRoot": "file:///Users/ashutoshmuraskar/Desktop/flutter",
+  "flutterVersion": "3.22.0",
   "pubCache": "file:///Users/ashutoshmuraskar/.pub-cache"
 }

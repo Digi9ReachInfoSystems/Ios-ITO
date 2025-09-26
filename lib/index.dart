@@ -61,3 +61,4 @@ export '/certificate_viewer/certificate_viewer_widget.dart'
 export '/power_products/power_products_widget.dart' show PowerProductsWidget;
 export '/notifications/notifications_widget.dart' show NotificationsWidget;
 export '/test_details/test_details_widget.dart' show TestDetailsWidget;
+export '/out_ofversion/out_ofversion_widget.dart' show OutOfversionWidget;

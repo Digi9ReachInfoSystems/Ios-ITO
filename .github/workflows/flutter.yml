@@ -16,7 +16,11 @@ jobs:
       # 2. Install Flutter
       - uses: subosito/flutter-action@v2
         with:
+<<<<<<< HEAD
           flutter-version: '3.22.0'   # latest stable
+=======
+          flutter-version: '3.24.0'   # latest stable
+>>>>>>> ffdd8ae (Add Android CI/CD workflow for Play Store)
           channel: 'stable'
 
       # 3. Install dependencies

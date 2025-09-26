@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -44,9 +45,10 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -104,12 +106,14 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
               );
             }
             final listViewNotificationsResponse = snapshot.data!;
+
             return Builder(
               builder: (context) {
                 final notifications = NotificationsCall.announcements(
                       listViewNotificationsResponse.jsonBody,
                     )?.toList() ??
                     [];
+
                 return ListView.builder(
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
@@ -117,95 +121,91 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   itemCount: notifications.length,
                   itemBuilder: (context, notificationsIndex) {
                     final notificationsItem = notifications[notificationsIndex];
-                    return Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).primaryBackground,
-                        borderRadius: BorderRadius.circular(0),
-                      ),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(16, 12, 16, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 4, 0),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      FFLocalizations.of(context).getText(
-                                        'dxc7z9p2' /* New Notifications */,
-                                      ),
-                                      maxLines: 1,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge,
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 4, 0, 0),
-                                      child: Text(
-                                        getJsonField(
-                                          notificationsItem,
-                                          r'''$.content''',
-                                        ).toString(),
-                                        maxLines: 2,
-                                        style: FlutterFlowTheme.of(context)
-                                            .labelMedium,
-                                      ),
-                                    ),
-                                    if (getJsonField(
-                                          notificationsItem,
-                                          r'''$.link''',
-                                        ) !=
-                                        null)
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 12, 0, 0),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          child: Image.network(
-                                            getJsonField(
-                                              notificationsItem,
-                                              r'''$.link''',
-                                            ).toString(),
-                                            width: 300,
-                                            height: 200,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
-                                      ),
-                                    Padding(
-  padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-  child: Text(
-    valueOrDefault<String>(
-      functions.notificationtime(functions.jsontoTime(getJsonField(
-        notificationsItem,
-        r'''$.created_on''',
-      ))),
-      '0',
-    ),
-    maxLines: 2,
-    style: FlutterFlowTheme.of(context).labelMedium,
-  ),
-),
-
-                                    Divider(
-                                      thickness: 1,
-                                      color: FlutterFlowTheme.of(context)
-                                          .secondaryText,
-                                    ),
-                                  ],
+                    return Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                      child: Card(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        elevation: 3,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(10, 0, 4, 0),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                FFLocalizations.of(context).getText(
+                                  'dxc7z9p2' /* New Notifications */,
                                 ),
+                                maxLines: 1,
+                                style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Outfit',
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                child: Text(
+                                  getJsonField(
+                                    notificationsItem,
+                                    r'''$.content''',
+                                  ).toString(),
+                                  style:FlutterFlowTheme.of(context).labelMedium.override(
+                  fontFamily: 'Outfit',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
                               ),
-                            ),
-                          ],
+                              if (getJsonField(
+                                    notificationsItem,
+                                    r'''$.link''',
+                                  ) !=
+                                  null)
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 12, 0, 0),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      getJsonField(
+                                        notificationsItem,
+                                        r'''$.link''',
+                                      ).toString(),
+                                      width: 300,
+                                      height: 200,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                child: Text(
+                                  valueOrDefault<String>(
+                                    functions.notificationtime(
+                                        functions.jsontoTime(getJsonField(
+                                      notificationsItem,
+                                      r'''$.created_on''',
+                                    ).toString())),
+                                    '0',
+                                  ),
+                                  maxLines: 2,
+                                  style: FlutterFlowTheme.of(context).headlineLarge.override(
+                  fontFamily: 'Outfit',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                ),
+          ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     );

@@ -171,31 +171,9 @@ print("appcheck");
           );
         }
       } else {
-        logFirebaseEvent('Homepagelogin_bottom_sheet');
-        await showModalBottomSheet(
-          isScrollControlled: true,
-          backgroundColor: Colors.transparent,
-          isDismissible: false,
-          enableDrag: false,
-          context: context,
-          builder: (context) {
-            return WebViewAware(
-              child: GestureDetector(
-                onTap: () {
-                  FocusScope.of(context).unfocus();
-                  FocusManager.instance.primaryFocus?.unfocus();
-                },
-                child: Padding(
-                  padding: MediaQuery.viewInsetsOf(context),
-                  child: SizedBox(
-                    height: MediaQuery.sizeOf(context).height * 0.5,
-                    child: const UpgraderWidget(),
-                  ),
-                ),
-              ),
-            );
-          },
-        ).then((value) => safeSetState(() {}));
+        logFirebaseEvent('Homepagelogin_navigate_to');
+
+        context.goNamed('outOfversion');
       }
     });
   }
