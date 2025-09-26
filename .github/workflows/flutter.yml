@@ -12,7 +12,7 @@ jobs:
       # 1. Checkout source
       - uses: actions/checkout@v4
 
-      # 2. Install Java 17 (compatible with Gradle 7.x)
+      # 2. Install Java 17 (compatible with Gradle 7.x/8.x)
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -20,7 +20,8 @@ jobs:
           java-version: '17'
 
       # 3. Install Flutter
-      - uses: subosito/flutter-action@v2
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.0'
           channel: 'stable'
@@ -37,24 +38,24 @@ jobs:
       - name: Build Android App Bundle
         run: flutter build appbundle --release
 
-      # 7. Upload APK/AAB as workflow artifacts (so you can download from GitHub)
+      # 7. Upload APK/AAB as GitHub workflow artifacts
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload AAB
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-      # 8. (Optional) Deploy to Play Store Internal Testing
+      # 8. Deploy to Google Play Internal Testing
       - name: Upload to Play Store
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
-          packageName: com.example.myapp   # 🔹 replace with your actual package name
+          packageName: com.ito.onlineexam.app   # 🔹 replace with your actual package name
           releaseFile: build/app/outputs/bundle/release/app-release.aab
           track: internal
