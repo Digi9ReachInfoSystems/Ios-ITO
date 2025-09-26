@@ -13,14 +13,10 @@ jobs:
       # 1. Checkout source
       - uses: actions/checkout@v4
 
-      # 2. Install Flutter
+      # 2. Install Flutter (your current version)
       - uses: subosito/flutter-action@v2
         with:
-<<<<<<< HEAD
-          flutter-version: '3.22.0'   # latest stable
-=======
-          flutter-version: '3.24.0'   # latest stable
->>>>>>> ffdd8ae (Add Android CI/CD workflow for Play Store)
+          flutter-version: '3.22.0'
           channel: 'stable'
 
       # 3. Install dependencies
@@ -44,30 +40,10 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
-          packageName: com.example.myapp    # 🔹 replace with your package name
+          packageName: com.example.myapp   # 🔹 replace with your actual package name
           releaseFile: build/app/outputs/bundle/release/app-release.aab
           track: internal
 
       # 7. Build iOS (no codesign for CI build)
       - name: Build iOS (No codesign)
         run: flutter build ios --release --no-codesign
-
-      # 8. Setup Ruby for Fastlane
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-
-      # 9. Install Fastlane
-      - name: Install fastlane
-        run: gem install fastlane
-
-      # 10. Deploy to TestFlight
-      - name: Upload to TestFlight
-        run: |
-          cd ios
-          fastlane beta
-        env:
-          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
-          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
