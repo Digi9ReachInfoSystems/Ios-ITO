@@ -1,0 +1,69 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      # 1. Checkout source
+      - uses: actions/checkout@v4
+
+      # 2. Install Flutter
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'   # latest stable
+          channel: 'stable'
+
+      # 3. Install dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # 4. Run static analysis & tests
+      - name: Analyze
+        run: flutter analyze
+      - name: Run tests
+        run: flutter test
+
+      # 5. Build Android APK & App Bundle
+      - name: Build Android APK
+        run: flutter build apk --release
+      - name: Build Android App Bundle
+        run: flutter build appbundle --release
+
+      # 6. Upload to Play Store Internal Testing
+      - name: Upload to Play Store
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
+          packageName: com.example.myapp    # 🔹 replace with your package name
+          releaseFile: build/app/outputs/bundle/release/app-release.aab
+          track: internal
+
+      # 7. Build iOS (no codesign for CI build)
+      - name: Build iOS (No codesign)
+        run: flutter build ios --release --no-codesign
+
+      # 8. Setup Ruby for Fastlane
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      # 9. Install Fastlane
+      - name: Install fastlane
+        run: gem install fastlane
+
+      # 10. Deploy to TestFlight
+      - name: Upload to TestFlight
+        run: |
+          cd ios
+          fastlane beta
+        env:
+          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}

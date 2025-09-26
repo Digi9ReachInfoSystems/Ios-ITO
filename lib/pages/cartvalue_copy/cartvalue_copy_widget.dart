@@ -608,27 +608,10 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                   logFirebaseEvent(
                                       'CARTVALUE_COPY_PAGE_PAY_NOW_BTN_ON_TAP');
                                   if (_model.checkboxValue == true) {
-                                    logFirebaseEvent('Button_firestore_query');
-              _model.newversion = await queryUpdateAlertRecordOnce(
-                singleRecord: true,
-              ).then((s) => s.firstOrNull);
-              logFirebaseEvent('Button_custom_action');
-              _model.oldversion = await actions.upgrader();
+                              _model.oldversion = await actions.upgrader();
               logFirebaseEvent('Button_update_page_state');
-              _model.version = () {
-                if (isAndroid) {
-                  return (_model.oldversion ==
-                          _model.newversion?.androidversion
-                      ? 1
-                      : 0);
-                } else if (isiOS) {
-                  return (_model.oldversion == _model.newversion?.iosVersion
-                      ? 1
-                      : 0);
-                } else {
-                  return 0;
-                }
-              }();
+              _model.version =
+                  _model.oldversion == FFAppState().appcheck ? 0 : 1;
               safeSetState(() {});
                                     logFirebaseEvent('Button_backend_call');
                                     _model.apiResult3ma =

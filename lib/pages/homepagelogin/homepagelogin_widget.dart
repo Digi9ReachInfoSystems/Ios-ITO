@@ -145,6 +145,10 @@ print("appcheck");
           logFirebaseEvent('Homepagelogin_update_app_state');
           FFAppState().allservices =
               _model.servicer!.toList().cast<ServicesStruct>();
+              FFAppState().appcheck = AppcheckCall.androidversion(
+            (_model.newversion?.jsonBody ?? ''),
+          )!;
+          
           safeSetState(() {});
         } else {
           logFirebaseEvent('Homepagelogin_alert_dialog');
@@ -221,498 +225,501 @@ print("appcheck");
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          automaticallyImplyLeading: false,
-          leading: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset(
-                'assets/images/WhatsApp_Image_2023-09-05_at_4.51_3_(2).png',
-                width: 361.0,
-                height: 200.0,
-                fit: BoxFit.cover,
+      child: WillPopScope(
+         onWillPop: () async => false,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          appBar: AppBar(
+            backgroundColor: Colors.white,
+            automaticallyImplyLeading: false,
+            leading: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.asset(
+                  'assets/images/WhatsApp_Image_2023-09-05_at_4.51_3_(2).png',
+                  width: 361.0,
+                  height: 200.0,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
-          ),
-          actions: [
-             Row(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        FutureBuilder<ApiCallResponse>(
-          future: NotificationsCall.call(
-            stdId: FFAppState().userInfo.stdId,
-            displayFor: 'student',
-          ),
-          builder: (context, snapshot) {
-            // Customize what your widget looks like when it's loading.
-            if (!snapshot.hasData) {
-              return Center(
-                child: SizedBox(
-                  width: 50,
-                  height: 50,
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      FlutterFlowTheme.of(context).primary,
+            actions: [
+               Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          FutureBuilder<ApiCallResponse>(
+            future: NotificationsCall.call(
+              stdId: FFAppState().userInfo.stdId,
+              displayFor: 'student',
+            ),
+            builder: (context, snapshot) {
+              // Customize what your widget looks like when it's loading.
+              if (!snapshot.hasData) {
+                return Center(
+                  child: SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        FlutterFlowTheme.of(context).primary,
+                      ),
                     ),
+                  ),
+                );
+              }
+              final badgeNotificationsResponse = snapshot.data!;
+              return badges.Badge(
+                badgeContent: Text(
+                  NotificationsCall.announcements(
+                    badgeNotificationsResponse.jsonBody,
+                  )!
+                      .length
+                      .toString(),
+                  style: FlutterFlowTheme.of(context).titleSmall.override(
+                        fontFamily: 'Readex Pro',
+                        color: Colors.white,
+                      ),
+                ),
+                showBadge: true,
+                shape: badges.BadgeShape.circle,
+                badgeColor: FlutterFlowTheme.of(context).primary,
+                elevation: 4,
+                padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                position: badges.BadgePosition.topEnd(),
+                animationType: badges.BadgeAnimationType.scale,
+                toAnimate: true,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+                  child: FlutterFlowIconButton(
+                    borderColor: FlutterFlowTheme.of(context).primary,
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    buttonSize: 50,
+                    fillColor: FlutterFlowTheme.of(context).accent1,
+                    icon: Icon(
+                      Icons.notifications_active,
+                      color: FlutterFlowTheme.of(context).primaryText,
+                      size: 30,
+                    ),
+                    onPressed: () async {
+                      logFirebaseEvent(
+                          'HOMEPAGELOGIN_notifications_active_ICN_O');
+                      logFirebaseEvent('IconButton_navigate_to');
+                      context.pushNamed('notifications');
+                    },
                   ),
                 ),
               );
-            }
-            final badgeNotificationsResponse = snapshot.data!;
-            return badges.Badge(
-              badgeContent: Text(
-                NotificationsCall.announcements(
-                  badgeNotificationsResponse.jsonBody,
-                )!
-                    .length
-                    .toString(),
-                style: FlutterFlowTheme.of(context).titleSmall.override(
-                      fontFamily: 'Readex Pro',
-                      color: Colors.white,
-                    ),
-              ),
-              showBadge: true,
-              shape: badges.BadgeShape.circle,
-              badgeColor: FlutterFlowTheme.of(context).primary,
-              elevation: 4,
-              padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
-              position: badges.BadgePosition.topEnd(),
-              animationType: badges.BadgeAnimationType.scale,
-              toAnimate: true,
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                child: FlutterFlowIconButton(
-                  borderColor: FlutterFlowTheme.of(context).primary,
-                  borderRadius: 10,
-                  borderWidth: 1,
-                  buttonSize: 50,
-                  fillColor: FlutterFlowTheme.of(context).accent1,
-                  icon: Icon(
-                    Icons.notifications_active,
-                    color: FlutterFlowTheme.of(context).primaryText,
-                    size: 30,
-                  ),
-                  onPressed: () async {
-                    logFirebaseEvent(
-                        'HOMEPAGELOGIN_notifications_active_ICN_O');
-                    logFirebaseEvent('IconButton_navigate_to');
-                    context.pushNamed('notifications');
-                  },
-                ),
-              ),
-            );
-          },
-        ),
-                Padding(
-  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-  child: FlutterFlowIconButton(
-    borderColor: FlutterFlowTheme.of(context).primary,
-    borderRadius: 10,
-    borderWidth: 1,
-    buttonSize: 50,
-    fillColor: FlutterFlowTheme.of(context).accent1,
-    icon: Icon(
-      Icons.person,
-      color: FlutterFlowTheme.of(context).primaryText,
-      size: 30,
-    ),
-    onPressed: () async {
-      logFirebaseEvent('HOMEPAGELOGIN_PAGE_person_ICN_ON_TAP');
-      logFirebaseEvent('IconButton_navigate_to');
-      context.pushNamed('profile');
-    },
-  ),
-)
-              ],
+            },
+          ),
+                  Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+          child: FlutterFlowIconButton(
+            borderColor: FlutterFlowTheme.of(context).primary,
+            borderRadius: 10,
+            borderWidth: 1,
+            buttonSize: 50,
+            fillColor: FlutterFlowTheme.of(context).accent1,
+            icon: Icon(
+        Icons.person,
+        color: FlutterFlowTheme.of(context).primaryText,
+        size: 30,
             ),
-          ],
-          centerTitle: true,
-          toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
-          elevation: 2.0,
-        ),
-        body: SafeArea(
-          top: true,
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: FutureBuilder<ApiCallResponse>(
-              future: GetServicesCall.call(),
-              builder: (context, snapshot) {
-                // Customize what your widget looks like when it's loading.
-                if (!snapshot.hasData) {
-                  return Center(
-                    child: HomeshimmerWidget(),
-                  );
-                }
-                final columnGetServicesResponse = snapshot.data!;
-                return SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              10.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            FFLocalizations.of(context).getText(
-                              '1mqf9cgg' /* Welcome back! */,
+            onPressed: () async {
+        logFirebaseEvent('HOMEPAGELOGIN_PAGE_person_ICN_ON_TAP');
+        logFirebaseEvent('IconButton_navigate_to');
+        context.pushNamed('profile');
+            },
+          ),
+        )
+                ],
+              ),
+            ],
+            centerTitle: true,
+            toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
+            elevation: 2.0,
+          ),
+          body: SafeArea(
+            top: true,
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
+              child: FutureBuilder<ApiCallResponse>(
+                future: GetServicesCall.call(),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: HomeshimmerWidget(),
+                    );
+                  }
+                  final columnGetServicesResponse = snapshot.data!;
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Align(
+                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 0.0, 0.0),
+                            child: Text(
+                              FFLocalizations.of(context).getText(
+                                '1mqf9cgg' /* Welcome back! */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Poppins',
+                                    color:
+                                        FlutterFlowTheme.of(context).primaryText,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                             ),
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Poppins',
-                                  color:
-                                      FlutterFlowTheme.of(context).primaryText,
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
                           ),
                         ),
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 5.0, 0.0, 0.0),
-                              child: Text(
-                                FFAppState().userInfo.studentName,
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
-                            ),
-                          ),
-                          Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  10.0, 5.0, 0.0, 0.0),
-                              child: Text(
-                                'Class : ${FFAppState().userInfo.stdId}',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                       fontWeight: FontWeight.w500,
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                        child: FutureBuilder<ApiCallResponse>(
-                          future: BannersCall.call(
-                            stdId: FFAppState().userInfo.stdId,
-                            displayFor: 'student',
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return HomeshimmerWidget();
-                            }
-                            final containerBannersResponse = snapshot.data!;
-                            return Container(
-                              decoration: BoxDecoration(),
-                              child: Builder(
-                                builder: (context) {
-                                  final banners = BannersCall.banners(
-                                        containerBannersResponse.jsonBody,
-                                      )?.toList() ??
-                                      [];
-                                  return Container(
-                                    width: double.infinity,
-                                    height: 200.0,
-                                    child: CarouselSlider.builder(
-                                      itemCount: banners.length,
-                                      itemBuilder: (context, bannersIndex, _) {
-                                        final bannersItem =
-                                            banners[bannersIndex];
-                                        return ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            getJsonField(
-                                              bannersItem,
-                                              r'''$.link''',
-                                            ).toString(),
-                                            width: 300.0,
-                                            height: 200.0,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        );
-                                      },
-                                      carouselController:
-                                          _model.carouselController ??=
-                                              CarouselSliderController(),
-                                      options: CarouselOptions(
-                                        initialPage: min(1, banners.length - 1),
-                                        viewportFraction: 1.0,
-                                        disableCenter: true,
-                                        enlargeCenterPage: true,
-                                        enlargeFactor: 0.25,
-                                        enableInfiniteScroll: true,
-                                        scrollDirection: Axis.horizontal,
-                                        autoPlay: true,
-                                        autoPlayAnimationDuration:
-                                            Duration(milliseconds: 800),
-                                        autoPlayInterval: Duration(
-                                            milliseconds: (800 + 4000)),
-                                        autoPlayCurve: Curves.linear,
-                                        pauseAutoPlayInFiniteScroll: true,
-                                        onPageChanged: (index, _) =>
-                                            _model.carouselCurrentIndex = index,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Row(
+                        Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, -1.0),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 5.0, 0.0, 0.0),
+                                    10.0, 5.0, 0.0, 0.0),
                                 child: Text(
-                                  FFLocalizations.of(context).getText(
-                                    '0q5965g5' /* Category */,
-                                  ),
+                                  FFAppState().userInfo.studentName,
+                                  style: FlutterFlowTheme.of(context).bodyMedium,
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10.0, 5.0, 0.0, 0.0),
+                                child: Text(
+                                  'Class : ${FFAppState().userInfo.stdId}',
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Poppins',
-                                        color: Color(0xFF272727),
-                                        fontSize: 16.0,
-                                        fontWeight: FontWeight.w500,
+                                         fontWeight: FontWeight.w500,
                                       ),
                                 ),
                               ),
                             ),
-                            InkWell(
-  splashColor: Colors.transparent,
-  focusColor: Colors.transparent,
-  hoverColor: Colors.transparent,
-  highlightColor: Colors.transparent,
-  onTap: () async {
-    logFirebaseEvent('HOMEPAGELOGIN_PAGE_Text_64eyacr2_ON_TAP');
-    logFirebaseEvent('Text_navigate_to');
-    context.pushNamed('service');
-  },
-  child: Text(
-    "View All",
-    style: FlutterFlowTheme.of(context).bodyMedium.override(
-          fontFamily: 'Readex Pro',
-          color: FlutterFlowTheme.of(context).primary,
-          fontWeight: FontWeight.w500,
-        ),
-  ),
-)
                           ],
                         ),
-                      ),
-                      Builder(
-                        builder: (context) {
-                          final userServices = FFAppState()
-                              .userInfo
-                              .allowedServices
-                              .where((e) => e != 'certificate')
-                              .toList();
-                          return GridView.builder(
-                            padding: EdgeInsets.zero,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 10.0,
-                              mainAxisSpacing: 10.0,
-                              childAspectRatio: 1.2,
+                        Padding(
+                          padding:
+                              EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          child: FutureBuilder<ApiCallResponse>(
+                            future: BannersCall.call(
+                              stdId: FFAppState().userInfo.stdId,
+                              displayFor: 'student',
                             ),
-                            primary: false,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: userServices.length,
-                            itemBuilder: (context, userServicesIndex) {
-                              final userServicesItem =
-                                  userServices[userServicesIndex];
-                                  final imageUrl = slugToImageUrl[
-                                      userServicesItem] ??
-                                  "https://www.indiantalent.org/uploads/services/95d486f1f60d26684c6c19c7e3a3d61d.png";
-                              return InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  logFirebaseEvent(
-                                      'HOMEPAGELOGIN_Container_azr8mu5t_ON_TAP');
-                                  if ((userServicesItem == 'monthly-test') ||
-                                      (userServicesItem ==
-                                          'summer-quiz-competition') ||
-                                      (userServicesItem == 'neet') ||
-                                      (userServicesItem == 'jee')) {
-                                    logFirebaseEvent('Container_navigate_to');
-
-                                    context.pushNamed(
-                                      'monthlyexam',
-                                      queryParameters: {
-                                        'serviceid': serializeParam(
-                                          functions.getServiceId(
-                                              userServicesItem,
-                                              GetServicesCall.services(
-                                                columnGetServicesResponse
-                                                    .jsonBody,
-                                              )!
-                                                  .toList()),
-                                          ParamType.String,
-                                        ),
-                                        'choosenservice': serializeParam(
-                                          userServicesItem,
-                                          ParamType.String,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  } else if (userServicesItem ==
-                                      'special-offer') {
-                                    logFirebaseEvent('Container_navigate_to');
-
-                                    context.pushNamed('productsmenu');
-                                  } else if ((userServicesItem ==
-                                          'annual-exam') ||
-                                      (userServicesItem ==
-                                          'online-study-material')) {
-                                    logFirebaseEvent('Container_navigate_to');
-
-                                    context.pushNamed(
-                                      'annualExam',
-                                     queryParameters: {
-                                        'serviceid': serializeParam(
-                                          functions.getServiceId(
-                                              userServicesItem,
-                                              GetServicesCall.services(
-                                                columnGetServicesResponse
-                                                    .jsonBody,
-                                              )!
-                                                  .toList()),
-                                          ParamType.String,
-                                        ),
-                                        'choosenservice': serializeParam(
-                                          userServicesItem,
-                                          ParamType.String,
-                                        ),
-                                      }.withoutNulls,
-                                    );
-                                  } else {
-                                    logFirebaseEvent('Container_alert_dialog');
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return WebViewAware(
-                                          child: AlertDialog(
-                                            title: Text('Alert !'),
-                                            content: Text(
-                                                'This service is under process. Please visit our website'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  }
-                                },
-                                child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 0.5,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.5,
-                                  decoration: BoxDecoration(
-                                    color: valueOrDefault<Color>(
-                                      functions.color(userServicesIndex),
-                                      FlutterFlowTheme.of(context).primary,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(-1.0, -1.0),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(10.0),
-                                          child: Text(
-                                            functions
-                                                .removehyphen(userServicesItem),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Poppins',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBackground,
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                          ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return HomeshimmerWidget();
+                              }
+                              final containerBannersResponse = snapshot.data!;
+                              return Container(
+                                decoration: BoxDecoration(),
+                                child: Builder(
+                                  builder: (context) {
+                                    final banners = BannersCall.banners(
+                                          containerBannersResponse.jsonBody,
+                                        )?.toList() ??
+                                        [];
+                                    return Container(
+                                      width: double.infinity,
+                                      height: 200.0,
+                                      child: CarouselSlider.builder(
+                                        itemCount: banners.length,
+                                        itemBuilder: (context, bannersIndex, _) {
+                                          final bannersItem =
+                                              banners[bannersIndex];
+                                          return ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.network(
+                                              getJsonField(
+                                                bannersItem,
+                                                r'''$.link''',
+                                              ).toString(),
+                                              width: 300.0,
+                                              height: 200.0,
+                                              fit: BoxFit.cover,
+                                            ),
+                                          );
+                                        },
+                                        carouselController:
+                                            _model.carouselController ??=
+                                                CarouselSliderController(),
+                                        options: CarouselOptions(
+                                          initialPage: min(1, banners.length - 1),
+                                          viewportFraction: 1.0,
+                                          disableCenter: true,
+                                          enlargeCenterPage: true,
+                                          enlargeFactor: 0.25,
+                                          enableInfiniteScroll: true,
+                                          scrollDirection: Axis.horizontal,
+                                          autoPlay: true,
+                                          autoPlayAnimationDuration:
+                                              Duration(milliseconds: 800),
+                                          autoPlayInterval: Duration(
+                                              milliseconds: (800 + 4000)),
+                                          autoPlayCurve: Curves.linear,
+                                          pauseAutoPlayInFiniteScroll: true,
+                                          onPageChanged: (index, _) =>
+                                              _model.carouselCurrentIndex = index,
                                         ),
                                       ),
-                                      Align(
-                                        alignment:
-                                            AlignmentDirectional(1.0, 1.0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 10.0, 0.0),
-                                          child: Container(
-                                            width: 60.0,
-                                            height: 60.0,
-                                            decoration: BoxDecoration(),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(8.0),
-                                              child: Image.network(
-                                                imageUrl,
-                                                width: 300.0,
-                                                height: 200.0,
-                                                fit: BoxFit.contain,
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Align(
+                                alignment: AlignmentDirectional(0.0, -1.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 5.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      '0q5965g5' /* Category */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Poppins',
+                                          color: Color(0xFF272727),
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                              InkWell(
+          splashColor: Colors.transparent,
+          focusColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onTap: () async {
+            logFirebaseEvent('HOMEPAGELOGIN_PAGE_Text_64eyacr2_ON_TAP');
+            logFirebaseEvent('Text_navigate_to');
+            context.pushNamed('service');
+          },
+          child: Text(
+            "View All",
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+            fontFamily: 'Readex Pro',
+            color: FlutterFlowTheme.of(context).primary,
+            fontWeight: FontWeight.w500,
+          ),
+          ),
+        )
+                            ],
+                          ),
+                        ),
+                        Builder(
+                          builder: (context) {
+                            final userServices = FFAppState()
+                                .userInfo
+                                .allowedServices
+                                .where((e) => e != 'certificate')
+                                .toList();
+                            return GridView.builder(
+                              padding: EdgeInsets.zero,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 10.0,
+                                mainAxisSpacing: 10.0,
+                                childAspectRatio: 1.2,
+                              ),
+                              primary: false,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.vertical,
+                              itemCount: userServices.length,
+                              itemBuilder: (context, userServicesIndex) {
+                                final userServicesItem =
+                                    userServices[userServicesIndex];
+                                    final imageUrl = slugToImageUrl[
+                                        userServicesItem] ??
+                                    "https://www.indiantalent.org/uploads/services/95d486f1f60d26684c6c19c7e3a3d61d.png";
+                                return InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    logFirebaseEvent(
+                                        'HOMEPAGELOGIN_Container_azr8mu5t_ON_TAP');
+                                    if ((userServicesItem == 'monthly-test') ||
+                                        (userServicesItem ==
+                                            'summer-quiz-competition') ||
+                                        (userServicesItem == 'neet') ||
+                                        (userServicesItem == 'jee')) {
+                                      logFirebaseEvent('Container_navigate_to');
+        
+                                      context.pushNamed(
+                                        'monthlyexam',
+                                        queryParameters: {
+                                          'serviceid': serializeParam(
+                                            functions.getServiceId(
+                                                userServicesItem,
+                                                GetServicesCall.services(
+                                                  columnGetServicesResponse
+                                                      .jsonBody,
+                                                )!
+                                                    .toList()),
+                                            ParamType.String,
+                                          ),
+                                          'choosenservice': serializeParam(
+                                            userServicesItem,
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    } else if (userServicesItem ==
+                                        'special-offer') {
+                                      logFirebaseEvent('Container_navigate_to');
+        
+                                      context.pushNamed('productsmenu');
+                                    } else if ((userServicesItem ==
+                                            'annual-exam') ||
+                                        (userServicesItem ==
+                                            'online-study-material')) {
+                                      logFirebaseEvent('Container_navigate_to');
+        
+                                      context.pushNamed(
+                                        'annualExam',
+                                       queryParameters: {
+                                          'serviceid': serializeParam(
+                                            functions.getServiceId(
+                                                userServicesItem,
+                                                GetServicesCall.services(
+                                                  columnGetServicesResponse
+                                                      .jsonBody,
+                                                )!
+                                                    .toList()),
+                                            ParamType.String,
+                                          ),
+                                          'choosenservice': serializeParam(
+                                            userServicesItem,
+                                            ParamType.String,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+                                    } else {
+                                      logFirebaseEvent('Container_alert_dialog');
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return WebViewAware(
+                                            child: AlertDialog(
+                                              title: Text('Alert !'),
+                                              content: Text(
+                                                  'This service is under process. Please visit our website'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () => Navigator.pop(
+                                                      alertDialogContext),
+                                                  child: Text('Ok'),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.sizeOf(context).width * 0.5,
+                                    height:
+                                        MediaQuery.sizeOf(context).height * 0.5,
+                                    decoration: BoxDecoration(
+                                      color: valueOrDefault<Color>(
+                                        functions.color(userServicesIndex),
+                                        FlutterFlowTheme.of(context).primary,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(-1.0, -1.0),
+                                          child: Padding(
+                                            padding: EdgeInsets.all(10.0),
+                                            child: Text(
+                                              functions
+                                                  .removehyphen(userServicesItem),
+                                              style: FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Poppins',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primaryBackground,
+                                                    fontSize: 16.0,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                            ),
+                                          ),
+                                        ),
+                                        Align(
+                                          alignment:
+                                              AlignmentDirectional(1.0, 1.0),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 10.0, 0.0),
+                                            child: Container(
+                                              width: 60.0,
+                                              height: 60.0,
+                                              decoration: BoxDecoration(),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: Image.network(
+                                                  imageUrl,
+                                                  width: 300.0,
+                                                  height: 200.0,
+                                                  fit: BoxFit.contain,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
-                    ],
-                  ),
-                );
-              },
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
