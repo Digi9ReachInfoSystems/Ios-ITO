@@ -1,9 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'quizdetails_model.dart';
 export 'quizdetails_model.dart';
@@ -64,11 +62,11 @@ class _QuizdetailsWidgetState extends State<QuizdetailsWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Poppins',
-                  color: Color(0xFF272727),
+                  color: const Color(0xFF272727),
                   fontSize: 22.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -79,30 +77,30 @@ class _QuizdetailsWidgetState extends State<QuizdetailsWidget> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Text(
                   FFLocalizations.of(context).getText(
                     'a6dt72au' /* REGISTRATION FEES */,
                   ),
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Readex Pro',
-                        color: Color(0xFF198543),
+                        color: const Color(0xFF198543),
                         fontSize: 18.0,
                         fontWeight: FontWeight.bold,
                       ),
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'h2fw319x' /* ₹ 500/- Per Student */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
-                          color: Color(0xFF020096),
+                          color: const Color(0xFF020096),
                           fontSize: 18.0,
                           fontWeight: FontWeight.w500,
                         ),
@@ -110,9 +108,9 @@ class _QuizdetailsWidgetState extends State<QuizdetailsWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'kpriz1y8' /* Students enrolling for the Sum... */,

@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'auth1_login_model.dart';
@@ -84,7 +83,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -98,15 +97,15 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: Alignment(0.0, 0),
+                      alignment: const Alignment(0.0, 0),
                       child: TabBar(
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
                             FlutterFlowTheme.of(context).secondaryText,
                         labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                        unselectedLabelStyle: TextStyle(),
+                        unselectedLabelStyle: const TextStyle(),
                         indicatorColor: FlutterFlowTheme.of(context).primary,
-                        padding: EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(4.0),
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
@@ -130,12 +129,12 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                         controller: _model.tabBarController,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(15.0),
+                            padding: const EdgeInsets.all(15.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
+                                  alignment: const AlignmentDirectional(-1.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
                                       'ccm8817s' /* Welcome to  */,
@@ -145,14 +144,14 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Poppins',
-                                          color: Color(0xFF272727),
+                                          color: const Color(0xFF272727),
                                           fontSize: 24.0,
                                           fontWeight: FontWeight.w600,
                                         ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -163,20 +162,20 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Poppins',
-                                          color: Color(0xFF272727),
+                                          color: const Color(0xFF272727),
                                         ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 16.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.emailAddressController,
                                       focusNode: _model.emailAddressFocusNode,
                                       autofocus: true,
-                                      autofillHints: [AutofillHints.email],
+                                      autofillHints: const [AutofillHints.email],
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
@@ -187,12 +186,12 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
-                                              color: Color(0xFF57636C),
+                                              color: const Color(0xFF57636C),
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                         enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFFE0E3E7),
                                             width: 2.0,
                                           ),
@@ -200,7 +199,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFF4B39EF),
                                             width: 2.0,
                                           ),
@@ -208,7 +207,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -216,7 +215,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -225,13 +224,13 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         ),
                                         filled: true,
                                         fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.all(24.0),
+                                        contentPadding: const EdgeInsets.all(24.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Plus Jakarta Sans',
-                                            color: Color(0xFF101213),
+                                            color: const Color(0xFF101213),
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -243,14 +242,14 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: Container(
+                                  child: SizedBox(
                                     width: double.infinity,
                                     child: TextFormField(
                                       controller: _model.passwordController,
                                       focusNode: _model.passwordFocusNode,
-                                      autofillHints: [AutofillHints.password],
+                                      autofillHints: const [AutofillHints.password],
                                       obscureText: !_model.passwordVisibility,
                                       decoration: InputDecoration(
                                         labelText:
@@ -261,12 +260,12 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             .labelMedium
                                             .override(
                                               fontFamily: 'Plus Jakarta Sans',
-                                              color: Color(0xFF57636C),
+                                              color: const Color(0xFF57636C),
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w500,
                                             ),
                                         enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFFE0E3E7),
                                             width: 2.0,
                                           ),
@@ -274,7 +273,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFF4B39EF),
                                             width: 2.0,
                                           ),
@@ -282,7 +281,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -290,7 +289,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -299,7 +298,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         ),
                                         filled: true,
                                         fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.all(24.0),
+                                        contentPadding: const EdgeInsets.all(24.0),
                                         suffixIcon: InkWell(
                                           onTap: () => setState(
                                             () => _model.passwordVisibility =
@@ -311,7 +310,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             _model.passwordVisibility
                                                 ? Icons.visibility_outlined
                                                 : Icons.visibility_off_outlined,
-                                            color: Color(0xFF57636C),
+                                            color: const Color(0xFF57636C),
                                             size: 24.0,
                                           ),
                                         ),
@@ -320,7 +319,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Plus Jakarta Sans',
-                                            color: Color(0xFF101213),
+                                            color: const Color(0xFF101213),
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.w500,
                                           ),
@@ -361,7 +360,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                 ),
                                               ),
                                               unselectedWidgetColor:
-                                                  Color(0xFFD9D9D9),
+                                                  const Color(0xFFD9D9D9),
                                             ),
                                             child: Checkbox(
                                               value: _model.checkboxValue ??=
@@ -370,7 +369,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                 setState(() => _model
                                                     .checkboxValue = newValue!);
                                               },
-                                              activeColor: Color(0xFF004696),
+                                              activeColor: const Color(0xFF004696),
                                               checkColor:
                                                   FlutterFlowTheme.of(context)
                                                       .info,
@@ -378,7 +377,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -391,7 +390,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                   .bodyMedium
                                                   .override(
                                                     fontFamily: 'Readex Pro',
-                                                    color: Color(0xFF272727),
+                                                    color: const Color(0xFF272727),
                                                   ),
                                             ),
                                           ),
@@ -400,7 +399,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                     ),
                                     Align(
                                       alignment:
-                                          AlignmentDirectional(-1.0, 0.0),
+                                          const AlignmentDirectional(-1.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent(
@@ -419,9 +418,9 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               MediaQuery.sizeOf(context).width *
                                                   0.372,
                                           height: 43.0,
-                                          padding: EdgeInsets.all(0.0),
+                                          padding: const EdgeInsets.all(0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: Colors.white,
                                           textStyle:
@@ -429,13 +428,13 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                   .titleSmall
                                                   .override(
                                                     fontFamily: 'Poppins',
-                                                    color: Color(0xFF004696),
+                                                    color: const Color(0xFF004696),
                                                     fontSize: 14.0,
                                                     fontWeight:
                                                         FontWeight.normal,
                                                   ),
                                           elevation: 0.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -447,15 +446,15 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   ],
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 15.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         logFirebaseEvent(
                                             'AUTH1_LOGIN_PAGE_SIGN_IN_BTN_ON_TAP');
-                                        Function() _navigate = () {};
+                                        Function() navigate = () {};
                                         logFirebaseEvent('Button_backend_call');
                                         _model.apiResult3td =
                                             await LoginOutsideCall.call(
@@ -623,7 +622,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           if (user == null) {
                                             return;
                                           }
-                                          _navigate = () => context.goNamedAuth(
+                                          navigate = () => context.goNamedAuth(
                                               'Homepagelogin', context.mounted);
                                         } else {
                                           logFirebaseEvent(
@@ -633,15 +632,15 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             builder: (alertDialogContext) {
                                               return WebViewAware(
                                                 child: AlertDialog(
-                                                  title: Text('Welcome'),
-                                                  content: Text(
+                                                  title: const Text('Welcome'),
+                                                  content: const Text(
                                                       'Wrong Email id and Password,Check Your Credentials Once'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext),
-                                                      child: Text('Ok'),
+                                                      child: const Text('Ok'),
                                                     ),
                                                   ],
                                                 ),
@@ -650,7 +649,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           );
                                         }
 
-                                        _navigate();
+                                        navigate();
 
                                         setState(() {});
                                       },
@@ -664,10 +663,10 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         height:
                                             MediaQuery.sizeOf(context).height *
                                                 0.05,
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         iconPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
+                                            const EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
@@ -679,7 +678,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               fontWeight: FontWeight.w600,
                                             ),
                                         elevation: 3.0,
-                                        borderSide: BorderSide(
+                                        borderSide: const BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),
@@ -690,7 +689,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -710,7 +709,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                       children: [
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '1ho21nwk' /* Not a member */,
@@ -738,10 +737,10 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           options: FFButtonOptions(
                                             height: 40.0,
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: Colors.white,
                                             textStyle:
@@ -749,13 +748,13 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                     .titleSmall
                                                     .override(
                                                       fontFamily: 'Poppins',
-                                                      color: Color(0xFF004696),
+                                                      color: const Color(0xFF004696),
                                                       fontSize: 14.0,
                                                       fontWeight:
                                                           FontWeight.normal,
                                                     ),
                                             elevation: 0.0,
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Colors.white,
                                               width: 0.0,
                                             ),
@@ -776,7 +775,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   '4c1m3un8' /* Please Fill the Register Form ... */,
@@ -785,7 +784,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Readex Pro',
-                                      color: Color(0xFF992A2A),
+                                      color: const Color(0xFF992A2A),
                                     ),
                               ),
                             ),

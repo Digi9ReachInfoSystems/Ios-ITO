@@ -1,9 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'quiz_awards_model.dart';
 export 'quiz_awards_model.dart';
@@ -49,7 +47,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Container(
               width: 80.0,
               height: 7.0,
@@ -67,7 +65,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
             child: Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
@@ -85,7 +83,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                         size: 24.0,
                       ),
                       Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'n88hbhxn' /* Top 10 ranking students in eac... */,
@@ -102,9 +100,8 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                     child: RichText(
-                      textScaleFactor: MediaQuery.of(context).textScaleFactor,
                       text: TextSpan(
                         children: [
                           TextSpan(
@@ -122,7 +119,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                         ],
                         style: FlutterFlowTheme.of(context).bodyMedium,
                       ),
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.center, textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
                     ),
                   ),
                 ],
@@ -146,7 +143,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                       size: 24.0,
                     ),
                     Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           '3in0d27x' /* The next 90 ranking students w... */,
@@ -160,9 +157,8 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: RichText(
-                    textScaleFactor: MediaQuery.of(context).textScaleFactor,
                     text: TextSpan(
                       children: [
                         TextSpan(
@@ -179,7 +175,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                       ],
                       style: FlutterFlowTheme.of(context).bodyMedium,
                     ),
-                    textAlign: TextAlign.center,
+                    textAlign: TextAlign.center, textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
                   ),
                 ),
               ],

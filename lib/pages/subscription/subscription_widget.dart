@@ -8,7 +8,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'subscription_model.dart';
 export 'subscription_model.dart';
@@ -68,7 +67,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: OrdersshimmerWidget(),
+            body: const OrdersshimmerWidget(),
           );
         }
         final subscriptionSubcsriptionsResponse = snapshot.data!;
@@ -83,13 +82,13 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
               backgroundColor: Colors.white,
               automaticallyImplyLeading: false,
               leading: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: Colors.transparent,
                   borderRadius: 30.0,
                   borderWidth: 1.0,
                   buttonSize: 60.0,
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.black,
                     size: 24.0,
@@ -112,7 +111,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                       fontWeight: FontWeight.w500,
                     ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
               elevation: 2.0,
@@ -125,7 +124,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Builder(
                         builder: (context) {
                           final servicename = SubcsriptionsCall.subscriptions(
@@ -141,7 +140,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                                 final servicenameItem =
                                     servicename[servicenameIndex];
                                 return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 10.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
@@ -174,10 +173,10 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                                               _model.servicess
                                           ? 70.0
                                           : 60.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color: valueOrDefault<Color>(
                                         functions.jsontostringlist(getJsonField(
@@ -211,7 +210,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                                             ),
                                           ),
                                       elevation: 3.0,
-                                      borderRadius: BorderRadius.only(
+                                      borderRadius: const BorderRadius.only(
                                         bottomLeft: Radius.circular(0.0),
                                         bottomRight: Radius.circular(0.0),
                                         topLeft: Radius.circular(12.0),
@@ -228,7 +227,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                     ),
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: Container(
                         width: MediaQuery.sizeOf(context).width * 1.0,
                         height: MediaQuery.sizeOf(context).height * 1.0,
@@ -237,7 +236,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 10.0),
                           child: Builder(
                             builder: (context) {
@@ -252,7 +251,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                                           )) ==
                                           _model.servicess)
                                       .toList()
-                                      ?.toList() ??
+                                      .toList() ??
                                   [];
                               return DataTable2(
                                 columns: [
@@ -340,7 +339,7 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                                 rows: (subs as Iterable)
                                     .mapIndexed((subsIndex, subsItem) => [
                                           Text(
-                                            '${functions.index(subsIndex).toString()}',
+                                            functions.index(subsIndex).toString(),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
@@ -407,12 +406,12 @@ class _SubscriptionWidgetState extends State<SubscriptionWidget> {
                                         ].map((c) => DataCell(c)).toList())
                                     .map((e) => DataRow(cells: e))
                                     .toList(),
-                                headingRowColor: MaterialStateProperty.all(
+                                headingRowColor: WidgetStateProperty.all(
                                   FlutterFlowTheme.of(context)
                                       .primaryBackground,
                                 ),
                                 headingRowHeight: 56.0,
-                                dataRowColor: MaterialStateProperty.all(
+                                dataRowColor: WidgetStateProperty.all(
                                   FlutterFlowTheme.of(context)
                                       .secondaryBackground,
                                 ),

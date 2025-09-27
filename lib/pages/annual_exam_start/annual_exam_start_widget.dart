@@ -1,6 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
-import '/components/dosanddont_widget.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -10,7 +9,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/shimmerservice/shimmerservice_widget.dart';
 import '/flutter_flow/permissions_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'annual_exam_start_model.dart';
@@ -82,7 +80,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -94,9 +92,9 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
               child: Text(
                 valueOrDefault<String>(
                   widget.choosensubject,
@@ -112,7 +110,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
               ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -130,12 +128,12 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     height: 500.0,
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                       child: PageView(
                         physics: const NeverScrollableScrollPhysics(),
                         controller: _model.pageViewController ??=
@@ -147,7 +145,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                             children: [
                               if (widget.serviceid == '1')
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 10.0, 20.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -163,7 +161,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                               ?.animateToPage(
                                             0,
                                             duration:
-                                                Duration(milliseconds: 500),
+                                                const Duration(milliseconds: 500),
                                             curve: Curves.ease,
                                           );
                                         },
@@ -171,17 +169,17 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                             FFLocalizations.of(context).getText(
                                           'yydb38vj' /* Test */,
                                         ),
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.exposure,
                                           size: 15.0,
                                         ),
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .success,
@@ -193,7 +191,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                     color: Colors.white,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -211,7 +209,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                               ?.animateToPage(
                                             1,
                                             duration:
-                                                Duration(milliseconds: 500),
+                                                const Duration(milliseconds: 500),
                                             curve: Curves.ease,
                                           );
                                         },
@@ -219,19 +217,19 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                             FFLocalizations.of(context).getText(
                                           'cklmkiq6' /* Result */,
                                         ),
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.rule,
                                           size: 15.0,
                                         ),
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   12.0, 0.0, 12.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
-                                          color: Color(0xD9227272),
+                                          color: const Color(0xD9227272),
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmall
@@ -240,7 +238,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                     color: Colors.white,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -254,7 +252,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                 ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 20.0, 10.0, 0.0),
                                   child: FutureBuilder<ApiCallResponse>(
                                     future: TestCall.call(
@@ -273,13 +271,13 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                     builder: (context, snapshot) {
                                       // Customize what your widget looks like when it's loading.
                                       if (!snapshot.hasData) {
-                                        return ShimmerserviceWidget();
+                                        return const ShimmerserviceWidget();
                                       }
                                       final tabBarTestResponse = snapshot.data!;
                                       return Column(
                                         children: [
                                           Align(
-                                            alignment: Alignment(0.0, 0),
+                                            alignment: const Alignment(0.0, 0),
                                             child: FlutterFlowButtonTabBar(
                                               useToggleButtonStyle: true,
                                               labelStyle:
@@ -288,7 +286,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                       ),
-                                              unselectedLabelStyle: TextStyle(),
+                                              unselectedLabelStyle: const TextStyle(),
                                               labelColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
@@ -301,7 +299,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                               unselectedBackgroundColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
-                                              borderColor: Color(0x00004696),
+                                              borderColor: const Color(0x00004696),
                                               unselectedBorderColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
@@ -309,10 +307,10 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                               borderRadius: 8.0,
                                               elevation: 0.0,
                                               buttonMargin:
-                                                  EdgeInsetsDirectional
+                                                  const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           8.0, 0.0, 8.0, 0.0),
-                                              padding: EdgeInsets.all(4.0),
+                                              padding: const EdgeInsets.all(4.0),
                                               tabs: [
                                                 Tab(
                                                   text: FFLocalizations.of(
@@ -354,7 +352,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                   _model.tabBarController,
                                               children: [
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 30.0),
                                                   child: Container(
@@ -371,7 +369,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   10.0),
                                                           child: Builder(
                                                             builder: (context) {
@@ -387,7 +385,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                     EdgeInsets
                                                                         .zero,
                                                                 gridDelegate:
-                                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                                                   crossAxisCount:
                                                                       2,
                                                                   crossAxisSpacing:
@@ -411,13 +409,13 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                           testnameIndex];
                                                                   return Align(
                                                                     alignment:
-                                                                        AlignmentDirectional(
+                                                                        const AlignmentDirectional(
                                                                             0.0,
                                                                             0.0),
                                                                     child:
                                                                         Padding(
                                                                       padding:
-                                                                          EdgeInsets.all(
+                                                                          const EdgeInsets.all(
                                                                               5.0),
                                                                       child:
                                                                           Material(
@@ -441,7 +439,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                             children:
                                                                                 [
                                                                               Align(
-                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                 child: Container(
                                                                                   width: 117.0,
                                                                                   height: 117.0,
@@ -449,12 +447,12 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                     shape: BoxShape.circle,
                                                                                     border: Border.all(
-                                                                                      color: Color(0xFFFFBD59),
+                                                                                      color: const Color(0xFFFFBD59),
                                                                                       width: 3.0,
                                                                                     ),
                                                                                   ),
                                                                                   child: Align(
-                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                     child: Material(
                                                                                       color: Colors.transparent,
                                                                                       elevation: 2.0,
@@ -466,7 +464,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                           color: FlutterFlowTheme.of(context).accent4,
                                                                                           image: DecorationImage(
                                                                                             fit: BoxFit.scaleDown,
-                                                                                            alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                            alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                             image: Image.network(
                                                                                               getJsonField(
                                                                                                 testnameItem,
@@ -476,7 +474,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                           ),
                                                                                           shape: BoxShape.circle,
                                                                                           border: Border.all(
-                                                                                            color: Color(0xFFFFECB2),
+                                                                                            color: const Color(0xFFFFECB2),
                                                                                           ),
                                                                                         ),
                                                                                       ),
@@ -486,9 +484,9 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                               ),
                                                                               Expanded(
                                                                                 child: Align(
-                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                   child: Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                                                                                     child: Container(
                                                                                       decoration: BoxDecoration(
                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -497,7 +495,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         children: [
                                                                                           Padding(
-                                                                                            padding: EdgeInsets.all(5.0),
+                                                                                            padding: const EdgeInsets.all(5.0),
                                                                                             child: Text(
                                                                                               getJsonField(
                                                                                                 testnameItem,
@@ -508,7 +506,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                             ),
                                                                                           ),
                                                                                           Padding(
-                                                                                            padding: EdgeInsets.all(5.0),
+                                                                                            padding: const EdgeInsets.all(5.0),
                                                                                             child: Text(
                                                                                               'Time : ${getJsonField(
                                                                                                 testnameItem,
@@ -763,12 +761,12 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                         builder: (alertDialogContext) {
                                                                                           return WebViewAware(
                                                                                             child: AlertDialog(
-                                                                                              title: Text('Alert'),
-                                                                                              content: Text('You Already Attempted this test'),
+                                                                                              title: const Text('Alert'),
+                                                                                              content: const Text('You Already Attempted this test'),
                                                                                               actions: [
                                                                                                 TextButton(
                                                                                                   onPressed: () => Navigator.pop(alertDialogContext),
-                                                                                                  child: Text('Ok'),
+                                                                                                  child: const Text('Ok'),
                                                                                                 ),
                                                                                               ],
                                                                                             ),
@@ -802,7 +800,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                 ),
                                                                               ),
                                                                               
-                                                                            ].divide(SizedBox(height: 8.0)).around(SizedBox(height: 8.0)),
+                                                                            ].divide(const SizedBox(height: 8.0)).around(const SizedBox(height: 8.0)),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -826,9 +824,9 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
         ))!
             .isNotEmpty))
       Align(
-        alignment: AlignmentDirectional(0, 0),
+        alignment: const AlignmentDirectional(0, 0),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
           child: Text(
             valueOrDefault<String>(
               TestCall.practisemsg(
@@ -854,7 +852,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
         ))!
             .isNotEmpty))
       Align(
-        alignment: AlignmentDirectional(0, 1),
+        alignment: const AlignmentDirectional(0, 1),
         child: FFButtonWidget(
           onPressed: () async {
             logFirebaseEvent('ANNUAL_EXAM_START_BUY_NOW_BTN_ON_TAP');
@@ -865,15 +863,15 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
           options: FFButtonOptions(
             width: MediaQuery.sizeOf(context).width * 0.9,
             height: MediaQuery.sizeOf(context).height * 0.05,
-            padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-            iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+            iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
             color: FlutterFlowTheme.of(context).primary,
             textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                   fontFamily: 'Readex Pro',
                   color: Colors.white,
                 ),
             elevation: 3,
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Colors.transparent,
               width: 1,
             ),
@@ -889,7 +887,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 0.0, 30.0),
                                                   child: Container(
@@ -906,7 +904,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                       children: [
                                                         Padding(
                                                           padding:
-                                                              EdgeInsets.all(
+                                                              const EdgeInsets.all(
                                                                   10.0),
                                                           child: Builder(
                                                             builder: (context) {
@@ -922,7 +920,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                     EdgeInsets
                                                                         .zero,
                                                                 gridDelegate:
-                                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                                                   crossAxisCount:
                                                                       2,
                                                                   crossAxisSpacing:
@@ -946,13 +944,13 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                           testnameIndex];
                                                                   return Align(
                                                                     alignment:
-                                                                        AlignmentDirectional(
+                                                                        const AlignmentDirectional(
                                                                             0.0,
                                                                             0.0),
                                                                     child:
                                                                         Padding(
                                                                       padding:
-                                                                          EdgeInsets.all(
+                                                                          const EdgeInsets.all(
                                                                               5.0),
                                                                       child:
                                                                           Material(
@@ -976,7 +974,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                             children:
                                                                                 [
                                                                               Align(
-                                                                                alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                 child: Container(
                                                                                   width: 117.0,
                                                                                   height: 117.0,
@@ -984,17 +982,17 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                     color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                     shape: BoxShape.circle,
                                                                                     border: Border.all(
-                                                                                      color: Color(0xFFFFBD59),
+                                                                                      color: const Color(0xFFFFBD59),
                                                                                       width: 3.0,
                                                                                     ),
                                                                                   ),
                                                                                   child: Align(
-                                                                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                     child: Container(
                                                                                       width: 105.0,
                                                                                       height: 105.0,
                                                                                       decoration: BoxDecoration(
-                                                                                        color: Color(0xFFFFECB2),
+                                                                                        color: const Color(0xFFFFECB2),
                                                                                         image: DecorationImage(
                                                                                           fit: BoxFit.cover,
                                                                                           image: Image.network(
@@ -1006,7 +1004,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                         ),
                                                                                         shape: BoxShape.circle,
                                                                                         border: Border.all(
-                                                                                          color: Color(0xFFFFECB2),
+                                                                                          color: const Color(0xFFFFECB2),
                                                                                         ),
                                                                                       ),
                                                                                     ),
@@ -1015,9 +1013,9 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                               ),
                                                                               Expanded(
                                                                                 child: Align(
-                                                                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                  alignment: const AlignmentDirectional(0.0, 0.0),
                                                                                   child: Padding(
-                                                                                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                                                                                     child: Container(
                                                                                       decoration: BoxDecoration(
                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -1026,7 +1024,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                         mainAxisSize: MainAxisSize.max,
                                                                                         children: [
                                                                                           Padding(
-                                                                                            padding: EdgeInsets.all(5.0),
+                                                                                            padding: const EdgeInsets.all(5.0),
                                                                                             child: Text(
                                                                                               valueOrDefault<String>(
                                                                                                 getJsonField(
@@ -1284,12 +1282,12 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                         builder: (alertDialogContext) {
                                                                                           return WebViewAware(
                                                                                             child: AlertDialog(
-                                                                                              title: Text('Alert'),
-                                                                                              content: Text('You Already Attempted this test'),
+                                                                                              title: const Text('Alert'),
+                                                                                              content: const Text('You Already Attempted this test'),
                                                                                               actions: [
                                                                                                 TextButton(
                                                                                                   onPressed: () => Navigator.pop(alertDialogContext),
-                                                                                                  child: Text('Ok'),
+                                                                                                  child: const Text('Ok'),
                                                                                                 ),
                                                                                               ],
                                                                                             ),
@@ -1321,7 +1319,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                                                   ),
                                                                                 ),
                                                                               ),
-                                                                            ].divide(SizedBox(height: 8.0)).around(SizedBox(height: 8.0)),
+                                                                            ].divide(const SizedBox(height: 8.0)).around(const SizedBox(height: 8.0)),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -1346,9 +1344,9 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
         ))!
             .isNotEmpty))
       Align(
-        alignment: AlignmentDirectional(0, -1),
+        alignment: const AlignmentDirectional(0, -1),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+          padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
           child: Text(
             valueOrDefault<String>(
               TestCall.ground2finalmsg(
@@ -1374,7 +1372,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
         ))!
             .isNotEmpty))
       Align(
-        alignment: AlignmentDirectional(0, 1),
+        alignment: const AlignmentDirectional(0, 1),
         child: FFButtonWidget(
           onPressed: () async {
             logFirebaseEvent('ANNUAL_EXAM_START_BUY_NOW_BTN_ON_TAP');
@@ -1385,15 +1383,15 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
           options: FFButtonOptions(
             width: MediaQuery.sizeOf(context).width * 0.9,
             height: MediaQuery.sizeOf(context).height * 0.05,
-            padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-            iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+            padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+            iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
             color: FlutterFlowTheme.of(context).primary,
             textStyle: FlutterFlowTheme.of(context).titleSmall.override(
                   fontFamily: 'Readex Pro',
                   color: Colors.white,
                 ),
             elevation: 3,
-            borderSide: BorderSide(
+            borderSide: const BorderSide(
               color: Colors.transparent,
               width: 1,
             ),
@@ -1424,7 +1422,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                             children: [
                               if (widget.serviceid == '1')
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       20.0, 10.0, 20.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -1440,7 +1438,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                               ?.animateToPage(
                                             0,
                                             duration:
-                                                Duration(milliseconds: 500),
+                                                const Duration(milliseconds: 500),
                                             curve: Curves.ease,
                                           );
                                         },
@@ -1448,17 +1446,17 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                             FFLocalizations.of(context).getText(
                                           'utlb7p7c' /* Test */,
                                         ),
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.exposure,
                                           size: 15.0,
                                         ),
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .success,
@@ -1470,7 +1468,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                     color: Colors.white,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -1488,7 +1486,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                               ?.animateToPage(
                                             1,
                                             duration:
-                                                Duration(milliseconds: 500),
+                                                const Duration(milliseconds: 500),
                                             curve: Curves.ease,
                                           );
                                         },
@@ -1496,19 +1494,19 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                             FFLocalizations.of(context).getText(
                                           '9b3117uf' /* Result */,
                                         ),
-                                        icon: Icon(
+                                        icon: const Icon(
                                           Icons.rule,
                                           size: 15.0,
                                         ),
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   12.0, 0.0, 12.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
-                                          color: Color(0xD9227272),
+                                          color: const Color(0xD9227272),
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmall
@@ -1517,7 +1515,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                     color: Colors.white,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -1531,7 +1529,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                 ),
                               Expanded(
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 0.0),
                                   child: FutureBuilder<ApiCallResponse>(
                                     future: MonthlyResultsCall.call(
@@ -1562,7 +1560,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                         height:
                                             MediaQuery.sizeOf(context).height *
                                                 1.0,
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: Builder(
                                           builder: (context) {
                                             final data =
@@ -1654,7 +1652,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                       onSelectChanged) =>
                                                   DataRow(
                                                 color:
-                                                    MaterialStateProperty.all(
+                                                    WidgetStateProperty.all(
                                                   dataIndex % 2 == 0
                                                       ? FlutterFlowTheme.of(
                                                               context)
@@ -1665,7 +1663,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                 ),
                                                 cells: [
                                                   Container(
-                                                    decoration: BoxDecoration(),
+                                                    decoration: const BoxDecoration(),
                                                     child: Text(
                                                       getJsonField(
                                                         dataItem,
@@ -1678,7 +1676,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                     ),
                                                   ),
                                                   Container(
-                                                    decoration: BoxDecoration(),
+                                                    decoration: const BoxDecoration(),
                                                     child: Text(
                                                       getJsonField(
                                                         dataItem,
@@ -1691,7 +1689,7 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                                     ),
                                                   ),
                                                   Container(
-                                                    decoration: BoxDecoration(),
+                                                    decoration: const BoxDecoration(),
                                                     child: Text(
                                                       getJsonField(
                                                         dataItem,

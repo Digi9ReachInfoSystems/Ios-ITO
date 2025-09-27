@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'round2result_model.dart';
@@ -53,7 +52,7 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: CelebrationsWidget(),
+            body: const CelebrationsWidget(),
           );
         }
         final round2resultRoundresultsResponse = snapshot.data!;
@@ -87,7 +86,7 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                     context.pop();
                   },
                 ),
-                actions: [],
+                actions: const [],
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     width: 100.0,
@@ -102,9 +101,9 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: Text(
                                   "Congratulations",
@@ -112,16 +111,16 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: Color(0x97FF0101),
+                                        color: const Color(0x97FF0101),
                                         fontSize: 26.0,
                                       ),
                                 ),
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 10.0),
                                 child: Text(
                                   FFAppState().userInfo.studentName,
@@ -259,7 +258,7 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                     dataRowBuilder: (resultsItem, resultsIndex, selected,
                             onSelectChanged) =>
                         DataRow(
-                      color: MaterialStateProperty.all(
+                      color: WidgetStateProperty.all(
                         resultsIndex % 2 == 0
                             ? FlutterFlowTheme.of(context).secondaryBackground
                             : FlutterFlowTheme.of(context).primaryBackground,
@@ -354,9 +353,9 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                           ),
                           options: FFButtonOptions(
                             height: 40.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 1.0, 0.0, 1.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).warning,
                             textStyle: FlutterFlowTheme.of(context)
@@ -367,7 +366,7 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                                   fontSize: 10.0,
                                 ),
                             elevation: 3.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),

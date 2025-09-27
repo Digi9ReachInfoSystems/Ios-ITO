@@ -7,7 +7,6 @@ import '/pages/shimmerservice/shimmerservice_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'monthlyexam_model.dart';
@@ -18,7 +17,7 @@ class MonthlyexamWidget extends StatefulWidget {
     super.key,
     this.serviceid,
     String? choosenservice,
-  }) : this.choosenservice = choosenservice ?? 'Test';
+  }) : choosenservice = choosenservice ?? 'Test';
 
   final String? serviceid;
   final String choosenservice;
@@ -75,7 +74,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -87,18 +86,18 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
             },
           ),
           title: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 20.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 20.0),
             child: Text(
               functions.removehyphen(widget.choosenservice),
               style: FlutterFlowTheme.of(context).headlineMedium.override(
                     fontFamily: 'Outfit',
-                    color: Color(0xFF272727),
+                    color: const Color(0xFF272727),
                     fontSize: 22.0,
                     fontWeight: FontWeight.w600,
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -127,7 +126,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
-                      return ShimmerserviceWidget();
+                      return const ShimmerserviceWidget();
                     }
                     final containerSubjectsResponse = snapshot.data!;
                     return Container(
@@ -137,7 +136,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                       ),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 15.0),
+                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 15.0),
                         child: Builder(
                           builder: (context) {
                             final children = SubjectsCall.productsByservice(
@@ -147,7 +146,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                             return GridView.builder(
                               padding: EdgeInsets.zero,
                               gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 10.0,
                                 mainAxisSpacing: 12.0,
@@ -186,15 +185,15 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                         builder: (alertDialogContext) {
                                           return WebViewAware(
                                             child: AlertDialog(
-                                              title: Text('Alert!'),
-                                              content: Text(
+                                              title: const Text('Alert!'),
+                                              content: const Text(
                                                   'Tests will be conducted on our website'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: Text('Ok'),
+                                                  child: const Text('Ok'),
                                                 ),
                                               ],
                                             ),
@@ -262,7 +261,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                            Align(
-      alignment: AlignmentDirectional(0, 0),
+      alignment: const AlignmentDirectional(0, 0),
       child: Container(
         width: MediaQuery.sizeOf(context).width,
         height: 45,
@@ -272,12 +271,12 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                     r'''$.subscription_status''',
                   )) ==
                   'Subscribed'
-              ? Color(0xFF9868FF)
+              ? const Color(0xFF9868FF)
               : FlutterFlowTheme.of(context).alternate,
           borderRadius: BorderRadius.circular(0),
         ),
         child: Align(
-          alignment: AlignmentDirectional(0, 0),
+          alignment: const AlignmentDirectional(0, 0),
           child: Text(
             getJsonField(
               childrenItem,
@@ -301,7 +300,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
     ),
                                           Align(
                                             alignment:
-                                                AlignmentDirectional(0.0, 0.0),
+                                                const AlignmentDirectional(0.0, 0.0),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
@@ -327,7 +326,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
       ),
     ),
     Padding(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Text(
         getJsonField(
           childrenItem,
@@ -355,10 +354,10 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                   },
                 ),
                 Align(
-                  alignment: AlignmentDirectional(0.0, 1.0),
+                  alignment: const AlignmentDirectional(0.0, 1.0),
                   child: Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         logFirebaseEvent('MONTHLYEXAM_PAGE_BUY_NOW_BTN_ON_TAP');
@@ -376,10 +375,10 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                       options: FFButtonOptions(
                         width: 343.0,
                         height: 48.0,
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -387,7 +386,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                   color: Colors.white,
                                 ),
                         elevation: 3.0,
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -396,7 +395,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                     ),
                   ),
                 ),
-              ].divide(SizedBox(height: 10.0)).around(SizedBox(height: 10.0)),
+              ].divide(const SizedBox(height: 10.0)).around(const SizedBox(height: 10.0)),
             ),
           ),
         ),

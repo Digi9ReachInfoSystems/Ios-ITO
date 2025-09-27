@@ -1,11 +1,9 @@
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'payment_success_model.dart';
 export 'payment_success_model.dart';
@@ -84,7 +82,7 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -136,9 +134,9 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                                 ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   20.0, 15.0, 20.0, 15.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -149,15 +147,15 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Readex Pro',
-                                      color: Color(0xFF272727),
+                                      color: const Color(0xFF272727),
                                     ),
                               ),
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 15.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -174,11 +172,11 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                                   width: MediaQuery.sizeOf(context).width * 0.9,
                                   height:
                                       MediaQuery.sizeOf(context).height * 0.05,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF004696),
+                                  color: const Color(0xFF004696),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
@@ -187,7 +185,7 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

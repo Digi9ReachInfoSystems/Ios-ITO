@@ -5,13 +5,10 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/special_offershimeer/special_offershimeer_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'productsmenu_model.dart';
@@ -38,8 +35,8 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 100.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 100.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -79,7 +76,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SpecialOffershimeerWidget(),
+            body: const SpecialOffershimeerWidget(),
           );
         }
         final productsmenuGetAllProductsResponse = snapshot.data!;
@@ -94,9 +91,9 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               automaticallyImplyLeading: false,
               title: Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 0.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'pvowosuk' /* Special Offers */,
@@ -110,7 +107,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                   ),
                 ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
               elevation: 2.0,
@@ -118,16 +115,16 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
             body: SafeArea(
               top: true,
               child: Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Stack(
-                  alignment: AlignmentDirectional(0.0, 1.0),
+                  alignment: const AlignmentDirectional(0.0, 1.0),
                   children: [
                     SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Card(
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               color: FlutterFlowTheme.of(context)
@@ -140,7 +137,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, -1.0),
+                                    alignment: const AlignmentDirectional(0.0, -1.0),
                                     child: Container(
                                       width: MediaQuery.sizeOf(context).width *
                                           1.0,
@@ -158,7 +155,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 10.0, 0.0, 10.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -199,7 +196,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                       child: Column(
                                         children: [
                                           Align(
-                                            alignment: Alignment(0.0, 0),
+                                            alignment: const Alignment(0.0, 0),
                                             child: TabBar(
                                               labelColor:
                                                   FlutterFlowTheme.of(context)
@@ -210,11 +207,11 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                               labelStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .titleMedium,
-                                              unselectedLabelStyle: TextStyle(),
+                                              unselectedLabelStyle: const TextStyle(),
                                               indicatorColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
-                                              padding: EdgeInsets.all(4.0),
+                                              padding: const EdgeInsets.all(4.0),
                                               tabs: [
                                                 Tab(
                                                   text: FFLocalizations.of(
@@ -1094,7 +1091,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                       children: [
                                         Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -1150,7 +1147,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                 itemBuilder: (context, productsIndex) {
                                   final productsItem = products[productsIndex];
                                   return Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       color: FlutterFlowTheme.of(context)
@@ -1165,7 +1162,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                         children: [
                                           Align(
                                             alignment:
-                                                AlignmentDirectional(0.0, -1.0),
+                                                const AlignmentDirectional(0.0, -1.0),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
@@ -1184,7 +1181,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 10.0,
                                                                 0.0, 10.0),
                                                     child: Text(
@@ -1502,7 +1499,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      AlignmentDirectional(
+                                                      const AlignmentDirectional(
                                                           0.0, 0.0),
                                                   child: InkWell(
                                                     splashColor:
@@ -1590,23 +1587,23 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                   blurRadius: 0.0,
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
-                                  offset: Offset(0.0, 1.0),
+                                  offset: const Offset(0.0, 1.0),
                                 )
                               ],
                               gradient: LinearGradient(
                                 colors: [
                                   FlutterFlowTheme.of(context).primary,
-                                  Color(0xFF514EFF)
+                                  const Color(0xFF514EFF)
                                 ],
-                                stops: [0.0, 1.0],
-                                begin: AlignmentDirectional(0.0, -1.0),
-                                end: AlignmentDirectional(0, 1.0),
+                                stops: const [0.0, 1.0],
+                                begin: const AlignmentDirectional(0.0, -1.0),
+                                end: const AlignmentDirectional(0, 1.0),
                               ),
                             ),
                             child: Stack(
                               children: [
                                 Padding(
-                                  padding: EdgeInsets.all(4.0),
+                                  padding: const EdgeInsets.all(4.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -1642,7 +1639,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 0.0, 0.0),
                                             child: Icon(
                                               Icons.east,

@@ -9,7 +9,6 @@ import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'testpage_model.dart';
@@ -17,11 +16,10 @@ export 'testpage_model.dart';
 
 class TestpageWidget extends StatefulWidget {
   const TestpageWidget({
-    Key? key,
+    super.key,
     required this.testId,
     String? timer,
-  })  : this.timer = timer ?? '15',
-        super(key: key);
+  })  : timer = timer ?? '15';
 
   final String? testId;
   final String timer;
@@ -101,7 +99,7 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                 milliSecond: false,
               ),
               controller: _model.timerController,
-              updateStateInterval: Duration(milliseconds: 1000),
+              updateStateInterval: const Duration(milliseconds: 1000),
               onChanged: (value, displayTime, shouldUpdate) {
                 _model.timerMilliseconds = value;
                 _model.timerValue = displayTime;
@@ -120,12 +118,12 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                   builder: (alertDialogContext) {
                     return WebViewAware(
                         child: AlertDialog(
-                      title: Text('Time Up!!'),
-                      content: Text('The Allocated Time Has Ended ! '),
+                      title: const Text('Time Up!!'),
+                      content: const Text('The Allocated Time Has Ended ! '),
                       actions: [
                         TextButton(
                           onPressed: () => Navigator.pop(alertDialogContext),
-                          child: Text('Ok'),
+                          child: const Text('Ok'),
                         ),
                       ],
                     ));
@@ -135,12 +133,12 @@ class _TestpageWidgetState extends State<TestpageWidget> {
               textAlign: TextAlign.start,
               style: FlutterFlowTheme.of(context).headlineSmall.override(
                     fontFamily: 'Outfit',
-                    color: Color(0xFFB82929),
+                    color: const Color(0xFFB82929),
                     fontSize: 22.0,
                     fontWeight: FontWeight.w600,
                   ),
             ),
-            actions: [],
+            actions: const [],
             centerTitle: true,
             toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
             elevation: 2.0,
@@ -148,7 +146,7 @@ class _TestpageWidgetState extends State<TestpageWidget> {
           body: SafeArea(
             top: true,
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
               child: SingleChildScrollView(
                 primary: false,
                 child: Column(
@@ -156,7 +154,7 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Align(
-                      alignment: AlignmentDirectional(0.00, -1.00),
+                      alignment: const AlignmentDirectional(0.00, -1.00),
                       child: Text(
                         valueOrDefault<String>(
                           FFAppState().subjectname,
@@ -165,14 +163,14 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                         textAlign: TextAlign.center,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
-                              color: Color(0xFF272727),
+                              color: const Color(0xFF272727),
                               fontSize: 18.0,
                               fontWeight: FontWeight.w500,
                             ),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
+                      padding: const EdgeInsetsDirectional.fromSTEB(
                           10.0, 10.0, 10.0, 10.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -197,18 +195,18 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                                   locale:
                                       FFLocalizations.of(context).languageCode,
                                 ),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.access_time_sharp,
                                   size: 12.0,
                                 ),
                                 options: FFButtonOptions(
                                   width: 150.0,
                                   height: 35.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       2.0, 0.0, 2.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFF863DFF),
+                                  color: const Color(0xFF863DFF),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
@@ -218,7 +216,7 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                                         fontWeight: FontWeight.w300,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -248,18 +246,18 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                                   locale:
                                       FFLocalizations.of(context).languageCode,
                                 ),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.access_time_sharp,
                                   size: 12.0,
                                 ),
                                 options: FFButtonOptions(
                                   width: 150.0,
                                   height: 35.0,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       2.0, 0.0, 2.0, 0.0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: Color(0xFFFF5858),
+                                  color: const Color(0xFFFF5858),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
@@ -269,7 +267,7 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                                         fontWeight: FontWeight.w300,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: BorderSide(
+                                  borderSide: const BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -282,7 +280,7 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                         ],
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: MediaQuery.sizeOf(context).width * 8.0,
                       height: MediaQuery.sizeOf(context).height * 1.5,
                       child: custom_widgets.TestWidgetNew(

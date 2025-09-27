@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'reset_password_model.dart';
@@ -78,7 +77,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -95,12 +94,12 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Poppins',
-                  color: Color(0xFF272727),
+                  color: const Color(0xFF272727),
                   fontSize: 22.0,
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -111,9 +110,9 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'xgie37mp' /* Reset Password */,
@@ -121,7 +120,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Poppins',
-                          color: Color(0xFF272727),
+                          color: const Color(0xFF272727),
                           fontSize: 24.0,
                           fontWeight: FontWeight.w600,
                         ),
@@ -129,9 +128,9 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(10.0, 20.0, 0.0, 0.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'sigy6cpn' /* Enter OTP */,
@@ -139,7 +138,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Poppins',
-                          color: Color(0xFF272727),
+                          color: const Color(0xFF272727),
                           fontSize: 18.0,
                           fontWeight: FontWeight.w600,
                         ),
@@ -169,7 +168,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                   fieldHeight: 50.0,
                   fieldWidth: 50.0,
                   borderWidth: 2.0,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(12.0),
                     bottomRight: Radius.circular(12.0),
                     topLeft: Radius.circular(12.0),
@@ -191,7 +190,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                     _model.pinCodeControllerValidator.asValidator(context),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0),
                 child: TextFormField(
                   controller: _model.textController1,
                   focusNode: _model.textFieldFocusNode1,
@@ -250,7 +249,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(20.0, 10.0, 20.0, 10.0),
                 child: TextFormField(
                   controller: _model.textController2,
                   focusNode: _model.textFieldFocusNode2,
@@ -309,9 +308,9 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                 ),
               ),
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                   child: FFButtonWidget(
                     onPressed: () async {
                       logFirebaseEvent(
@@ -333,7 +332,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                                 color: FlutterFlowTheme.of(context).primaryText,
                               ),
                             ),
-                            duration: Duration(milliseconds: 4000),
+                            duration: const Duration(milliseconds: 4000),
                             backgroundColor:
                                 FlutterFlowTheme.of(context).secondary,
                           ),
@@ -351,7 +350,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                                 color: FlutterFlowTheme.of(context).primaryText,
                               ),
                             ),
-                            duration: Duration(milliseconds: 4000),
+                            duration: const Duration(milliseconds: 4000),
                             backgroundColor:
                                 FlutterFlowTheme.of(context).secondary,
                           ),
@@ -362,13 +361,13 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                           builder: (alertDialogContext) {
                             return WebViewAware(
                               child: AlertDialog(
-                                title: Text('Wrong OTP'),
-                                content: Text('Your OTP is wrong'),
+                                title: const Text('Wrong OTP'),
+                                content: const Text('Your OTP is wrong'),
                                 actions: [
                                   TextButton(
                                     onPressed: () =>
                                         Navigator.pop(alertDialogContext),
-                                    child: Text('Ok'),
+                                    child: const Text('Ok'),
                                   ),
                                 ],
                               ),
@@ -386,10 +385,10 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                       width: MediaQuery.sizeOf(context).width * 0.9,
                       height: MediaQuery.sizeOf(context).height * 0.05,
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
                       iconPadding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                      color: Color(0xFF004696),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                      color: const Color(0xFF004696),
                       textStyle:
                           FlutterFlowTheme.of(context).titleSmall.override(
                                 fontFamily: 'Readex Pro',
@@ -397,7 +396,7 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                                 fontWeight: FontWeight.w600,
                               ),
                       elevation: 3.0,
-                      borderSide: BorderSide(
+                      borderSide: const BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),

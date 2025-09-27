@@ -1,12 +1,9 @@
-import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'test_details_model.dart';
@@ -83,7 +80,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
               borderRadius: 30,
               borderWidth: 1,
               buttonSize: 60,
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_rounded,
                 color: Color(0xFF272727),
                 size: 30,
@@ -94,7 +91,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                 context.pop();
               },
             ),
-            actions: [],
+            actions: const [],
             centerTitle: true,
             elevation: 2,
           ),
@@ -105,7 +102,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  if (widget!.category != 'practise')
+                  if (widget.category != 'practise')
                     Material(
                       color: Colors.transparent,
                       elevation: 6,
@@ -118,7 +115,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             AnimatedContainer(
-                              duration: Duration(milliseconds: 100),
+                              duration: const Duration(milliseconds: 100),
                               curve: Curves.easeInOut,
                               width: MediaQuery.sizeOf(context).width,
                               height: MediaQuery.sizeOf(context).height * 0.06,
@@ -126,19 +123,19 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                 gradient: LinearGradient(
                                   colors: [
                                     FlutterFlowTheme.of(context).primaryText,
-                                    Color(0xBD004696),
+                                    const Color(0xBD004696),
                                     FlutterFlowTheme.of(context)
                                         .secondaryBackground
                                   ],
-                                  stops: [0, 1, 1],
-                                  begin: AlignmentDirectional(0, -1),
-                                  end: AlignmentDirectional(0, 1),
+                                  stops: const [0, 1, 1],
+                                  begin: const AlignmentDirectional(0, -1),
+                                  end: const AlignmentDirectional(0, 1),
                                 ),
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(1, 0),
+                                alignment: const AlignmentDirectional(1, 0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 10, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -159,9 +156,9 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1, 0),
+                              alignment: const AlignmentDirectional(-1, 0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10, 10, 0, 10),
                                 child: RichText(
                                   textScaler: MediaQuery.of(context).textScaler,
@@ -237,7 +234,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: RichText(
                                 textScaler: MediaQuery.of(context).textScaler,
                                 text: TextSpan(
@@ -295,7 +292,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                       text: FFLocalizations.of(context).getText(
                                         '97ar1jiz' /* "START TEST"  */,
                                       ),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
@@ -303,7 +300,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                       text: FFLocalizations.of(context).getText(
                                         '41ug8cz7' /* button. */,
                                       ),
-                                      style: TextStyle(),
+                                      style: const TextStyle(),
                                     )
                                   ],
                                   style: FlutterFlowTheme.of(context)
@@ -317,7 +314,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: RichText(
                                 textScaler: MediaQuery.of(context).textScaler,
                                 text: TextSpan(
@@ -358,7 +355,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: RichText(
                                 textScaler: MediaQuery.of(context).textScaler,
                                 text: TextSpan(
@@ -393,7 +390,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                       text: FFLocalizations.of(context).getText(
                                         'pzqi3vb7' /* click the  */,
                                       ),
-                                      style: TextStyle(),
+                                      style: const TextStyle(),
                                     ),
                                     TextSpan(
                                       text: FFLocalizations.of(context).getText(
@@ -409,7 +406,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                       text: FFLocalizations.of(context).getText(
                                         's9d3lzi3' /* , */,
                                       ),
-                                      style: TextStyle(),
+                                      style: const TextStyle(),
                                     ),
                                     TextSpan(
                                       text: FFLocalizations.of(context).getText(
@@ -425,7 +422,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                       text: FFLocalizations.of(context).getText(
                                         '5gawm4si' /* ,  */,
                                       ),
-                                      style: TextStyle(),
+                                      style: const TextStyle(),
                                     ),
                                     TextSpan(
                                       text: FFLocalizations.of(context).getText(
@@ -441,7 +438,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                       text: FFLocalizations.of(context).getText(
                                         'vug7cw6b' /* , or  */,
                                       ),
-                                      style: TextStyle(),
+                                      style: const TextStyle(),
                                     ),
                                     TextSpan(
                                       text: FFLocalizations.of(context).getText(
@@ -457,7 +454,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                       text: FFLocalizations.of(context).getText(
                                         'ben72nr8' /* the exam window while attendin... */,
                                       ),
-                                      style: TextStyle(),
+                                      style: const TextStyle(),
                                     )
                                   ],
                                   style: FlutterFlowTheme.of(context)
@@ -471,9 +468,9 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1, 0),
+                              alignment: const AlignmentDirectional(-1, 0),
                               child: Padding(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 child: RichText(
                                   textScaler: MediaQuery.of(context).textScaler,
                                   text: TextSpan(
@@ -532,9 +529,9 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1, 0),
+                              alignment: const AlignmentDirectional(-1, 0),
                               child: Padding(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 child: RichText(
                                   textScaler: MediaQuery.of(context).textScaler,
                                   text: TextSpan(
@@ -606,7 +603,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: RichText(
                                 textScaler: MediaQuery.of(context).textScaler,
                                 text: TextSpan(
@@ -664,7 +661,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                       ),
                     ),
                   Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 20),
                     child: Material(
                       color: Colors.transparent,
                       elevation: 6,
@@ -677,7 +674,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             AnimatedContainer(
-                              duration: Duration(milliseconds: 100),
+                              duration: const Duration(milliseconds: 100),
                               curve: Curves.easeInOut,
                               width: MediaQuery.sizeOf(context).width,
                               height: MediaQuery.sizeOf(context).height * 0.06,
@@ -685,19 +682,19 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                 gradient: LinearGradient(
                                   colors: [
                                     FlutterFlowTheme.of(context).primaryText,
-                                    Color(0xBD004696),
+                                    const Color(0xBD004696),
                                     FlutterFlowTheme.of(context)
                                         .secondaryBackground
                                   ],
-                                  stops: [0, 1, 1],
-                                  begin: AlignmentDirectional(0, -1),
-                                  end: AlignmentDirectional(0, 1),
+                                  stops: const [0, 1, 1],
+                                  begin: const AlignmentDirectional(0, -1),
+                                  end: const AlignmentDirectional(0, 1),
                                 ),
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(1, 0),
+                                alignment: const AlignmentDirectional(1, 0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 10, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -719,12 +716,12 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                                  const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 10, 0, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -737,7 +734,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5, 0, 0, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -756,7 +753,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(-1, 0),
+                                    alignment: const AlignmentDirectional(-1, 0),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       color:
@@ -766,11 +763,11 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5, 5, 5, 5),
                                         child: Text(
                                           valueOrDefault<String>(
-                                            widget!.testName,
+                                            widget.testName,
                                             'Test',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -792,7 +789,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         FlutterFlowTheme.of(context).alternate,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 10, 0, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -805,7 +802,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   5, 0, 0, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -824,20 +821,20 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(-1, 0),
+                                    alignment: const AlignmentDirectional(-1, 0),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: Color(0xC6004696),
+                                      color: const Color(0xC6004696),
                                       elevation: 0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             5, 5, 5, 5),
                                         child: Text(
                                           valueOrDefault<String>(
-                                            widget!.subjectName,
+                                            widget.subjectName,
                                             'subject',
                                           ),
                                           style: FlutterFlowTheme.of(context)
@@ -859,7 +856,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         FlutterFlowTheme.of(context).alternate,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 10, 0, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -877,7 +874,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                               size: 30,
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5, 0, 0, 0),
                                               child: Text(
                                                 FFLocalizations.of(context)
@@ -901,7 +898,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         Card(
                                           clipBehavior:
                                               Clip.antiAliasWithSaveLayer,
-                                          color: Color(0xFF004699),
+                                          color: const Color(0xFF004699),
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -909,11 +906,11 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10, 5, 10, 5),
                                             child: Text(
                                               valueOrDefault<String>(
-                                                widget!.stdid,
+                                                widget.stdid,
                                                 'Std',
                                               ),
                                               style: FlutterFlowTheme.of(
@@ -938,7 +935,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         FlutterFlowTheme.of(context).alternate,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 10, 0, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -956,7 +953,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                               size: 24,
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5, 0, 0, 0),
                                               child: Text(
                                                 FFLocalizations.of(context)
@@ -989,11 +986,11 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10, 5, 10, 5),
                                             child: Text(
                                               valueOrDefault<String>(
-                                                widget!.totalTime,
+                                                widget.totalTime,
                                                 'Time',
                                               ),
                                               style: FlutterFlowTheme.of(
@@ -1018,7 +1015,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         FlutterFlowTheme.of(context).alternate,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 10, 0, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1036,7 +1033,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                               size: 24,
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5, 0, 0, 0),
                                               child: Text(
                                                 FFLocalizations.of(context)
@@ -1060,7 +1057,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         Card(
                                           clipBehavior:
                                               Clip.antiAliasWithSaveLayer,
-                                          color: Color(0xD2003999),
+                                          color: const Color(0xD2003999),
                                           elevation: 0,
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -1068,11 +1065,11 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10, 5, 10, 5),
                                             child: Text(
                                               valueOrDefault<String>(
-                                                widget!.totalquestion,
+                                                widget.totalquestion,
                                                 'Total Questions',
                                               ),
                                               style: FlutterFlowTheme.of(
@@ -1097,7 +1094,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                         FlutterFlowTheme.of(context).alternate,
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0, 10, 0, 10),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1115,7 +1112,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                               size: 24,
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5, 0, 0, 0),
                                               child: Text(
                                                 FFLocalizations.of(context)
@@ -1148,11 +1145,11 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     10, 5, 10, 5),
                                             child: Text(
                                               valueOrDefault<String>(
-                                                widget!.totalmarks,
+                                                widget.totalmarks,
                                                 'Total Marks',
                                               ),
                                               style: FlutterFlowTheme.of(
@@ -1181,7 +1178,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
+                                  const EdgeInsetsDirectional.fromSTEB(20, 0, 20, 10),
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
@@ -1192,7 +1189,7 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                     'testpage',
                                     queryParameters: {
                                       'testId': serializeParam(
-                                        widget!.testId,
+                                        widget.testId,
                                         ParamType.String,
                                       ),
                                       'timer': serializeParam(
@@ -1208,9 +1205,9 @@ class _TestDetailsWidgetState extends State<TestDetailsWidget> {
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width,
                                   height: 40,
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 16, 0),
-                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 0),
                                   color: FlutterFlowTheme.of(context).warning,
                                   textStyle: FlutterFlowTheme.of(context)

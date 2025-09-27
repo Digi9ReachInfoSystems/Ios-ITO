@@ -1,12 +1,10 @@
 import '../special_offershimeer/special_offershimeer_widget.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'power_packages_model.dart';
 export 'power_packages_model.dart';
@@ -74,7 +72,7 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -88,7 +86,7 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
              if (!snapshot.hasData) {
-                return SpecialOffershimeerWidget();
+                return const SpecialOffershimeerWidget();
               }
               final listViewPowerPackagesResponse = snapshot.data!;
               return Builder(
@@ -104,10 +102,10 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                     itemBuilder: (context, pacakgesIndex) {
                       final pacakgesItem = pacakges[pacakgesIndex];
                       return Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color: Color(0xFF198543),
+                          color: const Color(0xFF198543),
                           elevation: 4.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
@@ -116,23 +114,23 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 10.0, 0.0, 0.0),
                                 child: Container(
                                   width:
                                       MediaQuery.sizeOf(context).width * 0.75,
                                   
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFF2F2F2),
+                                    color: const Color(0xFFF2F2F2),
                                     borderRadius: BorderRadius.circular(4.0),
                                   ),
                                   child: Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 5.0),
                                       child: Container(
-                                        decoration: BoxDecoration(),
+                                        decoration: const BoxDecoration(),
                                         child: Text(
                                           getJsonField(
                                             pacakgesItem,
@@ -143,7 +141,7 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Poppins',
-                                                color: Color(0xFF272727),
+                                                color: const Color(0xFF272727),
                                                 fontSize: 17.0,
                                                 fontWeight: FontWeight.w500,
                                               ),
@@ -154,9 +152,9 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 8.0, 0.0, 0.0),
                                   child: Text(
                                     getJsonField(
@@ -174,7 +172,7 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 320.0,
                                 child: Divider(
                                   thickness: 1.0,
@@ -182,7 +180,7 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 20.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
@@ -211,11 +209,11 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                                         MediaQuery.sizeOf(context).width * 0.4,
                                     height: MediaQuery.sizeOf(context).height *
                                         0.05,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
-                                    color: Color(0xFF004696),
+                                    color: const Color(0xFF004696),
                                     textStyle: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
@@ -224,7 +222,7 @@ class _PowerPackagesWidgetState extends State<PowerPackagesWidget> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                     elevation: 3.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),

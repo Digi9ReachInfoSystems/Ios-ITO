@@ -2,11 +2,8 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'notifications_model.dart';
@@ -60,7 +57,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
             borderRadius: 30,
             borderWidth: 1,
             buttonSize: 60,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30,
@@ -81,7 +78,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2,
         ),
@@ -122,7 +119,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                   itemBuilder: (context, notificationsIndex) {
                     final notificationsItem = notifications[notificationsIndex];
                     return Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
+                      padding: const EdgeInsetsDirectional.fromSTEB(8, 8, 8, 8),
                       child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         color: FlutterFlowTheme.of(context).secondaryBackground,
@@ -131,7 +128,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(10, 0, 4, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 4, 0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -150,7 +147,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
           ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                    const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                                 child: Text(
                                   getJsonField(
                                     notificationsItem,
@@ -169,7 +166,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                   ) !=
                                   null)
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0, 12, 0, 0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8),
@@ -186,7 +183,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                                    const EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
                                 child: Text(
                                   valueOrDefault<String>(
                                     functions.notificationtime(

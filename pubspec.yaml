@@ -148,6 +148,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   syncfusion_flutter_calendar: ^27.2.4
 
+  http_parser: any
 dependency_overrides:
   http: 1.2.2
   pointer_interceptor: 0.10.1+2

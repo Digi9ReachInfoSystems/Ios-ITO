@@ -1,12 +1,8 @@
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'shimmer_model.dart';
 export 'shimmer_model.dart';
@@ -31,8 +27,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, -200.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -51,8 +47,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, -200.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -71,8 +67,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, -200.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -91,8 +87,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, -200.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -111,8 +107,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, -200.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -131,8 +127,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, -200.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -151,8 +147,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 1000.ms,
-          begin: Offset(0.0, 200.0),
-          end: Offset(0.0, -200.0),
+          begin: const Offset(0.0, 200.0),
+          end: const Offset(0.0, -200.0),
         ),
         FadeEffect(
           curve: Curves.easeInOut,
@@ -193,12 +189,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Container(
               width: double.infinity,
               height: 103.0,
               decoration: BoxDecoration(
-                color: Color(0xFFEDE8E8),
+                color: const Color(0xFFEDE8E8),
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: ClipRect(
@@ -225,12 +221,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Container(
               width: double.infinity,
               height: 103.0,
               decoration: BoxDecoration(
-                color: Color(0xFFEDE8E8),
+                color: const Color(0xFFEDE8E8),
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: ClipRect(
@@ -257,12 +253,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
             ),
           ),
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Container(
               width: double.infinity,
               height: 155.0,
               decoration: BoxDecoration(
-                color: Color(0xFFEDE8E8),
+                color: const Color(0xFFEDE8E8),
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: ClipRect(
@@ -293,12 +289,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: Color(0xFFEDE8E8),
+                    color: const Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -325,12 +321,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: Color(0xFFEDE8E8),
+                    color: const Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -363,12 +359,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: Color(0xFFEDE8E8),
+                    color: const Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -395,12 +391,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
                 ),
               ),
               Padding(
-                padding: EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: Color(0xFFEDE8E8),
+                    color: const Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(

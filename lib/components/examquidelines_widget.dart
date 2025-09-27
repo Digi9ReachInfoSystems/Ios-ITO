@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'examquidelines_model.dart';
 export 'examquidelines_model.dart';
@@ -51,7 +50,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Container(
                   width: 80.0,
                   height: 7.0,
@@ -69,7 +68,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                 color: FlutterFlowTheme.of(context).secondaryText,
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
@@ -87,7 +86,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                             size: 24.0,
                           ),
                           Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 '8cc63upn' /* There will be only ONE ATTEMPT... */,
@@ -129,7 +128,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           size: 24.0,
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               '4q518lde' /* After you start the Quiz, Do n... */,
@@ -170,10 +169,10 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           size: 24.0,
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 '1f6mzij7' /* Students who scroll the questi... */,
@@ -215,7 +214,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           size: 24.0,
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               't5x7u9ah' /* In any case or for any reason ... */,
@@ -250,7 +249,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               1.0, 0.0, 0.0, 0.0),
                           child: Icon(
                             Icons.filter_5,
@@ -259,7 +258,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           ),
                         ),
                         Container(
-                          decoration: BoxDecoration(),
+                          decoration: const BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               '5f1xtdnd' /* If because of the Internet con... */,

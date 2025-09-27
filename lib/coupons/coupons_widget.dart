@@ -1,6 +1,5 @@
 import '../backend/schema/structs/coupon_struct.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,7 +9,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'coupons_model.dart';
@@ -88,7 +86,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineSmall,
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -102,7 +100,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
-              return TestshimmerWidget();
+              return const TestshimmerWidget();
             }
             final columnGetAllProductsResponse = snapshot.data!;
             return SingleChildScrollView(
@@ -111,14 +109,14 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Container(
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 0.0, 0.0),
                             child: FaIcon(
                               FontAwesomeIcons.percentage,
@@ -127,9 +125,9 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -153,7 +151,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 10.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(24.0, 10.0, 0.0, 0.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'zb0aja85' /* Apply Coupons */,
@@ -163,7 +161,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 44.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 44.0),
                     child: Builder(
                       builder: (context) {
                         final list = GetAllProductsCall.coupons(
@@ -179,7 +177,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                           itemBuilder: (context, listIndex) {
                             final listItem = list[listIndex];
                             return Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 4.0, 16.0, 8.0),
                               child: Container(
                                 width: double.infinity,
@@ -187,7 +185,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       blurRadius: 4.0,
                                       color: Color(0x32000000),
@@ -197,7 +195,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 10.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -207,7 +205,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 4.0, 0.0, 0.0),
                                         child: Text(
                                           getJsonField(
@@ -259,7 +257,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     3.0, 3.0, 3.0, 3.0),
                                             child: Text(
                                               getJsonField(
@@ -288,7 +286,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 1.0),
+                                            const AlignmentDirectional(0.0, 1.0),
                                         child: FFButtonWidget(
                                           onPressed: (FFAppState()
                                                       .finalamount <=
@@ -319,16 +317,16 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                             (alertDialogContext) {
                                                           return WebViewAware(
                                                             child: AlertDialog(
-                                                              title: Text(
+                                                              title: const Text(
                                                                   'Invalid Coupon !!'),
-                                                              content: Text(
+                                                              content: const Text(
                                                                   'coupon Already applied'),
                                                               actions: [
                                                                 TextButton(
                                                                   onPressed: () =>
                                                                       Navigator.pop(
                                                                           alertDialogContext),
-                                                                  child: Text(
+                                                                  child: const Text(
                                                                       'Ok'),
                                                                 ),
                                                               ],
@@ -395,7 +393,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                                   .secondaryBackground,
                                                             ),
                                                           ),
-                                                          duration: Duration(
+                                                          duration: const Duration(
                                                               milliseconds:
                                                                   4000),
                                                           backgroundColor:
@@ -408,7 +406,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                 context.goNamed(
                   'Cartvalue',
                   extra: <String, dynamic>{
-                    kTransitionInfoKey: TransitionInfo(
+                    kTransitionInfoKey: const TransitionInfo(
                       hasTransition: true,
                       transitionType: PageTransitionType.fade,
                       duration: Duration(milliseconds: 1500),
@@ -425,7 +423,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                           (alertDialogContext) {
                                                         return WebViewAware(
                                                           child: AlertDialog(
-                                                            title: Text(
+                                                            title: const Text(
                                                                 'Invalid Amount'),
                                                             content: Text(
                                                                 'min required amount is ${getJsonField(
@@ -438,7 +436,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                                     Navigator.pop(
                                                                         alertDialogContext),
                                                                 child:
-                                                                    Text('Ok'),
+                                                                    const Text('Ok'),
                                                               ),
                                                             ],
                                                           ),
@@ -456,10 +454,10 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                 1.0,
                                             height: 45.0,
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -475,7 +473,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                             elevation: 2.0,
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),

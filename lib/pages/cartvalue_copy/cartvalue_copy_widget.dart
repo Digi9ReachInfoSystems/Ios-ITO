@@ -1,7 +1,5 @@
-import 'package:indian_talent_olympiad/backend/backend.dart';
 
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -11,7 +9,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'cartvalue_copy_model.dart';
@@ -93,7 +90,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -105,9 +102,9 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
               child: Text(
                 "Cart",
                 textAlign: TextAlign.start,
@@ -119,7 +116,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
               ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -127,7 +124,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               primary: false,
               child: Column(
@@ -146,7 +143,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                   Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           blurRadius: 4.0,
                           color: Color(0x33000000),
@@ -169,13 +166,13 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                             final allproductsItem =
                                 allproducts[allproductsIndex];
                             return Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0x00FFFFFF),
                               ),
                               child: Stack(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
@@ -221,7 +218,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
@@ -267,9 +264,9 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                     ),
                                   ),
                                  Align(
-  alignment: AlignmentDirectional(1, 0),
+  alignment: const AlignmentDirectional(1, 0),
   child: Padding(
-    padding: EdgeInsets.all(10),
+    padding: const EdgeInsets.all(10),
     child: FlutterFlowIconButton(
       borderColor: FlutterFlowTheme.of(context).primary,
       borderRadius: 20,
@@ -332,7 +329,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0x00FFFFFF),
                         ),
                         child: Text(
@@ -342,13 +339,13 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    color: Color(0xFFEE4C4C),
+                                    color: const Color(0xFFEE4C4C),
                                     fontSize: 12.0,
                                   ),
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        alignment: const AlignmentDirectional(-1.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             '7i2m2l6w' /* Price Details */,
@@ -364,13 +361,13 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'q6hd7u2k' /* Cart value */,
@@ -386,7 +383,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFAppState().combocart.toString(),
                                 style: FlutterFlowTheme.of(context)
@@ -403,14 +400,14 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'tlevidea' /* Delivery Charges */,
@@ -426,7 +423,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFAppState().combodedliveryfee.toString(),
                                 style: FlutterFlowTheme.of(context)
@@ -443,14 +440,14 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'gupms4xu' /* You saved */,
@@ -466,7 +463,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFAppState().discountamount.toString(),
                                 style: FlutterFlowTheme.of(context)
@@ -483,14 +480,14 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   '09du24ib' /* Total Amount */,
@@ -506,7 +503,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFAppState().combofinalamount.toString(),
                                 style: FlutterFlowTheme.of(context)
@@ -549,9 +546,9 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -568,7 +565,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 0.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -599,7 +596,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 30.0),
                         child: FFButtonWidget(
                           onPressed: (FFAppState().combofinalamount == 0.0)
@@ -691,7 +688,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                               ),
                                             ),
                                             duration:
-                                                Duration(milliseconds: 4000),
+                                                const Duration(milliseconds: 4000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -720,15 +717,15 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                           builder: (alertDialogContext) {
                                             return WebViewAware(
                                               child: AlertDialog(
-                                                title: Text('Alert !!'),
-                                                content: Text(
+                                                title: const Text('Alert !!'),
+                                                content: const Text(
                                                     'Select Atleast One Product'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text('Ok'),
+                                                    child: const Text('Ok'),
                                                   ),
                                                 ],
                                               ),
@@ -747,14 +744,14 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                       builder: (alertDialogContext) {
                                         return WebViewAware(
                                           child: AlertDialog(
-                                            title: Text('Warning!'),
-                                            content: Text(
+                                            title: const Text('Warning!'),
+                                            content: const Text(
                                                 'Please Agree for Terms and Conditions'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: Text('Ok'),
+                                                child: const Text('Ok'),
                                               ),
                                             ],
                                           ),
@@ -771,11 +768,11 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 48.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: Color(0xFF004696),
+                            color: const Color(0xFF004696),
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
@@ -784,7 +781,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                                   fontWeight: FontWeight.w600,
                                 ),
                             elevation: 3.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),
@@ -796,7 +793,7 @@ class _CartvalueCopyWidgetState extends State<CartvalueCopyWidget> {
                       ),
                     ],
                   ),
-                ].divide(SizedBox(height: 10.0)).around(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)).around(const SizedBox(height: 10.0)),
               ),
             ),
           ),

@@ -3,11 +3,8 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notification_popup_model.dart';
 export 'notification_popup_model.dart';
@@ -39,8 +36,8 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 50.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 50.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -108,12 +105,12 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
                 final notiItem = noti[notiIndex];
                 return Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 32.0, 16.0, 32.0),
+                      const EdgeInsetsDirectional.fromSTEB(16.0, 32.0, 16.0, 32.0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           blurRadius: 2.0,
                           color: Color(0x520E151B),
@@ -128,7 +125,7 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -164,7 +161,7 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               16.0, 4.0, 0.0, 12.0),
                           child: Text(
                             getJsonField(
@@ -180,7 +177,7 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
                             ) !=
                             null)
                           ClipRRect(
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(0.0),
                               bottomRight: Radius.circular(0.0),
                               topLeft: Radius.circular(12.0),

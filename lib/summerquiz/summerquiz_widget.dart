@@ -14,9 +14,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'summerquiz_model.dart';
@@ -70,7 +68,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -87,12 +85,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Poppins',
-                  color: Color(0xFF272727),
+                  color: const Color(0xFF272727),
                   fontSize: 18.0,
                   fontWeight: FontWeight.normal,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -130,13 +128,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                         children: [
                           Container(
                             height: 130.0,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: ListView(
                               padding: EdgeInsets.zero,
                               scrollDirection: Axis.horizontal,
                               children: [
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -167,12 +165,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.8,
-                                                  child: QuizdetailscomWidget(),
+                                                  child: const QuizdetailscomWidget(),
                                                 ),
                                               ),
                                             ),
@@ -190,7 +188,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       ),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             '8ypbl7es' /* Quiz Details */,
@@ -211,7 +209,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -242,13 +240,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.25,
                                                   child:
-                                                      RegistrationfeesWidget(),
+                                                      const RegistrationfeesWidget(),
                                                 ),
                                               ),
                                             ),
@@ -259,13 +257,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xFFFD7E14),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'ghla5cdw' /* Registration Fees */,
@@ -286,7 +284,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -317,12 +315,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.2,
-                                                  child: SummerquizDateWidget(),
+                                                  child: const SummerquizDateWidget(),
                                                 ),
                                               ),
                                             ),
@@ -333,13 +331,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xFFAFBE29),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             '04g3ppgo' /* Summer Quiz Date */,
@@ -360,7 +358,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -391,12 +389,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.8,
-                                                  child: ExamquidelinesWidget(),
+                                                  child: const ExamquidelinesWidget(),
                                                 ),
                                               ),
                                             ),
@@ -407,13 +405,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xFF0DCAF0),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'dea2lmit' /* Exam Quidelines */,
@@ -434,7 +432,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -465,12 +463,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.5,
-                                                  child: QuizAwardsWidget(),
+                                                  child: const QuizAwardsWidget(),
                                                 ),
                                               ),
                                             ),
@@ -481,13 +479,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xFF198754),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'ke3rabx1' /* Quiz Award */,
@@ -508,7 +506,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -539,12 +537,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: Container(
+                                                child: SizedBox(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.7,
-                                                  child: FaqsWidget(),
+                                                  child: const FaqsWidget(),
                                                 ),
                                               ),
                                             ),
@@ -555,13 +553,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: BoxDecoration(
+                                      decoration: const BoxDecoration(
                                         color: Color(0xFF863DFF),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            AlignmentDirectional(0.0, 0.0),
+                                            const AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'wfuvefue' /* FAQs */,
@@ -588,7 +586,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             width: 300.0,
                             height: MediaQuery.sizeOf(context).height * 0.16,
                             decoration: BoxDecoration(
-                              color: Color(0xFFFFE708),
+                              color: const Color(0xFFFFE708),
                               borderRadius: BorderRadius.circular(16.0),
                             ),
                             child: Column(
@@ -633,7 +631,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: Color(0xAF489965),
+                                        color: const Color(0xAF489965),
                                         fontSize: 16.0,
                                         fontWeight: FontWeight.w800,
                                       ),
@@ -649,7 +647,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: Color(0xFF9B51FF),
+                                        color: const Color(0xFF9B51FF),
                                         fontSize: 15.0,
                                       ),
                                 ),
@@ -657,7 +655,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Container(
                               width: 150.0,
@@ -668,7 +666,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'sxd7ocg4' /* Summer Quiz
@@ -679,7 +677,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Readex Pro',
-                                        color: Color(0xFF9B51FF),
+                                        color: const Color(0xFF9B51FF),
                                         fontSize: 18.0,
                                       ),
                                 ),
@@ -690,7 +688,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             key: _model.formKey,
                             autovalidateMode: AutovalidateMode.disabled,
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: FlutterFlowDropDown<String>(
                                 controller: _model.dropDownValueController ??=
@@ -701,7 +699,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   true,
                                 ) as List)
                                     .map<String>((s) => s.toString())
-                                    .toList()!,
+                                    .toList(),
                                 onChanged: (val) =>
                                     setState(() => _model.dropDownValue = val),
                                 width: 300.0,
@@ -724,7 +722,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     FlutterFlowTheme.of(context).alternate,
                                 borderWidth: 2.0,
                                 borderRadius: 8.0,
-                                margin: EdgeInsetsDirectional.fromSTEB(
+                                margin: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 4.0, 16.0, 4.0),
                                 hidesUnderline: true,
                                 isOverButton: true,
@@ -734,11 +732,9 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: RichText(
-                              textScaleFactor:
-                                  MediaQuery.of(context).textScaleFactor,
                               text: TextSpan(
                                 children: [
                                   TextSpan(
@@ -761,24 +757,24 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       ),
                                       '0.00',
                                     ),
-                                    style: TextStyle(),
+                                    style: const TextStyle(),
                                   )
                                 ],
                                 style: FlutterFlowTheme.of(context).bodyMedium,
-                              ),
+                              ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 10.0, 16.0, 0.0),
                             child: Container(
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           15.0, 0.0, 15.0, 0.0),
                                       child: TextFormField(
                                         controller: _model.textController,
@@ -890,15 +886,15 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (alertDialogContext) {
                                             return WebViewAware(
                                               child: AlertDialog(
-                                                title: Text('Invalid !!!'),
+                                                title: const Text('Invalid !!!'),
                                                 content:
-                                                    Text('Invalid Coupon Code'),
+                                                    const Text('Invalid Coupon Code'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text('Ok'),
+                                                    child: const Text('Ok'),
                                                   ),
                                                 ],
                                               ),
@@ -914,10 +910,10 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).warning,
@@ -928,7 +924,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             color: Colors.white,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -940,7 +936,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             ),
                           ),
                           Text(
-                            'Grand Total : ${_model.finalamount != null && _model.finalamount != '' ? _model.finalamount : SummerQuizCall.amount(
+                            'Grand Total : ${_model.finalamount != '' ? _model.finalamount : SummerQuizCall.amount(
                                 stackSummerQuizResponse.jsonBody,
                               )}',
                             style: FlutterFlowTheme.of(context)
@@ -952,7 +948,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                 ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
@@ -973,7 +969,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                               .primaryText,
                                         ),
                                       ),
-                                      duration: Duration(milliseconds: 4000),
+                                      duration: const Duration(milliseconds: 4000),
                                       backgroundColor:
                                           FlutterFlowTheme.of(context)
                                               .secondary,
@@ -1025,7 +1021,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             .primaryBackground,
                                       ),
                                     ),
-                                    duration: Duration(milliseconds: 4000),
+                                    duration: const Duration(milliseconds: 4000),
                                     backgroundColor:
                                         FlutterFlowTheme.of(context).primary,
                                     action: SnackBarAction(
@@ -1044,9 +1040,9 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                               ),
                               options: FFButtonOptions(
                                 height: 40.0,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).primary,
                                 textStyle: FlutterFlowTheme.of(context)
@@ -1056,7 +1052,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       color: Colors.white,
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -1089,10 +1085,8 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     .secondaryBackground,
                               ),
                               child: Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: RichText(
-                                  textScaleFactor:
-                                      MediaQuery.of(context).textScaleFactor,
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
@@ -1156,19 +1150,19 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           fontSize: 18.0,
                                         ),
                                   ),
-                                  textAlign: TextAlign.center,
+                                  textAlign: TextAlign.center, textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
                                 ),
                               ),
                             ),
                             Container(
                               height: 130.0,
-                              decoration: BoxDecoration(),
+                              decoration: const BoxDecoration(),
                               child: ListView(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.horizontal,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1199,13 +1193,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.8,
                                                     child:
-                                                        QuizdetailscomWidget(),
+                                                        const QuizdetailscomWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1223,7 +1217,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         ),
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '4jtczwei' /* Quiz Details */,
@@ -1244,7 +1238,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1275,13 +1269,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.25,
                                                     child:
-                                                        RegistrationfeesWidget(),
+                                                        const RegistrationfeesWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1292,13 +1286,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFFD7E14),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '78mpxpb9' /* Registration Fees */,
@@ -1319,7 +1313,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1350,13 +1344,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.2,
                                                     child:
-                                                        SummerquizDateWidget(),
+                                                        const SummerquizDateWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1367,13 +1361,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFFAFBE29),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'u5qaje13' /* Summer Quiz Date */,
@@ -1394,7 +1388,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1425,13 +1419,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.8,
                                                     child:
-                                                        ExamquidelinesWidget(),
+                                                        const ExamquidelinesWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1442,13 +1436,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFF0DCAF0),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'darce70u' /* Exam Quidelines */,
@@ -1469,7 +1463,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1500,12 +1494,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.5,
-                                                    child: QuizAwardsWidget(),
+                                                    child: const QuizAwardsWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1516,13 +1510,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFF198754),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '3gm6fqbp' /* Quiz Award */,
@@ -1543,7 +1537,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1574,12 +1568,12 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: Container(
+                                                  child: SizedBox(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.7,
-                                                    child: FaqsWidget(),
+                                                    child: const FaqsWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1590,13 +1584,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: BoxDecoration(
+                                        decoration: const BoxDecoration(
                                           color: Color(0xFF863DFF),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'wwfjtqs7' /* FAQs */,
@@ -1620,9 +1614,9 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.all(10.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: Container(
-                                decoration: BoxDecoration(),
+                                decoration: const BoxDecoration(),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'ibz6dc69' /* Indian Talent Olympiad introdu... */,

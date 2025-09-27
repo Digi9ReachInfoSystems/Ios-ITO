@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: macos-latest
+    env:
+      ANDROID_HOME: /Users/runner/Library/Android/sdk
+      FLUTTER_HOME: /opt/hostedtoolcache/flutter/stable-3.22.0-x64
 
     steps:
       # 1. Checkout source

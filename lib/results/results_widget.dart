@@ -6,7 +6,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'results_model.dart';
 export 'results_model.dart';
@@ -66,7 +65,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -83,11 +82,11 @@ class _ResultsWidgetState extends State<ResultsWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Poppins',
-                  color: Color(0xFF272727),
+                  color: const Color(0xFF272727),
                   fontSize: 22.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -193,7 +192,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                           rows: (result as Iterable)
                               .mapIndexed((resultIndex, resultItem) => [
                                     Container(
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Text(
                                         getJsonField(
                                           resultItem,
@@ -268,10 +267,10 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -284,7 +283,7 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                                                     fontSize: 12.0,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -296,11 +295,11 @@ class _ResultsWidgetState extends State<ResultsWidget> {
                                   ].map((c) => DataCell(c)).toList())
                               .map((e) => DataRow(cells: e))
                               .toList(),
-                          headingRowColor: MaterialStateProperty.all(
+                          headingRowColor: WidgetStateProperty.all(
                             FlutterFlowTheme.of(context).primaryBackground,
                           ),
                           headingRowHeight: 56.0,
-                          dataRowColor: MaterialStateProperty.all(
+                          dataRowColor: WidgetStateProperty.all(
                             FlutterFlowTheme.of(context).secondaryBackground,
                           ),
                           dataRowHeight: 65.0,

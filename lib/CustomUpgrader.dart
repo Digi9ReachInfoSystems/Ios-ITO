@@ -17,7 +17,7 @@ class CustomUpgrader extends Upgrader {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
         ),
-        builder: (context) => UpgraderWidget(),
+        builder: (context) => const UpgraderWidget(),
       );
     } else {
       debugPrint('No upgrade required. App is up to date.');

@@ -7,7 +7,6 @@ import '/pages/ordersshimmer/ordersshimmer_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'my_orders_model.dart';
 export 'my_orders_model.dart';
@@ -67,7 +66,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -89,7 +88,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -103,7 +102,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
-                return OrdersshimmerWidget();
+                return const OrdersshimmerWidget();
               }
               final containerOrderssResponse = snapshot.data!;
               return Container(
@@ -117,7 +116,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             10.0, 0.0, 10.0, 0.0),
                         child: Builder(
                           builder: (context) {
@@ -134,7 +133,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                               itemBuilder: (context, transIndex) {
                                 final transItem = trans[transIndex];
                                 return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 0.0),
                                   child: Container(
                                     width:
@@ -142,7 +141,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
-                                      boxShadow: [
+                                      boxShadow: const [
                                         BoxShadow(
                                           blurRadius: 4.0,
                                           color: Color(0x33000000),
@@ -153,15 +152,15 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                     ),
                                     child: Align(
                                       alignment:
-                                          AlignmentDirectional(-1.0, -1.0),
+                                          const AlignmentDirectional(-1.0, -1.0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             10.0, 10.0, 10.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Text(
                                                 getJsonField(
@@ -181,10 +180,10 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 5.0, 0.0, 0.0),
                                                 child: Text(
@@ -198,7 +197,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                                       .override(
                                                         fontFamily: 'Poppins',
                                                         color:
-                                                            Color(0xFF272727),
+                                                            const Color(0xFF272727),
                                                         fontWeight:
                                                             FontWeight.w300,
                                                       ),
@@ -206,7 +205,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                               ),
                                             ),
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 8.0, 0.0, 20.0),
                                               child: Row(
@@ -227,22 +226,22 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
   options: FFButtonOptions(
     width: MediaQuery.sizeOf(context).width * 0.3,
     height: MediaQuery.sizeOf(context).height * 0.04,
-    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-    iconPadding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+    padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
     color: functions.jsontostringlist(getJsonField(
               transItem,
               r'''$.payment_status''',
             )) ==
             'pending'
         ? FlutterFlowTheme.of(context).warning
-        : Color(0xFF198543),
+        : const Color(0xFF198543),
     textStyle: FlutterFlowTheme.of(context).titleSmall.override(
           fontFamily: 'Poppins',
           color: Colors.white,
           fontSize: 12,
         ),
     elevation: 3,
-    borderSide: BorderSide(
+    borderSide: const BorderSide(
       color: Colors.transparent,
       width: 1,
     ),
@@ -261,7 +260,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                                         .override(
                                                           fontFamily: 'Poppins',
                                                           color:
-                                                              Color(0xFF004696),
+                                                              const Color(0xFF004696),
                                                           fontSize: 18.0,
                                                           fontWeight:
                                                               FontWeight.w600,

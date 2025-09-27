@@ -3,10 +3,7 @@ import '/flutter_flow/flutter_flow_radio_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'radio_model.dart';
 export 'radio_model.dart';
@@ -67,7 +64,7 @@ class _RadioWidgetState extends State<RadioWidget> {
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+        padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -96,7 +93,7 @@ class _RadioWidgetState extends State<RadioWidget> {
                         color: FlutterFlowTheme.of(context).primaryBackground,
                       ),
                     ),
-                    duration: Duration(milliseconds: 4000),
+                    duration: const Duration(milliseconds: 4000),
                     backgroundColor: FlutterFlowTheme.of(context).primary,
                     action: SnackBarAction(
                       label: 'Go to cart',
@@ -123,9 +120,8 @@ class _RadioWidgetState extends State<RadioWidget> {
               verticalAlignment: WrapCrossAlignment.start,
             ),
             Align(
-              alignment: AlignmentDirectional(-1.0, 0.0),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: RichText(
-                textScaleFactor: MediaQuery.of(context).textScaleFactor,
                 text: TextSpan(
                   children: [
                     TextSpan(
@@ -140,18 +136,18 @@ class _RadioWidgetState extends State<RadioWidget> {
                       text: FFLocalizations.of(context).getText(
                         '9gnl1vi6' /*  /  */,
                       ),
-                      style: TextStyle(),
+                      style: const TextStyle(),
                     ),
                     TextSpan(
                       text: widget.parameter4!.toString(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color(0x95FF0000),
                         decoration: TextDecoration.lineThrough,
                       ),
                     )
                   ],
                   style: FlutterFlowTheme.of(context).bodyMedium,
-                ),
+                ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
               ),
             ),
             Builder(
@@ -168,7 +164,7 @@ class _RadioWidgetState extends State<RadioWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               2.0, 0.0, 0.0, 0.0),
                           child: Icon(
                             Icons.check,
@@ -178,9 +174,9 @@ class _RadioWidgetState extends State<RadioWidget> {
                         ),
                         Flexible(
                           child: Container(
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 productsItem.toString(),

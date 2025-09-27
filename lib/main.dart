@@ -1,11 +1,9 @@
 import 'package:indian_talent_olympiad/flutter_flow/firebase_remote_config_util.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:upgrader/upgrader.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
@@ -17,8 +15,6 @@ import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'flutter_flow/nav/nav.dart';
 import 'index.dart';
 
 
@@ -36,7 +32,7 @@ await Upgrader.clearSavedSettings();
 await initializeFirebaseRemoteConfig();
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
-    child: MyApp(),
+    child: const MyApp(),
   ));
 }
 
@@ -75,7 +71,7 @@ class _MyAppState extends State<MyApp> {
       ..listen((user) => _appStateNotifier.update(user));
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      Duration(milliseconds: 1000),
+      const Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -109,7 +105,7 @@ class _MyAppState extends State<MyApp> {
       ),
       child: MaterialApp.router(
         title: 'IndianTalentOlympiad',
-        localizationsDelegates: [
+        localizationsDelegates: const [
           FFLocalizationsDelegate(),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
@@ -133,7 +129,7 @@ class _MyAppState extends State<MyApp> {
 }
 
 class NavBarPage extends StatefulWidget {
-  NavBarPage({Key? key, this.initialPage, this.page}) : super(key: key);
+  const NavBarPage({super.key, this.initialPage, this.page});
 
   final String? initialPage;
   final Widget? page;
@@ -157,11 +153,11 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Homepagelogin': HomepageloginWidget(),
-      'productsmenu': ProductsmenuWidget(),
-      'schedule': ScheduleWidget(),
-      'powerPackages': PowerPackagesWidget(),
-      'profile': ProfileWidget(),
+      'Homepagelogin': const HomepageloginWidget(),
+      'productsmenu': const ProductsmenuWidget(),
+      'schedule': const ScheduleWidget(),
+      'powerPackages': const PowerPackagesWidget(),
+      'profile': const ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -181,7 +177,7 @@ class _NavBarPageState extends State<NavBarPage> {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.home_outlined,
               size: 24.0,
             ),
@@ -191,11 +187,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.local_offer_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.local_offer_rounded,
               size: 24.0,
             ),
@@ -205,11 +201,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.calendar_today_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.calendar_month_rounded,
               size: 24.0,
             ),
@@ -219,11 +215,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.blur_on,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.blur_on_sharp,
               size: 24.0,
             ),
@@ -233,11 +229,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
+            icon: const Icon(
               Icons.person_outlined,
               size: 24.0,
             ),
-            activeIcon: Icon(
+            activeIcon: const Icon(
               Icons.person,
               size: 24.0,
             ),

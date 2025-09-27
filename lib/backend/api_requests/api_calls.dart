@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import '../cloud_functions/cloud_functions.dart';
-import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -1132,7 +1130,7 @@ class GetUsersCall {
     String? sessionId = '',
     String? questionId = '',
     String? userAnswer = '',
-    dynamic? userAnswersJson,
+    dynamic userAnswersJson,
   }) async {
     final userAnswers = _serializeJson(userAnswersJson, true);
     final response = await makeCloudCall(
@@ -1703,7 +1701,7 @@ class PhonepeCall {
         response,
         r'''$.message''',
       ));
-  static dynamic? data(dynamic response) => getJsonField(
+  static dynamic data(dynamic response) => getJsonField(
         response,
         r'''$.data''',
       );
@@ -1768,7 +1766,7 @@ class PhonecallbackCall {
     bool? success,
     String? code = '',
     String? message = '',
-    dynamic? dataJson,
+    dynamic dataJson,
     String? orderId = '',
   }) async {
     final data = _serializeJson(dataJson);
@@ -1816,7 +1814,7 @@ class StatusCheckCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "merchantTransactionId": "${trancastionid}"
+  "merchantTransactionId": "$trancastionid"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'statusCheck',
@@ -1847,7 +1845,7 @@ class SummerQuizCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "user_id": "${userId}"
+  "user_id": "$userId"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'summerQuiz',
@@ -1866,7 +1864,7 @@ class SummerQuizCall {
     );
   }
 
-  static dynamic? productData(dynamic response) => getJsonField(
+  static dynamic productData(dynamic response) => getJsonField(
         response,
         r'''$.summer_quiz.product_data.*''',
       );
@@ -1878,11 +1876,11 @@ class SummerQuizCall {
         response,
         r'''$.summer_quiz.product_data[:].amount''',
       ));
-  static dynamic? coupon(dynamic response) => getJsonField(
+  static dynamic coupon(dynamic response) => getJsonField(
         response,
         r'''$.summer_quiz.coupons.*''',
       );
-  static dynamic? subscription(dynamic response) => getJsonField(
+  static dynamic subscription(dynamic response) => getJsonField(
         response,
         r'''$.summer_quiz.subscriptions''',
       );
@@ -1905,9 +1903,9 @@ class MonthlyResultsCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "user_id": "${userId}",
-  "subject_id": "${subjectId}",
-  "std_id": "${stdId}"
+  "user_id": "$userId",
+  "subject_id": "$subjectId",
+  "std_id": "$stdId"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'monthlyResults',
@@ -1938,7 +1936,7 @@ class RoundresultsCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "user_id": "${userId}"
+  "user_id": "$userId"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'roundresults',
@@ -1976,8 +1974,8 @@ class ViewCertificatesCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "result_id": "${resultId}",
-  "user_id": "${userId}"
+  "result_id": "$resultId",
+  "user_id": "$userId"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'viewCertificates',
@@ -2006,7 +2004,7 @@ class ViewCertificatesCall {
         r'''$.data.certificate_product_data''',
         true,
       ) as List?;
-  static dynamic? certificatedara(dynamic response) => getJsonField(
+  static dynamic certificatedara(dynamic response) => getJsonField(
         response,
         r'''$.data.display_on_certificate''',
       );
@@ -2018,7 +2016,7 @@ class PowerPackagesCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "std_id": "${stdId}"
+  "std_id": "$stdId"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'powerPackages',
@@ -2079,8 +2077,8 @@ class BannersCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "std_id": "${stdId}",
-  "display_for": "${displayFor}"
+  "std_id": "$stdId",
+  "display_for": "$displayFor"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'banners',
@@ -2112,8 +2110,8 @@ class NotificationsCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "std_id": "${stdId}",
-  "display_for": "${displayFor}"
+  "std_id": "$stdId",
+  "display_for": "$displayFor"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'notifications',

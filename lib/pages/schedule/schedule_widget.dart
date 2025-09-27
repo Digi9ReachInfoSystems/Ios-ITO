@@ -16,14 +16,13 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart'
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'schedule_model.dart';
 export 'schedule_model.dart';
 
 class ScheduleWidget extends StatefulWidget {
-  const ScheduleWidget({Key? key}) : super(key: key);
+  const ScheduleWidget({super.key});
 
   @override
   _ScheduleWidgetState createState() => _ScheduleWidgetState();
@@ -78,12 +77,12 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
           builder: (alertDialogContext) {
             return WebViewAware(
                 child: AlertDialog(
-              title: Text('failed'),
-              content: Text('Not Scheduled yet'),
+              title: const Text('failed'),
+              content: const Text('Not Scheduled yet'),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(alertDialogContext),
-                  child: Text('Ok'),
+                  child: const Text('Ok'),
                 ),
               ],
             ));
@@ -130,7 +129,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           title: Align(
-            alignment: AlignmentDirectional(0.00, 0.00),
+            alignment: const AlignmentDirectional(0.00, 0.00),
             child: Text(
               FFLocalizations.of(context).getText(
                 'ur85jst5' /* Schedule */,
@@ -143,7 +142,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                   ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -156,11 +155,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
               Expanded(
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                      const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                   child: Column(
                     children: [
                       Align(
-                        alignment: Alignment(0.0, 0),
+                        alignment: const Alignment(0.0, 0),
                         child: FlutterFlowButtonTabBar(
                           useToggleButtonStyle: true,
                           labelStyle:
@@ -168,7 +167,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                     fontFamily: 'Readex Pro',
                                     fontSize: 16.0,
                                   ),
-                          unselectedLabelStyle: TextStyle(),
+                          unselectedLabelStyle: const TextStyle(),
                           labelColor: FlutterFlowTheme.of(context).primaryText,
                           unselectedLabelColor:
                               FlutterFlowTheme.of(context).secondaryText,
@@ -180,9 +179,9 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                           borderWidth: 2.0,
                           borderRadius: 15.0,
                           elevation: 0.0,
-                          buttonMargin: EdgeInsetsDirectional.fromSTEB(
+                          buttonMargin: const EdgeInsetsDirectional.fromSTEB(
                               8.0, 0.0, 8.0, 0.0),
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               4.0, 4.0, 4.0, 4.0),
                           tabs: [
                             Tab(
@@ -212,14 +211,14 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
-                                  return TestshimmerWidget();
+                                  return const TestshimmerWidget();
                                 }
                                 final columnScheduleResponse = snapshot.data!;
                                 return Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 5.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -228,7 +227,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                         children: [
                                           if (_model.pageViewCurrentIndex1 == 0)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
@@ -240,7 +239,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       .pageViewController1
                                                       ?.animateToPage(
                                                     0,
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 500),
                                                     curve: Curves.ease,
                                                   );
@@ -252,11 +251,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 ),
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -272,7 +271,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                             color: Colors.white,
                                                           ),
                                                   elevation: 3.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -285,7 +284,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                             ),
                                           if (_model.pageViewCurrentIndex1 == 1)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
@@ -297,7 +296,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       .pageViewController1
                                                       ?.animateToPage(
                                                     0,
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 500),
                                                     curve: Curves.ease,
                                                   );
@@ -309,11 +308,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 ),
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -329,7 +328,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                             color: Colors.white,
                                                           ),
                                                   elevation: 3.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -342,7 +341,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                             ),
                                           if (_model.pageViewCurrentIndex1 == 1)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
@@ -354,7 +353,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       .pageViewController1
                                                       ?.animateToPage(
                                                     1,
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 500),
                                                     curve: Curves.ease,
                                                   );
@@ -366,11 +365,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 ),
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -386,7 +385,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                             color: Colors.white,
                                                           ),
                                                   elevation: 3.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -399,7 +398,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                             ),
                                           if (_model.pageViewCurrentIndex1 == 0)
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 0.0),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
@@ -411,7 +410,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       .pageViewController1
                                                       ?.animateToPage(
                                                     1,
-                                                    duration: Duration(
+                                                    duration: const Duration(
                                                         milliseconds: 500),
                                                     curve: Curves.ease,
                                                   );
@@ -423,11 +422,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 ),
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -443,7 +442,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                             color: Colors.white,
                                                           ),
                                                   elevation: 3.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -458,13 +457,13 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                       ),
                                     ),
                                     Expanded(
-                                      child: Container(
+                                      child: SizedBox(
                                         width: double.infinity,
                                         height: 500.0,
                                         child: Stack(
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 40.0),
                                               child: PageView(
@@ -477,7 +476,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 children: [
-                                                  Container(
+                                                  SizedBox(
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
@@ -501,7 +500,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                               .slot1annual,
                                                     ),
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
@@ -529,10 +528,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   0.00, -1.00),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         16.0, 0.0, 0.0, 16.0),
                                                 child: smooth_page_indicator
@@ -549,7 +548,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                         .pageViewController1!
                                                         .animateToPage(
                                                       i,
-                                                      duration: Duration(
+                                                      duration: const Duration(
                                                           milliseconds: 500),
                                                       curve: Curves.ease,
                                                     );
@@ -591,7 +590,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
-                                  return TestshimmerWidget();
+                                  return const TestshimmerWidget();
                                 }
                                 final columnScheduleResponse = snapshot.data!;
                                 return Column(
@@ -600,9 +599,9 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                     Container(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.9,
-                                      decoration: BoxDecoration(),
+                                      decoration: const BoxDecoration(),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 5.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -618,7 +617,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 await _model.pageViewController2
                                                     ?.animateToPage(
                                                   0,
-                                                  duration: Duration(
+                                                  duration: const Duration(
                                                       milliseconds: 500),
                                                   curve: Curves.ease,
                                                 );
@@ -629,11 +628,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                               ),
                                               options: FFButtonOptions(
                                                 height: 40.0,
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         3.0, 3.0, 3.0, 3.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -651,7 +650,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                           fontSize: 12.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -669,7 +668,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 await _model.pageViewController2
                                                     ?.animateToPage(
                                                   1,
-                                                  duration: Duration(
+                                                  duration: const Duration(
                                                       milliseconds: 500),
                                                   curve: Curves.ease,
                                                 );
@@ -680,11 +679,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                               ),
                                               options: FFButtonOptions(
                                                 height: 40.0,
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         4.0, 4.0, 4.0, 4.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -702,7 +701,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                           fontSize: 12.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -720,7 +719,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 await _model.pageViewController2
                                                     ?.animateToPage(
                                                   2,
-                                                  duration: Duration(
+                                                  duration: const Duration(
                                                       milliseconds: 500),
                                                   curve: Curves.ease,
                                                 );
@@ -731,11 +730,11 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                               ),
                                               options: FFButtonOptions(
                                                 height: 40.0,
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 0.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color:
@@ -751,7 +750,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                           fontSize: 12.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -769,7 +768,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 await _model.pageViewController2
                                                     ?.animateToPage(
                                                   3,
-                                                  duration: Duration(
+                                                  duration: const Duration(
                                                       milliseconds: 500),
                                                   curve: Curves.ease,
                                                 );
@@ -780,14 +779,14 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                               ),
                                               options: FFButtonOptions(
                                                 height: 40.0,
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 0.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
-                                                color: Color(0xFF489965),
+                                                color: const Color(0xFF489965),
                                                 textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .titleSmall
@@ -798,7 +797,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                           fontSize: 12.0,
                                                         ),
                                                 elevation: 3.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.transparent,
                                                   width: 1.0,
                                                 ),
@@ -813,14 +812,14 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                     ),
                                     Container(
                                       height: 500.0,
-                                      decoration: BoxDecoration(),
-                                      child: Container(
+                                      decoration: const BoxDecoration(),
+                                      child: SizedBox(
                                         width: double.infinity,
                                         height: 500.0,
                                         child: Stack(
                                           children: [
                                             Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 0.0, 40.0),
                                               child: PageView(
@@ -833,7 +832,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 children: [
-                                                  Container(
+                                                  SizedBox(
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
@@ -858,7 +857,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                       subjects: (ScheduleCall
                                                               .gk(
                                                         columnScheduleResponse
@@ -866,10 +865,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                     ),
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
@@ -895,7 +894,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                       subjects: (ScheduleCall
                                                               .drawing(
                                                         columnScheduleResponse
@@ -903,10 +902,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                     ),
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
@@ -932,7 +931,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                       subjects: (ScheduleCall
                                                               .science(
                                                         columnScheduleResponse
@@ -940,10 +939,10 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                     ),
                                                   ),
-                                                  Container(
+                                                  SizedBox(
                                                     width: MediaQuery.sizeOf(
                                                                 context)
                                                             .width *
@@ -969,7 +968,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                       subjects: (ScheduleCall
                                                               .maths(
                                                         columnScheduleResponse
@@ -977,17 +976,17 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                       ) as List)
                                                           .map<String>((s) =>
                                                               s.toString())
-                                                          .toList()!,
+                                                          .toList(),
                                                     ),
                                                   ),
                                                 ],
                                               ),
                                             ),
                                             Align(
-                                              alignment: AlignmentDirectional(
+                                              alignment: const AlignmentDirectional(
                                                   0.00, -1.00),
                                               child: Padding(
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         16.0, 0.0, 0.0, 16.0),
                                                 child: smooth_page_indicator
@@ -1004,7 +1003,7 @@ class _ScheduleWidgetState extends State<ScheduleWidget>
                                                         .pageViewController2!
                                                         .animateToPage(
                                                       i,
-                                                      duration: Duration(
+                                                      duration: const Duration(
                                                           milliseconds: 500),
                                                       curve: Curves.ease,
                                                     );

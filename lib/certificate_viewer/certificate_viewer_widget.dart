@@ -5,11 +5,8 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/special_offershimeer_copy/special_offershimeer_copy_widget.dart';
-import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'certificate_viewer_model.dart';
@@ -55,7 +52,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
 
     return FutureBuilder<ApiCallResponse>(
       future: ViewCertificatesCall.call(
-        resultId: widget!.resultId,
+        resultId: widget.resultId,
         userId: FFAppState().userInfo.userId,
       ),
       builder: (context, snapshot) {
@@ -63,7 +60,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: SpecialOffershimeerCopyWidget(),
+            body: const SpecialOffershimeerCopyWidget(),
           );
         }
         final certificateViewerViewCertificatesResponse = snapshot.data!;
@@ -84,7 +81,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                 borderRadius: 30,
                 borderWidth: 1,
                 buttonSize: 60,
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_rounded,
                   color: Color(0xFF272727),
                   size: 30,
@@ -101,13 +98,13 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                 ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
                       fontFamily: 'Poppins',
-                      color: Color(0xFF272727),
+                      color: const Color(0xFF272727),
                       fontSize: 18,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.w500,
                     ),
               ),
-              actions: [],
+              actions: const [],
               centerTitle: true,
               elevation: 2,
             ),
@@ -118,12 +115,12 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(3),
+                      padding: const EdgeInsets.all(3),
                       child: Container(
                         width: 400,
                         height: 260,
-                        decoration: BoxDecoration(),
-                        child: Container(
+                        decoration: const BoxDecoration(),
+                        child: SizedBox(
                           width: MediaQuery.sizeOf(context).width,
                           child: Stack(
                             children: [
@@ -143,13 +140,13 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0, 0),
+                                alignment: const AlignmentDirectional(0, 0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           10, 12, 0, 0),
                                       child: Text(
                                         getJsonField(
@@ -170,9 +167,9 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                       ),
                                     ),
                                     Align(
-                                      alignment: AlignmentDirectional(0, 0),
+                                      alignment: const AlignmentDirectional(0, 0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             30, 3, 0, 0),
                                         child: Text(
                                           getJsonField(
@@ -200,10 +197,10 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Align(
-                                          alignment: AlignmentDirectional(0, 0),
+                                          alignment: const AlignmentDirectional(0, 0),
                                           child: Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0, 0, 40, 0),
                                             child: Text(
                                               getJsonField(
@@ -227,7 +224,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                           ),
                                         ),
                                         Align(
-                                          alignment: AlignmentDirectional(0, 0),
+                                          alignment: const AlignmentDirectional(0, 0),
                                           child: Text(
                                             getJsonField(
                                               ViewCertificatesCall
@@ -250,9 +247,9 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                       ],
                                     ),
                                     Align(
-                                      alignment: AlignmentDirectional(0, 0),
+                                      alignment: const AlignmentDirectional(0, 0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 0, 3),
                                         child: Text(
                                           getJsonField(
@@ -275,9 +272,9 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                       ),
                                     ),
                                     Align(
-                                      alignment: AlignmentDirectional(0, 0),
+                                      alignment: const AlignmentDirectional(0, 0),
                                       child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                        padding: const EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 0, 53),
                                         child: Text(
                                           getJsonField(
@@ -308,10 +305,10 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
                       child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: Color(0xFF9868FF),
+                        color: const Color(0xFF9868FF),
                         elevation: 4,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8),
@@ -334,7 +331,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                   ),
                             ),
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   20, 10, 20, 10),
                               child: Card(
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -361,7 +358,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                 .bodyMedium
                                                 .override(
                                                   fontFamily: 'Readex Pro',
-                                                  color: Color(0xFF9B51FF),
+                                                  color: const Color(0xFF9B51FF),
                                                   fontSize: 20,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
@@ -372,7 +369,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                 .getText(
                                               'sb1pr095' /*  / per Subject */,
                                             ),
-                                            style: TextStyle(),
+                                            style: const TextStyle(),
                                           )
                                         ],
                                         style: FlutterFlowTheme.of(context)
@@ -497,7 +494,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                                     .primaryBackground,
                                                               ),
                                                             ),
-                                                            duration: Duration(
+                                                            duration: const Duration(
                                                                 milliseconds:
                                                                     4000),
                                                             backgroundColor:
@@ -620,7 +617,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                       },
                                     ),
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0, 10, 0, 10),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
@@ -630,7 +627,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Readex Pro',
-                                              color: Color(0xFF9868FF),
+                                              color: const Color(0xFF9868FF),
                                               fontSize: 10,
                                               letterSpacing: 0.0,
                                             ),
@@ -645,7 +642,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -660,9 +657,9 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.9,
                           height: 60,
-                          padding: EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
+                          padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
                           iconPadding:
-                              EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
@@ -671,7 +668,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                     letterSpacing: 0.0,
                                   ),
                           elevation: 3,
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.transparent,
                             width: 1,
                           ),

@@ -1,14 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/instant_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'powerwebview_model.dart';
 export 'powerwebview_model.dart';
@@ -44,7 +41,7 @@ class _PowerwebviewWidgetState extends State<PowerwebviewWidget> {
       logFirebaseEvent('POWERWEBVIEW_powerwebview_ON_INIT_STATE');
       logFirebaseEvent('powerwebview_start_periodic_action');
       _model.instantTimer = InstantTimer.periodic(
-        duration: Duration(milliseconds: 5000),
+        duration: const Duration(milliseconds: 5000),
         callback: (timer) async {
           logFirebaseEvent('powerwebview_backend_call');
           _model.status = await StatusCheckCall.call(
@@ -126,7 +123,7 @@ class _PowerwebviewWidgetState extends State<PowerwebviewWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -143,11 +140,11 @@ class _PowerwebviewWidgetState extends State<PowerwebviewWidget> {
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Poppins',
-                  color: Color(0xFF272727),
+                  color: const Color(0xFF272727),
                   fontSize: 22.0,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           elevation: 2.0,
         ),

@@ -3,12 +3,10 @@ import 'package:lottie/lottie.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'aftersubmit_model.dart';
@@ -59,12 +57,12 @@ class _AftersubmitWidgetState extends State<AftersubmitWidget> {
           builder: (alertDialogContext) {
             return WebViewAware(
               child: AlertDialog(
-                title: Text('Congrats'),
-                content: Text('Congrats the exam Was submitted Successfully'),
+                title: const Text('Congrats'),
+                content: const Text('Congrats the exam Was submitted Successfully'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('Ok'),
+                    child: const Text('Ok'),
                   ),
                 ],
               ),
@@ -81,13 +79,13 @@ class _AftersubmitWidgetState extends State<AftersubmitWidget> {
           builder: (alertDialogContext) {
             return WebViewAware(
               child: AlertDialog(
-                title: Text('Failed'),
+                title: const Text('Failed'),
                 content:
-                    Text('Submitting Exam Failed due to Internal Server Issue'),
+                    const Text('Submitting Exam Failed due to Internal Server Issue'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('Ok'),
+                    child: const Text('Ok'),
                   ),
                 ],
               ),
@@ -143,7 +141,7 @@ class _AftersubmitWidgetState extends State<AftersubmitWidget> {
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -176,7 +174,7 @@ class _AftersubmitWidgetState extends State<AftersubmitWidget> {
                     ),
               ),
               Align(
-                alignment: AlignmentDirectional(0, 0),
+                alignment: const AlignmentDirectional(0, 0),
                 child: Container(
                   width: 200,
                   height: 200,

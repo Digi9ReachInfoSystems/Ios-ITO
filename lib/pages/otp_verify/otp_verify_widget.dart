@@ -5,7 +5,6 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'otp_verify_model.dart';
 export 'otp_verify_model.dart';
@@ -65,7 +64,7 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -77,9 +76,9 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
             },
           ),
           title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 38.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 38.0, 0.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   'rnmgpki8' /* Enter OTP */,
@@ -93,7 +92,7 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
               ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -111,14 +110,14 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
                   child: Padding(
-                    padding: EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 5.0, 0.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -129,15 +128,15 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Poppins',
-                                    color: Color(0xFF272727),
+                                    color: const Color(0xFF272727),
                                   ),
                             ),
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(-1.0, 0.0),
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 20.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
@@ -148,7 +147,7 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
                                   .bodyMedium
                                   .override(
                                     fontFamily: 'Poppins',
-                                    color: Color(0xFF272727),
+                                    color: const Color(0xFF272727),
                                     fontSize: 24.0,
                                     fontWeight: FontWeight.w600,
                                   ),
@@ -179,7 +178,7 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
                             fieldHeight: 60.0,
                             fieldWidth: 55.0,
                             borderWidth: 2.0,
-                            borderRadius: BorderRadius.only(
+                            borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(12.0),
                               bottomRight: Radius.circular(12.0),
                               topLeft: Radius.circular(12.0),
@@ -205,9 +204,9 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
                               .asValidator(context),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 15.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () {
@@ -220,11 +219,11 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
                                 width: MediaQuery.sizeOf(context).width * 0.9,
                                 height:
                                     MediaQuery.sizeOf(context).height * 0.05,
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: Color(0xFF004696),
+                                color: const Color(0xFF004696),
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
@@ -233,7 +232,7 @@ class _OtpVerifyWidgetState extends State<OtpVerifyWidget> {
                                       fontWeight: FontWeight.w600,
                                     ),
                                 elevation: 3.0,
-                                borderSide: BorderSide(
+                                borderSide: const BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),

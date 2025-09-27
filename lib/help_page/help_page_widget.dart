@@ -2,12 +2,9 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'help_page_model.dart';
@@ -41,8 +38,8 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 110.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -60,8 +57,8 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 110.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -79,8 +76,8 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 110.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -98,8 +95,8 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 600.ms,
-          begin: Offset(0.0, 110.0),
-          end: Offset(0.0, 0.0),
+          begin: const Offset(0.0, 110.0),
+          end: const Offset(0.0, 0.0),
         ),
       ],
     ),
@@ -159,7 +156,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -176,12 +173,12 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
-                  color: Color(0xFF272727),
+                  color: const Color(0xFF272727),
                   fontSize: 22.0,
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -192,9 +189,9 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       '1hfgohhe' /* How May We Help You ? */,
@@ -211,32 +208,32 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: Alignment(0.0, 0),
+                      alignment: const Alignment(0.0, 0),
                       child: TabBar(
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
                             FlutterFlowTheme.of(context).secondaryText,
                         labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                        unselectedLabelStyle: TextStyle(),
+                        unselectedLabelStyle: const TextStyle(),
                         indicatorColor: FlutterFlowTheme.of(context).primary,
-                        padding: EdgeInsets.all(4.0),
+                        padding: const EdgeInsets.all(4.0),
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
                               'ogu8nqmx' /* Call Us */,
                             ),
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.call,
                               color: Color(0xFF009FE0),
                             ),
-                            iconMargin: EdgeInsetsDirectional.fromSTEB(
+                            iconMargin: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 10.0),
                           ),
                           Tab(
                             text: FFLocalizations.of(context).getText(
                               '781y8exd' /* Email Us */,
                             ),
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.email_sharp,
                               color: Color(0xFF009FE0),
                             ),
@@ -256,23 +253,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 8.0, 10.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     maxWidth: 500.0,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(
-                                      color: Color(0xFFE5E7EB),
+                                      color: const Color(0xFFE5E7EB),
                                       width: 2.0,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(12.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -286,14 +283,14 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                               .bodyLarge
                                               .override(
                                                 fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF15161E),
+                                                color: const Color(0xFF15161E),
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -320,7 +317,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                   .labelMedium
                                                   .override(
                                                     fontFamily: 'Outfit',
-                                                    color: Color(0xFF606A85),
+                                                    color: const Color(0xFF606A85),
                                                     fontSize: 16.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -329,7 +326,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -356,7 +353,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                   .labelMedium
                                                   .override(
                                                     fontFamily: 'Outfit',
-                                                    color: Color(0xFF606A85),
+                                                    color: const Color(0xFF606A85),
                                                     fontSize: 16.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -365,7 +362,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -392,7 +389,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                   .labelMedium
                                                   .override(
                                                     fontFamily: 'Outfit',
-                                                    color: Color(0xFF606A85),
+                                                    color: const Color(0xFF606A85),
                                                     fontSize: 16.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -406,23 +403,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                     'containerOnPageLoadAnimation1']!),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 8.0, 10.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     maxWidth: 500.0,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(
-                                      color: Color(0xFFE5E7EB),
+                                      color: const Color(0xFFE5E7EB),
                                       width: 2.0,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(12.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -436,14 +433,14 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                               .bodyLarge
                                               .override(
                                                 fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF15161E),
+                                                color: const Color(0xFF15161E),
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -470,7 +467,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                   .labelMedium
                                                   .override(
                                                     fontFamily: 'Outfit',
-                                                    color: Color(0xFF606A85),
+                                                    color: const Color(0xFF606A85),
                                                     fontSize: 16.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -479,7 +476,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
@@ -506,7 +503,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                   .labelMedium
                                                   .override(
                                                     fontFamily: 'Outfit',
-                                                    color: Color(0xFF606A85),
+                                                    color: const Color(0xFF606A85),
                                                     fontSize: 16.0,
                                                     fontWeight: FontWeight.w500,
                                                   ),
@@ -525,23 +522,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 8.0, 10.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     maxWidth: 500.0,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(
-                                      color: Color(0xFFE5E7EB),
+                                      color: const Color(0xFFE5E7EB),
                                       width: 2.0,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(12.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -555,14 +552,14 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                               .bodyLarge
                                               .override(
                                                 fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF15161E),
+                                                color: const Color(0xFF15161E),
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -572,7 +569,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                 .labelMedium
                                                 .override(
                                                   fontFamily: 'Outfit',
-                                                  color: Color(0xFF606A85),
+                                                  color: const Color(0xFF606A85),
                                                   fontSize: 20.0,
                                                   fontWeight: FontWeight.w500,
                                                 ),
@@ -585,23 +582,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                     'containerOnPageLoadAnimation3']!),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 15.0, 10.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: BoxConstraints(
+                                  constraints: const BoxConstraints(
                                     maxWidth: 500.0,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(
-                                      color: Color(0xFFE5E7EB),
+                                      color: const Color(0xFFE5E7EB),
                                       width: 2.0,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsets.all(12.0),
+                                    padding: const EdgeInsets.all(12.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -615,14 +612,14 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                               .bodyLarge
                                               .override(
                                                 fontFamily: 'Plus Jakarta Sans',
-                                                color: Color(0xFF15161E),
+                                                color: const Color(0xFF15161E),
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 10.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -634,7 +631,7 @@ ITO... */
                                                 .labelMedium
                                                 .override(
                                                   fontFamily: 'Outfit',
-                                                  color: Color(0xFF606A85),
+                                                  color: const Color(0xFF606A85),
                                                   fontSize: 20.0,
                                                   fontWeight: FontWeight.w500,
                                                 ),
@@ -642,7 +639,7 @@ ITO... */
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 4.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
@@ -652,7 +649,7 @@ ITO... */
                                                 .labelMedium
                                                 .override(
                                                   fontFamily: 'Outfit',
-                                                  color: Color(0xFF606A85),
+                                                  color: const Color(0xFF606A85),
                                                   fontSize: 20.0,
                                                   fontWeight: FontWeight.w500,
                                                 ),

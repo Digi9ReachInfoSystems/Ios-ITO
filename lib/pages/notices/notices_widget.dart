@@ -7,7 +7,6 @@ import '/pages/special_offershimeer/special_offershimeer_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notices_model.dart';
 export 'notices_model.dart';
@@ -69,13 +68,13 @@ class _NoticesWidgetState extends State<NoticesWidget>
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
           leading: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
             child: FlutterFlowIconButton(
               borderColor: Colors.transparent,
               borderRadius: 30.0,
               borderWidth: 1.0,
               buttonSize: 60.0,
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 color: Colors.black,
                 size: 24.0,
@@ -98,7 +97,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                   fontWeight: FontWeight.w500,
                 ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -115,24 +114,24 @@ class _NoticesWidgetState extends State<NoticesWidget>
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
-                return SpecialOffershimeerWidget();
+                return const SpecialOffershimeerWidget();
               }
               final tabBarNoticesResponse = snapshot.data!;
               return Column(
                 children: [
                   Align(
-                    alignment: Alignment(0.0, 0),
+                    alignment: const Alignment(0.0, 0),
                     child: TabBar(
                       labelColor: FlutterFlowTheme.of(context).primary,
-                      unselectedLabelColor: Color(0xFF009FE0),
+                      unselectedLabelColor: const Color(0xFF009FE0),
                       labelStyle:
                           FlutterFlowTheme.of(context).titleMedium.override(
                                 fontFamily: 'Readex Pro',
                                 fontWeight: FontWeight.w600,
                               ),
-                      unselectedLabelStyle: TextStyle(),
+                      unselectedLabelStyle: const TextStyle(),
                       indicatorColor: FlutterFlowTheme.of(context).primary,
-                      padding: EdgeInsets.all(4.0),
+                      padding: const EdgeInsets.all(4.0),
                       tabs: [
                         Tab(
                           text: FFLocalizations.of(context).getText(
@@ -161,7 +160,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                       controller: _model.tabBarController,
                       children: [
                         Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Builder(
                             builder: (context) {
                               final monthly = NoticesCall.monthly(
@@ -175,7 +174,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                 itemBuilder: (context, monthlyIndex) {
                                   final monthlyItem = monthly[monthlyIndex];
                                   return Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Container(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.5,
@@ -196,13 +195,13 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Align(
-                                            alignment: AlignmentDirectional(
+                                            alignment: const AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Container(
                                               width: double.infinity,
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Padding(
-                                                padding: EdgeInsets.all(10.0),
+                                                padding: const EdgeInsets.all(10.0),
                                                 child: Text(
                                                   getJsonField(
                                                     monthlyItem,
@@ -225,15 +224,15 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                             ),
                                           ),
                                           Align(
-                                            alignment: AlignmentDirectional(
+                                            alignment: const AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Padding(
-                                              padding: EdgeInsets.all(2.0),
+                                              padding: const EdgeInsets.all(2.0),
                                               child: Container(
                                                 width: double.infinity,
-                                                decoration: BoxDecoration(),
+                                                decoration: const BoxDecoration(),
                                                 child: Padding(
-                                                  padding: EdgeInsets.all(10.0),
+                                                  padding: const EdgeInsets.all(10.0),
                                                   child: Text(
                                                     getJsonField(
                                                       monthlyItem,
@@ -258,9 +257,9 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                           ),
                                           Align(
                                             alignment:
-                                                AlignmentDirectional(1.0, 1.0),
+                                                const AlignmentDirectional(1.0, 1.0),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 20.0, 5.0),
                                               child: FFButtonWidget(
@@ -281,11 +280,11 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                                 ),
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -296,7 +295,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                                               context)
                                                           .labelSmall,
                                                   elevation: 3.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -317,7 +316,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Builder(
                             builder: (context) {
                               final annualy = NoticesCall.annual(
@@ -331,7 +330,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                 itemBuilder: (context, annualyIndex) {
                                   final annualyItem = annualy[annualyIndex];
                                   return Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Container(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.5,
@@ -352,13 +351,13 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Align(
-                                            alignment: AlignmentDirectional(
+                                            alignment: const AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Container(
                                               width: double.infinity,
-                                              decoration: BoxDecoration(),
+                                              decoration: const BoxDecoration(),
                                               child: Padding(
-                                                padding: EdgeInsets.all(10.0),
+                                                padding: const EdgeInsets.all(10.0),
                                                 child: Text(
                                                   getJsonField(
                                                     annualyItem,
@@ -381,15 +380,15 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                             ),
                                           ),
                                           Align(
-                                            alignment: AlignmentDirectional(
+                                            alignment: const AlignmentDirectional(
                                                 -1.0, -1.0),
                                             child: Padding(
-                                              padding: EdgeInsets.all(2.0),
+                                              padding: const EdgeInsets.all(2.0),
                                               child: Container(
                                                 width: double.infinity,
-                                                decoration: BoxDecoration(),
+                                                decoration: const BoxDecoration(),
                                                 child: Padding(
-                                                  padding: EdgeInsets.all(10.0),
+                                                  padding: const EdgeInsets.all(10.0),
                                                   child: Text(
                                                     getJsonField(
                                                       annualyItem,
@@ -414,9 +413,9 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                           ),
                                           Align(
                                             alignment:
-                                                AlignmentDirectional(1.0, 1.0),
+                                                const AlignmentDirectional(1.0, 1.0),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 20.0, 0.0),
                                               child: FFButtonWidget(
@@ -437,11 +436,11 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                                 ),
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -452,7 +451,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                                               context)
                                                           .labelSmall,
                                                   elevation: 3.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),
@@ -473,7 +472,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Builder(
                             builder: (context) {
                               final instructions = NoticesCall.instructions(
@@ -488,7 +487,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                   final instructionsItem =
                                       instructions[instructionsIndex];
                                   return Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Container(
                                       width: MediaQuery.sizeOf(context).width *
                                           0.5,
@@ -512,13 +511,13 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Align(
-                                                alignment: AlignmentDirectional(
+                                                alignment: const AlignmentDirectional(
                                                     -1.0, -1.0),
                                                 child: Padding(
-                                                  padding: EdgeInsets.all(5.0),
+                                                  padding: const EdgeInsets.all(5.0),
                                                   child: Container(
                                                     width: double.infinity,
-                                                    decoration: BoxDecoration(),
+                                                    decoration: const BoxDecoration(),
                                                     child: Text(
                                                       getJsonField(
                                                         instructionsItem,
@@ -544,15 +543,15 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                                 ),
                                               ),
                                               Align(
-                                                alignment: AlignmentDirectional(
+                                                alignment: const AlignmentDirectional(
                                                     -1.0, -1.0),
                                                 child: Padding(
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 0.0, 0.0),
                                                   child: Container(
                                                     width: double.infinity,
-                                                    decoration: BoxDecoration(),
+                                                    decoration: const BoxDecoration(),
                                                     child: Text(
                                                       getJsonField(
                                                         instructionsItem,
@@ -581,9 +580,9 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                           ),
                                           Align(
                                             alignment:
-                                                AlignmentDirectional(1.0, 1.0),
+                                                const AlignmentDirectional(1.0, 1.0),
                                             child: Padding(
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 0.0, 20.0, 5.0),
                                               child: FFButtonWidget(
@@ -604,11 +603,11 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                                 ),
                                                 options: FFButtonOptions(
                                                   height: 40.0,
-                                                  padding: EdgeInsetsDirectional
+                                                  padding: const EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           24.0, 0.0, 24.0, 0.0),
                                                   iconPadding:
-                                                      EdgeInsetsDirectional
+                                                      const EdgeInsetsDirectional
                                                           .fromSTEB(0.0, 0.0,
                                                               0.0, 0.0),
                                                   color: FlutterFlowTheme.of(
@@ -619,7 +618,7 @@ class _NoticesWidgetState extends State<NoticesWidget>
                                                               context)
                                                           .labelSmall,
                                                   elevation: 3.0,
-                                                  borderSide: BorderSide(
+                                                  borderSide: const BorderSide(
                                                     color: Colors.transparent,
                                                     width: 1.0,
                                                   ),

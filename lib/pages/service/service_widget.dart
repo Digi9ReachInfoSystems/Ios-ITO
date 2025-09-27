@@ -1,12 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/shimmer/shimmer_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'service_model.dart';
@@ -114,7 +112,7 @@ final Map<String, String> slugToImageUrl = {
           fontWeight: FontWeight.w500,
         ),
   ),
-  actions: [],
+  actions: const [],
   centerTitle: true,
   toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
   elevation: 2,
@@ -122,13 +120,13 @@ final Map<String, String> slugToImageUrl = {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: FutureBuilder<ApiCallResponse>(
               future: GetServicesCall.call(),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
-                  return ShimmerWidget();
+                  return const ShimmerWidget();
                 }
                 final columnGetServicesResponse = snapshot.data!;
                 return SingleChildScrollView(
@@ -145,7 +143,7 @@ final Map<String, String> slugToImageUrl = {
                           return GridView.builder(
                             padding: EdgeInsets.zero,
                             gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
+                                const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2,
                               crossAxisSpacing: 10.0,
                               mainAxisSpacing: 10.0,
@@ -232,14 +230,14 @@ final Map<String, String> slugToImageUrl = {
                                       builder: (alertDialogContext) {
                                         return WebViewAware(
                                           child: AlertDialog(
-                                            title: Text('Alert !'),
-                                            content: Text(
+                                            title: const Text('Alert !'),
+                                            content: const Text(
                                                 'This service is under process. Please visit our website'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: Text('Ok'),
+                                                child: const Text('Ok'),
                                               ),
                                             ],
                                           ),
@@ -265,9 +263,9 @@ final Map<String, String> slugToImageUrl = {
                                     children: [
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(-1.0, -1.0),
+                                            const AlignmentDirectional(-1.0, -1.0),
                                         child: Padding(
-                                          padding: EdgeInsets.all(10.0),
+                                          padding: const EdgeInsets.all(10.0),
                                           child: Text(
                                             functions
                                                 .removehyphen(userServicesItem),
@@ -286,15 +284,15 @@ final Map<String, String> slugToImageUrl = {
                                       ),
                                       Align(
                                         alignment:
-                                            AlignmentDirectional(1.0, 1.0),
+                                            const AlignmentDirectional(1.0, 1.0),
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 10.0, 0.0),
                                           child: Container(
                                             width: 60.0,
                                             height: 60.0,
-                                            decoration: BoxDecoration(),
+                                            decoration: const BoxDecoration(),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(8.0),

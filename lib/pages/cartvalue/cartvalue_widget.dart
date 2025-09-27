@@ -1,6 +1,5 @@
 import '../../backend/schema/structs/coupon_struct.dart';
 import '/backend/api_requests/api_calls.dart';
-import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -10,7 +9,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
@@ -94,7 +92,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -106,9 +104,9 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
   },
           ),
           title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
               child: Text(
                 "Cart",
                 textAlign: TextAlign.start,
@@ -120,7 +118,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
               ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -128,7 +126,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: SingleChildScrollView(
               primary: false,
               child: Column(
@@ -147,7 +145,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                   Container(
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           blurRadius: 4.0,
                           color: Color(0x33000000),
@@ -169,13 +167,13 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                             final allproductsItem =
                                 allproducts[allproductsIndex];
                             return Container(
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0x00FFFFFF),
                               ),
                               child: Stack(
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
@@ -221,7 +219,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.all(10.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
@@ -272,9 +270,9 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(1.0, 0.0),
+                                    alignment: const AlignmentDirectional(1.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsets.all(10.0),
+                                      padding: const EdgeInsets.all(10.0),
                                       child: FlutterFlowIconButton(
                                         borderColor:
                                             FlutterFlowTheme.of(context)
@@ -358,10 +356,10 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'kbpx018a' /* Apply Coupons */,
@@ -406,9 +404,9 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(-1.0, 0.0),
+                                alignment: const AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -418,7 +416,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                         .bodyMedium
                                         .override(
                                           fontFamily: 'Poppins',
-                                          color: Color(0xFF453F3F),
+                                          color: const Color(0xFF453F3F),
                                           fontWeight: FontWeight.w500,
                                         ),
                                   ),
@@ -441,7 +439,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                     Container(
                       width: MediaQuery.sizeOf(context).width,
                       height: 70,
-                      decoration: BoxDecoration(),
+                      decoration: const BoxDecoration(),
                       child: Lottie.asset(
                         'assets/lottie_animations/Animation_-_1708324297486.json',
                         width: 150,
@@ -482,7 +480,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                       ),
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10, 0, 0, 0),
                                   child: Text(
                                     'You got ${FFAppState().couponscode.couponName} % off on your order',
@@ -500,9 +498,9 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                               ],
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1, 0),
+                              alignment: const AlignmentDirectional(-1, 0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10, 0, 10, 0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -553,7 +551,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color(0x00FFFFFF),
                         ),
                         child: Text(
@@ -563,13 +561,13 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
-                                    color: Color(0xFFEE4C4C),
+                                    color: const Color(0xFFEE4C4C),
                                     fontSize: 12.0,
                                   ),
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(-1.0, 0.0),
+                        alignment: const AlignmentDirectional(-1.0, 0.0),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'sp2eee6k' /* Price Details */,
@@ -585,13 +583,13 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   '0fnj3s10' /* Cart value */,
@@ -607,7 +605,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 valueOrDefault<String>(
                                   FFAppState().cartvalue.toString(),
@@ -627,14 +625,14 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   '1cbpysg2' /* You saved  */,
@@ -650,9 +648,9 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
-                                '${FFAppState().discountamount.toString()}',
+                                FFAppState().discountamount.toString(),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
@@ -667,14 +665,14 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   '252uzosp' /* Delivery Charges */,
@@ -690,7 +688,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 valueOrDefault<String>(
                                   FFAppState().deliveryfee.toString(),
@@ -710,14 +708,14 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 10.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   'p8uywyao' /* Total Amount */,
@@ -733,7 +731,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                               ),
                             ),
                             Align(
-                              alignment: AlignmentDirectional(-1.0, 0.0),
+                              alignment: const AlignmentDirectional(-1.0, 0.0),
                               child: Text(
                                 valueOrDefault<String>(
                                   FFAppState().finalamount.toString(),
@@ -779,9 +777,9 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                             ),
                           ),
                           Align(
-                            alignment: AlignmentDirectional(-1.0, 0.0),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   15.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -798,7 +796,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 20.0, 0.0, 0.0, 0.0),
                             child: InkWell(
                               splashColor: Colors.transparent,
@@ -829,7 +827,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                         ],
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 10.0, 0.0, 30.0),
                         child: FFButtonWidget(
                           onPressed: (FFAppState().finalamount == 0.0)
@@ -908,7 +906,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                               ),
                                             ),
                                             duration:
-                                                Duration(milliseconds: 4000),
+                                                const Duration(milliseconds: 4000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -937,15 +935,15 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                           builder: (alertDialogContext) {
                                             return WebViewAware(
                                               child: AlertDialog(
-                                                title: Text('Alert !!'),
-                                                content: Text(
+                                                title: const Text('Alert !!'),
+                                                content: const Text(
                                                     'Select Atleast One Product'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: Text('Ok'),
+                                                    child: const Text('Ok'),
                                                   ),
                                                 ],
                                               ),
@@ -964,14 +962,14 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                       builder: (alertDialogContext) {
                                         return WebViewAware(
                                           child: AlertDialog(
-                                            title: Text('Warning!'),
-                                            content: Text(
+                                            title: const Text('Warning!'),
+                                            content: const Text(
                                                 'Please Agree for Terms and Conditions'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: Text('Ok'),
+                                                child: const Text('Ok'),
                                               ),
                                             ],
                                           ),
@@ -988,11 +986,11 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 48.0,
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),
-                            iconPadding: EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
-                            color: Color(0xFF004696),
+                            color: const Color(0xFF004696),
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
@@ -1001,7 +999,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                   fontWeight: FontWeight.w600,
                                 ),
                             elevation: 3.0,
-                            borderSide: BorderSide(
+                            borderSide: const BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),
@@ -1011,7 +1009,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                       ),
                     ],
                   ),
-                ].divide(SizedBox(height: 10.0)).around(SizedBox(height: 10.0)),
+                ].divide(const SizedBox(height: 10.0)).around(const SizedBox(height: 10.0)),
               ),
             ),
           ),

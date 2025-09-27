@@ -1,7 +1,6 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'registrationfees_model.dart';
 export 'registrationfees_model.dart';
@@ -48,7 +47,7 @@ class _RegistrationfeesWidgetState extends State<RegistrationfeesWidget> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Container(
               width: 80.0,
               height: 7.0,
@@ -66,16 +65,16 @@ class _RegistrationfeesWidgetState extends State<RegistrationfeesWidget> {
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
           Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   '6kr28qda' /* REGISTRATION FEES */,
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
-                      color: Color(0xFF198543),
+                      color: const Color(0xFF198543),
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -83,16 +82,16 @@ class _RegistrationfeesWidgetState extends State<RegistrationfeesWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   'cea6xbix' /* ₹ 500/- Per Student */,
                 ),
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Readex Pro',
-                      color: Color(0xFF020096),
+                      color: const Color(0xFF020096),
                       fontSize: 18.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -100,9 +99,9 @@ class _RegistrationfeesWidgetState extends State<RegistrationfeesWidget> {
             ),
           ),
           Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   'pyyf3bpx' /* Students enrolling for the Sum... */,

@@ -1,13 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:indian_talent_olympiad/pages/powerfailure/powerfailure_widget.dart';
 import 'package:indian_talent_olympiad/pages/powerwebview/powerwebview_widget.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import '/backend/backend.dart';
-import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
@@ -15,11 +11,7 @@ import '/backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
 import '/index.dart';
 import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -85,54 +77,54 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? entryPage ?? NavBarPage()
-          : OnBoardingWidget(),
+          ? entryPage ?? const NavBarPage()
+          : const OnBoardingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? entryPage ?? NavBarPage()
-              : OnBoardingWidget(),
+              ? entryPage ?? const NavBarPage()
+              : const OnBoardingWidget(),
         ),
         FFRoute(
           name: 'schedule',
           path: '/schedule',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'schedule')
-              : ScheduleWidget(),
+              ? const NavBarPage(initialPage: 'schedule')
+              : const ScheduleWidget(),
         ),
         FFRoute(
           name: 'service',
           path: '/service',
-          builder: (context, params) => ServiceWidget(),
+          builder: (context, params) => const ServiceWidget(),
         ),
         FFRoute(
           name: 'profile',
           path: '/profile',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'profile')
-              : ProfileWidget(),
+              ? const NavBarPage(initialPage: 'profile')
+              : const ProfileWidget(),
         ),
         FFRoute(
           name: 'onBoarding',
           path: '/onBoarding',
-          builder: (context, params) => OnBoardingWidget(),
+          builder: (context, params) => const OnBoardingWidget(),
         ),
         FFRoute(
           name: 'walkThrough',
           path: '/walkThrough',
-          builder: (context, params) => WalkThroughWidget(),
+          builder: (context, params) => const WalkThroughWidget(),
         ),
         FFRoute(
           name: 'forgetPassword',
           path: '/forgetPassword',
-          builder: (context, params) => ForgetPasswordWidget(),
+          builder: (context, params) => const ForgetPasswordWidget(),
         ),
         FFRoute(
           name: 'otpVerify',
           path: '/otpVerify',
-          builder: (context, params) => OtpVerifyWidget(),
+          builder: (context, params) => const OtpVerifyWidget(),
         ),
         FFRoute(
           name: 'resetPassword',
@@ -144,7 +136,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'paymentSuccess',
           path: '/paymentSuccess',
-          builder: (context, params) => PaymentSuccessWidget(),
+          builder: (context, params) => const PaymentSuccessWidget(),
         ),
         FFRoute(
           name: 'monthlyexam',
@@ -168,14 +160,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'editProfile',
           path: '/editProfile',
-          builder: (context, params) => EditProfileWidget(),
+          builder: (context, params) => const EditProfileWidget(),
         ),
         FFRoute(
           name: 'powerPackages',
           path: '/powerPackages',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'powerPackages')
-              : PowerPackagesWidget(),
+              ? const NavBarPage(initialPage: 'powerPackages')
+              : const PowerPackagesWidget(),
         ),
          FFRoute(
           name: 'subscription',
@@ -187,7 +179,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'myOrders',
           path: '/myOrders',
-          builder: (context, params) => MyOrdersWidget(),
+          builder: (context, params) => const MyOrdersWidget(),
         ),
         FFRoute(
           name: 'testpage',
@@ -206,19 +198,19 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'Auth1Login',
           path: '/auth1Login',
-          builder: (context, params) => Auth1LoginWidget(),
+          builder: (context, params) => const Auth1LoginWidget(),
         ),
         FFRoute(
           name: 'Auth1register',
           path: '/auth1register',
-          builder: (context, params) => Auth1registerWidget(),
+          builder: (context, params) => const Auth1registerWidget(),
         ),
         FFRoute(
           name: 'Homepagelogin',
           path: '/homepagelogin',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Homepagelogin')
-              : HomepageloginWidget(),
+              ? const NavBarPage(initialPage: 'Homepagelogin')
+              : const HomepageloginWidget(),
         ),
         FFRoute(
           name: 'aftersubmit',
@@ -231,32 +223,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'helpPage',
           path: '/helpPage',
-          builder: (context, params) => HelpPageWidget(),
+          builder: (context, params) => const HelpPageWidget(),
         ),
         FFRoute(
           name: 'termsAndconditions',
           path: '/termsAndconditions',
-          builder: (context, params) => TermsAndconditionsWidget(),
+          builder: (context, params) => const TermsAndconditionsWidget(),
         ),
         FFRoute(
           name: 'privacyPolicy',
           path: '/privacyPolicy',
-          builder: (context, params) => PrivacyPolicyWidget(),
+          builder: (context, params) => const PrivacyPolicyWidget(),
         ),
         FFRoute(
           name: 'Deletionofrequest',
           path: '/deletionofrequest',
-          builder: (context, params) => DeletionofrequestWidget(),
+          builder: (context, params) => const DeletionofrequestWidget(),
         ),
         FFRoute(
           name: 'notices',
           path: '/notices',
-          builder: (context, params) => NoticesWidget(),
+          builder: (context, params) => const NoticesWidget(),
         ),
         FFRoute(
           name: 'demo',
           path: '/demo',
-          builder: (context, params) => DemoWidget(),
+          builder: (context, params) => const DemoWidget(),
         ),
         FFRoute(
           name: 'webview_payment',
@@ -268,7 +260,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'Cartvalue',
           path: '/cartvalue',
-          builder: (context, params) => CartvalueWidget(),
+          builder: (context, params) => const CartvalueWidget(),
         ),
         FFRoute(
           name: 'finalpaybutton',
@@ -281,34 +273,34 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'paymentfailure',
           path: '/paymentfailure',
-          builder: (context, params) => PaymentfailureWidget(),
+          builder: (context, params) => const PaymentfailureWidget(),
         ),
         FFRoute(
           name: 'productsmenu',
           path: '/productsmenu',
           builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'productsmenu')
-              : ProductsmenuWidget(),
+              ? const NavBarPage(initialPage: 'productsmenu')
+              : const ProductsmenuWidget(),
         ),
         FFRoute(
           name: 'refundpolicy',
           path: '/refundpolicy',
-          builder: (context, params) => RefundpolicyWidget(),
+          builder: (context, params) => const RefundpolicyWidget(),
         ),
         FFRoute(
           name: 'roundregistration',
           path: '/roundregistration',
-          builder: (context, params) => RoundregistrationWidget(),
+          builder: (context, params) => const RoundregistrationWidget(),
         ),
         FFRoute(
           name: 'results',
           path: '/results',
-          builder: (context, params) => ResultsWidget(),
+          builder: (context, params) => const ResultsWidget(),
         ),
         FFRoute(
           name: 'CartvalueCopy',
           path: '/cartvalueCopy',
-          builder: (context, params) => CartvalueCopyWidget(),
+          builder: (context, params) => const CartvalueCopyWidget(),
         ),
         FFRoute(
           name: 'productWebview',
@@ -320,12 +312,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'productFailure',
           path: '/productFailure',
-          builder: (context, params) => ProductFailureWidget(),
+          builder: (context, params) => const ProductFailureWidget(),
         ),
         FFRoute(
           name: 'summerquiz',
           path: '/summerquiz',
-          builder: (context, params) => SummerquizWidget(),
+          builder: (context, params) => const SummerquizWidget(),
         ),
         FFRoute(
           name: 'annualExam',
@@ -338,17 +330,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
         FFRoute(
           name: 'quizdetails',
           path: '/quizdetails',
-          builder: (context, params) => QuizdetailsWidget(),
+          builder: (context, params) => const QuizdetailsWidget(),
         ),
         FFRoute(
           name: 'round2result',
           path: '/round2result',
-          builder: (context, params) => Round2resultWidget(),
+          builder: (context, params) => const Round2resultWidget(),
         ),
         FFRoute(
           name: 'Coupons',
           path: '/coupons',
-          builder: (context, params) => CouponsWidget(),
+          builder: (context, params) => const CouponsWidget(),
         ),
         FFRoute(
           name: 'certificateViewer',
@@ -367,7 +359,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
          FFRoute(
           name: 'notifications',
           path: '/notifications',
-          builder: (context, params) => NotificationsWidget(),
+          builder: (context, params) => const NotificationsWidget(),
         ),
         FFRoute(
           name: 'powerwebview',
@@ -667,7 +659,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(
+  static TransitionInfo appDefault() => const TransitionInfo(
         hasTransition: true,
         transitionType: PageTransitionType.fade,
         duration: Duration(milliseconds: 300),

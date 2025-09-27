@@ -7,7 +7,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'profile_model.dart';
@@ -84,9 +83,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           title: Align(
-            alignment: AlignmentDirectional(0.0, 0.0),
+            alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   '0zberw20' /* Profile */,
@@ -100,7 +99,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ),
             ),
           ),
-          actions: [],
+          actions: const [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -108,7 +107,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -116,7 +115,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   Container(
                     width: MediaQuery.sizeOf(context).width * 0.9,
                     height: MediaQuery.sizeOf(context).height * 0.18,
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -136,12 +135,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 0.25,
                                 height: MediaQuery.sizeOf(context).width * 0.25,
                                 clipBehavior: Clip.antiAlias,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.asset(
@@ -153,20 +152,20 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ),
                         ),
                         Align(
-                          alignment: AlignmentDirectional(0.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 0.6,
                             height: MediaQuery.sizeOf(context).height * 0.14,
-                            decoration: BoxDecoration(),
+                            decoration: const BoxDecoration(),
                             child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 5.0, 0.0),
                                       child: Text(
                                         FFAppState().userInfo.studentName,
@@ -175,7 +174,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                             .bodyMedium
                                             .override(
                                               fontFamily: 'Poppins',
-                                              color: Color(0xFF272727),
+                                              color: const Color(0xFF272727),
                                               fontSize: 16.0,
                                               fontWeight: FontWeight.w500,
                                             ),
@@ -183,7 +182,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 5.0, 0.0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
@@ -194,14 +193,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           .bodyMedium
                                           .override(
                                             fontFamily: 'Poppins',
-                                            color: Color(0xFFA4A4A4),
+                                            color: const Color(0xFFA4A4A4),
                                           ),
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
@@ -224,12 +223,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .height *
                                               0.04,
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   15.0, 0.0, 15.0, 0.0),
                                           iconPadding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
-                                          color: Color(0xFF004696),
+                                          color: const Color(0xFF004696),
                                           textStyle:
                                               FlutterFlowTheme.of(context)
                                                   .titleSmall
@@ -239,7 +238,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -258,50 +257,50 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         '9sklizon' /* School Name */,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Poppins',
-                            color: Color(0xFF272727),
+                            color: const Color(0xFF272727),
                             fontSize: 16.0,
                             fontWeight: FontWeight.w600,
                           ),
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                       child: Text(
                         FFAppState().userInfo.schoolName,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Poppins',
-                              color: Color(0xFF272727),
+                              color: const Color(0xFF272727),
                             ),
                       ),
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     height: 1.0,
                     thickness: 1.0,
                     color: Color(0xFFBBAACC),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'dxembudd' /* Standard */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Poppins',
-                              color: Color(0xFF272727),
+                              color: const Color(0xFF272727),
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
                             ),
@@ -309,37 +308,37 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                       child: Text(
                         FFAppState().userInfo.stdId,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Poppins',
-                              color: Color(0xFF272727),
+                              color: const Color(0xFF272727),
                               fontSize: 16.0,
                             ),
                       ),
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     height: 1.0,
                     thickness: 1.0,
                     color: Color(0xFFBBAACC),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           '7zh174zt' /* Mobile Number */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Poppins',
-                              color: Color(0xFF272727),
+                              color: const Color(0xFF272727),
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
                             ),
@@ -347,28 +346,28 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Align(
-                    alignment: AlignmentDirectional(-1.0, 0.0),
+                    alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
                       child: Text(
                         FFAppState().userInfo.mobileNo,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Poppins',
-                              color: Color(0xFF272727),
+                              color: const Color(0xFF272727),
                               fontSize: 16.0,
                             ),
                       ),
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     height: 1.0,
                     thickness: 1.0,
                     color: Color(0xFFBBAACC),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -412,7 +411,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 22.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     7.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -428,7 +427,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -443,7 +442,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -468,7 +467,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 22.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -484,7 +483,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -501,7 +500,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   if (FFAppState().userInfo.showresult == 1)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -526,7 +525,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   size: 22.0,
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 2.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -542,7 +541,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 ),
                               ],
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 10.0, 0.0),
                               child: Icon(
@@ -558,7 +557,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   if (FFAppState().userInfo.showresult == 2)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -583,7 +582,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   size: 22.0,
                                 ),
                                 Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 2.0, 0.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -599,7 +598,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 ),
                               ],
                             ),
-                            Padding(
+                            const Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 10.0, 0.0),
                               child: Icon(
@@ -614,7 +613,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -639,7 +638,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 22.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -655,7 +654,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -670,7 +669,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -695,7 +694,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 22.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -711,7 +710,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -724,14 +723,14 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                     ),
                   ),
-                  Divider(
+                  const Divider(
                     height: 1.0,
                     thickness: 1.0,
                     color: Color(0xFFBBAACC),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -756,7 +755,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -772,7 +771,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -787,7 +786,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -811,7 +810,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 22.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -827,7 +826,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -842,7 +841,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -866,7 +865,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -882,7 +881,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -897,7 +896,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -922,7 +921,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -938,7 +937,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -953,7 +952,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -978,7 +977,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -994,7 +993,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(
@@ -1009,7 +1008,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -1023,19 +1022,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               builder: (alertDialogContext) {
                                 return WebViewAware(
                                   child: AlertDialog(
-                                    title: Text('Logout'),
-                                    content: Text(
+                                    title: const Text('Logout'),
+                                    content: const Text(
                                         'Are You Sure You Want To Logout ?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () => Navigator.pop(
                                             alertDialogContext, false),
-                                        child: Text('Cancel'),
+                                        child: const Text('Cancel'),
                                       ),
                                       TextButton(
                                         onPressed: () => Navigator.pop(
                                             alertDialogContext, true),
-                                        child: Text('Confirm'),
+                                        child: const Text('Confirm'),
                                       ),
                                     ],
                                   ),
@@ -1071,7 +1070,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 size: 24.0,
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     10.0, 2.0, 0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
@@ -1087,7 +1086,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ],
                           ),
-                          Padding(
+                          const Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 10.0, 0.0),
                             child: Icon(

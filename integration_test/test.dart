@@ -1,20 +1,15 @@
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
-import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_drop_down.dart';
-import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_icon_button.dart';
-import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_radio_button.dart';
-import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_widgets.dart';
-import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_theme.dart';
-import 'package:indian_talent_olympiad/index.dart';
+
 import 'package:indian_talent_olympiad/main.dart';
 import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_util.dart';
 
 import 'package:provider/provider.dart';
 import 'package:indian_talent_olympiad/backend/firebase/firebase_config.dart';
 import 'package:indian_talent_olympiad/auth/firebase_auth/auth_util.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -35,22 +30,22 @@ void main() async {
 
     await tester.pumpWidget(ChangeNotifierProvider(
       create: (context) => FFAppState(),
-      child: MyApp(),
+      child: const MyApp(),
     ));
 
-    await tester.enterText(find.byKey(ValueKey('TextField_q8c8')), 'Megha');
-    await tester.enterText(find.byKey(ValueKey('TextField_1w5e')), 'Honnappa');
+    await tester.enterText(find.byKey(const ValueKey('TextField_q8c8')), 'Megha');
+    await tester.enterText(find.byKey(const ValueKey('TextField_1w5e')), 'Honnappa');
     await tester.enterText(
-        find.byKey(ValueKey('TextField_e33n')), 'honnappa@gmail.com');
+        find.byKey(const ValueKey('TextField_e33n')), 'honnappa@gmail.com');
     await tester.enterText(
-        find.byKey(ValueKey('TextField_w3il')), '8088215512');
-    await tester.enterText(find.byKey(ValueKey('TextField_x2g0')), 'Bangalore');
-    await tester.enterText(find.byKey(ValueKey('TextField_b8tt')), 'PPEC');
-    await tester.enterText(find.byKey(ValueKey('TextField_7sea')), 'Karnataka');
-    await tester.enterText(find.byKey(ValueKey('TextField_chcn')), 'Bangalore');
-    await tester.tap(find.byKey(ValueKey('DropDown_0vrd')));
-    await tester.enterText(find.byKey(ValueKey('TextField_mbbb')), 'megha@123');
-    await tester.enterText(find.byKey(ValueKey('TextField_l7dt')), 'megha@123');
+        find.byKey(const ValueKey('TextField_w3il')), '8088215512');
+    await tester.enterText(find.byKey(const ValueKey('TextField_x2g0')), 'Bangalore');
+    await tester.enterText(find.byKey(const ValueKey('TextField_b8tt')), 'PPEC');
+    await tester.enterText(find.byKey(const ValueKey('TextField_7sea')), 'Karnataka');
+    await tester.enterText(find.byKey(const ValueKey('TextField_chcn')), 'Bangalore');
+    await tester.tap(find.byKey(const ValueKey('DropDown_0vrd')));
+    await tester.enterText(find.byKey(const ValueKey('TextField_mbbb')), 'megha@123');
+    await tester.enterText(find.byKey(const ValueKey('TextField_l7dt')), 'megha@123');
     await tester.pumpAndSettle();
     expect(find.text('Welcome back!'), findsWidgets);
   });
