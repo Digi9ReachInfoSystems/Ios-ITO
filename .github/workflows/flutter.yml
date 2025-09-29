@@ -16,6 +16,9 @@ jobs:
       - uses: actions/checkout@v4
 
       # 2. Install Java 17 (compatible with Gradle 7.x/8.x)
+      - name: Flutter clean
+        run: flutter clean
+
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
@@ -33,10 +36,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-# 5. Clean Gradle cache (helps with resolving custom repos like PhonePe)
-      - name: Clean Gradle
-        run: ./gradlew clean
-        
+
       # 6. Build Android APK
       - name: Build Android APK
         run: flutter build apk --release
