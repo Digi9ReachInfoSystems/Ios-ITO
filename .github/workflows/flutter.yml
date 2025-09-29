@@ -28,7 +28,9 @@ jobs:
       # 4. Install dependencies
       - name: Install dependencies
         run: flutter pub get
-
+      - name: Install Android SDK 34
+        run: |
+          sdkmanager "platforms;android-34" "build-tools;34.0.0"    
       # 5. Decode Keystore from GitHub Secret
       - name: Decode Keystore
         run: |
