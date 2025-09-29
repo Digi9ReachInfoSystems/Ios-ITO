@@ -7,24 +7,20 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    env:
-      ANDROID_HOME: /Users/runner/Library/Android/sdk
-      FLUTTER_HOME: /opt/hostedtoolcache/flutter/stable-3.22.0-x64
 
     steps:
-      # 1. Checkout source
+      # 1. Checkout code
       - uses: actions/checkout@v4
 
-      # 2. Install Java 17 (compatible with Gradle 7.x/8.x)
+      # 2. Setup Java 17 (required for Gradle 7.x+)
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      # 3. Install Flutter
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      # 3. Setup Flutter
+      - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.0'
           channel: 'stable'
@@ -33,33 +29,48 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      # 5. Decode Keystore from GitHub Secret
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
 
       # 6. Build Android APK
       - name: Build Android APK
+        env:
+          ANDROID_KEYSTORE_FILE: android/app/upload-keystore.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: flutter build apk --release
 
-      # 6. Build Android App Bundle (Play Store)
+      # 7. Build Android App Bundle (for Play Store)
       - name: Build Android App Bundle
+        env:
+          ANDROID_KEYSTORE_FILE: android/app/upload-keystore.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: flutter build appbundle --release
 
-      # 7. Upload APK/AAB as GitHub workflow artifacts
+      # 8. Upload APK as Artifact
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk
 
+      # 9. Upload AAB as Artifact
       - name: Upload AAB
         uses: actions/upload-artifact@v4
         with:
           name: release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-      # 8. Deploy to Google Play Internal Testing
+      # 10. (Optional) Deploy to Play Store Internal Track
       - name: Upload to Play Store
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
-          packageName: com.ito.onlineexam.app   # 🔹 replace with your actual package name
+          packageName: com.ito.onlineexam.app   # replace with your real package name
           releaseFile: build/app/outputs/bundle/release/app-release.aab
           track: internal
