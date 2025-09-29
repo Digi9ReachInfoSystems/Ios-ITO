@@ -47,8 +47,7 @@ android {
 
     signingConfigs {
     release {
-        def keystorePath = System.getenv("ANDROID_KEYSTORE_FILE") ?: "$rootDir/app/upload-keystore.jks"
-        storeFile file(keystorePath)
+        storeFile file("upload-keystore.jks")
         storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
         keyAlias System.getenv("ANDROID_KEY_ALIAS")
         keyPassword System.getenv("ANDROID_KEY_PASSWORD")
