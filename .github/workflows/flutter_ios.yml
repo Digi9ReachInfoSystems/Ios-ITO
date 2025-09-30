@@ -4,50 +4,24 @@ on:
   workflow_dispatch:   # Run only when manually triggered
 
 jobs:
-  build:
+  build_ios:
     runs-on: macos-latest
 
     steps:
-      # 1. Checkout source code
-      - uses: actions/checkout@v4
+      # 1. Checkout repo
+      - name: Checkout source
+        uses: actions/checkout@v4
 
-      # 2. Setup Java (needed for Flutter)
-      - name: Setup Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      # 3. Setup Flutter
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.22.0'
-          channel: 'stable'
-
-      # 4. Install dependencies
-      - name: Install dependencies
-        run: flutter pub get
-
-      # 5. Build iOS (without codesign for CI)
-      - name: Build iOS (no codesign)
-        run: flutter build ios --release --no-codesign
-
-      # 6. Setup Ruby (for Fastlane)
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-
-      # 7. Install Fastlane
+      # 2. Setup Ruby (needed for Fastlane)
       - name: Install Fastlane
-        run: gem install fastlane
+        run: sudo gem install fastlane -NV
 
-      # 8. Upload to TestFlight
-      - name: Upload to TestFlight
+      - name: Build and Upload to TestFlight
         run: |
           cd ios
           fastlane beta
         env:
-          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+
