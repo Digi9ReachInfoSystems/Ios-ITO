@@ -9,32 +9,44 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      # 1. Checkout repo
+      # 1. Checkout source
       - uses: actions/checkout@v4
 
-      # 2. Set up Ruby (needed for Fastlane)
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      # 2. Install Flutter
+      - uses: subosito/flutter-action@v2
         with:
-          ruby-version: '3.0'
+          flutter-version: '3.22.0'
+          channel: 'stable'
 
-      # 3. Select correct Xcode version
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_16.2.app
+      # 3. Install dependencies (important for Generated.xcconfig)
+      - name: Install Flutter dependencies
+        run: flutter pub get
 
-      # 4. Install Fastlane
-      - name: Install Fastlane
-        run: gem install fastlane
-
-      # 5. Install CocoaPods
+      # 4. Install CocoaPods
       - name: Install CocoaPods
         run: |
           cd ios
           pod install --repo-update
 
-      # 6. Build & Upload to TestFlight
-      - name: Build and upload to TestFlight
-        run: fastlane beta
-        working-directory: ios
+      # 5. Setup Ruby for Fastlane
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      # 6. Install Bundler & Fastlane
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install || true
+          gem install fastlane
+
+      # 7. Build & Upload to TestFlight
+      - name: Deploy to TestFlight
+        run: |
+          cd ios
+          fastlane beta
         env:
           APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
