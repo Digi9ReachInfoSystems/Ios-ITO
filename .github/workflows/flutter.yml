@@ -50,7 +50,7 @@ jobs:
       # 7. Build Android App Bundle (for Play Store)
       - name: Build Android App Bundle
         env:
-          ANDROID_KEYSTORE_FILE: android/app/upload-keystore.jks
+          ANDROID_KEYSTORE_FILE: android/app/key.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
