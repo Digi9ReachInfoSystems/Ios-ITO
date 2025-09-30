@@ -70,11 +70,11 @@ jobs:
           name: release-aab
           path: build/app/outputs/bundle/release/app-release.aab
 
-      # 10. (Optional) Deploy to Play Store Internal Track
+      # 10. (Optional) Deploy to Play Store Internal Track service account updated
       - name: Upload to Play Store
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }} 
           packageName: com.ito.onlineexam.app 
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           track: internal
