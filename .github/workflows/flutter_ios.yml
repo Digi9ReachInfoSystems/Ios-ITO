@@ -25,6 +25,10 @@ jobs:
       # 3. Install dependencies
       - name: Install dependencies
         run: flutter pub get
+             cd ios
+             pod repo update
+             pod install
+             cd ..
 
       # 4. Install CocoaPods
       - name: Install Pods
