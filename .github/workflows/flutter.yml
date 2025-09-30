@@ -75,6 +75,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
-          packageName: com.ito.onlineexam.app   # replace with your real package name
-          releaseFile: build/app/outputs/bundle/release/app-release.aab
+          packageName: com.ito.onlineexam.app   # must match applicationId in build.gradle
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
           track: internal
+          status: completed

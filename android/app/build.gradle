@@ -39,7 +39,7 @@ android {
     defaultConfig {
         applicationId "com.ito.onlineexam.app"
         minSdkVersion 23
-        targetSdkVersion 334
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
