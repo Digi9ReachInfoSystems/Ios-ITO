@@ -5,44 +5,29 @@ on:
     branches: [ main ]
 
 jobs:
-  build_ios:
+  build:
     runs-on: macos-latest
 
     steps:
-      # 1. Checkout source
       - uses: actions/checkout@v4
 
-      # 2. Install Flutter
       - uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.22.0'
           channel: 'stable'
 
-      # 3. Install dependencies (important for Generated.xcconfig)
-      - name: Install Flutter dependencies
+      - name: Install dependencies
         run: flutter pub get
 
-      # 4. Install CocoaPods
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_15.4.app
+
       - name: Install CocoaPods
         run: |
           cd ios
           pod install --repo-update
 
-      # 5. Setup Ruby for Fastlane
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.2'
-
-      # 6. Install Bundler & Fastlane
-      - name: Install dependencies
-        run: |
-          gem install bundler
-          bundle install || true
-          gem install fastlane
-
-      # 7. Build & Upload to TestFlight
-      - name: Deploy to TestFlight
+      - name: Upload to TestFlight
         run: |
           cd ios
           fastlane beta
