@@ -27,7 +27,7 @@ jobs:
           cd ios
           pod install --repo-update
 
-      - name: Upload to TestFlight
+      - name: Build and Upload to TestFlight
         run: |
           cd ios
           fastlane beta
