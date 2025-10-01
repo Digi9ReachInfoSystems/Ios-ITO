@@ -1,48 +1,51 @@
-name: Flutter iOS CI/CD
+name: iOS CI/CD
 
 on:
+  workflow_dispatch:   # only run manually (safe for testing)
   push:
-    branches: [ main ]
+    branches:
+      - main
+    paths:
+      - "ios/**"
+      - ".github/workflows/ios.yml"
 
 jobs:
   build-ios:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      # 1. Select correct Xcode version (Apple supports only certain versions on GitHub runners)
-      - name: Setup Xcode
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.22.0"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Install CocoaPods
+        run: |
+          cd ios
+          pod repo update
+          pod install
+          cd ..
+
+      - name: Set up Xcode
         uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: "16.4.0"
-      # 2. Setup Flutter
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.22.0"
-          channel: "stable"
 
-      # 3. Install dependencies
-      - name: Install dependencies
-        run: flutter pub get
-             cd ios
-             pod repo update
-             pod install
-             cd ..
+      - name: Install Fastlane
+        run: sudo gem install fastlane -NV
 
-      # 4. Install CocoaPods
-      - name: Install Pods
-        run: |
-          cd ios
-          pod install --repo-update
-
-      # 5. Build and upload to TestFlight
-      - name: Build and Upload to TestFlight
-        run: |
-          cd ios
-          bundle install
-          bundle exec fastlane beta
+      - name: Build & Upload to TestFlight
         env:
-          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          cd ios
+          fastlane beta
