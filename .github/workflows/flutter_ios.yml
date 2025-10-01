@@ -1,13 +1,8 @@
-name: iOS CI/CD
+name: Flutter iOS CI/CD
 
 on:
-  workflow_dispatch:   # only run manually (safe for testing)
   push:
-    branches:
-      - main
-    paths:
-      - "ios/**"
-      - ".github/workflows/ios.yml"
+    branches: [ main ]
 
 jobs:
   build-ios:
@@ -42,7 +37,7 @@ jobs:
 
       - name: Build & Upload to TestFlight
         env:
-          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_API_KEY_ID }}
+          APP_STORE_CONNECT_KEY_ID: ${{ secrets.APP_STORE_CONNECT_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_API_KEY: ${{ secrets.APP_STORE_CONNECT_API_KEY }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
