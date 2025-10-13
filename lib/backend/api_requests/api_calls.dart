@@ -1,4 +1,7 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:indian_talent_olympiad/backend/api_requests/api_token_manager.dart';
+
 import '../cloud_functions/cloud_functions.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -7,6 +10,12 @@ import 'api_manager.dart';
 export 'api_manager.dart' show ApiCallResponse;
 
 const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+
+String getBaseUrl() {
+  // Default fallback if .env fails to load
+  return dotenv.env['API_BASE_URL'] ??
+      'https://www.indiantalent.org/RESTapi';
+}
 
 class LoginOutsideCall {
   static Future<ApiCallResponse> call({
@@ -23,7 +32,22 @@ class LoginOutsideCall {
         },
       },
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
+   // ✅ convert the response
+    final apiResponse = ApiCallResponse.fromCloudCallResponse(response);
+
+    // ✅ Extract and store token globally
+    try {
+      final token = getJsonField(apiResponse.jsonBody, r'''$.token.firebase_token''');
+      final expires = getJsonField(apiResponse.jsonBody, r'''$.token.expires_at''');
+      if (token != null) {
+        ApiTokenManager.setToken(token.toString(), expires?.toString());
+        print('✅ Token saved: ${ApiTokenManager.token}');
+      }
+    } catch (e) {
+      print('⚠️ Token parsing failed: $e');
+    }
+
+    return apiResponse;
   }
 
   static String? studentName(dynamic response) =>
@@ -1819,7 +1843,7 @@ class StatusCheckCall {
     return ApiManager.instance.makeApiCall(
       callName: 'statusCheck',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/payment/check_payment_status',
+          '${getBaseUrl()}/student/payment/check_payment_status',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -1850,7 +1874,7 @@ class SummerQuizCall {
     return ApiManager.instance.makeApiCall(
       callName: 'summerQuiz',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/Products/summer_quiz_product_and_coupons',
+          '${getBaseUrl()}/student/Products/summer_quiz_product_and_coupons',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -1909,7 +1933,7 @@ class MonthlyResultsCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'monthlyResults',
-      apiUrl: 'https://www.indiantalent.org/RESTapi/student/exam/test_attempts',
+      apiUrl: '${getBaseUrl()}/student/exam/test_attempts',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -1941,7 +1965,7 @@ class RoundresultsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'roundresults',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/result/get_round_2_results',
+          '${getBaseUrl()}/student/result/get_round_2_results',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -1980,7 +2004,7 @@ class ViewCertificatesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'viewCertificates',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/exam/view_certificate',
+          '${getBaseUrl()}/student/exam/view_certificate',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -2021,7 +2045,7 @@ class PowerPackagesCall {
     return ApiManager.instance.makeApiCall(
       callName: 'powerPackages',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/products/fetch_packages',
+          '${getBaseUrl()}/student/products/fetch_packages',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -2082,7 +2106,7 @@ class BannersCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'banners',
-      apiUrl: 'https://www.indiantalent.org/RESTapi/student/profile/banners',
+      apiUrl: '${getBaseUrl()}/student/profile/banners',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -2116,7 +2140,7 @@ class NotificationsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'notifications',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/profile/announcements',
+          '${getBaseUrl()}/student/profile/announcements',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -2154,7 +2178,7 @@ class GetquestionsoxCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getquestionsox',
-      apiUrl: 'https://www.indiantalent.org/RESTapi/student/exam/get_questions',
+      apiUrl: '${getBaseUrl()}/student/exam/get_questions',
       callType: ApiCallType.POST,
       headers: {},
       params: {},

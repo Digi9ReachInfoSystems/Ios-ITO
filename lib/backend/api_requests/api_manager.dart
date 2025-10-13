@@ -9,9 +9,12 @@ import 'package:collection/collection.dart';
 import 'package:http/http.dart' as http;
 import 'package:equatable/equatable.dart';
 import 'package:http_parser/http_parser.dart';
+import 'package:indian_talent_olympiad/backend/api_requests/api_calls.dart';
+import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_util.dart';
 import 'package:mime_type/mime_type.dart';
 
 import '/flutter_flow/uploaded_file.dart';
+import 'api_token_manager.dart';
 
 import 'get_streamed_response.dart';
 
@@ -432,9 +435,37 @@ class ApiManager {
           isStreamingApi: isStreamingApi,
         );
     // Modify for your specific needs if this differs from your API.
-    if (_accessToken != null) {
-      headers[HttpHeaders.authorizationHeader] = 'Bearer $_accessToken';
+    final mergedHeaders = {
+  ...ApiTokenManager.headers,
+  ...headers,
+};
+
+// 🔄 Optional: auto-refresh token if expired
+await ApiTokenManager.refreshIfNeeded(() async {
+  try {
+    final refreshResponse = await ApiManager.instance.makeApiCall(
+      callName: 'RefreshToken',
+      apiUrl: '${getBaseUrl()}/student/auth/generate_auth_token',
+      callType: ApiCallType.POST,
+      headers: {'Authorization': 'Bearer ${ApiTokenManager.token}'},
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+
+    final newToken = getJsonField(refreshResponse.jsonBody, r'''$.token.firebase_token''');
+    final expires = getJsonField(refreshResponse.jsonBody, r'''$.token.expires_at''');
+
+    if (newToken != null) {
+      ApiTokenManager.setToken(newToken.toString(), expires?.toString());
+      print('♻️ Token refreshed successfully');
     }
+    return newToken?.toString();
+  } catch (e) {
+    print('⚠️ Token refresh failed: $e');
+    return null;
+  }
+});
     if (!apiUrl.startsWith('http')) {
       apiUrl = 'https://$apiUrl';
     }

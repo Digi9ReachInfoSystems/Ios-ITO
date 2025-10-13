@@ -74,6 +74,7 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
       
       logFirebaseEvent('Homepagelogin_backend_call');
       _model.apiResulti35 = await GetServicesCall.call();
+      
      logFirebaseEvent('Homepagelogin_backend_call');
       _model.newversion = await AppcheckCall.call(
         appId: 'com.ito.onlineexam.app',
@@ -165,7 +166,7 @@ print("appcheck");
       } else {
         logFirebaseEvent('Homepagelogin_navigate_to');
 
-        context.goNamed('outOfversion');
+        // context.goNamed('outOfversion');
       }
     });
   }

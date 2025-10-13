@@ -373,6 +373,7 @@ class _TestWidgetNewState extends State<TestWidgetNew>
 
   @override
   Widget build(BuildContext context) {
+     debugPrint('✅ TestWidgetNew build() called');
     List<String> sectionTitles = ['Subjective'];
     if (widget.questions2 != null && widget.questions2!.isNotEmpty) {
       sectionTitles.add('Logical');
@@ -479,85 +480,96 @@ class _TestWidgetNewState extends State<TestWidgetNew>
           _adjustListLength(widget.question3Id ?? [], questions3Length);
     }
 
-    return Scaffold(
-      body: Column(
-        children: [
-          if (sectionTitles.length > 1)
-            Container(
-              height: 45,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-              ),
-              child: TabBar(
-                controller: _tabController,
-                indicatorColor: Colors.transparent,
-                labelPadding: EdgeInsets.only(left: 1.0),
-                tabs: sectionTitles
-                    .map((title) => _buildCustomTab(
-                          title,
-                          _tabController.index == _getSectionIndex(title),
-                        ))
-                    .toList(),
-              ),
-            ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
+     return Scaffold(
+    backgroundColor: Colors.white,
+    body: SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SizedBox(
+            height: constraints.maxHeight,
+            width: constraints.maxWidth,
+            child: Column(
               children: [
-                _buildSection(
-                  0,
-                  'Subjective',
-                  widget.questions,
-                  adjustedQuestionImage,
-                  adjustedAnswer1,
-                  adjustedAnswer2,
-                  adjustedAnswer3,
-                  adjustedAnswer4,
-                  adjustedAnswerImage1,
-                  adjustedAnswerImage2,
-                  adjustedAnswerImage3,
-                  adjustedAnswerImage4,
-                  adjustedQuestionId,
+                if (sectionTitles.length > 1)
+                  Container(
+                    height: 45,
+                    color: Colors.grey[200],
+                    child: TabBar(
+                      controller: _tabController,
+                      indicatorColor: Colors.transparent,
+                      tabs: sectionTitles
+                          .map((title) => _buildCustomTab(
+                                title,
+                                _tabController.index == _getSectionIndex(title),
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                Expanded(
+                  child: TabBarView(
+                    controller: _tabController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    children: [
+                      _buildSection(
+                        0,
+                        'Subjective',
+                        widget.questions,
+                        widget.questionimage,
+                        widget.answer1,
+                        widget.answer2,
+                        widget.answer3,
+                        widget.answer4,
+                        widget.answerimage1,
+                        widget.answerimage2,
+                        widget.answerimage3,
+                        widget.answerimage4,
+                        widget.questionid,
+                      ),
+                      if (widget.questions2 != null &&
+                          widget.questions2!.isNotEmpty)
+                        _buildSection(
+                          1,
+                          'Logical',
+                          widget.questions2!,
+                          widget.question2image ?? [],
+                          widget.sectionbanswer1 ?? [],
+                          widget.sectionbanswer2 ?? [],
+                          widget.sectionbanswer3 ?? [],
+                          widget.sectionbanswer4 ?? [],
+                          widget.sectionbanswerimage1 ?? [],
+                          widget.sectionbanswerimage2 ?? [],
+                          widget.sectionbanswerimage3 ?? [],
+                          widget.sectionbanswerimage4 ?? [],
+                          widget.question2Id ?? [],
+                        ),
+                      if (widget.questions3 != null &&
+                          widget.questions3!.isNotEmpty)
+                        _buildSection(
+                          2,
+                          "HOT's",
+                          widget.questions3!,
+                          widget.questionimage3 ?? [],
+                          widget.sectionCanswer1 ?? [],
+                          widget.sectionCanswer2 ?? [],
+                          widget.sectionCanswer3 ?? [],
+                          widget.sectionCanswer4 ?? [],
+                          widget.sectionCanswerimage1 ?? [],
+                          widget.sectionCanswerimage2 ?? [],
+                          widget.sectionCanswerimage3 ?? [],
+                          widget.sectionCanswerimage4 ?? [],
+                          widget.question3Id ?? [],
+                        ),
+                    ],
+                  ),
                 ),
-                if (adjustedQuestions2 != null && adjustedQuestions2.isNotEmpty)
-                  _buildSection(
-                    1,
-                    'Logical',
-                    adjustedQuestions2,
-                    adjustedQuestion2Image!,
-                    adjustedSectionBAnswer1!,
-                    adjustedSectionBAnswer2!,
-                    adjustedSectionBAnswer3!,
-                    adjustedSectionBAnswer4!,
-                    adjustedSectionBAnswerImage1!,
-                    adjustedSectionBAnswerImage2!,
-                    adjustedSectionBAnswerImage3!,
-                    adjustedSectionBAnswerImage4!,
-                    adjustedQuestion2Id!,
-                  ),
-                if (adjustedQuestions3 != null && adjustedQuestions3.isNotEmpty)
-                  _buildSection(
-                    2,
-                    "HOT's",
-                    adjustedQuestions3,
-                    adjustedQuestion3Image!,
-                    adjustedSectionCAnswer1!,
-                    adjustedSectionCAnswer2!,
-                    adjustedSectionCAnswer3!,
-                    adjustedSectionCAnswer4!,
-                    adjustedSectionCAnswerImage1!,
-                    adjustedSectionCAnswerImage2!,
-                    adjustedSectionCAnswerImage3!,
-                    adjustedSectionCAnswerImage4!,
-                    adjustedQuestion3Id!,
-                  ),
               ],
             ),
-          ),
-        ],
+          );
+        },
       ),
-    );
-  }
+    ),
+  );
+}
 
   Widget _buildSection(
     int sectionIndex,

@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:indian_talent_olympiad/flutter_flow/firebase_remote_config_util.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,18 @@ import 'flutter_flow/internationalization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'index.dart';
+import 'backend/api_requests/api_config.dart';
 
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+    WidgetsFlutterBinding.ensureInitialized();
+    const envFile = kReleaseMode ? '.env.live' : '.env.test';
+    await dotenv.load(fileName: envFile);
+
+  // Optional console check
+  print('🔧 Environment loaded: ${dotenv.env['APP_ENV']}');
+  print('🌐 Base URL: ${dotenv.env['BASE_URL']}');
+
   usePathUrlStrategy();
   await initFirebase();
 await Upgrader.clearSavedSettings();
