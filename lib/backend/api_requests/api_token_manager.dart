@@ -1,19 +1,29 @@
 import 'dart:async';
 
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+
 class ApiTokenManager {
+  static final _storage = const FlutterSecureStorage();
   static String? _token;
   static DateTime? _expiry;
 
+ static Future<void> init() async {
+    _token = await _storage.read(key: 'token');
+    final expiryString = await _storage.read(key: 'expiry');
+    if (expiryString != null) {
+      _expiry = DateTime.tryParse(expiryString);
+    }
+  }
   /// Set token & expiry once after login
-  static void setToken(String token, String? expiresAt) {
+   static Future<void> setToken(String token, String? expiresAt) async {
     _token = token;
+    _expiry = expiresAt != null && expiresAt.isNotEmpty
+        ? DateTime.tryParse(expiresAt)
+        : null;
 
-    if (expiresAt != null && expiresAt.isNotEmpty) {
-      try {
-        _expiry = DateTime.parse(expiresAt);
-      } catch (_) {
-        _expiry = null;
-      }
+    await _storage.write(key: 'token', value: token);
+    if (_expiry != null) {
+      await _storage.write(key: 'expiry', value: _expiry!.toIso8601String());
     }
   }
 
@@ -28,9 +38,11 @@ class ApiTokenManager {
   }
 
   /// Clear token (on logout)
-  static void clear() {
+  static Future<void> clear() async {
     _token = null;
     _expiry = null;
+    await _storage.delete(key: 'token');
+    await _storage.delete(key: 'expiry');
   }
 
   /// Refresh token automatically if expired
@@ -50,4 +62,6 @@ class ApiTokenManager {
     if (_token != null) h['Authorization'] = 'Bearer $_token';
     return h;
   }
+
+  
 }

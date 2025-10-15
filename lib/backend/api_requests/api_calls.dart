@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:indian_talent_olympiad/backend/api_requests/api_token_manager.dart';
 
@@ -13,8 +14,8 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 String getBaseUrl() {
   // Default fallback if .env fails to load
-  return dotenv.env['API_BASE_URL'] ??
-      'https://www.indiantalent.org/RESTapi';
+  return dotenv.env['BASE_URL'] ??
+      'https://www.olympiadx.com/RESTapi';
 }
 
 class LoginOutsideCall {
@@ -22,26 +23,46 @@ class LoginOutsideCall {
     String? mobile = '',
     String? password = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'LoginOutsideCall',
-        'variables': {
-          'mobile': mobile,
-          'password': password,
-        },
+    // ✅ Make the actual REST API call
+    final response = await ApiManager.instance.makeApiCall(
+      callName: 'LoginOutsideCall',
+      apiUrl: '${getBaseUrl()}/student/auth/login',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
+      params: {
+        'login_id': mobile,
+        'password': password,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-   // ✅ convert the response
-    final apiResponse = ApiCallResponse.fromCloudCallResponse(response);
+
+    // ✅ Build compatible ApiCallResponse (FlutterFlow format)
+    final apiResponse = ApiCallResponse(
+      response.jsonBody,
+      response.headers,
+      response.statusCode,
+      response: response.response,
+    );
 
     // ✅ Extract and store token globally
     try {
       final token = getJsonField(apiResponse.jsonBody, r'''$.token.firebase_token''');
       final expires = getJsonField(apiResponse.jsonBody, r'''$.token.expires_at''');
-      if (token != null) {
+
+      if (token != null && token.toString().isNotEmpty) {
         ApiTokenManager.setToken(token.toString(), expires?.toString());
         print('✅ Token saved: ${ApiTokenManager.token}');
+        
+      } else {
+        print('⚠️ No token found in response');
       }
     } catch (e) {
       print('⚠️ Token parsing failed: $e');
@@ -99,10 +120,8 @@ class LoginOutsideCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  static String? token(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.token''',
-      ));
+  static String? token(dynamic response) =>
+    castToType<String>(getJsonField(response, r'''$.token.firebase_token'''));
   static String? schoolName(dynamic response) =>
       castToType<String>(getJsonField(
         response,
@@ -162,21 +181,30 @@ class LoginOutsideCall {
 }
 
 class ForgetPasswordCall {
-  static Future<ApiCallResponse> call({
+   static Future<ApiCallResponse> call({
     String? mobile = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'ForgetPasswordCall',
-        'variables': {
-          'mobile': mobile,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "mobile": "${mobile}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'forgetPassword',
+      apiUrl:
+          '${getBaseUrl()}/student/Auth/forgot_password',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
-
   static dynamic message(dynamic response) => getJsonField(
         response,
         r'''$.message''',
@@ -191,19 +219,27 @@ class VerifyOtpPhoneCall {
   static Future<ApiCallResponse> call({
     String? otp = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'VerifyOtpPhoneCall',
-        'variables': {
-          'otp': otp,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "otp": "${otp}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'verifyOtpPhone',
+      apiUrl: '${getBaseUrl()}/student/auth/verify_otp',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
-
 class RegiterCall {
   static Future<ApiCallResponse> call({
     String? studentName = '',
@@ -218,26 +254,35 @@ class RegiterCall {
     String? confirmPassword = '',
     int? stdId,
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'RegiterCall',
-        'variables': {
-          'studentName': studentName,
-          'parentName': parentName,
-          'parentEmail': parentEmail,
-          'mobile': mobile,
-          'address': address,
-          'schoolName': schoolName,
-          'state': state,
-          'city': city,
-          'password': password,
-          'confirmPassword': confirmPassword,
-          'stdId': stdId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "student_name": "${studentName}",
+  "parent_name": "${parentName}",
+  "parent_email": "${parentEmail}",
+  "mobile": "${mobile}",
+  "address": "${address}",
+  "school_name": "${schoolName}",
+  "state": "${state}",
+  "city": "${city}",
+  "password": "${password}",
+  "confirm_password": "${confirmPassword}",
+  "std_id": ${stdId}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'regiter',
+      apiUrl: '${getBaseUrl()}/student/register/index',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static dynamic userId(dynamic response) => getJsonField(
@@ -257,36 +302,56 @@ class ResetpasswordCall {
     String? mobile = '',
     String? otp = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'ResetpasswordCall',
-        'variables': {
-          'password': password,
-          'confirmPassword': confirmPassword,
-          'mobile': mobile,
-          'otp': otp,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "mobile": "${mobile}",
+  "otp": "${otp}",
+  "password": "${password}",
+  "confirm_password": "${confirmPassword}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'resetpassword',
+      apiUrl:
+          '${getBaseUrl()}/student/Auth/recover_account',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
 class GetAllProductsCall {
-  static Future<ApiCallResponse> call({
+ static Future<ApiCallResponse> call({
     String? std = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'GetAllProductsCall',
-        'variables': {
-          'std': std,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "std_id": "${std}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getAllProducts',
+      apiUrl:
+          '${getBaseUrl()}/student/products/fetch_products_and_coupons',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static List? products(dynamic response) => getJsonField(
@@ -322,7 +387,7 @@ class GetAllProductsCall {
 }
 
 class EditprofileCall {
-  static Future<ApiCallResponse> call({
+   static Future<ApiCallResponse> call({
     String? token = '',
     String? studentName = '',
     String? parentName = '',
@@ -338,29 +403,38 @@ class EditprofileCall {
     String? schoolPincode = '',
     String? userName = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'EditprofileCall',
-        'variables': {
-          'token': token,
-          'studentName': studentName,
-          'parentName': parentName,
-          'address': address,
-          'district': district,
-          'state': state,
-          'city': city,
-          'pinCode': pinCode,
-          'schoolName': schoolName,
-          'schoolState': schoolState,
-          'schoolAddress': schoolAddress,
-          'schoolCity': schoolCity,
-          'schoolPincode': schoolPincode,
-          'userName': userName,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "token": "${token}",
+  "student_name": "${studentName}",
+  "parent_name": "${parentName}",
+  "address": "${address}",
+  "district": "${district}",
+  "state": "${state}",
+  "city": "${city}",
+  "pin_code": "${pinCode}",
+  "school_name": "${schoolName}",
+  "school_state": "${schoolState}",
+  "school_address": "${schoolAddress}",
+  "school_city": "${schoolCity}",
+  "school_pin_code": "${schoolPincode}",
+  "username": "${userName}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'editprofile',
+      apiUrl: '${getBaseUrl()}/student/profile/index',
+      callType: ApiCallType.PUT,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
@@ -369,17 +443,27 @@ class SubcsriptionsCall {
     String? userId = '',
     String? stdId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'SubcsriptionsCall',
-        'variables': {
-          'userId': userId,
-          'stdId': stdId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "user_id": "${userId}",
+  "std_id": "${stdId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'subcsriptions',
+      apiUrl:
+          '${getBaseUrl()}/student/profile/subscriptions',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static List? subscriptions(dynamic response) => getJsonField(
@@ -445,31 +529,44 @@ class OrderprCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'OrderprCall',
-        'variables': {
-          'userId': userId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "user_id": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'orderpr',
+      apiUrl: '${getBaseUrl()}/student/profile/orders',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
 class GetServicesCall {
-  static Future<ApiCallResponse> call() async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'GetServicesCall',
-        'variables': {},
-      },
+ static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getServices',
+      apiUrl: '${getBaseUrl()}/student/services/index',
+      callType: ApiCallType.GET,
+      headers: ApiTokenManager.headers,
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
-
   static List? services(dynamic response) => getJsonField(
         response,
         r'''$.services.*''',
@@ -519,23 +616,32 @@ class GetServicesCall {
 }
 
 class SubjectsCall {
-  static Future<ApiCallResponse> call({
+ static Future<ApiCallResponse> call({
     String? stdId = '',
     String? userId = '',
     String? serviceId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'SubjectsCall',
-        'variables': {
-          'stdId': stdId,
-          'userId': userId,
-          'serviceId': serviceId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "std_id": "${stdId}",
+  "user_id": "${userId}",
+  "service_id": "${serviceId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'subjects',
+      apiUrl: '${getBaseUrl()}/student/exam/index',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static String? stdId(dynamic response) => castToType<String>(getJsonField(
@@ -786,20 +892,29 @@ class TestCall {
     String? userId = '',
     String? serviceId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'TestCall',
-        'variables': {
-          'subjectId': subjectId,
-          'round': round,
-          'stdId': stdId,
-          'userId': userId,
-          'serviceId': serviceId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "subject_id": "${subjectId}",
+  "round": "${round}",
+  "std_id": "${stdId}",
+  "user_id": "${userId}",
+  "service_id": "${serviceId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'test',
+      apiUrl: '${getBaseUrl()}/student/exam/get_tests',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static dynamic testResults(dynamic response) => getJsonField(
@@ -879,23 +994,31 @@ class TestCall {
 }
 
 class GetquestionsCall {
-  static Future<ApiCallResponse> call({
+ static Future<ApiCallResponse> call({
     String? testId = '',
     String? userId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'GetquestionsCall',
-        'variables': {
-          'testId': testId,
-          'userId': userId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "test_id": "${testId}",
+  "user_id": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getquestions',
+      apiUrl: '${getBaseUrl()}/student/exam/get_questions',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
-
   static dynamic questionId(dynamic response) => getJsonField(
         response,
         r'''$.test_questions.*.questionId''',
@@ -988,21 +1111,31 @@ class GetquestionsCall {
 }
 
 class SlotCall {
-  static Future<ApiCallResponse> call({
+ static Future<ApiCallResponse> call({
     String? slot = '',
     String? userId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'SlotCall',
-        'variables': {
-          'slot': slot,
-          'userId': userId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "slot": "${slot}",
+  "user_id": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'slot',
+      apiUrl:
+          '${getBaseUrl()}/student/exam/set_annual_slot',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static dynamic message(dynamic response) => getJsonField(
@@ -1019,16 +1152,25 @@ class OrderssCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'OrderssCall',
-        'variables': {
-          'userId': userId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "user_id": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'orderss',
+      apiUrl: '${getBaseUrl()}/student/profile/orders',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static List? transactions(dynamic response) => getJsonField(
@@ -1043,19 +1185,27 @@ class ScheduleCall {
     String? stdId = '',
     String? serviceId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'ScheduleCall',
-        'variables': {
-          'stdId': stdId,
-          'serviceId': serviceId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "std_id": "${stdId}",
+  "service_id": "${serviceId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'schedule',
+      apiUrl: '${getBaseUrl()}/student/profile/schedule',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
-
   static List<String>? dates(dynamic response) => (getJsonField(
         response,
         r'''$.annualExamSchedule.*.*.*''',
@@ -1157,28 +1307,75 @@ class GetUsersCall {
     dynamic userAnswersJson,
   }) async {
     final userAnswers = _serializeJson(userAnswersJson, true);
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'GetUsersCall',
-        'variables': {
-          'testId': testId,
-          'attempted': attempted,
-          'userId': userId,
-          'takenTime': takenTime,
-          'sessionId': sessionId,
-          'questionId': questionId,
-          'userAnswer': userAnswer,
-          'userAnswers': userAnswers,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "test_id": "${testId}",
+  "attempted_questions": "${attempted}",
+  "user_id": "${userId}",
+  "taken_time": "${takenTime}",
+  "session_id": "${sessionId}",
+  "user_answers": [    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    },
+    {
+      "question_id": "${questionId}",
+      "user_answer": "${userAnswer}"
+    }
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getUsers',
+      apiUrl: '${getBaseUrl()}/student/exam/exam_response',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
 class SubmitanswerstobackendCall {
-  static Future<ApiCallResponse> call({
+ static Future<ApiCallResponse> call({
     String? testId = '',
     String? attemptedQuestions = '',
     String? userId = '',
@@ -1187,22 +1384,32 @@ class SubmitanswerstobackendCall {
     dynamic userAnswersJson,
   }) async {
     final userAnswers = _serializeJson(userAnswersJson, true);
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'SubmitanswerstobackendCall',
-        'variables': {
-          'testId': testId,
-          'attemptedQuestions': attemptedQuestions,
-          'userId': userId,
-          'takenTime': takenTime,
-          'sessionId': sessionId,
-          'userAnswers': userAnswers,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "test_id": "${testId}",
+  "attempted_questions": "${attemptedQuestions}",
+  "user_id": "${userId}",
+  "taken_time": "${takenTime}",
+  "session_id": "${sessionId}",
+  "user_answers": ${userAnswers}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Submitanswerstobackend',
+      apiUrl: '${getBaseUrl()}/student/exam/exam_response',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
+
 
   static dynamic totalquestions(dynamic response) => getJsonField(
         response,
@@ -1218,18 +1425,26 @@ class NoticesCall {
   static Future<ApiCallResponse> call({
     String? stdId = '5',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'NoticesCall',
-        'variables': {
-          'stdId': stdId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "std_id": "${stdId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'notices',
+      apiUrl: '${getBaseUrl()}/student/profile/notices',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
-
   static List? instructions(dynamic response) => getJsonField(
         response,
         r'''$.notices.instructions.*''',
@@ -1248,19 +1463,29 @@ class NoticesCall {
 }
 
 class ProductsCall {
-  static Future<ApiCallResponse> call({
+ static Future<ApiCallResponse> call({
     String? stdId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'ProductsCall',
-        'variables': {
-          'stdId': stdId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "std_id": "${stdId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'products',
+      apiUrl:
+          '${getBaseUrl()}/student/products/fetch_products',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static List? products(dynamic response) => getJsonField(
@@ -1365,31 +1590,45 @@ class ProductsSubscriptionCall {
     String? deliveryCharge = '',
     String? powerpackid = '',
     String? purchaseType = '',
-    String? productId = '',
-    int? isUpdated,
     List<String>? comboIdList,
   }) async {
     final products = _serializeList(productsList);
     final comboId = _serializeList(comboIdList);
 
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'ProductsSubscriptionCall',
-        'variables': {
-          'userId': userId,
-          'products': products,
-          'payableAmount': payableAmount,
-          'deliveryCharge': deliveryCharge,
-          'powerpackid': powerpackid,
-          'purchaseType': purchaseType,
-          'productId': productId,
-          'comboId': comboId,
-          
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "user_id": "${userId}",
+"products":${products},
+"payment_data":{
+  "payment_gateway": "ccavenue",
+        "currency": "INR",
+ "delivery_charge": "${deliveryCharge}",
+        "payable_amount": "${payableAmount}", 
+        "discount_amount": "0",
+        "coupon_code": "NULL",
+        "purchase_type" : "individual" ,
+"power_pack_id":"${powerpackid}",
+ "purchase_type" :"${purchaseType}",
+ 
+ "combo_id":"${comboId}"
+}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'products Subscription',
+      apiUrl:
+          '${getBaseUrl()}/student/register/get_selected_products',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static List? products(dynamic response) => getJsonField(
@@ -1486,15 +1725,20 @@ class ProductsSubscriptionCall {
 }
 
 class GetStandardsCall {
-  static Future<ApiCallResponse> call() async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'GetStandardsCall',
-        'variables': {},
-      },
+   static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get standards',
+      apiUrl: '${getBaseUrl()}/student/Standard',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static List<String>? standards(dynamic response) => (getJsonField(
@@ -1513,53 +1757,77 @@ class DeleteLogsCall {
     String? testId = '',
     String? userid = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'DeleteLogsCall',
-        'variables': {
-          'testId': testId,
-          'userid': userid,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+"testId":"${testId}",
+"userId":"${userid}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'deleteLogs',
+      apiUrl:
+          '${getBaseUrl()}/student/exam/delete_test_logs',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
+
 
 class TestingexamCall {
   static Future<ApiCallResponse> call({
     String? userId = '299898',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'TestingexamCall',
-        'variables': {
-          'userId': userId,
-        },
+    return ApiManager.instance.makeApiCall(
+      callName: 'testingexam',
+      apiUrl: '${getBaseUrl()}/student/exam/resultData',
+      callType: ApiCallType.GET,
+      headers: ApiTokenManager.headers,
+      params: {
+        'user_id': userId,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 }
 
 class ResultsCall {
-  static Future<ApiCallResponse> call({
+ static Future<ApiCallResponse> call({
     String? mobile = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'ResultsCall',
-        'variables': {
-          'mobile': mobile,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "mobile": "${mobile}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'results',
+      apiUrl: '${getBaseUrl()}/student/Result',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
-
   static List? resultdata(dynamic response) => getJsonField(
         response,
         r'''$.resultData.*''',
@@ -1573,18 +1841,29 @@ class RoundregistrationCall {
     String? userId = '',
     String? stdId = '',
   }) async {
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'RoundregistrationCall',
-        'variables': {
-          'mobileNo': mobileNo,
-          'userId': userId,
-          'stdId': stdId,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "mobile": "${mobileNo}",
+  "user_id": "${userId}",
+ 
+  "standard": "${stdId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'roundregistration',
+      apiUrl:
+          '${getBaseUrl()}/student/products/fetch_round_two_combos',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static List? science(dynamic response) => getJsonField(
@@ -1625,7 +1904,7 @@ class RoundregistrationCall {
 }
 
 class SubmitregistrationCall {
-  static Future<ApiCallResponse> call({
+   static Future<ApiCallResponse> call({
     String? userid = '',
     List<String>? comboIdList,
     List<String>? certificatesList,
@@ -1639,24 +1918,33 @@ class SubmitregistrationCall {
     final comboId = _serializeList(comboIdList);
     final certificates = _serializeList(certificatesList);
 
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'SubmitregistrationCall',
-        'variables': {
-          'userid': userid,
-          'comboId': comboId,
-          'certificates': certificates,
-          'payment': payment,
-          'slug': slug,
-          'totaldiscount': totaldiscount,
-          'finalamount': finalamount,
-          'deliverycharges': deliverycharges,
-          'isUpdated': isUpdated,
-        },
-      },
+    final ffApiRequestBody = '''
+{
+  "user_id": "${userid}",
+  "selected_combo_ids": ${comboId},
+  "selected_certificates": ${certificates},
+  "payment_gateway": "${payment}",
+  "slug": "${slug}",
+  "total_discount": "${totaldiscount}",
+  "final_total_amount": "${finalamount}",
+"isUpdated":${isUpdated},
+  "delivery_charges_applied": "${deliverycharges}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'submitregistration',
+      apiUrl: '${getBaseUrl()}/student/Register/round_two',
+      callType: ApiCallType.POST,
+      headers: ApiTokenManager.headers,
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
 
   static String? transactionId(dynamic response) =>
@@ -1794,21 +2082,30 @@ class PhonecallbackCall {
     String? orderId = '',
   }) async {
     final data = _serializeJson(dataJson);
-    final response = await makeCloudCall(
-      _kPrivateApiFunctionName,
-      {
-        'callName': 'PhonecallbackCall',
-        'variables': {
-          'success': success,
-          'code': code,
-          'message': message,
-          'data': data,
-          'orderId': orderId,
-        },
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'phonecallback',
+      apiUrl:
+          '${getBaseUrl()}/student/payment/Phonepe_callback',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {
+        'success': success,
+        'code': code,
+        'message': message,
+        'data': data,
+        'order_id': orderId,
       },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
     );
-    return ApiCallResponse.fromCloudCallResponse(response);
   }
+
 
   static dynamic amount(dynamic response) => getJsonField(
         response,
@@ -1845,7 +2142,7 @@ class StatusCheckCall {
       apiUrl:
           '${getBaseUrl()}/student/payment/check_payment_status',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1876,7 +2173,7 @@ class SummerQuizCall {
       apiUrl:
           '${getBaseUrl()}/student/Products/summer_quiz_product_and_coupons',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1935,7 +2232,7 @@ class MonthlyResultsCall {
       callName: 'monthlyResults',
       apiUrl: '${getBaseUrl()}/student/exam/test_attempts',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1967,7 +2264,7 @@ class RoundresultsCall {
       apiUrl:
           '${getBaseUrl()}/student/result/get_round_2_results',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2006,7 +2303,7 @@ class ViewCertificatesCall {
       apiUrl:
           '${getBaseUrl()}/student/exam/view_certificate',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2047,7 +2344,7 @@ class PowerPackagesCall {
       apiUrl:
           '${getBaseUrl()}/student/products/fetch_packages',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2108,7 +2405,7 @@ class BannersCall {
       callName: 'banners',
       apiUrl: '${getBaseUrl()}/student/profile/banners',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2132,17 +2429,20 @@ class NotificationsCall {
     String? stdId = '',
     String? displayFor = '',
   }) async {
+    
     final ffApiRequestBody = '''
+
 {
   "std_id": "$stdId",
   "display_for": "$displayFor"
 }''';
+
     return ApiManager.instance.makeApiCall(
       callName: 'notifications',
       apiUrl:
           '${getBaseUrl()}/student/profile/announcements',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2180,7 +2480,7 @@ class GetquestionsoxCall {
       callName: 'getquestionsox',
       apiUrl: '${getBaseUrl()}/student/exam/get_questions',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: ApiTokenManager.headers,
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,

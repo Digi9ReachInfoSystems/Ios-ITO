@@ -1,4 +1,5 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:indian_talent_olympiad/backend/api_requests/api_token_manager.dart';
 import 'package:indian_talent_olympiad/flutter_flow/firebase_remote_config_util.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ void main() async {
     WidgetsFlutterBinding.ensureInitialized();
     const envFile = kReleaseMode ? '.env.live' : '.env.test';
     await dotenv.load(fileName: envFile);
-
+    await ApiTokenManager.init();
   // Optional console check
   print('🔧 Environment loaded: ${dotenv.env['APP_ENV']}');
   print('🌐 Base URL: ${dotenv.env['BASE_URL']}');

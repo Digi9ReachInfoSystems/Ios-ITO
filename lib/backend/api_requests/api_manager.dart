@@ -416,8 +416,11 @@ class ApiManager {
     bool cache = false,
     bool isStreamingApi = false,
     ApiCallOptions? options,
+    
     http.Client? client,
   }) async {
+
+    
     final callOptions = options ??
         ApiCallOptions(
           callName: callName,
@@ -435,10 +438,7 @@ class ApiManager {
           isStreamingApi: isStreamingApi,
         );
     // Modify for your specific needs if this differs from your API.
-    final mergedHeaders = {
-  ...ApiTokenManager.headers,
-  ...headers,
-};
+    final mergedHeaders = { ...ApiTokenManager.headers, ...headers, };
 
 // 🔄 Optional: auto-refresh token if expired
 await ApiTokenManager.refreshIfNeeded(() async {

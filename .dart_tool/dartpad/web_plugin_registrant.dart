@@ -16,6 +16,7 @@ import 'package:firebase_core_web/firebase_core_web.dart';
 import 'package:firebase_messaging_web/firebase_messaging_web.dart';
 import 'package:firebase_performance_web/firebase_performance_web.dart';
 import 'package:firebase_remote_config_web/firebase_remote_config_web.dart';
+import 'package:flutter_secure_storage_web/flutter_secure_storage_web.dart';
 import 'package:google_sign_in_web/google_sign_in_web.dart';
 import 'package:package_info_plus/src/package_info_plus_web.dart';
 import 'package:permission_handler_html/permission_handler_html.dart';
@@ -37,6 +38,7 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   FirebaseMessagingWeb.registerWith(registrar);
   FirebasePerformanceWeb.registerWith(registrar);
   FirebaseRemoteConfigWeb.registerWith(registrar);
+  FlutterSecureStorageWeb.registerWith(registrar);
   GoogleSignInPlugin.registerWith(registrar);
   PackageInfoPlusWebPlugin.registerWith(registrar);
   WebPermissionHandler.registerWith(registrar);

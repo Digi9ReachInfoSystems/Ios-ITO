@@ -135,6 +135,7 @@ dependencies:
   syncfusion_flutter_calendar: ^27.2.4
   http_parser: any
   flutter_dotenv: ^6.0.0
+  flutter_secure_storage: ^9.2.4
 
 dependency_overrides:
   http: 1.2.2

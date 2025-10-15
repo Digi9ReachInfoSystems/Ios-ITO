@@ -47,17 +47,17 @@ android {
 
     signingConfigs {
     release {
-        storeFile file("key.jks")
-        storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-        keyAlias System.getenv("ANDROID_KEY_ALIAS")
-        keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+        // storeFile file("key.jks")
+        // storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+        // keyAlias System.getenv("ANDROID_KEY_ALIAS")
+        // keyPassword System.getenv("ANDROID_KEY_PASSWORD")
     }
 }
 
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
+            // signingConfig signingConfigs.release
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
