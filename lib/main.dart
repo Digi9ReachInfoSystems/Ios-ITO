@@ -26,6 +26,7 @@ void main() async {
     const envFile = kReleaseMode ? '.env.live' : '.env.test';
     await dotenv.load(fileName: envFile);
     await ApiTokenManager.init();
+    await ApiTokenManager.refreshIfNeeded();
   // Optional console check
   print('🔧 Environment loaded: ${dotenv.env['APP_ENV']}');
   print('🌐 Base URL: ${dotenv.env['BASE_URL']}');

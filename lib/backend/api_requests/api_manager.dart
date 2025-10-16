@@ -401,151 +401,125 @@ class ApiManager {
         client: client,
       );
 
-  Future<ApiCallResponse> makeApiCall({
-    required String callName,
-    required String apiUrl,
-    required ApiCallType callType,
-    Map<String, dynamic> headers = const {},
-    Map<String, dynamic> params = const {},
-    String? body,
-    BodyType? bodyType,
-    bool returnBody = true,
-    bool encodeBodyUtf8 = false,
-    bool decodeUtf8 = false,
-    bool alwaysAllowBody = false,
-    bool cache = false,
-    bool isStreamingApi = false,
-    ApiCallOptions? options,
-    
-    http.Client? client,
-  }) async {
+ Future<ApiCallResponse> makeApiCall({
+  required String callName,
+  required String apiUrl,
+  required ApiCallType callType,
+  Map<String, dynamic> headers = const {},
+  Map<String, dynamic> params = const {},
+  String? body,
+  BodyType? bodyType,
+  bool returnBody = true,
+  bool encodeBodyUtf8 = false,
+  bool decodeUtf8 = false,
+  bool alwaysAllowBody = false,
+  bool cache = false,
+  bool isStreamingApi = false,
+  ApiCallOptions? options,
+  http.Client? client,
+}) async {
+  final callOptions = options ??
+      ApiCallOptions(
+        callName: callName,
+        callType: callType,
+        apiUrl: apiUrl,
+        headers: headers,
+        params: params,
+        bodyType: bodyType,
+        body: body,
+        returnBody: returnBody,
+        encodeBodyUtf8: encodeBodyUtf8,
+        decodeUtf8: decodeUtf8,
+        alwaysAllowBody: alwaysAllowBody,
+        cache: cache,
+        isStreamingApi: isStreamingApi,
+      );
 
-    
-    final callOptions = options ??
-        ApiCallOptions(
-          callName: callName,
-          callType: callType,
-          apiUrl: apiUrl,
-          headers: headers,
-          params: params,
-          bodyType: bodyType,
-          body: body,
-          returnBody: returnBody,
-          encodeBodyUtf8: encodeBodyUtf8,
-          decodeUtf8: decodeUtf8,
-          alwaysAllowBody: alwaysAllowBody,
-          cache: cache,
-          isStreamingApi: isStreamingApi,
-        );
-    // Modify for your specific needs if this differs from your API.
-    final mergedHeaders = { ...ApiTokenManager.headers, ...headers, };
+  // ✅ 1. Refresh token automatically if expired (no recursion)
+  await ApiTokenManager.refreshIfNeeded();
 
-// 🔄 Optional: auto-refresh token if expired
-await ApiTokenManager.refreshIfNeeded(() async {
+  // ✅ 2. Merge headers (updated token + any custom ones)
+  final mergedHeaders = {...ApiTokenManager.headers, ...headers};
+
+  // ✅ 3. Ensure URL is complete
+  if (!apiUrl.startsWith('http')) {
+    apiUrl = 'https://$apiUrl';
+  }
+
+  // ✅ 4. Return cached response if available
+  if (cache && _apiCache.containsKey(callOptions)) {
+    return _apiCache[callOptions]!;
+  }
+
+  ApiCallResponse result;
   try {
-    final refreshResponse = await ApiManager.instance.makeApiCall(
-      callName: 'RefreshToken',
-      apiUrl: '${getBaseUrl()}/student/auth/generate_auth_token',
-      callType: ApiCallType.POST,
-      headers: {'Authorization': 'Bearer ${ApiTokenManager.token}'},
-      params: {},
-      bodyType: BodyType.JSON,
-      returnBody: true,
-    );
+    switch (callType) {
+      case ApiCallType.GET:
+        result = await urlRequest(
+          callType,
+          apiUrl,
+          mergedHeaders,
+          params,
+          returnBody,
+          decodeUtf8,
+          isStreamingApi,
+          client: client,
+        );
+        break;
 
-    final newToken = getJsonField(refreshResponse.jsonBody, r'''$.token.firebase_token''');
-    final expires = getJsonField(refreshResponse.jsonBody, r'''$.token.expires_at''');
+      case ApiCallType.DELETE:
+        result = alwaysAllowBody
+            ? await requestWithBody(
+                callType,
+                apiUrl,
+                mergedHeaders,
+                params,
+                body,
+                bodyType,
+                returnBody,
+                encodeBodyUtf8,
+                decodeUtf8,
+                alwaysAllowBody,
+                isStreamingApi,
+                client: client,
+              )
+            : await urlRequest(
+                callType,
+                apiUrl,
+                mergedHeaders,
+                params,
+                returnBody,
+                decodeUtf8,
+                isStreamingApi,
+                client: client,
+              );
+        break;
 
-    if (newToken != null) {
-      ApiTokenManager.setToken(newToken.toString(), expires?.toString());
-      print('♻️ Token refreshed successfully');
+      case ApiCallType.POST:
+      case ApiCallType.PUT:
+      case ApiCallType.PATCH:
+        result = await requestWithBody(
+          callType,
+          apiUrl,
+          mergedHeaders,
+          params,
+          body,
+          bodyType,
+          returnBody,
+          encodeBodyUtf8,
+          decodeUtf8,
+          alwaysAllowBody,
+          isStreamingApi,
+          client: client,
+        );
+        break;
     }
-    return newToken?.toString();
+
+    if (cache) _apiCache[callOptions] = result;
   } catch (e) {
-    print('⚠️ Token refresh failed: $e');
-    return null;
+    result = ApiCallResponse(null, {}, -1, exception: e);
   }
-});
-    if (!apiUrl.startsWith('http')) {
-      apiUrl = 'https://$apiUrl';
-    }
 
-    // If we've already made this exact call before and caching is on,
-    // return the cached result.
-    if (cache && _apiCache.containsKey(callOptions)) {
-      return _apiCache[callOptions]!;
-    }
-
-    ApiCallResponse result;
-    try {
-      switch (callType) {
-        case ApiCallType.GET:
-          result = await urlRequest(
-            callType,
-            apiUrl,
-            headers,
-            params,
-            returnBody,
-            decodeUtf8,
-            isStreamingApi,
-            client: client,
-          );
-          break;
-        case ApiCallType.DELETE:
-          result = alwaysAllowBody
-              ? await requestWithBody(
-                  callType,
-                  apiUrl,
-                  headers,
-                  params,
-                  body,
-                  bodyType,
-                  returnBody,
-                  encodeBodyUtf8,
-                  decodeUtf8,
-                  alwaysAllowBody,
-                  isStreamingApi,
-                  client: client,
-                )
-              : await urlRequest(
-                  callType,
-                  apiUrl,
-                  headers,
-                  params,
-                  returnBody,
-                  decodeUtf8,
-                  isStreamingApi,
-                  client: client,
-                );
-          break;
-        case ApiCallType.POST:
-        case ApiCallType.PUT:
-        case ApiCallType.PATCH:
-          result = await requestWithBody(
-            callType,
-            apiUrl,
-            headers,
-            params,
-            body,
-            bodyType,
-            returnBody,
-            encodeBodyUtf8,
-            decodeUtf8,
-            alwaysAllowBody,
-            isStreamingApi,
-            client: client,
-          );
-          break;
-      }
-
-      // If caching is on, cache the result (if present).
-      if (cache) {
-        _apiCache[callOptions] = result;
-      }
-    } catch (e) {
-      result = ApiCallResponse(null, {}, -1, exception: e);
-    }
-
-    return result;
-  }
+  return result;
+}
 }
