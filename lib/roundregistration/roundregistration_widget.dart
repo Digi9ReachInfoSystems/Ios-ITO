@@ -1,4 +1,3 @@
-
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -6,8 +5,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'roundregistration_model.dart';
 export 'roundregistration_model.dart';
@@ -15,8 +15,11 @@ export 'roundregistration_model.dart';
 class RoundregistrationWidget extends StatefulWidget {
   const RoundregistrationWidget({super.key});
 
+  static String routeName = 'roundregistration';
+  static String routePath = '/roundregistration';
+
   @override
-  _RoundregistrationWidgetState createState() =>
+  State<RoundregistrationWidget> createState() =>
       _RoundregistrationWidgetState();
 }
 
@@ -24,7 +27,6 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
   late RoundregistrationModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  Map<String, String> selectedCombosPerPackage = {};
 
   @override
   void initState() {
@@ -42,81 +44,8 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
     super.dispose();
   }
 
-  void handleComboSelection(
-      BuildContext context, dynamic scienceItem, String packageId) {
-    // Log Firebase event
-    logFirebaseEvent('ROUNDREGISTRATION_Radio_ON_TAP');
-    logFirebaseEvent('Radio_update_app_state');
-
-    // Update the state
-    setState(() {
-      FFAppState().addToTotalcombocart(Round2cartStruct(
-        productId: getJsonField(
-          scienceItem,
-          r'''$.combo_id''',
-        ).toString(),
-        productname: getJsonField(
-          scienceItem,
-          r'''$.combo_name''',
-        ).toString(),
-        productamount: getJsonField(
-          scienceItem,
-          r'''$.inr_discount_amt''',
-        ).toString(),
-        discountamout: getJsonField(
-          scienceItem,
-          r'''$.inr_amount''',
-        ).toString(),
-        deliverablecount: getJsonField(
-          scienceItem,
-          r'''$.deliverable_item_count''',
-        ).toString(),
-      ));
-      FFAppState().addToComboid(getJsonField(
-        scienceItem,
-        r'''$.combo_id''',
-      ).toString());
-      FFAppState().discountamount =
-          functions.discountfee(FFAppState().totalcombocart.toList());
-      FFAppState().combodedliveryfee = valueOrDefault<double>(
-        functions.deliveryfee(FFAppState().totalcombocart.toList()),
-        0.0,
-      );
-        FFAppState().update(() {});
-    });
-
-    // Show snack bar
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'Product added to the cart',
-          style:
-              TextStyle(color: FlutterFlowTheme.of(context).primaryBackground),
-        ),
-        duration: const Duration(milliseconds: 4000),
-        backgroundColor: FlutterFlowTheme.of(context).primary,
-        action: SnackBarAction(
-          label: 'Go to cart',
-          textColor: FlutterFlowTheme.of(context).primaryBackground,
-          onPressed: () async {
-            context.pushNamed('CartvalueCopy');
-          },
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
@@ -124,6 +53,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
         mobileNo: FFAppState().userInfo.mobileNo,
         userId: FFAppState().userInfo.userId,
         stdId: FFAppState().userInfo.stdId,
+        token: FFAppState().userInfo.token,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -144,10 +74,12 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
           );
         }
         final roundregistrationRoundregistrationResponse = snapshot.data!;
+
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -159,7 +91,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_rounded,
                   color: Color(0xFF272727),
                   size: 30.0,
@@ -175,14 +107,27 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                   'dwowqgdq' /* Round 2 Registration */,
                 ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Poppins',
-                      color: const Color(0xFF272727),
+                      font: GoogleFonts.poppins(
+                        fontWeight: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontWeight,
+                        fontStyle: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontStyle,
+                      ),
+                      color: Color(0xFF272727),
                       fontSize: 22.0,
+                      letterSpacing: 0.0,
+                      fontWeight: FlutterFlowTheme.of(context)
+                          .headlineMedium
+                          .fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                     ),
               ),
               actions: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -193,7 +138,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                           'ROUNDREGISTRATION_Icon_ludfartp_ON_TAP');
                       logFirebaseEvent('Icon_navigate_to');
 
-                      context.pushNamed('CartvalueCopy');
+                      context.pushNamed(CartvalueCopyWidget.routeName);
                     },
                     child: Icon(
                       Icons.shopping_cart_checkout,
@@ -219,20 +164,19 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                   .jsonBody,
                             )?.toList() ??
                             [];
+
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
-                          primary: false,
                           scrollDirection: Axis.vertical,
                           itemCount: pacakges.length,
                           itemBuilder: (context, pacakgesIndex) {
                             final pacakgesItem = pacakges[pacakgesIndex];
-                            String packageId = getJsonField(
-                                    pacakgesItem, r'''$.package_name''')
-                                .toString(); // Make sure this is the correct JSON field for package ID
                             return Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Card(
+                              padding: EdgeInsets.all(10.0),
+                              child: Container(
+                                width: MediaQuery.sizeOf(context).width * 1.0,
+                                decoration: BoxDecoration(),
                                 child: SingleChildScrollView(
                                   primary: false,
                                   child: Column(
@@ -245,8 +189,8 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                 1.0,
                                         height:
                                             MediaQuery.sizeOf(context).height *
-                                                0.08,
-                                        decoration: const BoxDecoration(
+                                                0.06,
+                                        decoration: BoxDecoration(
                                           color: Color(0xC5F9CF58),
                                         ),
                                         child: Row(
@@ -256,9 +200,10 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                           children: [
                                             Flexible(
                                               child: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Container(
+                                                  decoration: BoxDecoration(),
                                                   child: Text(
                                                     getJsonField(
                                                       pacakgesItem,
@@ -266,7 +211,33 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                     ).toString(),
                                                     style: FlutterFlowTheme.of(
                                                             context)
-                                                        .headlineMedium,
+                                                        .headlineMedium
+                                                        .override(
+                                                          font: GoogleFonts
+                                                              .outfit(
+                                                            fontWeight:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineMedium
+                                                                    .fontWeight,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .headlineMedium
+                                                                    .fontStyle,
+                                                          ),
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .headlineMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .headlineMedium
+                                                                  .fontStyle,
+                                                        ),
                                                   ),
                                                 ),
                                               ),
@@ -280,6 +251,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                             pacakgesItem,
                                             r'''$.combos''',
                                           ).toList();
+
                                           return ListView.builder(
                                             padding: EdgeInsets.zero,
                                             primary: false,
@@ -290,27 +262,6 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                 (context, scienceIndex) {
                                               final scienceItem =
                                                   science[scienceIndex];
-                                              String comboId = getJsonField(
-                                                      scienceItem,
-                                                      r'''$.combo_id''')
-                                                  .toString();
-                                              bool isComboInCart = FFAppState()
-                                                  .totalcombocart
-                                                  .any((cartItem) =>
-                                                      cartItem.productId ==
-                                                      comboId);
-                                              bool isAnyComboFromPackageInCart =
-                                                  selectedCombosPerPackage
-                                                          .containsKey(
-                                                              packageId) &&
-                                                      FFAppState()
-                                                          .totalcombocart
-                                                          .any((cartItem) =>
-                                                              cartItem
-                                                                  .productId ==
-                                                              selectedCombosPerPackage[
-                                                                  packageId]);
-                                                                
                                               return Card(
                                                 clipBehavior:
                                                     Clip.antiAliasWithSaveLayer,
@@ -324,7 +275,7 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                           8.0),
                                                 ),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 0.0, 5.0, 0.0),
                                                   child: Column(
@@ -332,73 +283,270 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                         MainAxisSize.max,
                                                     children: [
                                                       Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
                                                                 .spaceBetween,
                                                         children: [
-                                                          Text(
-                                                            getJsonField(
-                                                              scienceItem,
-                                                              r'''$.combo_name''',
-                                                            ).toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium,
+                                                          Align(
+                                                            alignment:
+                                                                AlignmentDirectional(
+                                                                    -1.0, 0.0),
+                                                            child: Text(
+                                                              getJsonField(
+                                                                scienceItem,
+                                                                r'''$.combo_name''',
+                                                              ).toString(),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    font: GoogleFonts
+                                                                        .readexPro(
+                                                                      fontWeight: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .fontWeight,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .fontStyle,
+                                                                    ),
+                                                                    letterSpacing:
+                                                                        0.0,
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                            ),
                                                           ),
-                                                          Radio<String>(
-                                                            value: comboId,
-                                                            groupValue:
-                                                                selectedCombosPerPackage[
-                                                                    packageId],
-                                                            onChanged: (String?
-                                                                newValue) {
-                                                              if (!isAnyComboFromPackageInCart) {
-                                                                setState(() {
-                                                                  selectedCombosPerPackage[
-                                                                          packageId] =
-                                                                      newValue!;
-                                                                });
-                                                              } else {
-                                                                // Optionally, show a message if a combo from the package is already in the cart
+                                                          if (FFAppState()
+                                                                  .comboid
+                                                                  .contains(
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.combo_id''',
+                                                                  ).toString()) ==
+                                                              false)
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'ROUNDREGISTRATION_Icon_7xb26hkj_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'Icon_update_app_state');
+                                                                FFAppState()
+                                                                    .addToTotalcombocart(
+                                                                        Round2cartStruct(
+                                                                  productId:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.combo_id''',
+                                                                  ).toString(),
+                                                                  productname:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.combo_name''',
+                                                                  ).toString(),
+                                                                  productamount:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.inr_discount_amt''',
+                                                                  ).toString(),
+                                                                  discountamout:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.inr_amount''',
+                                                                  ).toString(),
+                                                                  deliverablecount:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.deliverable_item_count''',
+                                                                  ).toString(),
+                                                                ));
+                                                                FFAppState()
+                                                                    .addToComboid(
+                                                                        getJsonField(
+                                                                  scienceItem,
+                                                                  r'''$.combo_id''',
+                                                                ).toString());
+                                                                FFAppState()
+                                                                        .discountamount =
+                                                                    functions.discountfee(FFAppState()
+                                                                        .totalcombocart
+                                                                        .toList());
+                                                                FFAppState()
+                                                                        .combodedliveryfee =
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                  functions.deliveryfee(
+                                                                      FFAppState()
+                                                                          .totalcombocart
+                                                                          .toList()),
+                                                                  0.0,
+                                                                );
+                                                                FFAppState()
+                                                                    .update(
+                                                                        () {});
+                                                                logFirebaseEvent(
+                                                                    'Icon_show_snack_bar');
                                                                 ScaffoldMessenger.of(
                                                                         context)
                                                                     .showSnackBar(
-                                                                  const SnackBar(
+                                                                  SnackBar(
                                                                     content:
                                                                         Text(
-                                                                      "A combo from this package is already in the cart.",
-                                                                      style: TextStyle(
-                                                                          color:
-                                                                              Colors.white), // Optional: Adjust text color for better visibility
+                                                                      'Product added to the cart',
+                                                                      style:
+                                                                          TextStyle(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryBackground,
+                                                                      ),
                                                                     ),
                                                                     duration: Duration(
-                                                                        seconds:
-                                                                            3),
+                                                                        milliseconds:
+                                                                            4000),
                                                                     backgroundColor:
-                                                                        Colors
-                                                                            .grey, // Set the background color to grey
+                                                                        FlutterFlowTheme.of(context)
+                                                                            .primary,
+                                                                    action:
+                                                                        SnackBarAction(
+                                                                      label:
+                                                                          'Go to cart',
+                                                                      textColor:
+                                                                          FlutterFlowTheme.of(context)
+                                                                              .primaryBackground,
+                                                                      onPressed:
+                                                                          () async {
+                                                                        context.pushNamed(
+                                                                            CartvalueCopyWidget.routeName);
+                                                                      },
+                                                                    ),
                                                                   ),
                                                                 );
-                                                              }
-                                                            },
-                                                          ),
-                                                          if (selectedCombosPerPackage[
-                                                                      packageId] ==
-                                                                  comboId &&
-                                                              !isComboInCart)
-                                                            ElevatedButton(
-                                                              onPressed:
-                                                                  (isComboInCart ||
-                                                                          isAnyComboFromPackageInCart)
-                                                                      ? null
-                                                                      : () {
-                                                                          handleComboSelection(
-                                                                              context,
-                                                                              scienceItem,
-                                                                              packageId);
-                                                                        },
-                                                              child: const Text(
-                                                                  'Add to Cart'),
+                                                              },
+                                                              child: Icon(
+                                                                Icons
+                                                                    .add_box_sharp,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondary,
+                                                                size: 26.0,
+                                                              ),
+                                                            ),
+                                                          if (FFAppState()
+                                                                  .comboid
+                                                                  .contains(
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.combo_id''',
+                                                                  ).toString()) ==
+                                                              true)
+                                                            InkWell(
+                                                              splashColor: Colors
+                                                                  .transparent,
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                logFirebaseEvent(
+                                                                    'ROUNDREGISTRATION_Icon_qy3btwwz_ON_TAP');
+                                                                logFirebaseEvent(
+                                                                    'Icon_update_app_state');
+                                                                FFAppState()
+                                                                    .removeFromTotalcombocart(
+                                                                        Round2cartStruct(
+                                                                  productId:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.combo_id''',
+                                                                  ).toString(),
+                                                                  productname:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.combo_name''',
+                                                                  ).toString(),
+                                                                  productamount:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.inr_discount_amt''',
+                                                                  ).toString(),
+                                                                  discountamout:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.inr_amount''',
+                                                                  ).toString(),
+                                                                  deliverablecount:
+                                                                      getJsonField(
+                                                                    scienceItem,
+                                                                    r'''$.deliverable_item_count''',
+                                                                  ).toString(),
+                                                                ));
+                                                                FFAppState()
+                                                                    .removeFromComboid(
+                                                                        getJsonField(
+                                                                  scienceItem,
+                                                                  r'''$.combo_id''',
+                                                                ).toString());
+                                                                FFAppState()
+                                                                        .combocart =
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                  functions.finalcartamountCopy(
+                                                                      FFAppState()
+                                                                          .totalcombocart
+                                                                          .toList()),
+                                                                  0.0,
+                                                                );
+                                                                FFAppState()
+                                                                        .combodedliveryfee =
+                                                                    valueOrDefault<
+                                                                        double>(
+                                                                  functions.deliveryfee(
+                                                                      FFAppState()
+                                                                          .totalcombocart
+                                                                          .toList()),
+                                                                  0.0,
+                                                                );
+                                                                FFAppState().combofinalamount = functions.payableamount(
+                                                                    FFAppState()
+                                                                        .combocart,
+                                                                    FFAppState()
+                                                                        .combodedliveryfee);
+                                                                FFAppState()
+                                                                        .deliverablecount =
+                                                                    functions.deliverablecount(FFAppState()
+                                                                        .totalcombocart
+                                                                        .toList());
+                                                                FFAppState()
+                                                                    .update(
+                                                                        () {});
+                                                              },
+                                                              child: Icon(
+                                                                Icons.check,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primary,
+                                                                size: 26.0,
+                                                              ),
                                                             ),
                                                         ],
                                                       ),
@@ -411,67 +559,123 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                         children: [
                                                           Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
-                                                                    -1, 0),
+                                                                AlignmentDirectional(
+                                                                    -1.0, 0.0),
                                                             child: RichText(
+                                                              textScaler:
+                                                                  MediaQuery.of(
+                                                                          context)
+                                                                      .textScaler,
                                                               text: TextSpan(
-                                    children: [
-                                      TextSpan(
-                                        text: FFLocalizations.of(context).getText(
-                                          '85xacx66' /* ₹  */,
-                                        ),
-                                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                              fontFamily: 'Readex Pro',
-                                              color: FlutterFlowTheme.of(context).primaryText,
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                      ),
-                                      TextSpan(
-                                        text: getJsonField(
-                                          scienceItem,
-                                          r'''$.inr_discount_amt''',
-                                        ).toString(),
-                                        style: const TextStyle(),
-                                      ),
-                                      const TextSpan(
-                                        text: "/",
-                                        style: TextStyle(
-                                          color: Color(0x95FF0000),
-                                          
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: getJsonField(
-                                          scienceItem,
-                                          r'''$.inr_amount''',
-                                        ).toString(),
-                                        style: const TextStyle(
-                                          color: Color(0xDDB82929),
-                                          decoration: TextDecoration.lineThrough,
-                                        ),
-                                      )
-                                    ],
+                                                                children: [
+                                                                  TextSpan(
+                                                                    text: FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      '85xacx66' /* ₹  */,
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.readexPro(
+                                                                            fontWeight:
+                                                                                FontWeight.normal,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                          ),
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).primaryText,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight:
+                                                                              FontWeight.normal,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                  TextSpan(
+                                                                    text:
+                                                                        getJsonField(
+                                                                      scienceItem,
+                                                                      r'''$.inr_discount_amt''',
+                                                                    ).toString(),
+                                                                    style:
+                                                                        TextStyle(),
+                                                                  ),
+                                                                  TextSpan(
+                                                                    text: FFLocalizations.of(
+                                                                            context)
+                                                                        .getText(
+                                                                      'hkawktdp' /* / */,
+                                                                    ),
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color(
+                                                                          0x95FF0000),
+                                                                      decoration:
+                                                                          TextDecoration
+                                                                              .lineThrough,
+                                                                    ),
+                                                                  ),
+                                                                  TextSpan(
+                                                                    text:
+                                                                        getJsonField(
+                                                                      scienceItem,
+                                                                      r'''$.inr_amount''',
+                                                                    ).toString(),
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: Color(
+                                                                          0xDDB82929),
+                                                                      decoration:
+                                                                          TextDecoration
+                                                                              .lineThrough,
+                                                                    ),
+                                                                  )
+                                                                ],
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyMedium,
-                                                              ), textScaler: TextScaler.linear(MediaQuery.of(
-                                                                          context)
-                                                                      .textScaleFactor),
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      font: GoogleFonts
+                                                                          .readexPro(
+                                                                        fontWeight: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .fontWeight,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .fontStyle,
+                                                                      ),
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                      fontWeight: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .fontWeight,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .bodyMedium
+                                                                          .fontStyle,
+                                                                    ),
+                                                              ),
                                                             ),
                                                           ),
                                                           if (getJsonField(
-                                    scienceItem,
-                                    r'''$.discount_in_percentage''',
-                                  ) !=
-                                  "")
+                                                                scienceItem,
+                                                                r'''$.discount_in_percentage''',
+                                                              ) !=
+                                                              null)
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          12,
-                                                                          0,
-                                                                          16,
-                                                                          0),
+                                                                          12.0,
+                                                                          0.0,
+                                                                          16.0,
+                                                                          0.0),
                                                               child:
                                                                   FFButtonWidget(
                                                                 onPressed: () {
@@ -485,20 +689,19 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                                 ).toString(),
                                                                 options:
                                                                     FFButtonOptions(
-                                                                  height: 35,
-                                                                  padding: const EdgeInsetsDirectional
+                                                                  height: 35.0,
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
-                                                                          0,
-                                                                          0,
-                                                                          0,
-                                                                          0),
-                                                                  iconPadding:
-                                                                      const EdgeInsetsDirectional
-                                                                          .fromSTEB(
-                                                                              0,
-                                                                              0,
-                                                                              0,
-                                                                              0),
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                  iconPadding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          0.0),
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .primary,
@@ -506,35 +709,51 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                                           context)
                                                                       .titleSmall
                                                                       .override(
-                                                                        fontFamily:
-                                                                            'Readex Pro',
+                                                                        font: GoogleFonts
+                                                                            .readexPro(
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .titleSmall
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .titleSmall
+                                                                              .fontStyle,
+                                                                        ),
                                                                         color: Colors
                                                                             .white,
                                                                         fontSize:
-                                                                            12,
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight: FlutterFlowTheme.of(context)
+                                                                            .titleSmall
+                                                                            .fontWeight,
+                                                                        fontStyle: FlutterFlowTheme.of(context)
+                                                                            .titleSmall
+                                                                            .fontStyle,
                                                                       ),
-                                                                  elevation: 3,
+                                                                  elevation:
+                                                                      3.0,
                                                                   borderSide:
-                                                                      const BorderSide(
+                                                                      BorderSide(
                                                                     color: Colors
                                                                         .transparent,
-                                                                    width: 1,
+                                                                    width: 1.0,
                                                                   ),
                                                                   borderRadius:
-                                                                      const BorderRadius
+                                                                      BorderRadius
                                                                           .only(
                                                                     bottomLeft:
                                                                         Radius.circular(
-                                                                            0),
+                                                                            0.0),
                                                                     bottomRight:
                                                                         Radius.circular(
-                                                                            16),
+                                                                            16.0),
                                                                     topLeft: Radius
                                                                         .circular(
-                                                                            16),
+                                                                            16.0),
                                                                     topRight: Radius
                                                                         .circular(
-                                                                            0),
+                                                                            0.0),
                                                                   ),
                                                                 ),
                                                                 showLoadingIndicator:
@@ -544,49 +763,86 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                         ],
                                                       ),
                                                       Builder(
-  builder: (context) {
-    final products = getJsonField(
-      scienceItem,
-      r'''$.products''',
-    ).toList();
+                                                        builder: (context) {
+                                                          final products =
+                                                              getJsonField(
+                                                            scienceItem,
+                                                            r'''$.products''',
+                                                          ).toList();
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(
-        products.length,
-        (productsIndex) {
-          final productsItem = products[productsIndex];
-          return Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(2.0, 0.0, 0.0, 0.0),
-                child: Icon(
-                  Icons.check,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 20.0,
-                ),
-              ),
-              Flexible(
-                child: Container(
-                  decoration: const BoxDecoration(),
-                  child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      productsItem.toString(),
-                      style: FlutterFlowTheme.of(context).bodyMedium,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  },
-),
-
+                                                          return ListView
+                                                              .builder(
+                                                            padding:
+                                                                EdgeInsets.zero,
+                                                            shrinkWrap: true,
+                                                            scrollDirection:
+                                                                Axis.vertical,
+                                                            itemCount:
+                                                                products.length,
+                                                            itemBuilder: (context,
+                                                                productsIndex) {
+                                                              final productsItem =
+                                                                  products[
+                                                                      productsIndex];
+                                                              return Row(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .max,
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            2.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                    child: Icon(
+                                                                      Icons
+                                                                          .check,
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                      size:
+                                                                          20.0,
+                                                                    ),
+                                                                  ),
+                                                                  Flexible(
+                                                                    child:
+                                                                        Container(
+                                                                      decoration:
+                                                                          BoxDecoration(),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                                                            10.0,
+                                                                            0.0,
+                                                                            0.0,
+                                                                            0.0),
+                                                                        child:
+                                                                            Text(
+                                                                          productsItem
+                                                                              .toString(),
+                                                                          style: FlutterFlowTheme.of(context)
+                                                                              .bodyMedium
+                                                                              .override(
+                                                                                font: GoogleFonts.readexPro(
+                                                                                  fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                  fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                                ),
+                                                                                letterSpacing: 0.0,
+                                                                                fontWeight: FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                                                                                fontStyle: FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                                                                              ),
+                                                                        ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                          );
+                                                        },
+                                                      ),
                                                     ],
                                                   ),
                                                 ),
@@ -602,16 +858,41 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                         height:
                                             MediaQuery.sizeOf(context).height *
                                                 0.06,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           color: Color(0xC5F9CF58),
                                         ),
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             'Selected : ${FFAppState().totalcombocart.length.toString()}',
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyMedium,
+                                                .bodyMedium
+                                                .override(
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                           ),
                                         ),
                                       ),
@@ -633,143 +914,241 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                           roundregistrationRoundregistrationResponse.jsonBody,
                         ))!
                             .isNotEmpty)
-                    Align(
-                      alignment: const AlignmentDirectional(1.0, 0.0),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          width: MediaQuery.sizeOf(context).width * 1.0,
-                          height: MediaQuery.sizeOf(context).height * 0.3,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF0DCAF0),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 10.0, 10.0, 0.0),
-                                child: Container(
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 0.12,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 5.0, 0.0, 0.0),
-                                        child: Text(
-                                          FFLocalizations.of(context).getText(
-                                            '4kqt6pcb' /* Buy Round 1 One Certificate */,
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyMedium
-                                              .override(
-                                                fontFamily: 'Readex Pro',
-                                                color: const Color(0x95FF0000),
-                                                fontSize: 16.0,
-                                              ),
-                                        ),
-                                      ),
-                                      Text(
-                                        "₹ 80 / subject",
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(),
-                                        child: Padding(
+                      Align(
+                        alignment: AlignmentDirectional(1.0, 0.0),
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Container(
+                            width: MediaQuery.sizeOf(context).width * 1.0,
+                            height: MediaQuery.sizeOf(context).height * 0.3,
+                            decoration: BoxDecoration(
+                              color: Color(0xFF0DCAF0),
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10.0, 10.0, 10.0, 0.0),
+                                  child: Container(
+                                    width:
+                                        MediaQuery.sizeOf(context).width * 1.0,
+                                    height: MediaQuery.sizeOf(context).height *
+                                        0.12,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryBackground,
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 5.0, 0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
-                                              '3vbhy8d4' /* Certificate will be delivered ... */,
+                                              '4kqt6pcb' /* Buy Round 1 One Certificate */,
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: const Color(0x95FF0000),
-                                                  fontSize: 14.0,
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0x95FF0000),
+                                                  fontSize: 16.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Builder(
-                                builder: (context) {
-                                  final non =
-                                      RoundregistrationCall.nonqualified(
-                                            roundregistrationRoundregistrationResponse
-                                                .jsonBody,
-                                          )?.toList() ??
-                                          [];
-                                  return ListView.builder(
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    itemCount: non.length,
-                                    itemBuilder: (context, nonIndex) {
-                                      final nonItem = non[nonIndex];
-                                      String productId = getJsonField(
-                                              nonItem, r'''$.product_id''')
-                                          .toString();
-                                      bool isProductInCart = FFAppState()
-                                          .totalcombocart
-                                          .any((cartItem) =>
-                                              cartItem.productId == productId);
-                                      return Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 10.0, 0.0, 0.0),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Align(
-                                              alignment: const AlignmentDirectional(
-                                                  -1.0, 0.0),
-                                              child: Text(
-                                                getJsonField(
-                                                  nonItem,
-                                                  r'''$.subject_name''',
-                                                ).toString(),
-                                                style:
+                                        Text(
+                                          FFLocalizations.of(context).getText(
+                                            'rjobuwqa' /*  $ 80 / subject */,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyMedium
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
-                                                        ),
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
+                                        ),
+                                        Container(
+                                          decoration: BoxDecoration(),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 5.0, 0.0, 0.0),
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '3vbhy8d4' /* Certificate will be delivered ... */,
+                                              ),
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    font: GoogleFonts.readexPro(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0x95FF0000),
+                                                    fontSize: 14.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                             ),
-                                            if (!isProductInCart)
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  logFirebaseEvent(
-                                                      'ROUNDREGISTRATION_Icon_squ7yqb6_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Icon_update_app_state');
-                                                  setState(() {
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Builder(
+                                  builder: (context) {
+                                    final non =
+                                        RoundregistrationCall.nonqualified(
+                                              roundregistrationRoundregistrationResponse
+                                                  .jsonBody,
+                                            )?.toList() ??
+                                            [];
+
+                                    return ListView.builder(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      itemCount: non.length,
+                                      itemBuilder: (context, nonIndex) {
+                                        final nonItem = non[nonIndex];
+                                        return Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 10.0, 0.0, 0.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Align(
+                                                alignment: AlignmentDirectional(
+                                                    -1.0, 0.0),
+                                                child: Text(
+                                                  getJsonField(
+                                                    nonItem,
+                                                    r'''$.subject_name''',
+                                                  ).toString(),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font: GoogleFonts
+                                                            .readexPro(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                              ),
+                                              if (FFAppState()
+                                                      .comboid
+                                                      .contains(getJsonField(
+                                                        nonItem,
+                                                        r'''$.product_id''',
+                                                      ).toString()) ==
+                                                  false)
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'ROUNDREGISTRATION_Icon_squ7yqb6_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Icon_update_app_state');
                                                     FFAppState()
                                                         .addToTotalcombocart(
                                                             Round2cartStruct(
@@ -788,68 +1167,76 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                       ).toString(),
                                                       deliverablecount: '1',
                                                     ));
-                                                    
                                                     FFAppState()
                                                         .addToCertificateId(
                                                             getJsonField(
                                                       nonItem,
                                                       r'''$.product_id''',
                                                     ).toString());
-                                                  });
-                                                  logFirebaseEvent(
-                                                      'Icon_show_snack_bar');
-                                                  ScaffoldMessenger.of(context)
-                                                      .showSnackBar(
-                                                    SnackBar(
-                                                      content: Text(
-                                                        'Product added to the cart',
-                                                        style: TextStyle(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .primaryBackground,
+                                                    safeSetState(() {});
+                                                    logFirebaseEvent(
+                                                        'Icon_show_snack_bar');
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Product added to the cart',
+                                                          style: TextStyle(
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryBackground,
+                                                          ),
                                                         ),
-                                                      ),
-                                                      duration: const Duration(
-                                                          milliseconds: 4000),
-                                                      backgroundColor:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      action: SnackBarAction(
-                                                        label: 'Go to cart',
-                                                        textColor:
+                                                        duration: Duration(
+                                                            milliseconds: 4000),
+                                                        backgroundColor:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primaryBackground,
-                                                        onPressed: () async {
-                                                          context.pushNamed(
-                                                              'CartvalueCopy');
-                                                        },
+                                                                .primary,
+                                                        action: SnackBarAction(
+                                                          label: 'Go to cart',
+                                                          textColor: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBackground,
+                                                          onPressed: () async {
+                                                            context.pushNamed(
+                                                                CartvalueCopyWidget
+                                                                    .routeName);
+                                                          },
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
-                                                child: Icon(
-                                                  Icons.add_box_sharp,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 26.0,
+                                                    );
+                                                  },
+                                                  child: Icon(
+                                                    Icons.add_box_sharp,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 26.0,
+                                                  ),
                                                 ),
-                                              ),
-                                            if (isProductInCart)
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  logFirebaseEvent(
-                                                      'ROUNDREGISTRATION_Icon_8rvod8zd_ON_TAP');
-                                                  logFirebaseEvent(
-                                                      'Icon_update_app_state');
-                                                  FFAppState().update(() {
+                                              if (FFAppState()
+                                                      .comboid
+                                                      .contains(getJsonField(
+                                                        nonItem,
+                                                        r'''$.product_id''',
+                                                      ).toString()) ==
+                                                  true)
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'ROUNDREGISTRATION_Icon_8rvod8zd_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Icon_update_app_state');
                                                     FFAppState()
                                                         .removeFromTotalcombocart(
                                                             Round2cartStruct(
@@ -895,28 +1282,28 @@ class _RoundregistrationWidgetState extends State<RoundregistrationWidget> {
                                                       nonItem,
                                                       r'''$.product_id''',
                                                     ).toString());
-                                                  });
-                                                },
-                                                child: Icon(
-                                                  Icons.check,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                  size: 26.0,
+                                                    FFAppState().update(() {});
+                                                  },
+                                                  child: Icon(
+                                                    Icons.check,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                    size: 26.0,
+                                                  ),
                                                 ),
-                                              ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ],
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),

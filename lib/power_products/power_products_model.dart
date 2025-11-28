@@ -1,8 +1,20 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'power_products_widget.dart' show PowerProductsWidget;
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/ordersshimmer/ordersshimmer_widget.dart';
+import 'dart:ui';
+import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'power_products_widget.dart' show PowerProductsWidget;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:webviewx_plus/webviewx_plus.dart';
 
 class PowerProductsModel extends FlutterFlowModel<PowerProductsWidget> {
   ///  Local state fields for this page.
@@ -28,14 +40,11 @@ class PowerProductsModel extends FlutterFlowModel<PowerProductsWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for Carousel widget.
   CarouselSliderController? carouselController;
-
   int carouselCurrentIndex = 1;
 
   // State field(s) for CheckboxListTile widget.
-
   Map<dynamic, bool> checkboxListTileValueMap = {};
   List<dynamic> get checkboxListTileCheckedItems =>
       checkboxListTileValueMap.entries
@@ -44,7 +53,6 @@ class PowerProductsModel extends FlutterFlowModel<PowerProductsWidget> {
           .toList();
 
   // State field(s) for Checkbox widget.
-
   Map<dynamic, bool> checkboxValueMap1 = {};
   List<dynamic> get checkboxCheckedItems1 => checkboxValueMap1.entries
       .where((e) => e.value)
@@ -64,7 +72,5 @@ class PowerProductsModel extends FlutterFlowModel<PowerProductsWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 }

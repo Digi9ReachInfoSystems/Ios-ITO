@@ -19,12 +19,14 @@ class AnswersStruct extends FFFirebaseStruct {
   String? _question;
   String get question => _question ?? '';
   set question(String? val) => _question = val;
+
   bool hasQuestion() => _question != null;
 
   // "answer" field.
   String? _answer;
   String get answer => _answer ?? '';
   set answer(String? val) => _answer = val;
+
   bool hasAnswer() => _answer != null;
 
   static AnswersStruct fromMap(Map<String, dynamic> data) => AnswersStruct(

@@ -39,73 +39,93 @@ class SubjectsStruct extends FFFirebaseStruct {
   String? _id;
   String get id => _id ?? '';
   set id(String? val) => _id = val;
+
   bool hasId() => _id != null;
 
   // "subject_id" field.
   String? _subjectId;
   String get subjectId => _subjectId ?? '';
   set subjectId(String? val) => _subjectId = val;
+
   bool hasSubjectId() => _subjectId != null;
 
   // "duration" field.
   String? _duration;
   String get duration => _duration ?? '';
   set duration(String? val) => _duration = val;
+
   bool hasDuration() => _duration != null;
 
   // "service_type" field.
   String? _serviceType;
   String get serviceType => _serviceType ?? '';
   set serviceType(String? val) => _serviceType = val;
+
   bool hasServiceType() => _serviceType != null;
 
   // "std" field.
   List<String>? _std;
   List<String> get std => _std ?? const [];
   set std(List<String>? val) => _std = val;
-  void updateStd(Function(List<String>) updateFn) => updateFn(_std ??= []);
+
+  void updateStd(Function(List<String>) updateFn) {
+    updateFn(_std ??= []);
+  }
+
   bool hasStd() => _std != null;
 
   // "round" field.
   String? _round;
   String get round => _round ?? '';
   set round(String? val) => _round = val;
+
   bool hasRound() => _round != null;
 
   // "amount" field.
   String? _amount;
   String get amount => _amount ?? '';
   set amount(String? val) => _amount = val;
+
   bool hasAmount() => _amount != null;
 
   // "alias" field.
   String? _alias;
   String get alias => _alias ?? '';
   set alias(String? val) => _alias = val;
+
   bool hasAlias() => _alias != null;
 
   // "subjectTitle" field.
   List<String>? _subjectTitle;
   List<String> get subjectTitle => _subjectTitle ?? const [];
   set subjectTitle(List<String>? val) => _subjectTitle = val;
-  void updateSubjectTitle(Function(List<String>) updateFn) =>
-      updateFn(_subjectTitle ??= []);
+
+  void updateSubjectTitle(Function(List<String>) updateFn) {
+    updateFn(_subjectTitle ??= []);
+  }
+
   bool hasSubjectTitle() => _subjectTitle != null;
 
   // "subjectname" field.
   List<String>? _subjectname;
   List<String> get subjectname => _subjectname ?? const [];
   set subjectname(List<String>? val) => _subjectname = val;
-  void updateSubjectname(Function(List<String>) updateFn) =>
-      updateFn(_subjectname ??= []);
+
+  void updateSubjectname(Function(List<String>) updateFn) {
+    updateFn(_subjectname ??= []);
+  }
+
   bool hasSubjectname() => _subjectname != null;
 
   // "subjectIcon" field.
   List<String>? _subjectIcon;
   List<String> get subjectIcon => _subjectIcon ?? const [];
   set subjectIcon(List<String>? val) => _subjectIcon = val;
-  void updateSubjectIcon(Function(List<String>) updateFn) =>
-      updateFn(_subjectIcon ??= []);
+
+  void updateSubjectIcon(Function(List<String>) updateFn) {
+    updateFn(_subjectIcon ??= []);
+  }
+
   bool hasSubjectIcon() => _subjectIcon != null;
 
   static SubjectsStruct fromMap(Map<String, dynamic> data) => SubjectsStruct(
@@ -160,7 +180,7 @@ class SubjectsStruct extends FFFirebaseStruct {
         'std': serializeParam(
           _std,
           ParamType.String,
-          true,
+          isList: true,
         ),
         'round': serializeParam(
           _round,
@@ -177,17 +197,17 @@ class SubjectsStruct extends FFFirebaseStruct {
         'subjectTitle': serializeParam(
           _subjectTitle,
           ParamType.String,
-          true,
+          isList: true,
         ),
         'subjectname': serializeParam(
           _subjectname,
           ParamType.String,
-          true,
+          isList: true,
         ),
         'subjectIcon': serializeParam(
           _subjectIcon,
           ParamType.String,
-          true,
+          isList: true,
         ),
       }.withoutNulls;
 

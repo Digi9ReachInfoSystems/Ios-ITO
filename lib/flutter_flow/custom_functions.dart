@@ -3,7 +3,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:indian_talent_olympiad/backend/schema/structs/powercart_struct.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'lat_lng.dart';
@@ -49,7 +48,7 @@ String images(int names) {
 double powercartamount(List<PowercartStruct>? cartitems) {
   double value = 0.0;
   for (var item in cartitems!) {
-    double? parsedValue = double.tryParse(item.productamount);
+    double? parsedValue = double.parse(item.productamount.toString());
     if (parsedValue != null) {
       print(value);
       value = value + parsedValue;
@@ -135,8 +134,9 @@ List<dynamic> convertdatatypetopjson(List<AnswersStruct> datatype) {
 String convertjsaontostring(dynamic valuee1) {
   // {"Computer":"11th Dec 2023"} return only "Computer" as string
   String valuee1String = valuee1.toString();
-  int endIndex = valuee1String.indexOf(':');
-  return valuee1String.substring(1, endIndex);
+  // int endIndex = valuee1String.indexOf(':');
+  // return valuee1String.substring(1, endIndex);
+  return valuee1String;
 }
 
 List<dynamic> convertjsontorequired(dynamic jsonData) {
@@ -196,44 +196,48 @@ double finalcartamountCopy(List<Round2cartStruct>? cartitems) {
 }
 
 double powerdeliveryfee(List<PowercartStruct> cartlist) {
-  int total_deliverable_item_count = 0;
-  for (var item in cartlist) {
-    int? itemDeliverableCount = int.tryParse(item.deliverablecount);
-    if (itemDeliverableCount != null) {
-      total_deliverable_item_count += itemDeliverableCount;
-    }
-  }
+  int totalDeliverableItemCount = cartlist.length;
+  // for (var item in cartlist) {
+  //   // Safely convert deliverablecount to int
+  //   int itemDeliverableCount = int.tryParse(item.deliverablecount ?? '') ?? 0;
 
-  // Calculating delivery charge based on the total count of deliverable items
-  double delivery_charge;
-  if (total_deliverable_item_count == 0) {
-    delivery_charge = 0.0;
-  } else if (total_deliverable_item_count <= 3) {
-    delivery_charge = 70.0;
-  } else if (total_deliverable_item_count <= 6) {
-    delivery_charge = 100.0;
+  //   totalDeliverableItemCount += itemDeliverableCount;
+  // }
+
+  // Calculate delivery charge
+  if (totalDeliverableItemCount == 0) {
+    return 0.0;
+  } else if (totalDeliverableItemCount > 0 && totalDeliverableItemCount <= 3) {
+    return 70.0;
+  } else if (totalDeliverableItemCount > 3 && totalDeliverableItemCount <= 6) {
+    return 100.0;
+  } else if (totalDeliverableItemCount > 6) {
+    return 140.0;
   } else {
-    delivery_charge = 140.0;
+    return 0.0;
   }
-
-  return delivery_charge;
 }
 
-int calculatetotalamount(
-  double discountpercent,
-  double amount,
+double calculatetotalamount(
+  String discountpercent,
+  String amount,
 ) {
+  /// MODIFY CODE ONLY BELOW THIS LINE
+
   // Write a function to get an amount after subtracting discount amount
-  double discount =
-      discountpercent / 100.0; // Corrected the type to double and division
-  double originalAmount = amount; // Redundant, could directly use `amount`
+  double discount = double.parse(discountpercent.toString()) /
+      100.0; // Corrected the type to double and division
+  double originalAmount =
+      double.parse(amount.toString()); // Redundant, could directly use `amount`
   double discountedAmount = (originalAmount * discount);
-  return discountedAmount
-      .round(); // Rounding to nearest integer if you still want to return an int
+  return double.parse(discountedAmount
+      .round()
+      .toString()); // Rounding to nearest integer if you still want to return an int
+  /// MODIFY CODE ONLY ABOVE THIS LINE
 }
 
 double discountfee(List<Round2cartStruct>? cartitems) {
-   double totalDiscount = 0.0;
+  double totalDiscount = 0.0;
 
   // Check for null cart items
   if (cartitems == null) return totalDiscount;
@@ -244,10 +248,6 @@ double discountfee(List<Round2cartStruct>? cartitems) {
     double productAmount = double.tryParse(item.productamount ?? '0') ?? 0.0;
 
     // Calculate the discount difference
-    // Skip the minus operation if discountAmount is 0 or productAmount is 80
-    if (discountAmount == 0 || productAmount == 80) {
-      continue; // Skip this iteration
-    }
     double discountDifference = discountAmount - productAmount;
 
     // Accumulate the discount value
@@ -372,12 +372,12 @@ String sessionCode() {
 }
 
 double getdelivery(List<CartitemsStruct> cartlist) {
-  // only count item if producttype in cartvalues1 is "book" or else dont count the items
-   bool hasCertificate =
+  bool hasCertificate =
       cartlist.any((item) => item.producttypes == 'Certificate');
   if (hasCertificate) {
     return 70.0;
   }
+  // only count item if producttype in cartvalues1 is "book" or else dont count the items
   int value = 0;
   for (var items in cartlist) {
     if (items.producttypes == 'book') {
@@ -686,7 +686,7 @@ DateTime? jsontoTime(String? timevalue) {
   return null;
 }
 
-int? percent(int noofProducts) {
+int percent(int noofProducts) {
   int discountPercent = 0;
   switch (noofProducts) {
     case 1:
@@ -708,10 +708,176 @@ int? percent(int noofProducts) {
 }
 
 double grandtotal(
-  double cartValue,
-  double saved,
-  double deliverycharges,
+  String cartValue,
+  String saved,
+  String deliverycharges,
 ) {
-  double finalamount = (cartValue - saved) + deliverycharges;
-  return finalamount;
+  print("cart value $cartValue");
+  print("Saved $saved");
+  print("Delivery cgarde $deliverycharges");
+  // If cartValue is null, final amount must be 0
+  if (double.parse(cartValue.toString()) == null ||
+      double.parse(cartValue.toString()) == 0) return 0;
+
+  // saved and deliveryCharges — treat null as 0
+  final double s = double.parse(saved.toString()) ?? 0;
+  final double d = double.parse(deliverycharges.toString()) ?? 0;
+
+  double finalAmount = (double.parse(cartValue.toString()) - s) + d;
+  return finalAmount;
+}
+
+List<String> anualexamdynamicslot(dynamic anualexamdata) {
+  List<String> result = [];
+
+  if (anualexamdata == null ||
+      anualexamdata['annualExamSchedule'] == null ||
+      anualexamdata['annualExamSchedule'] is! Map) {
+    return result;
+  }
+
+  final schedule = anualexamdata['annualExamSchedule'] as Map;
+
+  final regex = RegExp(r'Slot\s+(\d+)');
+
+  // Extract slots with their number
+  final slotList = <int, String>{};
+
+  schedule.keys.forEach((key) {
+    final match = regex.firstMatch(key);
+    if (match != null) {
+      int number = int.parse(match.group(1)!); // extract slot number
+      slotList[number] = "Slot $number";
+    }
+  });
+
+  // Sort by slot number
+  final sortedKeys = slotList.keys.toList()..sort();
+
+  // Create final sorted list
+  for (var k in sortedKeys) {
+    result.add(slotList[k]!);
+  }
+
+  return result;
+}
+
+List<dynamic> homeservice(
+  List<dynamic>? allservice,
+  List<String>? requiredservices,
+) {
+  if (allservice == null || requiredservices == null) {
+    return [];
+  }
+
+  // Convert to lowercase set
+  final requiredSet =
+      requiredservices.map((e) => e.toLowerCase().trim()).toSet();
+
+  final filtered = allservice.where((service) {
+    final slug = service['service_slug']?.toString().toLowerCase().trim() ?? '';
+    final name = service['service_name']?.toString().toLowerCase().trim() ?? '';
+
+    // Skip Certificate
+    if (name == 'certificate') return false;
+
+    // Required list contains SLUG but we match using service_name
+    return requiredSet.contains(slug) || requiredSet.contains(name);
+  }).toList();
+
+  return filtered;
+}
+
+bool monthlyexamcheck(String serviceTitle) {
+  if (serviceTitle == "Monthly Test" ||
+      serviceTitle == "NEET" ||
+      serviceTitle == "JEE" ||
+      serviceTitle == "Summer Quiz Competition") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool specialoffercheck(String serviceTitle) {
+  if (serviceTitle == "Special Offer") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool anualexamandspecialstudymaterialcheck(String serviceTitle) {
+  if (serviceTitle == "Annual Exam" ||
+      serviceTitle == "Online Study Material") {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+String filterserviceimageurl(
+  dynamic allservicedata,
+  String servicename,
+) {
+  if (allservicedata == null ||
+      allservicedata["services"] == null ||
+      allservicedata["services"].isEmpty) {
+    return "";
+  }
+
+  final services = allservicedata["services"];
+
+  // Normalize the incoming servicename
+  String normalizedInput =
+      servicename.toLowerCase().replaceAll(" ", "").replaceAll("-", "");
+
+  for (var item in services.values) {
+    if (item is Map) {
+      String slug = item["service_slug"]?.toString() ?? "";
+
+      // Normalize slug
+      String normalizedSlug =
+          slug.toLowerCase().replaceAll(" ", "").replaceAll("-", "");
+
+      if (normalizedSlug == normalizedInput) {
+        return item["service_icon"]?.toString() ?? "";
+      }
+    }
+  }
+
+  return "";
+}
+
+String totalnotification(
+  int importentnotificationlengh,
+  int nomarmalnotificationlength,
+) {
+  return (importentnotificationlengh + nomarmalnotificationlength).toString();
+}
+
+bool checkvertion(
+  String backendvertion,
+  String currentappversion,
+) {
+  List<int> backendParts = backendvertion.split('.').map(int.parse).toList();
+  List<int> currentParts = currentappversion.split('.').map(int.parse).toList();
+
+  int maxLength = backendParts.length > currentParts.length
+      ? backendParts.length
+      : currentParts.length;
+
+  // Pad shorter list with zeros
+  while (backendParts.length < maxLength) backendParts.add(0);
+  while (currentParts.length < maxLength) currentParts.add(0);
+
+  for (int i = 0; i < maxLength; i++) {
+    if (currentParts[i] > backendParts[i]) {
+      return true; // current version is greater
+    } else if (currentParts[i] < backendParts[i]) {
+      return false; // current version is lower
+    }
+  }
+
+  return true; // versions are equal
 }

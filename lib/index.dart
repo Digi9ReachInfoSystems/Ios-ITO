@@ -60,5 +60,14 @@ export '/certificate_viewer/certificate_viewer_widget.dart'
     show CertificateViewerWidget;
 export '/power_products/power_products_widget.dart' show PowerProductsWidget;
 export '/notifications/notifications_widget.dart' show NotificationsWidget;
+export '/testpagetestingdummy/testpagetestingdummy_widget.dart'
+    show TestpagetestingdummyWidget;
+export '/pages/powercart/powercart_widget.dart' show PowercartWidget;
+export '/pages/powerwebview/powerwebview_widget.dart' show PowerwebviewWidget;
+export '/pages/powerfailure/powerfailure_widget.dart' show PowerfailureWidget;
 export '/test_details/test_details_widget.dart' show TestDetailsWidget;
 export '/out_ofversion/out_ofversion_widget.dart' show OutOfversionWidget;
+export '/pages/monthlyexam_copy/monthlyexam_copy_widget.dart'
+    show MonthlyexamCopyWidget;
+export '/pages/cartvalue_copy_copy/cartvalue_copy_copy_widget.dart'
+    show CartvalueCopyCopyWidget;

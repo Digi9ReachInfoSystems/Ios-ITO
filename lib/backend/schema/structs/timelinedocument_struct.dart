@@ -3,9 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class TimelinedocumentStruct extends FFFirebaseStruct {
@@ -21,12 +19,14 @@ class TimelinedocumentStruct extends FFFirebaseStruct {
   String? _subject;
   String get subject => _subject ?? '';
   set subject(String? val) => _subject = val;
+
   bool hasSubject() => _subject != null;
 
   // "date" field.
   DateTime? _date;
   DateTime? get date => _date;
   set date(DateTime? val) => _date = val;
+
   bool hasDate() => _date != null;
 
   static TimelinedocumentStruct fromMap(Map<String, dynamic> data) =>

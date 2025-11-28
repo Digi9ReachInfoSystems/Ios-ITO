@@ -1,15 +1,18 @@
 import 'dart:async';
 
 import 'serialization_util.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 
 final _handledMessageIds = <String?>{};
 
 class PushNotificationsHandler extends StatefulWidget {
-  const PushNotificationsHandler({super.key, required this.child});
+  const PushNotificationsHandler({Key? key, required this.child})
+      : super(key: key);
 
   final Widget child;
 
@@ -39,44 +42,50 @@ class _PushNotificationsHandlerState extends State<PushNotificationsHandler> {
     }
     _handledMessageIds.add(message.messageId);
 
-    if (mounted) {
-      setState(() => _loading = true);
-    }
+    safeSetState(() => _loading = true);
     try {
       final initialPageName = message.data['initialPageName'] as String;
       final initialParameterData = getInitialParameterData(message.data);
       final parametersBuilder = parametersBuilderMap[initialPageName];
       if (parametersBuilder != null) {
         final parameterData = await parametersBuilder(initialParameterData);
-        context.pushNamed(
-          initialPageName,
-          pathParameters: parameterData.pathParameters,
-          extra: parameterData.extra,
-        );
+        if (mounted) {
+          context.pushNamed(
+            initialPageName,
+            pathParameters: parameterData.pathParameters,
+            extra: parameterData.extra,
+          );
+        } else {
+          appNavigatorKey.currentContext?.pushNamed(
+            initialPageName,
+            pathParameters: parameterData.pathParameters,
+            extra: parameterData.extra,
+          );
+        }
       }
     } catch (e) {
       print('Error: $e');
     } finally {
-      if (mounted) {
-        setState(() => _loading = false);
-      }
+      safeSetState(() => _loading = false);
     }
   }
 
   @override
   void initState() {
     super.initState();
-    handleOpenedPushNotification();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      handleOpenedPushNotification();
+    });
   }
 
   @override
   Widget build(BuildContext context) => _loading
       ? Container(
-          color: Colors.white,
+          color: FlutterFlowTheme.of(context).secondaryBackground,
           child: Center(
             child: Image.asset(
-              'assets/images/ITO_Pencil_Logo_with_name.png',
-              width: MediaQuery.sizeOf(context).width * 0.8,
+              'assets/images/indian-talent-olympiad-new-logo.png',
+              width: MediaQuery.sizeOf(context).width * 0.6,
               fit: BoxFit.contain,
             ),
           ),
@@ -100,7 +109,7 @@ class ParameterData {
       );
 
   static Future<ParameterData> Function(Map<String, dynamic>) none() =>
-      (data) async => const ParameterData();
+      (data) async => ParameterData();
 }
 
 final parametersBuilderMap =
@@ -130,11 +139,16 @@ final parametersBuilderMap =
           'serviceid': getParameter<String>(data, 'serviceid'),
           'choosensubject': getParameter<String>(data, 'choosensubject'),
           'alias': getParameter<String>(data, 'alias'),
+          'round': getParameter<String>(data, 'round'),
         },
       ),
   'editProfile': ParameterData.none(),
   'powerPackages': ParameterData.none(),
-  'subscription': ParameterData.none(),
+  'subscription': (data) async => ParameterData(
+        allParams: {
+          'serviceName': getParameter<String>(data, 'serviceName'),
+        },
+      ),
   'myOrders': ParameterData.none(),
   'testpage': (data) async => ParameterData(
         allParams: {
@@ -196,10 +210,49 @@ final parametersBuilderMap =
           'resultId': getParameter<String>(data, 'resultId'),
         },
       ),
-  'powerProducts': (data) async => const ParameterData(
-        allParams: {},
+  'powerProducts': (data) async => ParameterData(
+        allParams: <String, dynamic>{},
       ),
   'notifications': ParameterData.none(),
+  'testpagetestingdummy': (data) async => ParameterData(
+        allParams: {
+          'testId': getParameter<String>(data, 'testId'),
+          'timer': getParameter<String>(data, 'timer'),
+        },
+      ),
+  'powercart': ParameterData.none(),
+  'powerwebview': (data) async => ParameterData(
+        allParams: {
+          'payurl': getParameter<String>(data, 'payurl'),
+        },
+      ),
+  'powerfailure': (data) async => ParameterData(
+        allParams: {
+          'payurl': getParameter<String>(data, 'payurl'),
+        },
+      ),
+  'testDetails': (data) async => ParameterData(
+        allParams: {
+          'testId': getParameter<String>(data, 'testId'),
+          'time': getParameter<String>(data, 'time'),
+          'alias': getParameter<String>(data, 'alias'),
+          'testName': getParameter<String>(data, 'testName'),
+          'totalTime': getParameter<String>(data, 'totalTime'),
+          'category': getParameter<String>(data, 'category'),
+          'subjectName': getParameter<String>(data, 'subjectName'),
+          'stdid': getParameter<String>(data, 'stdid'),
+          'totalquestion': getParameter<String>(data, 'totalquestion'),
+          'totalmarks': getParameter<String>(data, 'totalmarks'),
+        },
+      ),
+  'outOfversion': ParameterData.none(),
+  'monthlyexamCopy': (data) async => ParameterData(
+        allParams: {
+          'serviceid': getParameter<String>(data, 'serviceid'),
+          'choosenservice': getParameter<String>(data, 'choosenservice'),
+        },
+      ),
+  'CartvalueCopyCopy': ParameterData.none(),
 };
 
 Map<String, dynamic> getInitialParameterData(Map<String, dynamic> data) {

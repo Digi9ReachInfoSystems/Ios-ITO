@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'certificate_viewer_widget.dart' show CertificateViewerWidget;
 import 'package:flutter/material.dart';
 

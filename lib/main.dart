@@ -1,38 +1,38 @@
-import 'package:indian_talent_olympiad/flutter_flow/firebase_remote_config_util.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-import 'package:upgrader/upgrader.dart';
 import 'auth/firebase_auth/firebase_user_provider.dart';
 import 'auth/firebase_auth/auth_util.dart';
 
 import 'backend/push_notifications/push_notifications_util.dart';
 import 'backend/firebase/firebase_config.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 import 'flutter_flow/internationalization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'index.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
   usePathUrlStrategy();
+
   await initFirebase();
-await Upgrader.clearSavedSettings();
+
   final appState = FFAppState(); // Initialize FFAppState
   await appState.initializePersistedState();
 
   if (!kIsWeb) {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
   }
-await initializeFirebaseRemoteConfig();
+  await initializeFirebaseRemoteConfig();
+
   runApp(ChangeNotifierProvider(
     create: (context) => appState,
-    child: const MyApp(),
+    child: MyApp(),
   ));
 }
 
@@ -51,12 +51,25 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
-  ThemeMode _themeMode = ThemeMode.system;
 
-  late Stream<BaseAuthUser> userStream;
+  ThemeMode _themeMode = ThemeMode.system;
 
   late AppStateNotifier _appStateNotifier;
   late GoRouter _router;
+  String getRoute([RouteMatch? routeMatch]) {
+    final RouteMatch lastMatch =
+        routeMatch ?? _router.routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : _router.routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
+
+  List<String> getRouteStack() =>
+      _router.routerDelegate.currentConfiguration.matches
+          .map((e) => getRoute(e))
+          .toList();
+  late Stream<BaseAuthUser> userStream;
 
   final authUserSub = authenticatedUserStream.listen((_) {});
   final fcmTokenSub = fcmTokenUserStream.listen((_) {});
@@ -68,10 +81,12 @@ class _MyAppState extends State<MyApp> {
     _appStateNotifier = AppStateNotifier.instance;
     _router = createRouter(_appStateNotifier, widget.entryPage);
     userStream = indianTalentOlympiadFirebaseUserStream()
-      ..listen((user) => _appStateNotifier.update(user));
+      ..listen((user) {
+        _appStateNotifier.update(user);
+      });
     jwtTokenStream.listen((_) {});
     Future.delayed(
-      const Duration(milliseconds: 1000),
+      Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
   }
@@ -84,55 +99,54 @@ class _MyAppState extends State<MyApp> {
   }
 
   void setLocale(String language) {
-    setState(() => _locale = createLocale(language));
+    safeSetState(() => _locale = createLocale(language));
   }
 
-  void setThemeMode(ThemeMode mode) => setState(() {
+  void setThemeMode(ThemeMode mode) => safeSetState(() {
         _themeMode = mode;
       });
 
   @override
   Widget build(BuildContext context) {
-    return UpgradeAlert(
-       
-      upgrader:Upgrader(
-        debugLogging:true,
-        debugDisplayAlways:true,
-        languageCode: "en",
-        messages:UpgraderMessages(code: "en"),
-        countryCode: "IN",
-        minAppVersion: "1.0.0",
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      title: 'IndianTalentOlympiad',
+      localizationsDelegates: [
+        FFLocalizationsDelegate(),
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        FallbackMaterialLocalizationDelegate(),
+        FallbackCupertinoLocalizationDelegate(),
+      ],
+      locale: _locale,
+      supportedLocales: const [
+        Locale('en'),
+        Locale('hi'),
+        Locale('mr'),
+        Locale('kn'),
+      ],
+      theme: ThemeData(
+        brightness: Brightness.light,
+        useMaterial3: false,
       ),
-      child: MaterialApp.router(
-        title: 'IndianTalentOlympiad',
-        localizationsDelegates: const [
-          FFLocalizationsDelegate(),
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        locale: _locale,
-        supportedLocales: const [
-          Locale('en'),
-          Locale('hi'),
-          Locale('mr'),
-          Locale('kn'),
-        ],
-        theme: ThemeData(
-          brightness: Brightness.light,
-        ),
-        themeMode: _themeMode,
-        routerConfig: _router,
-      ),
+      themeMode: _themeMode,
+      routerConfig: _router,
     );
   }
 }
 
 class NavBarPage extends StatefulWidget {
-  const NavBarPage({super.key, this.initialPage, this.page});
+  NavBarPage({
+    Key? key,
+    this.initialPage,
+    this.page,
+    this.disableResizeToAvoidBottomInset = false,
+  }) : super(key: key);
 
   final String? initialPage;
   final Widget? page;
+  final bool disableResizeToAvoidBottomInset;
 
   @override
   _NavBarPageState createState() => _NavBarPageState();
@@ -153,19 +167,20 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
-      'Homepagelogin': const HomepageloginWidget(),
-      'productsmenu': const ProductsmenuWidget(),
-      'schedule': const ScheduleWidget(),
-      'powerPackages': const PowerPackagesWidget(),
-      'profile': const ProfileWidget(),
+      'Homepagelogin': HomepageloginWidget(),
+      'productsmenu': ProductsmenuWidget(),
+      'schedule': ScheduleWidget(),
+      'powerPackages': PowerPackagesWidget(),
+      'profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
     return Scaffold(
+      resizeToAvoidBottomInset: !widget.disableResizeToAvoidBottomInset,
       body: _currentPage ?? tabs[_currentPageName],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (i) => setState(() {
+        onTap: (i) => safeSetState(() {
           _currentPage = null;
           _currentPageName = tabs.keys.toList()[i];
         }),
@@ -177,7 +192,7 @@ class _NavBarPageState extends State<NavBarPage> {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: Icon(
               Icons.home_outlined,
               size: 24.0,
             ),
@@ -187,11 +202,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: Icon(
               Icons.local_offer_outlined,
               size: 24.0,
             ),
-            activeIcon: const Icon(
+            activeIcon: Icon(
               Icons.local_offer_rounded,
               size: 24.0,
             ),
@@ -201,11 +216,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: Icon(
               Icons.calendar_today_outlined,
               size: 24.0,
             ),
-            activeIcon: const Icon(
+            activeIcon: Icon(
               Icons.calendar_month_rounded,
               size: 24.0,
             ),
@@ -215,11 +230,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: Icon(
               Icons.blur_on,
               size: 24.0,
             ),
-            activeIcon: const Icon(
+            activeIcon: Icon(
               Icons.blur_on_sharp,
               size: 24.0,
             ),
@@ -229,11 +244,11 @@ class _NavBarPageState extends State<NavBarPage> {
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: Icon(
               Icons.person_outlined,
               size: 24.0,
             ),
-            activeIcon: const Icon(
+            activeIcon: Icon(
               Icons.person,
               size: 24.0,
             ),
@@ -247,4 +262,3 @@ class _NavBarPageState extends State<NavBarPage> {
     );
   }
 }
-

@@ -1,9 +1,9 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:ui';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:provider/provider.dart';
 import 'shimmerservice_model.dart';
 export 'shimmerservice_model.dart';
 
@@ -18,168 +18,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
     with TickerProviderStateMixin {
   late ShimmerserviceModel _model;
 
-  final animationsMap = {
-    'imageOnPageLoadAnimation1': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation2': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation3': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation4': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation5': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation6': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation7': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-    'imageOnPageLoadAnimation8': AnimationInfo(
-      loop: true,
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 1000.ms,
-          begin: const Offset(0.0, 200.0),
-          end: const Offset(0.0, -200.0),
-        ),
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 1000.ms,
-          duration: 1000.ms,
-          begin: 0.765,
-          end: 1.0,
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -191,6 +30,169 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => ShimmerserviceModel());
+
+    animationsMap.addAll({
+      'imageOnPageLoadAnimation1': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation2': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation3': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation4': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation5': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation6': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation7': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+      'imageOnPageLoadAnimation8': AnimationInfo(
+        loop: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 1000.0.ms,
+            begin: Offset(0.0, 200.0),
+            end: Offset(0.0, -200.0),
+          ),
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 1000.0.ms,
+            duration: 1000.0.ms,
+            begin: 0.765,
+            end: 1.0,
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -202,8 +204,6 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -213,12 +213,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -228,7 +228,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
@@ -245,12 +245,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -260,7 +260,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
@@ -283,12 +283,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -298,7 +298,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
@@ -315,12 +315,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -330,7 +330,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
@@ -353,12 +353,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -368,7 +368,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
@@ -385,12 +385,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -400,7 +400,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
@@ -423,12 +423,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -438,7 +438,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(
@@ -455,12 +455,12 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: EdgeInsets.all(10.0),
                 child: Container(
                   width: MediaQuery.sizeOf(context).width * 0.4,
                   height: MediaQuery.sizeOf(context).height * 0.2,
                   decoration: BoxDecoration(
-                    color: const Color(0xFFEDE8E8),
+                    color: Color(0xFFEDE8E8),
                     borderRadius: BorderRadius.circular(15.0),
                   ),
                   child: ClipRect(
@@ -470,7 +470,7 @@ class _ShimmerserviceWidgetState extends State<ShimmerserviceWidget>
                         sigmaY: 6.0,
                       ),
                       child: Transform.rotate(
-                        angle: 1.9199,
+                        angle: 110.0 * (math.pi / 180),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8.0),
                           child: Image.network(

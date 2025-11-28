@@ -14,7 +14,9 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'summerquiz_model.dart';
@@ -22,6 +24,9 @@ export 'summerquiz_model.dart';
 
 class SummerquizWidget extends StatefulWidget {
   const SummerquizWidget({super.key});
+
+  static String routeName = 'summerquiz';
+  static String routePath = '/summerquiz';
 
   @override
   State<SummerquizWidget> createState() => _SummerquizWidgetState();
@@ -54,9 +59,10 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -68,7 +74,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -76,7 +82,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
             onPressed: () async {
               logFirebaseEvent('SUMMERQUIZ_arrow_back_rounded_ICN_ON_TAP');
               logFirebaseEvent('IconButton_navigate_back');
-              context.pop();
+              context.safePop();
             },
           ),
           title: Text(
@@ -84,13 +90,20 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
               '0j7t3vlw' /* Summer Quiz Competition */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
-                  color: const Color(0xFF272727),
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.normal,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
+                  color: Color(0xFF272727),
                   fontSize: 18.0,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.normal,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -99,6 +112,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
           child: FutureBuilder<ApiCallResponse>(
             future: SummerQuizCall.call(
               userId: FFAppState().userInfo.userId,
+              token: FFAppState().userInfo.token,
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
@@ -116,6 +130,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                 );
               }
               final stackSummerQuizResponse = snapshot.data!;
+
               return Stack(
                 children: [
                   if (SummerQuizCall.subscription(
@@ -128,13 +143,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                         children: [
                           Container(
                             height: 130.0,
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: ListView(
                               padding: EdgeInsets.zero,
                               scrollDirection: Axis.horizontal,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -154,23 +169,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         builder: (context) {
                                           return WebViewAware(
                                             child: GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: SizedBox(
+                                                child: Container(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.8,
-                                                  child: const QuizdetailscomWidget(),
+                                                  child: QuizdetailscomWidget(),
                                                 ),
                                               ),
                                             ),
@@ -188,7 +203,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       ),
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             '8ypbl7es' /* Quiz Details */,
@@ -197,11 +212,31 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Readex Pro',
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -209,7 +244,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -229,24 +264,24 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         builder: (context) {
                                           return WebViewAware(
                                             child: GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: SizedBox(
+                                                child: Container(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.25,
                                                   child:
-                                                      const RegistrationfeesWidget(),
+                                                      RegistrationfeesWidget(),
                                                 ),
                                               ),
                                             ),
@@ -257,13 +292,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         color: Color(0xFFFD7E14),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'ghla5cdw' /* Registration Fees */,
@@ -272,11 +307,31 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Readex Pro',
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -284,7 +339,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -304,23 +359,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         builder: (context) {
                                           return WebViewAware(
                                             child: GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: SizedBox(
+                                                child: Container(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.2,
-                                                  child: const SummerquizDateWidget(),
+                                                  child: SummerquizDateWidget(),
                                                 ),
                                               ),
                                             ),
@@ -331,13 +386,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         color: Color(0xFFAFBE29),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             '04g3ppgo' /* Summer Quiz Date */,
@@ -346,11 +401,31 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Readex Pro',
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -358,7 +433,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -378,23 +453,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         builder: (context) {
                                           return WebViewAware(
                                             child: GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: SizedBox(
+                                                child: Container(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.8,
-                                                  child: const ExamquidelinesWidget(),
+                                                  child: ExamquidelinesWidget(),
                                                 ),
                                               ),
                                             ),
@@ -405,13 +480,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         color: Color(0xFF0DCAF0),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'dea2lmit' /* Exam Quidelines */,
@@ -420,11 +495,31 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Readex Pro',
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -432,7 +527,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -452,23 +547,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         builder: (context) {
                                           return WebViewAware(
                                             child: GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: SizedBox(
+                                                child: Container(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.5,
-                                                  child: const QuizAwardsWidget(),
+                                                  child: QuizAwardsWidget(),
                                                 ),
                                               ),
                                             ),
@@ -479,13 +574,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         color: Color(0xFF198754),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'ke3rabx1' /* Quiz Award */,
@@ -494,11 +589,31 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Readex Pro',
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -506,7 +621,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 16.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -526,23 +641,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         builder: (context) {
                                           return WebViewAware(
                                             child: GestureDetector(
-                                              onTap: () => _model.unfocusNode
-                                                      .canRequestFocus
-                                                  ? FocusScope.of(context)
-                                                      .requestFocus(
-                                                          _model.unfocusNode)
-                                                  : FocusScope.of(context)
-                                                      .unfocus(),
+                                              onTap: () {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                FocusManager
+                                                    .instance.primaryFocus
+                                                    ?.unfocus();
+                                              },
                                               child: Padding(
                                                 padding:
                                                     MediaQuery.viewInsetsOf(
                                                         context),
-                                                child: SizedBox(
+                                                child: Container(
                                                   height:
                                                       MediaQuery.sizeOf(context)
                                                               .height *
                                                           0.7,
-                                                  child: const FaqsWidget(),
+                                                  child: FaqsWidget(),
                                                 ),
                                               ),
                                             ),
@@ -553,13 +668,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     child: Container(
                                       width: 100.0,
                                       height: 100.0,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         color: Color(0xFF863DFF),
                                         shape: BoxShape.circle,
                                       ),
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Text(
                                           FFLocalizations.of(context).getText(
                                             'wfuvefue' /* FAQs */,
@@ -568,11 +683,31 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Readex Pro',
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
+                                                ),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryBackground,
                                                 fontSize: 18.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -586,7 +721,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             width: 300.0,
                             height: MediaQuery.sizeOf(context).height * 0.16,
                             decoration: BoxDecoration(
-                              color: const Color(0xFFFFE708),
+                              color: Color(0xFFFFE708),
                               borderRadius: BorderRadius.circular(16.0),
                             ),
                             child: Column(
@@ -600,8 +735,18 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Roboto Slab',
+                                        font: GoogleFonts.robotoSlab(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                                 Text(
@@ -614,10 +759,26 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         color: FlutterFlowTheme.of(context)
                                             .tertiary,
                                         fontSize: 22.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                                 Text(
@@ -630,10 +791,20 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: const Color(0xAF489965),
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight: FontWeight.w800,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: Color(0xAF489965),
                                         fontSize: 16.0,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w800,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                                 Text(
@@ -646,16 +817,32 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: const Color(0xFF9B51FF),
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: Color(0xFF9B51FF),
                                         fontSize: 15.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ],
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: Container(
                               width: 150.0,
@@ -666,7 +853,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                 shape: BoxShape.circle,
                               ),
                               child: Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'sxd7ocg4' /* Summer Quiz
@@ -676,9 +863,25 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: const Color(0xFF9B51FF),
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        color: Color(0xFF9B51FF),
                                         fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
@@ -688,7 +891,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             key: _model.formKey,
                             autovalidateMode: AutovalidateMode.disabled,
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 0.0),
                               child: FlutterFlowDropDown<String>(
                                 controller: _model.dropDownValueController ??=
@@ -697,15 +900,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   stackSummerQuizResponse.jsonBody,
                                   r'''$.summer_quiz.standards''',
                                   true,
-                                ) as List)
-                                    .map<String>((s) => s.toString())
-                                    .toList(),
-                                onChanged: (val) =>
-                                    setState(() => _model.dropDownValue = val),
+                                ) as List?)!
+                                    .map<String>((e) => e.toString())
+                                    .toList()
+                                    .cast<String>(),
+                                onChanged: (val) => safeSetState(
+                                    () => _model.dropDownValue = val),
                                 width: 300.0,
                                 height: 50.0,
-                                textStyle:
-                                    FlutterFlowTheme.of(context).bodyMedium,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                 hintText: FFLocalizations.of(context).getText(
                                   '6lsofv2b' /* Select Standard... */,
                                 ),
@@ -722,7 +943,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     FlutterFlowTheme.of(context).alternate,
                                 borderWidth: 2.0,
                                 borderRadius: 8.0,
-                                margin: const EdgeInsetsDirectional.fromSTEB(
+                                margin: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 4.0, 16.0, 4.0),
                                 hidesUnderline: true,
                                 isOverButton: true,
@@ -732,9 +953,10 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: RichText(
+                              textScaler: MediaQuery.of(context).textScaler,
                               text: TextSpan(
                                 children: [
                                   TextSpan(
@@ -744,10 +966,21 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          font: GoogleFonts.readexPro(
+                                            fontWeight: FontWeight.bold,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.bold,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                   TextSpan(
@@ -757,24 +990,42 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       ),
                                       '0.00',
                                     ),
-                                    style: const TextStyle(),
+                                    style: TextStyle(),
                                   )
                                 ],
-                                style: FlutterFlowTheme.of(context).bodyMedium,
-                              ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                              ),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 10.0, 16.0, 0.0),
                             child: Container(
-                              decoration: const BoxDecoration(),
+                              decoration: BoxDecoration(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           15.0, 0.0, 15.0, 0.0),
                                       child: TextFormField(
                                         controller: _model.textController,
@@ -786,12 +1037,58 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                               .getText(
                                             'quvq93lj' /* Enter Coupon Code... */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -835,7 +1132,28 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
-                                            .bodyMedium,
+                                            .bodyMedium
+                                            .override(
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
                                         validator: _model
                                             .textControllerValidator
                                             .asValidator(context),
@@ -861,24 +1179,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           _model.textController.text) {
                                         logFirebaseEvent(
                                             'Button_update_page_state');
-                                        setState(() {
-                                          _model.finalamount =
-                                              valueOrDefault<String>(
-                                            functions.discountamount(
-                                                getJsonField(
-                                                  SummerQuizCall.coupon(
-                                                    stackSummerQuizResponse
-                                                        .jsonBody,
-                                                  ),
-                                                  r'''$.discount''',
-                                                ).toString(),
-                                                SummerQuizCall.amount(
+                                        _model.finalamount =
+                                            valueOrDefault<String>(
+                                          functions.discountamount(
+                                              getJsonField(
+                                                SummerQuizCall.coupon(
                                                   stackSummerQuizResponse
                                                       .jsonBody,
-                                                )!),
-                                            '0.00',
-                                          );
-                                        });
+                                                ),
+                                                r'''$.discount''',
+                                              ).toString(),
+                                              SummerQuizCall.amount(
+                                                stackSummerQuizResponse
+                                                    .jsonBody,
+                                              )!),
+                                          '0.00',
+                                        );
+                                        safeSetState(() {});
                                       } else {
                                         logFirebaseEvent('Button_alert_dialog');
                                         await showDialog(
@@ -886,15 +1203,15 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (alertDialogContext) {
                                             return WebViewAware(
                                               child: AlertDialog(
-                                                title: const Text('Invalid !!!'),
+                                                title: Text('Invalid !!!'),
                                                 content:
-                                                    const Text('Invalid Coupon Code'),
+                                                    Text('Invalid Coupon Code'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: const Text('Ok'),
+                                                    child: Text('Ok'),
                                                   ),
                                                 ],
                                               ),
@@ -903,28 +1220,46 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         );
                                       }
 
-                                      setState(() {});
+                                      safeSetState(() {});
                                     },
                                     text: FFLocalizations.of(context).getText(
                                       'q2jl6etd' /* Apply */,
                                     ),
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).warning,
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
-                                            fontFamily: 'Readex Pro',
+                                            font: GoogleFonts.readexPro(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
+                                            ),
                                             color: Colors.white,
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .fontStyle,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -942,13 +1277,22 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Poppins',
+                                  font: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   fontSize: 20.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w500,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 10.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
@@ -969,7 +1313,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                               .primaryText,
                                         ),
                                       ),
-                                      duration: const Duration(milliseconds: 4000),
+                                      duration: Duration(milliseconds: 4000),
                                       backgroundColor:
                                           FlutterFlowTheme.of(context)
                                               .secondary,
@@ -978,39 +1322,37 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   return;
                                 }
                                 logFirebaseEvent('Button_update_app_state');
-                                setState(() {
-                                  FFAppState().addToTotalcart(CartitemsStruct(
-                                    productId: getJsonField(
-                                      SummerQuizCall.productData(
-                                        stackSummerQuizResponse.jsonBody,
-                                      ),
-                                      r'''$.id''',
-                                    ).toString(),
-                                    productamount: _model.finalamount,
-                                    productname: getJsonField(
-                                      SummerQuizCall.productData(
-                                        stackSummerQuizResponse.jsonBody,
-                                      ),
-                                      r'''$.title''',
-                                    ).toString(),
-                                    producttypes: getJsonField(
-                                      SummerQuizCall.productData(
-                                        stackSummerQuizResponse.jsonBody,
-                                      ),
-                                      r'''$.service_id''',
-                                    ).toString(),
-                                  ));
-                                  FFAppState().addToProductids(getJsonField(
+                                FFAppState().addToTotalcart(CartitemsStruct(
+                                  productId: getJsonField(
                                     SummerQuizCall.productData(
                                       stackSummerQuizResponse.jsonBody,
                                     ),
                                     r'''$.id''',
-                                  ).toString());
-                                });
+                                  ).toString(),
+                                  productamount: _model.finalamount,
+                                  productname: getJsonField(
+                                    SummerQuizCall.productData(
+                                      stackSummerQuizResponse.jsonBody,
+                                    ),
+                                    r'''$.title''',
+                                  ).toString(),
+                                  producttypes: getJsonField(
+                                    SummerQuizCall.productData(
+                                      stackSummerQuizResponse.jsonBody,
+                                    ),
+                                    r'''$.service_id''',
+                                  ).toString(),
+                                ));
+                                FFAppState().addToProductids(getJsonField(
+                                  SummerQuizCall.productData(
+                                    stackSummerQuizResponse.jsonBody,
+                                  ),
+                                  r'''$.id''',
+                                ).toString());
+                                safeSetState(() {});
                                 logFirebaseEvent('Button_update_page_state');
-                                setState(() {
-                                  _model.finalamount = '0.00';
-                                });
+                                _model.finalamount = '0.00';
+                                safeSetState(() {});
                                 logFirebaseEvent('Button_show_snack_bar');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -1021,7 +1363,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             .primaryBackground,
                                       ),
                                     ),
-                                    duration: const Duration(milliseconds: 4000),
+                                    duration: Duration(milliseconds: 4000),
                                     backgroundColor:
                                         FlutterFlowTheme.of(context).primary,
                                     action: SnackBarAction(
@@ -1029,7 +1371,8 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       textColor: FlutterFlowTheme.of(context)
                                           .primaryBackground,
                                       onPressed: () async {
-                                        context.pushNamed('Cartvalue');
+                                        context.pushNamed(
+                                            CartvalueWidget.routeName);
                                       },
                                     ),
                                   ),
@@ -1040,19 +1383,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                               ),
                               options: FFButtonOptions(
                                 height: 40.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
                                 color: FlutterFlowTheme.of(context).primary,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
+                                      ),
                                       color: Colors.white,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
                                     ),
                                 elevation: 3.0,
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Colors.transparent,
                                   width: 1.0,
                                 ),
@@ -1085,8 +1442,9 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     .secondaryBackground,
                               ),
                               child: Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: RichText(
+                                  textScaler: MediaQuery.of(context).textScaler,
                                   text: TextSpan(
                                     children: [
                                       TextSpan(
@@ -1097,12 +1455,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight: FontWeight.bold,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
                                               fontSize: 20.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.bold,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                       TextSpan(
@@ -1146,23 +1515,41 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Readex Pro',
+                                          font: GoogleFonts.readexPro(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
                                           fontSize: 18.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
-                                  textAlign: TextAlign.center, textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                                  textAlign: TextAlign.center,
                                 ),
                               ),
                             ),
                             Container(
                               height: 130.0,
-                              decoration: const BoxDecoration(),
+                              decoration: BoxDecoration(),
                               child: ListView(
                                 padding: EdgeInsets.zero,
                                 scrollDirection: Axis.horizontal,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1182,24 +1569,24 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (context) {
                                             return WebViewAware(
                                               child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.8,
                                                     child:
-                                                        const QuizdetailscomWidget(),
+                                                        QuizdetailscomWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1217,7 +1604,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                         ),
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '4jtczwei' /* Quiz Details */,
@@ -1226,11 +1613,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBackground,
                                                   fontSize: 18.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -1238,7 +1647,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1258,24 +1667,24 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (context) {
                                             return WebViewAware(
                                               child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.25,
                                                     child:
-                                                        const RegistrationfeesWidget(),
+                                                        RegistrationfeesWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1286,13 +1695,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           color: Color(0xFFFD7E14),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '78mpxpb9' /* Registration Fees */,
@@ -1301,11 +1710,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBackground,
                                                   fontSize: 18.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -1313,7 +1744,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1333,24 +1764,24 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (context) {
                                             return WebViewAware(
                                               child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.2,
                                                     child:
-                                                        const SummerquizDateWidget(),
+                                                        SummerquizDateWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1361,13 +1792,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           color: Color(0xFFAFBE29),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'u5qaje13' /* Summer Quiz Date */,
@@ -1376,11 +1807,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBackground,
                                                   fontSize: 18.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -1388,7 +1841,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1408,24 +1861,24 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (context) {
                                             return WebViewAware(
                                               child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.8,
                                                     child:
-                                                        const ExamquidelinesWidget(),
+                                                        ExamquidelinesWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1436,13 +1889,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           color: Color(0xFF0DCAF0),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'darce70u' /* Exam Quidelines */,
@@ -1451,11 +1904,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBackground,
                                                   fontSize: 18.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -1463,7 +1938,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1483,23 +1958,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (context) {
                                             return WebViewAware(
                                               child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.5,
-                                                    child: const QuizAwardsWidget(),
+                                                    child: QuizAwardsWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1510,13 +1985,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           color: Color(0xFF198754),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '3gm6fqbp' /* Quiz Award */,
@@ -1525,11 +2000,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBackground,
                                                   fontSize: 18.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -1537,7 +2034,7 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 10.0, 10.0, 16.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -1557,23 +2054,23 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                           builder: (context) {
                                             return WebViewAware(
                                               child: GestureDetector(
-                                                onTap: () => _model.unfocusNode
-                                                        .canRequestFocus
-                                                    ? FocusScope.of(context)
-                                                        .requestFocus(
-                                                            _model.unfocusNode)
-                                                    : FocusScope.of(context)
-                                                        .unfocus(),
+                                                onTap: () {
+                                                  FocusScope.of(context)
+                                                      .unfocus();
+                                                  FocusManager
+                                                      .instance.primaryFocus
+                                                      ?.unfocus();
+                                                },
                                                 child: Padding(
                                                   padding:
                                                       MediaQuery.viewInsetsOf(
                                                           context),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: MediaQuery.sizeOf(
                                                                 context)
                                                             .height *
                                                         0.7,
-                                                    child: const FaqsWidget(),
+                                                    child: FaqsWidget(),
                                                   ),
                                                 ),
                                               ),
@@ -1584,13 +2081,13 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                       child: Container(
                                         width: 100.0,
                                         height: 100.0,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           color: Color(0xFF863DFF),
                                           shape: BoxShape.circle,
                                         ),
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'wwfjtqs7' /* FAQs */,
@@ -1599,11 +2096,33 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .primaryBackground,
                                                   fontSize: 18.0,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -1614,9 +2133,9 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.all(10.0),
+                              padding: EdgeInsets.all(10.0),
                               child: Container(
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'ibz6dc69' /* Indian Talent Olympiad introdu... */,
@@ -1625,9 +2144,25 @@ class _SummerquizWidgetState extends State<SummerquizWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poly',
+                                        font: GoogleFonts.poly(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryText,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),

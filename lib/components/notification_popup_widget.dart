@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notification_popup_model.dart';
 export 'notification_popup_model.dart';
@@ -21,27 +22,7 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
     with TickerProviderStateMixin {
   late NotificationPopupModel _model;
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 50.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void setState(VoidCallback callback) {
@@ -54,6 +35,27 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
     super.initState();
     _model = createModel(context, () => NotificationPopupModel());
 
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 50.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -77,6 +79,7 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
       future: NotificationsCall.call(
         stdId: FFAppState().userInfo.stdId,
         displayFor: 'student',
+        token: FFAppState().userInfo.token,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -93,28 +96,33 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
           );
         }
         final columnNotificationsResponse = snapshot.data!;
+
         return Builder(
           builder: (context) {
             final noti = NotificationsCall.highpriority(
                   columnNotificationsResponse.jsonBody,
                 )?.toList() ??
                 [];
+
             return Column(
               mainAxisSize: MainAxisSize.max,
               children: List.generate(noti.length, (notiIndex) {
                 final notiItem = noti[notiIndex];
                 return Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 32.0, 16.0, 32.0),
+                      EdgeInsetsDirectional.fromSTEB(16.0, 32.0, 16.0, 32.0),
                   child: Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.of(context).secondaryBackground,
-                      boxShadow: const [
+                      boxShadow: [
                         BoxShadow(
                           blurRadius: 2.0,
                           color: Color(0x520E151B),
-                          offset: Offset(0.0, 1.0),
+                          offset: Offset(
+                            0.0,
+                            1.0,
+                          ),
                         )
                       ],
                       borderRadius: BorderRadius.circular(12.0),
@@ -125,7 +133,7 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 16.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -137,38 +145,87 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
                                   FFLocalizations.of(context).getText(
                                     'j6rmyozi' /* New Notications */,
                                   ),
-                                  style: FlutterFlowTheme.of(context).bodyLarge,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyLarge
+                                      .override(
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyLarge
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .fontStyle,
+                                      ),
                                 ),
                               ),
                               InkWell(
-  splashColor: Colors.transparent,
-  focusColor: Colors.transparent,
-  hoverColor: Colors.transparent,
-  highlightColor: Colors.transparent,
-  onTap: () async {
-    logFirebaseEvent('NOTIFICATION_POPUP_Icon_25hwnyi0_ON_TAP');
-    logFirebaseEvent('Icon_close_dialog,_drawer,_etc');
-    Navigator.pop(context);
-  },
-  child: Icon(
-    Icons.cancel_rounded,
-    color: FlutterFlowTheme.of(context).secondaryText,
-    size: 24,
-  ),
-)
-
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  logFirebaseEvent(
+                                      'NOTIFICATION_POPUP_Icon_25hwnyi0_ON_TAP');
+                                  logFirebaseEvent(
+                                      'Icon_close_dialog_drawer_etc');
+                                  Navigator.pop(context);
+                                },
+                                child: Icon(
+                                  Icons.cancel_rounded,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 24.0,
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              16.0, 4.0, 0.0, 12.0),
-                          child: Text(
-                            getJsonField(
-                              notiItem,
-                              r'''$.content''',
-                            ).toString(),
-                            style: FlutterFlowTheme.of(context).labelMedium,
+                        Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          elevation: 0.0,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                16.0, 4.0, 0.0, 12.0),
+                            child: Text(
+                              getJsonField(
+                                notiItem,
+                                r'''$.content''',
+                              ).toString(),
+                              style: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
+                            ),
                           ),
                         ),
                         if (getJsonField(
@@ -177,7 +234,7 @@ class _NotificationPopupWidgetState extends State<NotificationPopupWidget>
                             ) !=
                             null)
                           ClipRRect(
-                            borderRadius: const BorderRadius.only(
+                            borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(0.0),
                               bottomRight: Radius.circular(0.0),
                               topLeft: Radius.circular(12.0),

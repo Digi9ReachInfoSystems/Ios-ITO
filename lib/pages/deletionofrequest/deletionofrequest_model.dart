@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class DeletionofrequestModel extends FlutterFlowModel<DeletionofrequestWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
@@ -43,8 +42,6 @@ class DeletionofrequestModel extends FlutterFlowModel<DeletionofrequestWidget> {
     return null;
   }
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     textController1Validator = _textController1Validator;
@@ -53,15 +50,10 @@ class DeletionofrequestModel extends FlutterFlowModel<DeletionofrequestWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
     textFieldFocusNode2?.dispose();
     textController2?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

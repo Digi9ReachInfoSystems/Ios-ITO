@@ -1,22 +1,26 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:indian_talent_olympiad/pages/powerfailure/powerfailure_widget.dart';
-import 'package:indian_talent_olympiad/pages/powerwebview/powerwebview_widget.dart';
 import 'package:provider/provider.dart';
+import '/backend/backend.dart';
+import '/backend/schema/structs/index.dart';
 
 import '/auth/base_auth_user_provider.dart';
 
 import '/backend/push_notifications/push_notifications_handler.dart'
     show PushNotificationsHandler;
-import '/index.dart';
 import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
 
 const kTransitionInfoKey = '__transition_info__';
+
+GlobalKey<NavigatorState> appNavigatorKey = GlobalKey<NavigatorState>();
 
 class AppStateNotifier extends ChangeNotifier {
   AppStateNotifier._();
@@ -76,114 +80,142 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
+      navigatorKey: appNavigatorKey,
       errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? entryPage ?? const NavBarPage()
-          : const OnBoardingWidget(),
+          ? entryPage ?? NavBarPage()
+          : OnBoardingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) => appStateNotifier.loggedIn
-              ? entryPage ?? const NavBarPage()
-              : const OnBoardingWidget(),
+              ? entryPage ?? NavBarPage()
+              : OnBoardingWidget(),
         ),
         FFRoute(
-          name: 'schedule',
-          path: '/schedule',
+          name: ScheduleWidget.routeName,
+          path: ScheduleWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'schedule')
-              : const ScheduleWidget(),
+              ? NavBarPage(initialPage: 'schedule')
+              : ScheduleWidget(),
         ),
         FFRoute(
-          name: 'service',
-          path: '/service',
-          builder: (context, params) => const ServiceWidget(),
+          name: ServiceWidget.routeName,
+          path: ServiceWidget.routePath,
+          builder: (context, params) => ServiceWidget(),
         ),
         FFRoute(
-          name: 'profile',
-          path: '/profile',
+          name: ProfileWidget.routeName,
+          path: ProfileWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'profile')
-              : const ProfileWidget(),
+              ? NavBarPage(initialPage: 'profile')
+              : ProfileWidget(),
         ),
         FFRoute(
-          name: 'onBoarding',
-          path: '/onBoarding',
-          builder: (context, params) => const OnBoardingWidget(),
+          name: OnBoardingWidget.routeName,
+          path: OnBoardingWidget.routePath,
+          builder: (context, params) => OnBoardingWidget(),
         ),
         FFRoute(
-          name: 'walkThrough',
-          path: '/walkThrough',
-          builder: (context, params) => const WalkThroughWidget(),
+          name: WalkThroughWidget.routeName,
+          path: WalkThroughWidget.routePath,
+          builder: (context, params) => WalkThroughWidget(),
         ),
         FFRoute(
-          name: 'forgetPassword',
-          path: '/forgetPassword',
-          builder: (context, params) => const ForgetPasswordWidget(),
+          name: ForgetPasswordWidget.routeName,
+          path: ForgetPasswordWidget.routePath,
+          builder: (context, params) => ForgetPasswordWidget(),
         ),
         FFRoute(
-          name: 'otpVerify',
-          path: '/otpVerify',
-          builder: (context, params) => const OtpVerifyWidget(),
+          name: OtpVerifyWidget.routeName,
+          path: OtpVerifyWidget.routePath,
+          builder: (context, params) => OtpVerifyWidget(),
         ),
         FFRoute(
-          name: 'resetPassword',
-          path: '/resetPassword',
+          name: ResetPasswordWidget.routeName,
+          path: ResetPasswordWidget.routePath,
           builder: (context, params) => ResetPasswordWidget(
-            phonenumber: params.getParam('phonenumber', ParamType.String),
+            phonenumber: params.getParam(
+              'phonenumber',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'paymentSuccess',
-          path: '/paymentSuccess',
-          builder: (context, params) => const PaymentSuccessWidget(),
+          name: PaymentSuccessWidget.routeName,
+          path: PaymentSuccessWidget.routePath,
+          builder: (context, params) => PaymentSuccessWidget(),
         ),
         FFRoute(
-          name: 'monthlyexam',
-          path: '/monthlyexam',
+          name: MonthlyexamWidget.routeName,
+          path: MonthlyexamWidget.routePath,
           builder: (context, params) => MonthlyexamWidget(
-            serviceid: params.getParam('serviceid', ParamType.String),
-            choosenservice: params.getParam('choosenservice', ParamType.String),
+            serviceid: params.getParam(
+              'serviceid',
+              ParamType.String,
+            ),
+            choosenservice: params.getParam(
+              'choosenservice',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'annualExamStart',
-          path: '/annualExamStart',
+          name: AnnualExamStartWidget.routeName,
+          path: AnnualExamStartWidget.routePath,
           builder: (context, params) => AnnualExamStartWidget(
-            subjectid: params.getParam('subjectid', ParamType.String),
-            serviceid: params.getParam('serviceid', ParamType.String),
-            choosensubject: params.getParam('choosensubject', ParamType.String),
-            alias: params.getParam('alias', ParamType.String),
-             round: params.getParam('round', ParamType.String),
+            subjectid: params.getParam(
+              'subjectid',
+              ParamType.String,
+            ),
+            serviceid: params.getParam(
+              'serviceid',
+              ParamType.String,
+            ),
+            choosensubject: params.getParam(
+              'choosensubject',
+              ParamType.String,
+            ),
+            alias: params.getParam(
+              'alias',
+              ParamType.String,
+            ),
+            round: params.getParam(
+              'round',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'editProfile',
-          path: '/editProfile',
-          builder: (context, params) => const EditProfileWidget(),
+          name: EditProfileWidget.routeName,
+          path: EditProfileWidget.routePath,
+          builder: (context, params) => EditProfileWidget(),
         ),
         FFRoute(
-          name: 'powerPackages',
-          path: '/powerPackages',
+          name: PowerPackagesWidget.routeName,
+          path: PowerPackagesWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'powerPackages')
-              : const PowerPackagesWidget(),
+              ? NavBarPage(initialPage: 'powerPackages')
+              : PowerPackagesWidget(),
         ),
-         FFRoute(
-          name: 'subscription',
-          path: '/subscription',
+        FFRoute(
+          name: SubscriptionWidget.routeName,
+          path: SubscriptionWidget.routePath,
           builder: (context, params) => SubscriptionWidget(
-            serviceName: params.getParam('serviceName', ParamType.String),
+            serviceName: params.getParam(
+              'serviceName',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'myOrders',
-          path: '/myOrders',
-          builder: (context, params) => const MyOrdersWidget(),
+          name: MyOrdersWidget.routeName,
+          path: MyOrdersWidget.routePath,
+          builder: (context, params) => MyOrdersWidget(),
         ),
         FFRoute(
-          name: 'testpage',
-          path: '/testpage',
+          name: TestpageWidget.routeName,
+          path: TestpageWidget.routePath,
           builder: (context, params) => TestpageWidget(
             testId: params.getParam(
               'testId',
@@ -196,195 +228,251 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
-          name: 'Auth1Login',
-          path: '/auth1Login',
-          builder: (context, params) => const Auth1LoginWidget(),
+          name: Auth1LoginWidget.routeName,
+          path: Auth1LoginWidget.routePath,
+          builder: (context, params) => Auth1LoginWidget(),
         ),
         FFRoute(
-          name: 'Auth1register',
-          path: '/auth1register',
-          builder: (context, params) => const Auth1registerWidget(),
+          name: Auth1registerWidget.routeName,
+          path: Auth1registerWidget.routePath,
+          builder: (context, params) => Auth1registerWidget(),
         ),
         FFRoute(
-          name: 'Homepagelogin',
-          path: '/homepagelogin',
+          name: HomepageloginWidget.routeName,
+          path: HomepageloginWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'Homepagelogin')
-              : const HomepageloginWidget(),
+              ? NavBarPage(initialPage: 'Homepagelogin')
+              : HomepageloginWidget(),
         ),
         FFRoute(
-          name: 'aftersubmit',
-          path: '/aftersubmit',
+          name: AftersubmitWidget.routeName,
+          path: AftersubmitWidget.routePath,
           builder: (context, params) => AftersubmitWidget(
-            testid: params.getParam('testid', ParamType.String),
-            totaltime: params.getParam('totaltime', ParamType.String),
+            testid: params.getParam(
+              'testid',
+              ParamType.String,
+            ),
+            totaltime: params.getParam(
+              'totaltime',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'helpPage',
-          path: '/helpPage',
-          builder: (context, params) => const HelpPageWidget(),
+          name: HelpPageWidget.routeName,
+          path: HelpPageWidget.routePath,
+          builder: (context, params) => HelpPageWidget(),
         ),
         FFRoute(
-          name: 'termsAndconditions',
-          path: '/termsAndconditions',
-          builder: (context, params) => const TermsAndconditionsWidget(),
+          name: TermsAndconditionsWidget.routeName,
+          path: TermsAndconditionsWidget.routePath,
+          builder: (context, params) => TermsAndconditionsWidget(),
         ),
         FFRoute(
-          name: 'privacyPolicy',
-          path: '/privacyPolicy',
-          builder: (context, params) => const PrivacyPolicyWidget(),
+          name: PrivacyPolicyWidget.routeName,
+          path: PrivacyPolicyWidget.routePath,
+          builder: (context, params) => PrivacyPolicyWidget(),
         ),
         FFRoute(
-          name: 'Deletionofrequest',
-          path: '/deletionofrequest',
-          builder: (context, params) => const DeletionofrequestWidget(),
+          name: DeletionofrequestWidget.routeName,
+          path: DeletionofrequestWidget.routePath,
+          builder: (context, params) => DeletionofrequestWidget(),
         ),
         FFRoute(
-          name: 'notices',
-          path: '/notices',
-          builder: (context, params) => const NoticesWidget(),
+          name: NoticesWidget.routeName,
+          path: NoticesWidget.routePath,
+          builder: (context, params) => NoticesWidget(),
         ),
         FFRoute(
-          name: 'demo',
-          path: '/demo',
-          builder: (context, params) => const DemoWidget(),
+          name: DemoWidget.routeName,
+          path: DemoWidget.routePath,
+          builder: (context, params) => DemoWidget(),
         ),
         FFRoute(
-          name: 'webview_payment',
-          path: '/webviewPayment',
+          name: WebviewPaymentWidget.routeName,
+          path: WebviewPaymentWidget.routePath,
           builder: (context, params) => WebviewPaymentWidget(
-            payurl: params.getParam('payurl', ParamType.String),
+            payurl: params.getParam(
+              'payurl',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'Cartvalue',
-          path: '/cartvalue',
-          builder: (context, params) => const CartvalueWidget(),
+          name: CartvalueWidget.routeName,
+          path: CartvalueWidget.routePath,
+          builder: (context, params) => CartvalueWidget(),
         ),
         FFRoute(
-          name: 'finalpaybutton',
-          path: '/finalpaybutton',
+          name: FinalpaybuttonWidget.routeName,
+          path: FinalpaybuttonWidget.routePath,
           builder: (context, params) => FinalpaybuttonWidget(
-            orderid: params.getParam('orderid', ParamType.String),
-            finalamount: params.getParam('finalamount', ParamType.double),
+            orderid: params.getParam(
+              'orderid',
+              ParamType.String,
+            ),
+            finalamount: params.getParam(
+              'finalamount',
+              ParamType.double,
+            ),
           ),
         ),
         FFRoute(
-          name: 'paymentfailure',
-          path: '/paymentfailure',
-          builder: (context, params) => const PaymentfailureWidget(),
+          name: PaymentfailureWidget.routeName,
+          path: PaymentfailureWidget.routePath,
+          builder: (context, params) => PaymentfailureWidget(),
         ),
         FFRoute(
-          name: 'productsmenu',
-          path: '/productsmenu',
+          name: ProductsmenuWidget.routeName,
+          path: ProductsmenuWidget.routePath,
           builder: (context, params) => params.isEmpty
-              ? const NavBarPage(initialPage: 'productsmenu')
-              : const ProductsmenuWidget(),
+              ? NavBarPage(initialPage: 'productsmenu')
+              : ProductsmenuWidget(),
         ),
         FFRoute(
-          name: 'refundpolicy',
-          path: '/refundpolicy',
-          builder: (context, params) => const RefundpolicyWidget(),
+          name: RefundpolicyWidget.routeName,
+          path: RefundpolicyWidget.routePath,
+          builder: (context, params) => RefundpolicyWidget(),
         ),
         FFRoute(
-          name: 'roundregistration',
-          path: '/roundregistration',
-          builder: (context, params) => const RoundregistrationWidget(),
+          name: RoundregistrationWidget.routeName,
+          path: RoundregistrationWidget.routePath,
+          builder: (context, params) => RoundregistrationWidget(),
         ),
         FFRoute(
-          name: 'results',
-          path: '/results',
-          builder: (context, params) => const ResultsWidget(),
+          name: ResultsWidget.routeName,
+          path: ResultsWidget.routePath,
+          builder: (context, params) => ResultsWidget(),
         ),
         FFRoute(
-          name: 'CartvalueCopy',
-          path: '/cartvalueCopy',
-          builder: (context, params) => const CartvalueCopyWidget(),
+          name: CartvalueCopyWidget.routeName,
+          path: CartvalueCopyWidget.routePath,
+          builder: (context, params) => CartvalueCopyWidget(),
         ),
         FFRoute(
-          name: 'productWebview',
-          path: '/productWebview',
+          name: ProductWebviewWidget.routeName,
+          path: ProductWebviewWidget.routePath,
           builder: (context, params) => ProductWebviewWidget(
-            payurl: params.getParam('payurl', ParamType.String),
+            payurl: params.getParam(
+              'payurl',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'productFailure',
-          path: '/productFailure',
-          builder: (context, params) => const ProductFailureWidget(),
+          name: ProductFailureWidget.routeName,
+          path: ProductFailureWidget.routePath,
+          builder: (context, params) => ProductFailureWidget(),
         ),
         FFRoute(
-          name: 'summerquiz',
-          path: '/summerquiz',
-          builder: (context, params) => const SummerquizWidget(),
+          name: SummerquizWidget.routeName,
+          path: SummerquizWidget.routePath,
+          builder: (context, params) => SummerquizWidget(),
         ),
         FFRoute(
-          name: 'annualExam',
-          path: '/annualExam',
+          name: AnnualExamWidget.routeName,
+          path: AnnualExamWidget.routePath,
           builder: (context, params) => AnnualExamWidget(
-            serviceid: params.getParam('serviceid', ParamType.String),
-            choosenservice: params.getParam('choosenservice', ParamType.String),
+            serviceid: params.getParam(
+              'serviceid',
+              ParamType.String,
+            ),
+            choosenservice: params.getParam(
+              'choosenservice',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'quizdetails',
-          path: '/quizdetails',
-          builder: (context, params) => const QuizdetailsWidget(),
+          name: QuizdetailsWidget.routeName,
+          path: QuizdetailsWidget.routePath,
+          builder: (context, params) => QuizdetailsWidget(),
         ),
         FFRoute(
-          name: 'round2result',
-          path: '/round2result',
-          builder: (context, params) => const Round2resultWidget(),
+          name: Round2resultWidget.routeName,
+          path: Round2resultWidget.routePath,
+          builder: (context, params) => Round2resultWidget(),
         ),
         FFRoute(
-          name: 'Coupons',
-          path: '/coupons',
-          builder: (context, params) => const CouponsWidget(),
+          name: CouponsWidget.routeName,
+          path: CouponsWidget.routePath,
+          builder: (context, params) => CouponsWidget(),
         ),
         FFRoute(
-          name: 'certificateViewer',
-          path: '/certificateViewer',
+          name: CertificateViewerWidget.routeName,
+          path: CertificateViewerWidget.routePath,
           builder: (context, params) => CertificateViewerWidget(
-            resultId: params.getParam('resultId', ParamType.String),
+            resultId: params.getParam(
+              'resultId',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
-          name: 'powerProducts',
-          path: '/powerProducts',
+          name: PowerProductsWidget.routeName,
+          path: PowerProductsWidget.routePath,
           builder: (context, params) => PowerProductsWidget(
-            productId: params.getParam('productId', ParamType.JSON),
+            productId: params.getParam(
+              'productId',
+              ParamType.JSON,
+            ),
           ),
         ),
-         FFRoute(
-          name: 'notifications',
-          path: '/notifications',
-          builder: (context, params) => const NotificationsWidget(),
+        FFRoute(
+          name: NotificationsWidget.routeName,
+          path: NotificationsWidget.routePath,
+          builder: (context, params) => NotificationsWidget(),
         ),
         FFRoute(
-          name: 'powerwebview',
-          path: '/powerwebview',
+          name: TestpagetestingdummyWidget.routeName,
+          path: TestpagetestingdummyWidget.routePath,
+          builder: (context, params) => TestpagetestingdummyWidget(
+            testId: params.getParam(
+              'testId',
+              ParamType.String,
+            ),
+            timer: params.getParam(
+              'timer',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: PowercartWidget.routeName,
+          path: PowercartWidget.routePath,
+          builder: (context, params) => PowercartWidget(),
+        ),
+        FFRoute(
+          name: PowerwebviewWidget.routeName,
+          path: PowerwebviewWidget.routePath,
           builder: (context, params) => PowerwebviewWidget(
-            payurl: params.getParam('payurl', ParamType.String),
-            productid: params.getParam('productid', ParamType.JSON),
+            payurl: params.getParam(
+              'payurl',
+              ParamType.String,
+            ),
+            productid: params.getParam(
+              'productid',
+              ParamType.JSON,
+            ),
           ),
         ),
         FFRoute(
-          name: 'powerfailure',
-          path: '/powerfailure',
+          name: PowerfailureWidget.routeName,
+          path: PowerfailureWidget.routePath,
           builder: (context, params) => PowerfailureWidget(
-            payurl: params.getParam('payurl', ParamType.String),
-            productid: params.getParam('productid', ParamType.JSON),
+            payurl: params.getParam(
+              'payurl',
+              ParamType.String,
+            ),
+            productid: params.getParam(
+              'productid',
+              ParamType.JSON,
+            ),
           ),
         ),
         FFRoute(
-          name: 'outOfversion',
-          path: '/outOfversion',
-          builder: (context, params) => const OutOfversionWidget(),
-        ),
-        FFRoute(
-          name: 'testDetails',
-          path: '/testDetails',
+          name: TestDetailsWidget.routeName,
+          path: TestDetailsWidget.routePath,
           builder: (context, params) => TestDetailsWidget(
             testId: params.getParam(
               'testId',
@@ -406,29 +494,52 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               'totalTime',
               ParamType.String,
             ),
-             category: params.getParam(
+            category: params.getParam(
               'category',
               ParamType.String,
-            ), 
-             subjectName: params.getParam(
+            ),
+            subjectName: params.getParam(
               'subjectName',
               ParamType.String,
-            ), 
+            ),
             stdid: params.getParam(
               'stdid',
               ParamType.String,
-            ), 
+            ),
             totalquestion: params.getParam(
               'totalquestion',
               ParamType.String,
             ),
-             totalmarks: params.getParam(
+            totalmarks: params.getParam(
               'totalmarks',
               ParamType.String,
-            )
+            ),
           ),
+        ),
+        FFRoute(
+          name: OutOfversionWidget.routeName,
+          path: OutOfversionWidget.routePath,
+          builder: (context, params) => OutOfversionWidget(),
+        ),
+        FFRoute(
+          name: MonthlyexamCopyWidget.routeName,
+          path: MonthlyexamCopyWidget.routePath,
+          builder: (context, params) => MonthlyexamCopyWidget(
+            serviceid: params.getParam(
+              'serviceid',
+              ParamType.String,
+            ),
+            choosenservice: params.getParam(
+              'choosenservice',
+              ParamType.String,
+            ),
+          ),
+        ),
+        FFRoute(
+          name: CartvalueCopyCopyWidget.routeName,
+          path: CartvalueCopyCopyWidget.routePath,
+          builder: (context, params) => CartvalueCopyCopyWidget(),
         )
-        
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 
@@ -523,7 +634,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -544,10 +655,11 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
     List<String>? collectionNamePath,
-  ]) {
+    StructBuilder<T>? structBuilder,
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }
@@ -560,8 +672,13 @@ class FFParameters {
       return param;
     }
     // Return serialized value.
-    return deserializeParam<T>(param, type, isList,
-        collectionNamePath: collectionNamePath);
+    return deserializeParam<T>(
+      param,
+      type,
+      isList,
+      collectionNamePath: collectionNamePath,
+      structBuilder: structBuilder,
+    );
   }
 }
 
@@ -599,6 +716,7 @@ class FFRoute {
           return null;
         },
         pageBuilder: (context, state) {
+          fixStatusBarOniOS16AndBelow(context);
           final ffParams = FFParameters(state, asyncParams);
           final page = ffParams.hasFutures
               ? FutureBuilder(
@@ -608,11 +726,11 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: Colors.white,
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
                   child: Center(
                     child: Image.asset(
-                      'assets/images/ITO_Pencil_Logo_with_name.png',
-                      width: MediaQuery.sizeOf(context).width * 0.8,
+                      'assets/images/indian-talent-olympiad-new-logo.png',
+                      width: MediaQuery.sizeOf(context).width * 0.6,
                       fit: BoxFit.contain,
                     ),
                   ),
@@ -659,7 +777,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(
+  static TransitionInfo appDefault() => TransitionInfo(
         hasTransition: true,
         transitionType: PageTransitionType.fade,
         duration: Duration(milliseconds: 300),
@@ -684,4 +802,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

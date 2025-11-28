@@ -1,21 +1,30 @@
-import 'package:indian_talent_olympiad/backend/schema/structs/coupon_struct.dart';
-
+import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/special_offershimeer/special_offershimeer_widget.dart';
+import 'dart:math';
+import 'dart:ui';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+
 import 'productsmenu_model.dart';
 export 'productsmenu_model.dart';
 
 class ProductsmenuWidget extends StatefulWidget {
   const ProductsmenuWidget({super.key});
+
+  static String routeName = 'productsmenu';
+  static String routePath = '/productsmenu';
 
   @override
   State<ProductsmenuWidget> createState() => _ProductsmenuWidgetState();
@@ -27,20 +36,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 100.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -49,11 +45,78 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
 
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'productsmenu'});
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      logFirebaseEvent('PRODUCTSMENU_productsmenu_ON_INIT_STATE');
+      Function() _navigate = () {};
+      logFirebaseEvent('productsmenu_backend_call');
+      _model.validatetoken = await ValidateTokenCall.call(
+        token: FFAppState().userInfo.token,
+      );
+
+      if (!(_model.validatetoken?.succeeded ?? true)) {
+        logFirebaseEvent('productsmenu_backend_call');
+        _model.getnewtoken = await GetNewTokenCall.call(
+          userID: FFAppState().userInfo.token,
+        );
+
+        if ((_model.getnewtoken?.succeeded ?? true)) {
+          logFirebaseEvent('productsmenu_update_app_state');
+          FFAppState().updateUserInfoStruct(
+            (e) => e
+              ..token = getJsonField(
+                (_model.getnewtoken?.jsonBody ?? ''),
+                r'''$.jwt_token''',
+              ).toString(),
+          );
+          FFAppState().update(() {});
+        } else {
+          logFirebaseEvent('productsmenu_show_snack_bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Your session has expired. Please log in again to continue.',
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+              ),
+              duration: Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+            ),
+          );
+          logFirebaseEvent('productsmenu_auth');
+          GoRouter.of(context).prepareAuthEvent();
+          await authManager.signOut();
+          GoRouter.of(context).clearRedirectLocation();
+
+          _navigate = () =>
+              context.goNamedAuth(OnBoardingWidget.routeName, context.mounted);
+        }
+      }
+
+      _navigate();
+    });
+
     _model.tabBarController = TabController(
       vsync: this,
       length: 3,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 100.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -70,20 +133,26 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
     return FutureBuilder<ApiCallResponse>(
       future: GetAllProductsCall.call(
         std: FFAppState().userInfo.stdId,
+        token: FFAppState().userInfo.token,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: const SpecialOffershimeerWidget(),
+            body: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 70, 0, 0),
+              child: SpecialOffershimeerWidget(),
+            ),
           );
         }
         final productsmenuGetAllProductsResponse = snapshot.data!;
+
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -91,56 +160,63 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
               backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
               automaticallyImplyLeading: false,
               title: Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0, 0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(25.0, 0.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(25, 0, 0, 0),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       'pvowosuk' /* Special Offers */,
                     ),
                     textAlign: TextAlign.start,
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 16.0,
+                          font: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .headlineMedium
+                                .fontStyle,
+                          ),
+                          fontSize: 16,
+                          letterSpacing: 0.0,
                           fontWeight: FontWeight.w500,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .headlineMedium
+                              .fontStyle,
                         ),
                   ),
                 ),
               ),
-              actions: const [],
+              actions: [],
               centerTitle: true,
-              toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
-              elevation: 2.0,
+              elevation: 0.5,
             ),
             body: SafeArea(
               top: true,
               child: Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0, 0),
                 child: Stack(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
+                  alignment: AlignmentDirectional(0, 1),
                   children: [
                     SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0, 0),
                             child: Card(
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              elevation: 4.0,
+                              elevation: 4,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Align(
-                                    alignment: const AlignmentDirectional(0.0, -1.0),
+                                    alignment: AlignmentDirectional(0, -1),
                                     child: Container(
-                                      width: MediaQuery.sizeOf(context).width *
-                                          1.0,
+                                      width: MediaQuery.sizeOf(context).width,
                                       height:
                                           MediaQuery.sizeOf(context).height *
                                               0.1,
@@ -155,8 +231,8 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 10.0),
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 10, 0, 10),
                                             child: Text(
                                               FFLocalizations.of(context)
                                                   .getText(
@@ -166,12 +242,26 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                       context)
                                                   .bodyMedium
                                                   .override(
-                                                    fontFamily: 'Poppins',
+                                                    font: GoogleFonts.poppins(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .primaryBackground,
-                                                    fontSize: 20.0,
+                                                    fontSize: 20,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
@@ -183,12 +273,12 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                     clipBehavior: Clip.antiAliasWithSaveLayer,
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    elevation: 4.0,
+                                    elevation: 4,
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Container(
-                                      height: 650.0,
+                                      height: 450,
                                       decoration: BoxDecoration(
                                         color: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
@@ -196,7 +286,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                       child: Column(
                                         children: [
                                           Align(
-                                            alignment: const Alignment(0.0, 0),
+                                            alignment: Alignment(0, 0),
                                             child: TabBar(
                                               labelColor:
                                                   FlutterFlowTheme.of(context)
@@ -204,14 +294,39 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                               unselectedLabelColor:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
-                                              labelStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleMedium,
-                                              unselectedLabelStyle: const TextStyle(),
+                                              labelStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleMedium
+                                                  .override(
+                                                    font: GoogleFonts.readexPro(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleMedium
+                                                            .fontStyle,
+                                                  ),
+                                              unselectedLabelStyle: TextStyle(),
                                               indicatorColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
-                                              padding: const EdgeInsets.all(4.0),
+                                              padding: EdgeInsets.all(4),
                                               tabs: [
                                                 Tab(
                                                   text: FFLocalizations.of(
@@ -257,11 +372,11 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryBackground,
-                                                  elevation: 4.0,
+                                                  elevation: 1,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8.0),
+                                                            8),
                                                   ),
                                                   child: Builder(
                                                     builder: (context) {
@@ -272,268 +387,291 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                     .jsonBody,
                                                               )?.toList() ??
                                                               [];
-                                                      return ListView.builder(
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        shrinkWrap: true,
-                                                        primary: false,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemCount:
-                                                            subProducts.length,
-                                                        itemBuilder: (context,
-                                                            subProductsIndex) {
-                                                          final subProductsItem =
-                                                              subProducts[
-                                                                  subProductsIndex];
-                                                          return Theme(
-                                                            data: ThemeData(
-                                                              unselectedWidgetColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                            ),
-                                                            child:
-                                                                CheckboxListTile(
-                                                              value: _model
-                                                                      .checkboxListTileValueMap1[
-                                                                  subProductsItem] ??= FFAppState()
-                                                                      .productids
-                                                                      .contains(
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_id''',
-                                                                      ).toString()) ==
-                                                                  true,
-                                                              onChanged:
-                                                                  (newValue) async {
-                                                                setState(() =>
-                                                                    _model.checkboxListTileValueMap1[
-                                                                            subProductsItem] =
-                                                                        newValue!);
-                                                                if (newValue!) {
-                                                                  logFirebaseEvent(
-                                                                      'PRODUCTSMENU_CheckboxListTile_9wf939ya_O');
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                        .addToTotalcart(
-                                                                            CartitemsStruct(
-                                                                      productId:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_id''',
-                                                                      ).toString(),
-                                                                      productamount:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.INR''',
-                                                                      ).toString(),
-                                                                      productname:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_name''',
-                                                                      ).toString(),
-                                                                      producttypes:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.service_type''',
-                                                                      ).toString(),
-                                                                    ));
-                                                                    FFAppState()
-                                                                        .addToProductids(
+
+                                                      return SingleChildScrollView(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: List.generate(
+                                                              subProducts
+                                                                  .length,
+                                                              (subProductsIndex) {
+                                                            final subProductsItem =
+                                                                subProducts[
+                                                                    subProductsIndex];
+                                                            return Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child: Theme(
+                                                                data: ThemeData(
+                                                                  unselectedWidgetColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                ),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                  value: _model
+                                                                          .checkboxListTileValueMap1[
+                                                                      subProductsItem] ??= FFAppState()
+                                                                          .productids
+                                                                          .contains(
+                                                                              getJsonField(
+                                                                            subProductsItem,
+                                                                            r'''$.product_id''',
+                                                                          ).toString()) ==
+                                                                      true,
+                                                                  onChanged:
+                                                                      (newValue) async {
+                                                                    safeSetState(() =>
+                                                                        _model.checkboxListTileValueMap1[subProductsItem] =
+                                                                            newValue!);
+                                                                    if (newValue!) {
+                                                                      logFirebaseEvent(
+                                                                          'PRODUCTSMENU_CheckboxListTile_9wf939ya_O');
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                          .addToTotalcart(
+                                                                              CartitemsStruct(
+                                                                        productId:
                                                                             getJsonField(
-                                                                      subProductsItem,
-                                                                      r'''$.product_id''',
-                                                                    ).toString());
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_page_state');
-                                                                  setState(() {
-                                                                    _model.addToTotalAmount(
-                                                                        subProductsItem
-                                                                            .toString());
-                                                                    _model.added =
-                                                                        true;
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                    FFAppState()
-                                                                        .applied = [];
-                                                                    FFAppState()
-                                                                            .discountamount =
-                                                                        0.0;
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        functions.minusdiscountamount(
-                                                                            valueOrDefault<double>(
-                                                                              functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
-                                                                              0.0,
-                                                                            ),
-                                                                            FFAppState().discountamount)!;
-                                                                  });
-                                                                } else {
-                                                                  logFirebaseEvent(
-                                                                      'PRODUCTSMENU_CheckboxListTile_9wf939ya_O');
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                        .removeFromTotalcart(
-                                                                            CartitemsStruct(
-                                                                      productId:
-                                                                          getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_id''',
+                                                                        ).toString(),
+                                                                        productamount:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.INR''',
+                                                                        ).toString(),
+                                                                        productname:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_name''',
+                                                                        ).toString(),
+                                                                        producttypes:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.service_type''',
+                                                                        ).toString(),
+                                                                      ));
+                                                                      FFAppState()
+                                                                          .addToProductids(
+                                                                              getJsonField(
                                                                         subProductsItem,
                                                                         r'''$.product_id''',
-                                                                      ).toString(),
-                                                                      productamount:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.INR''',
-                                                                      ).toString(),
-                                                                      productname:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_name''',
-                                                                      ).toString(),
-                                                                      producttypes:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.service_type''',
-                                                                      ).toString(),
-                                                                    ));
-                                                                    FFAppState()
-                                                                        .removeFromProductids(
+                                                                      ).toString());
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_page_state');
+                                                                      _model.addToTotalAmount(
+                                                                          subProductsItem
+                                                                              .toString());
+                                                                      _model.added =
+                                                                          true;
+                                                                      safeSetState(
+                                                                          () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .applied = [];
+                                                                      FFAppState()
+                                                                              .discountamount =
+                                                                          0.0;
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          functions.minusdiscountamount(
+                                                                              valueOrDefault<double>(
+                                                                                functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                                0.0,
+                                                                              ),
+                                                                              FFAppState().discountamount)!;
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                    } else {
+                                                                      logFirebaseEvent(
+                                                                          'PRODUCTSMENU_CheckboxListTile_9wf939ya_O');
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                          .removeFromTotalcart(
+                                                                              CartitemsStruct(
+                                                                        productId:
                                                                             getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_id''',
+                                                                        ).toString(),
+                                                                        productamount:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.INR''',
+                                                                        ).toString(),
+                                                                        productname:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_name''',
+                                                                        ).toString(),
+                                                                        producttypes:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.service_type''',
+                                                                        ).toString(),
+                                                                      ));
+                                                                      FFAppState()
+                                                                          .removeFromProductids(
+                                                                              getJsonField(
+                                                                        subProductsItem,
+                                                                        r'''$.product_id''',
+                                                                      ).toString());
+                                                                      FFAppState()
+                                                                              .cartvalue =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.finalcartamount(FFAppState()
+                                                                            .totalcart
+                                                                            .toList()),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                              .deliveryfee =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.getdelivery(FFAppState()
+                                                                            .totalcart
+                                                                            .toList()),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.payableamount(
+                                                                            FFAppState().cartvalue,
+                                                                            FFAppState().deliveryfee),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_page_state');
+                                                                      _model.removeFromTotalAmount(
+                                                                          subProductsItem
+                                                                              .toString());
+                                                                      safeSetState(
+                                                                          () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .applied = [];
+                                                                      FFAppState()
+                                                                              .discountamount =
+                                                                          0.0;
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          functions.minusdiscountamount(
+                                                                              valueOrDefault<double>(
+                                                                                functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                                0.0,
+                                                                              ),
+                                                                              FFAppState().discountamount)!;
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                    }
+                                                                  },
+                                                                  title: Text(
+                                                                    getJsonField(
                                                                       subProductsItem,
-                                                                      r'''$.product_id''',
-                                                                    ).toString());
-                                                                    FFAppState()
-                                                                            .cartvalue =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.finalcartamount(FFAppState()
-                                                                          .totalcart
-                                                                          .toList()),
-                                                                      0.0,
-                                                                    );
-                                                                    FFAppState()
-                                                                            .deliveryfee =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.getdelivery(FFAppState()
-                                                                          .totalcart
-                                                                          .toList()),
-                                                                      0.0,
-                                                                    );
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.payableamount(
-                                                                          FFAppState()
-                                                                              .cartvalue,
-                                                                          FFAppState()
-                                                                              .deliveryfee),
-                                                                      0.0,
-                                                                    );
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_page_state');
-                                                                  setState(() {
-                                                                    _model.removeFromTotalAmount(
-                                                                        subProductsItem
-                                                                            .toString());
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                    FFAppState()
-                                                                        .applied = [];
-                                                                    FFAppState()
-                                                                            .discountamount =
-                                                                        0.0;
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        functions.minusdiscountamount(
-                                                                            valueOrDefault<double>(
-                                                                              functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                      r'''$.product_name''',
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLarge
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.outfit(
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                                                                          ),
+                                                                          fontSize:
+                                                                              14,
+                                                                          letterSpacing:
                                                                               0.0,
-                                                                            ),
-                                                                            FFAppState().discountamount)!;
-                                                                  });
-                                                                }
-                                                              },
-                                                              title: Text(
-                                                                getJsonField(
-                                                                  subProductsItem,
-                                                                  r'''$.product_name''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          14.0,
-                                                                    ),
-                                                              ),
-                                                              subtitle: Text(
-                                                                getJsonField(
-                                                                  subProductsItem,
-                                                                  r'''$.INR''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                    ),
-                                                              ),
-                                                              tileColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              activeColor:
-                                                                  FlutterFlowTheme.of(
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .titleLarge
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .titleLarge
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                  subtitle:
+                                                                      Text(
+                                                                    getJsonField(
+                                                                      subProductsItem,
+                                                                      r'''$.INR''',
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.readexPro(
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                          ),
+                                                                          fontSize:
+                                                                              12,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                  tileColor: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
-                                                              checkColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                              dense: false,
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
-                                                            ),
-                                                          );
-                                                        },
+                                                                      .secondaryBackground,
+                                                                  activeColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                  checkColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .info,
+                                                                  dense: false,
+                                                                  controlAffinity:
+                                                                      ListTileControlAffinity
+                                                                          .leading,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }),
+                                                        ),
                                                       );
                                                     },
                                                   ),
@@ -544,11 +682,11 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryBackground,
-                                                  elevation: 4.0,
+                                                  elevation: 4,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8.0),
+                                                            8),
                                                   ),
                                                   child: Builder(
                                                     builder: (context) {
@@ -559,246 +697,268 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                     .jsonBody,
                                                               )?.toList() ??
                                                               [];
-                                                      return ListView.builder(
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        primary: false,
-                                                        shrinkWrap: true,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemCount:
-                                                            sixMonths.length,
-                                                        itemBuilder: (context,
-                                                            sixMonthsIndex) {
-                                                          final sixMonthsItem =
-                                                              sixMonths[
-                                                                  sixMonthsIndex];
-                                                          return Theme(
-                                                            data: ThemeData(
-                                                              unselectedWidgetColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                            ),
-                                                            child:
-                                                                CheckboxListTile(
-                                                              value: _model
-                                                                      .checkboxListTileValueMap2[
-                                                                  sixMonthsItem] ??= FFAppState()
-                                                                      .productids
-                                                                      .contains(
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.product_id''',
-                                                                      ).toString()) ==
-                                                                  true,
-                                                              onChanged:
-                                                                  (newValue) async {
-                                                                setState(() =>
-                                                                    _model.checkboxListTileValueMap2[
-                                                                            sixMonthsItem] =
-                                                                        newValue!);
-                                                                if (newValue!) {
-                                                                  logFirebaseEvent(
-                                                                      'PRODUCTSMENU_CheckboxListTile_l3k3oe8d_O');
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                        .addToTotalcart(
-                                                                            CartitemsStruct(
-                                                                      productId:
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.product_id''',
-                                                                      ).toString(),
-                                                                      productamount:
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.INR''',
-                                                                      ).toString(),
-                                                                      productname:
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.product_name''',
-                                                                      ).toString(),
-                                                                      producttypes:
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.service_type''',
-                                                                      ).toString(),
-                                                                    ));
-                                                                    FFAppState()
-                                                                        .addToProductids(
+
+                                                      return SingleChildScrollView(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: List.generate(
+                                                              sixMonths.length,
+                                                              (sixMonthsIndex) {
+                                                            final sixMonthsItem =
+                                                                sixMonths[
+                                                                    sixMonthsIndex];
+                                                            return Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child: Theme(
+                                                                data: ThemeData(
+                                                                  unselectedWidgetColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                ),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                  value: _model
+                                                                          .checkboxListTileValueMap2[
+                                                                      sixMonthsItem] ??= FFAppState()
+                                                                          .productids
+                                                                          .contains(
+                                                                              getJsonField(
+                                                                            sixMonthsItem,
+                                                                            r'''$.product_id''',
+                                                                          ).toString()) ==
+                                                                      true,
+                                                                  onChanged:
+                                                                      (newValue) async {
+                                                                    safeSetState(() =>
+                                                                        _model.checkboxListTileValueMap2[sixMonthsItem] =
+                                                                            newValue!);
+                                                                    if (newValue!) {
+                                                                      logFirebaseEvent(
+                                                                          'PRODUCTSMENU_CheckboxListTile_l3k3oe8d_O');
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                          .addToTotalcart(
+                                                                              CartitemsStruct(
+                                                                        productId:
                                                                             getJsonField(
-                                                                      sixMonthsItem,
-                                                                      r'''$.product_id''',
-                                                                    ).toString());
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                    FFAppState()
-                                                                        .applied = [];
-                                                                    FFAppState()
-                                                                            .discountamount =
-                                                                        0.0;
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        functions.minusdiscountamount(
-                                                                            valueOrDefault<double>(
-                                                                              functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
-                                                                              0.0,
-                                                                            ),
-                                                                            FFAppState().discountamount)!;
-                                                                  });
-                                                                } else {
-                                                                  logFirebaseEvent(
-                                                                      'PRODUCTSMENU_CheckboxListTile_l3k3oe8d_O');
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                        .removeFromTotalcart(
-                                                                            CartitemsStruct(
-                                                                      productId:
-                                                                          getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.product_id''',
+                                                                        ).toString(),
+                                                                        productamount:
+                                                                            getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.INR''',
+                                                                        ).toString(),
+                                                                        productname:
+                                                                            getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.product_name''',
+                                                                        ).toString(),
+                                                                        producttypes:
+                                                                            getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.service_type''',
+                                                                        ).toString(),
+                                                                      ));
+                                                                      FFAppState()
+                                                                          .addToProductids(
+                                                                              getJsonField(
                                                                         sixMonthsItem,
                                                                         r'''$.product_id''',
-                                                                      ).toString(),
-                                                                      productamount:
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.INR''',
-                                                                      ).toString(),
-                                                                      productname:
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.product_name''',
-                                                                      ).toString(),
-                                                                      producttypes:
-                                                                          getJsonField(
-                                                                        sixMonthsItem,
-                                                                        r'''$.service_type''',
-                                                                      ).toString(),
-                                                                    ));
-                                                                    FFAppState()
-                                                                        .removeFromProductids(
+                                                                      ).toString());
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .applied = [];
+                                                                      FFAppState()
+                                                                              .discountamount =
+                                                                          0.0;
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          functions.minusdiscountamount(
+                                                                              valueOrDefault<double>(
+                                                                                functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                                0.0,
+                                                                              ),
+                                                                              FFAppState().discountamount)!;
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                    } else {
+                                                                      logFirebaseEvent(
+                                                                          'PRODUCTSMENU_CheckboxListTile_l3k3oe8d_O');
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                          .removeFromTotalcart(
+                                                                              CartitemsStruct(
+                                                                        productId:
                                                                             getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.product_id''',
+                                                                        ).toString(),
+                                                                        productamount:
+                                                                            getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.INR''',
+                                                                        ).toString(),
+                                                                        productname:
+                                                                            getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.product_name''',
+                                                                        ).toString(),
+                                                                        producttypes:
+                                                                            getJsonField(
+                                                                          sixMonthsItem,
+                                                                          r'''$.service_type''',
+                                                                        ).toString(),
+                                                                      ));
+                                                                      FFAppState()
+                                                                          .removeFromProductids(
+                                                                              getJsonField(
+                                                                        sixMonthsItem,
+                                                                        r'''$.product_id''',
+                                                                      ).toString());
+                                                                      FFAppState()
+                                                                              .cartvalue =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.finalcartamount(FFAppState()
+                                                                            .totalcart
+                                                                            .toList()),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                              .deliveryfee =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.getdelivery(FFAppState()
+                                                                            .totalcart
+                                                                            .toList()),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.payableamount(
+                                                                            FFAppState().cartvalue,
+                                                                            FFAppState().deliveryfee),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .applied = [];
+                                                                      FFAppState()
+                                                                              .discountamount =
+                                                                          0.0;
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          functions.minusdiscountamount(
+                                                                              valueOrDefault<double>(
+                                                                                functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                                0.0,
+                                                                              ),
+                                                                              FFAppState().discountamount)!;
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                    }
+                                                                  },
+                                                                  title: Text(
+                                                                    getJsonField(
                                                                       sixMonthsItem,
-                                                                      r'''$.product_id''',
-                                                                    ).toString());
-                                                                    FFAppState()
-                                                                            .cartvalue =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.finalcartamount(FFAppState()
-                                                                          .totalcart
-                                                                          .toList()),
-                                                                      0.0,
-                                                                    );
-                                                                    FFAppState()
-                                                                            .deliveryfee =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.getdelivery(FFAppState()
-                                                                          .totalcart
-                                                                          .toList()),
-                                                                      0.0,
-                                                                    );
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.payableamount(
-                                                                          FFAppState()
-                                                                              .cartvalue,
-                                                                          FFAppState()
-                                                                              .deliveryfee),
-                                                                      0.0,
-                                                                    );
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                    FFAppState()
-                                                                        .applied = [];
-                                                                    FFAppState()
-                                                                            .discountamount =
-                                                                        0.0;
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        functions.minusdiscountamount(
-                                                                            valueOrDefault<double>(
-                                                                              functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                      r'''$.product_name''',
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLarge
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.outfit(
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                                                                          ),
+                                                                          fontSize:
+                                                                              14,
+                                                                          letterSpacing:
                                                                               0.0,
-                                                                            ),
-                                                                            FFAppState().discountamount)!;
-                                                                  });
-                                                                }
-                                                              },
-                                                              title: Text(
-                                                                getJsonField(
-                                                                  sixMonthsItem,
-                                                                  r'''$.product_name''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          14.0,
-                                                                    ),
-                                                              ),
-                                                              subtitle: Text(
-                                                                getJsonField(
-                                                                  sixMonthsItem,
-                                                                  r'''$.INR''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                    ),
-                                                              ),
-                                                              tileColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              activeColor:
-                                                                  FlutterFlowTheme.of(
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .titleLarge
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .titleLarge
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                  subtitle:
+                                                                      Text(
+                                                                    getJsonField(
+                                                                      sixMonthsItem,
+                                                                      r'''$.INR''',
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.readexPro(
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                          ),
+                                                                          fontSize:
+                                                                              12,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                  tileColor: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
-                                                              checkColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                              dense: false,
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
-                                                            ),
-                                                          );
-                                                        },
+                                                                      .secondaryBackground,
+                                                                  activeColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                  checkColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .info,
+                                                                  dense: false,
+                                                                  controlAffinity:
+                                                                      ListTileControlAffinity
+                                                                          .leading,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }),
+                                                        ),
                                                       );
                                                     },
                                                   ),
@@ -809,11 +969,11 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryBackground,
-                                                  elevation: 4.0,
+                                                  elevation: 4,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            8.0),
+                                                            8),
                                                   ),
                                                   child: Builder(
                                                     builder: (context) {
@@ -824,246 +984,269 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                     .jsonBody,
                                                               )?.toList() ??
                                                               [];
-                                                      return ListView.builder(
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        primary: false,
-                                                        shrinkWrap: true,
-                                                        scrollDirection:
-                                                            Axis.vertical,
-                                                        itemCount:
-                                                            subProducts.length,
-                                                        itemBuilder: (context,
-                                                            subProductsIndex) {
-                                                          final subProductsItem =
-                                                              subProducts[
-                                                                  subProductsIndex];
-                                                          return Theme(
-                                                            data: ThemeData(
-                                                              unselectedWidgetColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryText,
-                                                            ),
-                                                            child:
-                                                                CheckboxListTile(
-                                                              value: _model
-                                                                      .checkboxListTileValueMap3[
-                                                                  subProductsItem] ??= FFAppState()
-                                                                      .productids
-                                                                      .contains(
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_id''',
-                                                                      ).toString()) ==
-                                                                  true,
-                                                              onChanged:
-                                                                  (newValue) async {
-                                                                setState(() =>
-                                                                    _model.checkboxListTileValueMap3[
-                                                                            subProductsItem] =
-                                                                        newValue!);
-                                                                if (newValue!) {
-                                                                  logFirebaseEvent(
-                                                                      'PRODUCTSMENU_CheckboxListTile_oe8041yj_O');
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                        .addToTotalcart(
-                                                                            CartitemsStruct(
-                                                                      productId:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_id''',
-                                                                      ).toString(),
-                                                                      productamount:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.INR''',
-                                                                      ).toString(),
-                                                                      productname:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_name''',
-                                                                      ).toString(),
-                                                                      producttypes:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.service_type''',
-                                                                      ).toString(),
-                                                                    ));
-                                                                    FFAppState()
-                                                                        .addToProductids(
+
+                                                      return SingleChildScrollView(
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          children: List.generate(
+                                                              subProducts
+                                                                  .length,
+                                                              (subProductsIndex) {
+                                                            final subProductsItem =
+                                                                subProducts[
+                                                                    subProductsIndex];
+                                                            return Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child: Theme(
+                                                                data: ThemeData(
+                                                                  unselectedWidgetColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .secondaryText,
+                                                                ),
+                                                                child:
+                                                                    CheckboxListTile(
+                                                                  value: _model
+                                                                          .checkboxListTileValueMap3[
+                                                                      subProductsItem] ??= FFAppState()
+                                                                          .productids
+                                                                          .contains(
+                                                                              getJsonField(
+                                                                            subProductsItem,
+                                                                            r'''$.product_id''',
+                                                                          ).toString()) ==
+                                                                      true,
+                                                                  onChanged:
+                                                                      (newValue) async {
+                                                                    safeSetState(() =>
+                                                                        _model.checkboxListTileValueMap3[subProductsItem] =
+                                                                            newValue!);
+                                                                    if (newValue!) {
+                                                                      logFirebaseEvent(
+                                                                          'PRODUCTSMENU_CheckboxListTile_oe8041yj_O');
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                          .addToTotalcart(
+                                                                              CartitemsStruct(
+                                                                        productId:
                                                                             getJsonField(
-                                                                      subProductsItem,
-                                                                      r'''$.product_id''',
-                                                                    ).toString());
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                    FFAppState()
-                                                                        .applied = [];
-                                                                    FFAppState()
-                                                                            .discountamount =
-                                                                        0.0;
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        functions.minusdiscountamount(
-                                                                            valueOrDefault<double>(
-                                                                              functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
-                                                                              0.0,
-                                                                            ),
-                                                                            FFAppState().discountamount)!;
-                                                                  });
-                                                                } else {
-                                                                  logFirebaseEvent(
-                                                                      'PRODUCTSMENU_CheckboxListTile_oe8041yj_O');
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                        .removeFromTotalcart(
-                                                                            CartitemsStruct(
-                                                                      productId:
-                                                                          getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_id''',
+                                                                        ).toString(),
+                                                                        productamount:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.INR''',
+                                                                        ).toString(),
+                                                                        productname:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_name''',
+                                                                        ).toString(),
+                                                                        producttypes:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.service_type''',
+                                                                        ).toString(),
+                                                                      ));
+                                                                      FFAppState()
+                                                                          .addToProductids(
+                                                                              getJsonField(
                                                                         subProductsItem,
                                                                         r'''$.product_id''',
-                                                                      ).toString(),
-                                                                      productamount:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.INR''',
-                                                                      ).toString(),
-                                                                      productname:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.product_name''',
-                                                                      ).toString(),
-                                                                      producttypes:
-                                                                          getJsonField(
-                                                                        subProductsItem,
-                                                                        r'''$.service_type''',
-                                                                      ).toString(),
-                                                                    ));
-                                                                    FFAppState()
-                                                                        .removeFromProductids(
+                                                                      ).toString());
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .applied = [];
+                                                                      FFAppState()
+                                                                              .discountamount =
+                                                                          0.0;
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          functions.minusdiscountamount(
+                                                                              valueOrDefault<double>(
+                                                                                functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                                0.0,
+                                                                              ),
+                                                                              FFAppState().discountamount)!;
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                    } else {
+                                                                      logFirebaseEvent(
+                                                                          'PRODUCTSMENU_CheckboxListTile_oe8041yj_O');
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                          .removeFromTotalcart(
+                                                                              CartitemsStruct(
+                                                                        productId:
                                                                             getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_id''',
+                                                                        ).toString(),
+                                                                        productamount:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.INR''',
+                                                                        ).toString(),
+                                                                        productname:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.product_name''',
+                                                                        ).toString(),
+                                                                        producttypes:
+                                                                            getJsonField(
+                                                                          subProductsItem,
+                                                                          r'''$.service_type''',
+                                                                        ).toString(),
+                                                                      ));
+                                                                      FFAppState()
+                                                                          .removeFromProductids(
+                                                                              getJsonField(
+                                                                        subProductsItem,
+                                                                        r'''$.product_id''',
+                                                                      ).toString());
+                                                                      FFAppState()
+                                                                              .cartvalue =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.finalcartamount(FFAppState()
+                                                                            .totalcart
+                                                                            .toList()),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                              .deliveryfee =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.getdelivery(FFAppState()
+                                                                            .totalcart
+                                                                            .toList()),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          valueOrDefault<
+                                                                              double>(
+                                                                        functions.payableamount(
+                                                                            FFAppState().cartvalue,
+                                                                            FFAppState().deliveryfee),
+                                                                        0.0,
+                                                                      );
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                      logFirebaseEvent(
+                                                                          'CheckboxListTile_update_app_state');
+                                                                      FFAppState()
+                                                                              .couponscode =
+                                                                          CouponStruct();
+                                                                      FFAppState()
+                                                                          .applied = [];
+                                                                      FFAppState()
+                                                                              .discountamount =
+                                                                          0.0;
+                                                                      FFAppState()
+                                                                              .finalamount =
+                                                                          functions.minusdiscountamount(
+                                                                              valueOrDefault<double>(
+                                                                                functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                                0.0,
+                                                                              ),
+                                                                              FFAppState().discountamount)!;
+                                                                      FFAppState()
+                                                                          .update(
+                                                                              () {});
+                                                                    }
+                                                                  },
+                                                                  title: Text(
+                                                                    getJsonField(
                                                                       subProductsItem,
-                                                                      r'''$.product_id''',
-                                                                    ).toString());
-                                                                    FFAppState()
-                                                                            .cartvalue =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.finalcartamount(FFAppState()
-                                                                          .totalcart
-                                                                          .toList()),
-                                                                      0.0,
-                                                                    );
-                                                                    FFAppState()
-                                                                            .deliveryfee =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.getdelivery(FFAppState()
-                                                                          .totalcart
-                                                                          .toList()),
-                                                                      0.0,
-                                                                    );
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        valueOrDefault<
-                                                                            double>(
-                                                                      functions.payableamount(
-                                                                          FFAppState()
-                                                                              .cartvalue,
-                                                                          FFAppState()
-                                                                              .deliveryfee),
-                                                                      0.0,
-                                                                    );
-                                                                  });
-                                                                  logFirebaseEvent(
-                                                                      'CheckboxListTile_update_app_state');
-                                                                  FFAppState()
-                                                                      .update(
-                                                                          () {
-                                                                    FFAppState()
-                                                                            .couponscode =
-                                                                        CouponStruct();
-                                                                    FFAppState()
-                                                                        .applied = [];
-                                                                    FFAppState()
-                                                                            .discountamount =
-                                                                        0.0;
-                                                                    FFAppState()
-                                                                            .finalamount =
-                                                                        functions.minusdiscountamount(
-                                                                            valueOrDefault<double>(
-                                                                              functions.payableamount(FFAppState().cartvalue, FFAppState().deliveryfee),
+                                                                      r'''$.product_name''',
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLarge
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.outfit(
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                                                                          ),
+                                                                          fontSize:
+                                                                              14,
+                                                                          letterSpacing:
                                                                               0.0,
-                                                                            ),
-                                                                            FFAppState().discountamount)!;
-                                                                  });
-                                                                }
-                                                              },
-                                                              title: Text(
-                                                                getJsonField(
-                                                                  subProductsItem,
-                                                                  r'''$.product_name''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          14.0,
-                                                                    ),
-                                                              ),
-                                                              subtitle: Text(
-                                                                getJsonField(
-                                                                  subProductsItem,
-                                                                  r'''$.INR''',
-                                                                ).toString(),
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                    ),
-                                                              ),
-                                                              tileColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              activeColor:
-                                                                  FlutterFlowTheme.of(
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .titleLarge
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .titleLarge
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                  subtitle:
+                                                                      Text(
+                                                                    getJsonField(
+                                                                      subProductsItem,
+                                                                      r'''$.INR''',
+                                                                    ).toString(),
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .override(
+                                                                          font:
+                                                                              GoogleFonts.readexPro(
+                                                                            fontWeight:
+                                                                                FlutterFlowTheme.of(context).labelMedium.fontWeight,
+                                                                            fontStyle:
+                                                                                FlutterFlowTheme.of(context).labelMedium.fontStyle,
+                                                                          ),
+                                                                          fontSize:
+                                                                              12,
+                                                                          letterSpacing:
+                                                                              0.0,
+                                                                          fontWeight: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .fontWeight,
+                                                                          fontStyle: FlutterFlowTheme.of(context)
+                                                                              .labelMedium
+                                                                              .fontStyle,
+                                                                        ),
+                                                                  ),
+                                                                  tileColor: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
-                                                              checkColor:
-                                                                  FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                              dense: false,
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
-                                                            ),
-                                                          );
-                                                        },
+                                                                      .secondaryBackground,
+                                                                  activeColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primary,
+                                                                  checkColor:
+                                                                      FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .info,
+                                                                  dense: false,
+                                                                  controlAffinity:
+                                                                      ListTileControlAffinity
+                                                                          .leading,
+                                                                ),
+                                                              ),
+                                                            );
+                                                          }),
+                                                        ),
                                                       );
                                                     },
                                                   ),
@@ -1075,55 +1258,95 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                       ),
                                     ),
                                   ),
-                                  Container(
-                                    width:
-                                        MediaQuery.sizeOf(context).width * 1.0,
-                                    height:
-                                        MediaQuery.sizeOf(context).height * 0.1,
-                                    decoration: BoxDecoration(
-                                      color:
-                                          FlutterFlowTheme.of(context).primary,
-                                    ),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              logFirebaseEvent(
-                                                  'PRODUCTSMENU_PAGE_Text_gku1z3dp_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Text_navigate_to');
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      logFirebaseEvent(
+                                          'PRODUCTSMENU_Container_x0kn2zbx_ON_TAP');
+                                      logFirebaseEvent('Container_navigate_to');
 
-                                              context.pushNamed('Cartvalue');
-                                            },
-                                            child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'o339ehv3' /* Go to cart */,
+                                      context.pushNamed(
+                                          CartvalueCopyWidget.routeName);
+
+                                      logFirebaseEvent(
+                                          'Container_update_app_state');
+                                      FFAppState().applied = [];
+                                      FFAppState().discountamount = 0.0;
+                                      FFAppState().update(() {});
+                                    },
+                                    child: Container(
+                                      width: MediaQuery.sizeOf(context).width,
+                                      height:
+                                          MediaQuery.sizeOf(context).height *
+                                              0.1,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                      ),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'PRODUCTSMENU_PAGE_Text_gku1z3dp_ON_TAP');
+                                              },
+                                              child: Text(
+                                                FFLocalizations.of(context)
+                                                    .getText(
+                                                  'o339ehv3' /* Go to cart */,
+                                                ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font:
+                                                          GoogleFonts.readexPro(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .primaryBackground,
+                                                      fontSize: 16,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .primaryBackground,
-                                                    fontSize: 16.0,
-                                                  ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -1138,6 +1361,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                             .jsonBody,
                                       )?.toList() ??
                                       [];
+
                               return ListView.builder(
                                 padding: EdgeInsets.zero,
                                 primary: false,
@@ -1147,26 +1371,24 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                 itemBuilder: (context, productsIndex) {
                                   final productsItem = products[productsIndex];
                                   return Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0, 0),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
-                                      elevation: 4.0,
+                                      elevation: 4,
                                       shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, -1.0),
+                                                AlignmentDirectional(0, -1),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  1.0,
+                                                  .width,
                                               height: MediaQuery.sizeOf(context)
                                                       .height *
                                                   0.1,
@@ -1181,9 +1403,9 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 10.0,
-                                                                0.0, 10.0),
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 10, 0, 10),
                                                     child: Text(
                                                       getJsonField(
                                                         productsItem,
@@ -1194,15 +1416,29 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                   context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Poppins',
+                                                                font: GoogleFonts
+                                                                    .poppins(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                                 color: FlutterFlowTheme.of(
                                                                         context)
                                                                     .primaryBackground,
-                                                                fontSize: 20.0,
+                                                                fontSize: 20,
+                                                                letterSpacing:
+                                                                    0.0,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
                                                               ),
                                                     ),
                                                   ),
@@ -1215,10 +1451,10 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                 Clip.antiAliasWithSaveLayer,
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
-                                            elevation: 4.0,
+                                            elevation: 4,
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
-                                                  BorderRadius.circular(8.0),
+                                                  BorderRadius.circular(8),
                                             ),
                                             child: Builder(
                                               builder: (context) {
@@ -1227,6 +1463,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                   productsItem,
                                                   r'''$.products''',
                                                 ).toList();
+
                                                 return ListView.builder(
                                                   padding: EdgeInsets.zero,
                                                   primary: false,
@@ -1239,36 +1476,37 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                     final subProductsItem =
                                                         subProducts[
                                                             subProductsIndex];
-                                                    return Theme(
-                                                      data: ThemeData(
-                                                        unselectedWidgetColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .secondaryText,
-                                                      ),
-                                                      child: CheckboxListTile(
-                                                        value: _model
-                                                                .checkboxListTileValueMap4[
-                                                            subProductsItem] ??= FFAppState()
-                                                                .productids
-                                                                .contains(
-                                                                    getJsonField(
-                                                                  subProductsItem,
-                                                                  r'''$.product_id''',
-                                                                ).toString()) ==
-                                                            true,
-                                                        onChanged:
-                                                            (newValue) async {
-                                                          setState(() => _model
-                                                                      .checkboxListTileValueMap4[
-                                                                  subProductsItem] =
-                                                              newValue!);
-                                                          if (newValue!) {
-                                                            logFirebaseEvent(
-                                                                'PRODUCTSMENU_CheckboxListTile_xpp5gzsd_O');
-                                                            logFirebaseEvent(
-                                                                'CheckboxListTile_update_app_state');
-                                                            setState(() {
+                                                    return Material(
+                                                      color: Colors.transparent,
+                                                      child: Theme(
+                                                        data: ThemeData(
+                                                          unselectedWidgetColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .secondaryText,
+                                                        ),
+                                                        child: CheckboxListTile(
+                                                          value: _model
+                                                                  .checkboxListTileValueMap4[
+                                                              subProductsItem] ??= FFAppState()
+                                                                  .productids
+                                                                  .contains(
+                                                                      getJsonField(
+                                                                    subProductsItem,
+                                                                    r'''$.product_id''',
+                                                                  ).toString()) ==
+                                                              true,
+                                                          onChanged:
+                                                              (newValue) async {
+                                                            safeSetState(() =>
+                                                                _model.checkboxListTileValueMap4[
+                                                                        subProductsItem] =
+                                                                    newValue!);
+                                                            if (newValue!) {
+                                                              logFirebaseEvent(
+                                                                  'PRODUCTSMENU_CheckboxListTile_xpp5gzsd_O');
+                                                              logFirebaseEvent(
+                                                                  'CheckboxListTile_update_app_state');
                                                               FFAppState()
                                                                   .addToTotalcart(
                                                                       CartitemsStruct(
@@ -1299,17 +1537,17 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                 subProductsItem,
                                                                 r'''$.product_id''',
                                                               ).toString());
-                                                            });
-                                                            logFirebaseEvent(
-                                                                'CheckboxListTile_update_page_state');
-                                                            setState(() {
+                                                              safeSetState(
+                                                                  () {});
+                                                              logFirebaseEvent(
+                                                                  'CheckboxListTile_update_page_state');
                                                               _model.addToTotalAmount(
                                                                   productsItem
                                                                       .toString());
-                                                            });
-                                                            logFirebaseEvent(
-                                                                'CheckboxListTile_update_app_state');
-                                                            setState(() {
+                                                              safeSetState(
+                                                                  () {});
+                                                              logFirebaseEvent(
+                                                                  'CheckboxListTile_update_app_state');
                                                               FFAppState()
                                                                       .couponscode =
                                                                   CouponStruct();
@@ -1329,14 +1567,13 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                       ),
                                                                       FFAppState()
                                                                           .discountamount)!;
-                                                            });
-                                                          } else {
-                                                            logFirebaseEvent(
-                                                                'PRODUCTSMENU_CheckboxListTile_xpp5gzsd_O');
-                                                            logFirebaseEvent(
-                                                                'CheckboxListTile_update_app_state');
-                                                            FFAppState()
-                                                                .update(() {
+                                                              safeSetState(
+                                                                  () {});
+                                                            } else {
+                                                              logFirebaseEvent(
+                                                                  'PRODUCTSMENU_CheckboxListTile_xpp5gzsd_O');
+                                                              logFirebaseEvent(
+                                                                  'CheckboxListTile_update_app_state');
                                                               FFAppState()
                                                                   .removeFromTotalcart(
                                                                       CartitemsStruct(
@@ -1398,17 +1635,18 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                         .deliveryfee),
                                                                 0.0,
                                                               );
-                                                            });
-                                                            logFirebaseEvent(
-                                                                'CheckboxListTile_update_page_state');
-                                                            setState(() {
+                                                              FFAppState()
+                                                                  .update(
+                                                                      () {});
+                                                              logFirebaseEvent(
+                                                                  'CheckboxListTile_update_page_state');
                                                               _model.removeFromTotalAmount(
                                                                   productsItem
                                                                       .toString());
-                                                            });
-                                                            logFirebaseEvent(
-                                                                'CheckboxListTile_update_app_state');
-                                                            setState(() {
+                                                              safeSetState(
+                                                                  () {});
+                                                              logFirebaseEvent(
+                                                                  'CheckboxListTile_update_app_state');
                                                               FFAppState()
                                                                       .couponscode =
                                                                   CouponStruct();
@@ -1428,52 +1666,92 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                                                       ),
                                                                       FFAppState()
                                                                           .discountamount)!;
-                                                            });
-                                                          }
-                                                        },
-                                                        title: Text(
-                                                          getJsonField(
-                                                            subProductsItem,
-                                                            r'''$.product_name''',
-                                                          ).toString(),
-                                                          style: FlutterFlowTheme
+                                                              safeSetState(
+                                                                  () {});
+                                                            }
+                                                          },
+                                                          title: Text(
+                                                            getJsonField(
+                                                              subProductsItem,
+                                                              r'''$.product_name''',
+                                                            ).toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .titleLarge
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .outfit(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLarge
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleLarge
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  fontSize: 14,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleLarge
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleLarge
+                                                                      .fontStyle,
+                                                                ),
+                                                          ),
+                                                          subtitle: Text(
+                                                            getJsonField(
+                                                              subProductsItem,
+                                                              r'''$.INR''',
+                                                            ).toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .labelMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .readexPro(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .labelMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  fontSize: 12,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                          ),
+                                                          tileColor: FlutterFlowTheme
                                                                   .of(context)
-                                                              .titleLarge
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Outfit',
-                                                                fontSize: 14.0,
-                                                              ),
+                                                              .secondaryBackground,
+                                                          activeColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .primary,
+                                                          checkColor:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .info,
+                                                          dense: false,
+                                                          controlAffinity:
+                                                              ListTileControlAffinity
+                                                                  .leading,
                                                         ),
-                                                        subtitle: Text(
-                                                          getJsonField(
-                                                            subProductsItem,
-                                                            r'''$.INR''',
-                                                          ).toString(),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .labelMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                fontSize: 12.0,
-                                                              ),
-                                                        ),
-                                                        tileColor: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        activeColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        checkColor:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .info,
-                                                        dense: false,
-                                                        controlAffinity:
-                                                            ListTileControlAffinity
-                                                                .leading,
                                                       ),
                                                     );
                                                   },
@@ -1481,66 +1759,101 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                               },
                                             ),
                                           ),
-                                          Container(
-                                            width: MediaQuery.sizeOf(context)
-                                                    .width *
-                                                1.0,
-                                            height: MediaQuery.sizeOf(context)
-                                                    .height *
-                                                0.1,
-                                            decoration: BoxDecoration(
-                                              color: functions
-                                                  .color(productsIndex),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Align(
-                                                  alignment:
-                                                      const AlignmentDirectional(
-                                                          0.0, 0.0),
-                                                  child: InkWell(
-                                                    splashColor:
-                                                        Colors.transparent,
-                                                    focusColor:
-                                                        Colors.transparent,
-                                                    hoverColor:
-                                                        Colors.transparent,
-                                                    highlightColor:
-                                                        Colors.transparent,
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'PRODUCTSMENU_PAGE_Text_r1050mdd_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'Text_navigate_to');
+                                          InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              logFirebaseEvent(
+                                                  'PRODUCTSMENU_Container_5i2h7r28_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Container_navigate_to');
 
-                                                      context.pushNamed(
-                                                          'Cartvalue');
-                                                    },
-                                                    child: Text(
-                                                      FFLocalizations.of(
-                                                              context)
-                                                          .getText(
-                                                        '1in3u6bk' /* Go to cart */,
+                                              context.pushNamed(
+                                                  CartvalueCopyWidget
+                                                      .routeName);
+
+                                              logFirebaseEvent(
+                                                  'Container_update_app_state');
+                                              FFAppState().applied = [];
+                                              FFAppState().discountamount = 0.0;
+                                              FFAppState().update(() {});
+                                            },
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                  .width,
+                                              height: MediaQuery.sizeOf(context)
+                                                      .height *
+                                                  0.1,
+                                              decoration: BoxDecoration(
+                                                color: functions
+                                                    .color(productsIndex),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Align(
+                                                    alignment:
+                                                        AlignmentDirectional(
+                                                            0, 0),
+                                                    child: InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'PRODUCTSMENU_PAGE_Text_r1050mdd_ON_TAP');
+                                                      },
+                                                      child: Text(
+                                                        FFLocalizations.of(
+                                                                context)
+                                                            .getText(
+                                                          '1in3u6bk' /* Go to cart */,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  font: GoogleFonts
+                                                                      .readexPro(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .primaryBackground,
+                                                                  fontSize: 16,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryBackground,
-                                                                fontSize: 16.0,
-                                                              ),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -1556,7 +1869,7 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                     ),
                     if (FFAppState().totalcart.isNotEmpty)
                       Container(
-                        width: MediaQuery.sizeOf(context).width * 1.0,
+                        width: MediaQuery.sizeOf(context).width,
                         height: MediaQuery.sizeOf(context).height * 0.09,
                         decoration: BoxDecoration(
                           color:
@@ -1572,50 +1885,72 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                 'PRODUCTSMENU_PAGE_SocialPost_2_ON_TAP');
                             logFirebaseEvent('SocialPost_2_navigate_to');
 
-                            context.pushNamed('Cartvalue');
+                            context.pushNamed(CartvalueWidget.routeName);
+
                             logFirebaseEvent('SocialPost_2_update_app_state');
-                            FFAppState().update(() {
-                              FFAppState().applied = [];
-                              FFAppState().discountamount = 0.0;
-                            });
+                            FFAppState().applied = [];
+                            FFAppState().discountamount = 0.0;
+                            FFAppState().update(() {});
                           },
                           child: Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  blurRadius: 0.0,
+                                  blurRadius: 0,
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
-                                  offset: const Offset(0.0, 1.0),
+                                  offset: Offset(
+                                    0.0,
+                                    1,
+                                  ),
                                 )
                               ],
                               gradient: LinearGradient(
                                 colors: [
                                   FlutterFlowTheme.of(context).primary,
-                                  const Color(0xFF514EFF)
+                                  Color(0xFF514EFF)
                                 ],
-                                stops: const [0.0, 1.0],
-                                begin: const AlignmentDirectional(0.0, -1.0),
-                                end: const AlignmentDirectional(0, 1.0),
+                                stops: [0, 1],
+                                begin: AlignmentDirectional(0, -1),
+                                end: AlignmentDirectional(0, 1),
                               ),
                             ),
                             child: Stack(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(4.0),
+                                  padding: EdgeInsets.all(4),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
                                         '${FFAppState().totalcart.length.toString()} item added',
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Poppins',
+                                              font: GoogleFonts.poppins(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryBackground,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                       Row(
@@ -1630,23 +1965,36 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Poppins',
+                                                  font: GoogleFonts.poppins(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryBackground,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 0.0, 0.0),
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    5, 0, 0, 0),
                                             child: Icon(
                                               Icons.east,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryBackground,
-                                              size: 20.0,
+                                              size: 20,
                                             ),
                                           ),
                                         ],
@@ -1655,10 +2003,9 @@ class _ProductsmenuWidgetState extends State<ProductsmenuWidget>
                                   ),
                                 ),
                                 Lottie.asset(
-                                  'assets/lottie_animations/Animation_-_1708324297486.json',
-                                  width: MediaQuery.sizeOf(context).width * 1.0,
-                                  height:
-                                      MediaQuery.sizeOf(context).height * 1.0,
+                                  'assets/jsons/Animation_-_1708324297486.json',
+                                  width: MediaQuery.sizeOf(context).width,
+                                  height: MediaQuery.sizeOf(context).height,
                                   fit: BoxFit.cover,
                                   repeat: false,
                                   animate: true,

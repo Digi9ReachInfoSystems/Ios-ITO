@@ -21,18 +21,21 @@ class UserStruct extends FFFirebaseStruct {
   String? _uid;
   String get uid => _uid ?? '';
   set uid(String? val) => _uid = val;
+
   bool hasUid() => _uid != null;
 
   // "display_name" field.
   String? _displayName;
   String get displayName => _displayName ?? '';
   set displayName(String? val) => _displayName = val;
+
   bool hasDisplayName() => _displayName != null;
 
   // "create_time" field.
   String? _createTime;
   String get createTime => _createTime ?? '';
   set createTime(String? val) => _createTime = val;
+
   bool hasCreateTime() => _createTime != null;
 
   static UserStruct fromMap(Map<String, dynamic> data) => UserStruct(

@@ -5,8 +5,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/shimmerservice/shimmerservice_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'monthlyexam_model.dart';
@@ -17,10 +19,13 @@ class MonthlyexamWidget extends StatefulWidget {
     super.key,
     this.serviceid,
     String? choosenservice,
-  }) : choosenservice = choosenservice ?? 'Test';
+  }) : this.choosenservice = choosenservice ?? 'Test';
 
   final String? serviceid;
   final String choosenservice;
+
+  static String routeName = 'monthlyexam';
+  static String routePath = '/monthlyexam';
 
   @override
   State<MonthlyexamWidget> createState() => _MonthlyexamWidgetState();
@@ -48,21 +53,13 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -74,7 +71,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -85,30 +82,33 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
               context.safePop();
             },
           ),
-          title: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 25.0, 0.0, 20.0),
-            child: Text(
-              functions.removehyphen(widget.choosenservice),
-              style: FlutterFlowTheme.of(context).headlineMedium.override(
-                    fontFamily: 'Outfit',
-                    color: const Color(0xFF272727),
-                    fontSize: 22.0,
+          title: Text(
+            functions.removehyphen(widget.choosenservice),
+            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                  font: GoogleFonts.outfit(
                     fontWeight: FontWeight.w600,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
-            ),
+                  color: Color(0xFF272727),
+                  fontSize: 18.0,
+                  letterSpacing: 0.0,
+                  fontWeight: FontWeight.w600,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
-          toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
-          elevation: 2.0,
+          elevation: 0.5,
         ),
         body: SafeArea(
           top: true,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                FutureBuilder<ApiCallResponse>(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: FutureBuilder<ApiCallResponse>(
                   future: SubjectsCall.call(
                     stdId: valueOrDefault<String>(
                       FFAppState().userInfo.stdId,
@@ -122,39 +122,40 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                       widget.serviceid,
                       '1',
                     ),
+                    token: FFAppState().userInfo.token,
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
-                      return const ShimmerserviceWidget();
+                      return ShimmerserviceWidget();
                     }
                     final containerSubjectsResponse = snapshot.data!;
+
                     return Container(
                       height: MediaQuery.sizeOf(context).height * 0.8,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                       ),
                       child: Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 15.0),
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            10.0, 0.0, 10.0, 15.0),
                         child: Builder(
                           builder: (context) {
                             final children = SubjectsCall.productsByservice(
                                   containerSubjectsResponse.jsonBody,
                                 )?.toList() ??
                                 [];
-                            return GridView.builder(
-                              padding: EdgeInsets.zero,
+
+                            return MasonryGridView.builder(
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 10.0,
-                                mainAxisSpacing: 12.0,
-                                childAspectRatio: 0.8,
+                                  SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount:
+                                    MediaQuery.sizeOf(context).width < 500.0
+                                        ? 2
+                                        : 4,
                               ),
-                              primary: false,
-                              shrinkWrap: true,
-                              scrollDirection: Axis.vertical,
+                              crossAxisSpacing: 10.0,
+                              mainAxisSpacing: 10.0,
                               itemCount: children.length,
                               itemBuilder: (context, childrenIndex) {
                                 final childrenItem = children[childrenIndex];
@@ -166,18 +167,18 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                   onTap: () async {
                                     logFirebaseEvent(
                                         'MONTHLYEXAM_Container_ht6xftzw_ON_TAP');
-                                     if ((functions.jsontostringlist(
-                                                          getJsonField(
-                                                        childrenItem,
-                                                        r'''$.subject_alias''',
-                                                      )) ==
-                                                      'Drawing') ||
-                                                  (functions.jsontostringlist(
-                                                          getJsonField(
-                                                        childrenItem,
-                                                        r'''$.subject_alias''',
-                                                      )) ==
-                                                      'Essay')) {
+                                    if (((SubjectsCall.alias(
+                                              containerSubjectsResponse
+                                                  .jsonBody,
+                                            )?.elementAtOrNull(
+                                                childrenIndex)) ==
+                                            'Drawing') ||
+                                        ((SubjectsCall.alias(
+                                              containerSubjectsResponse
+                                                  .jsonBody,
+                                            )?.elementAtOrNull(
+                                                childrenIndex)) ==
+                                            'Essay')) {
                                       logFirebaseEvent(
                                           'Container_alert_dialog');
                                       await showDialog(
@@ -185,15 +186,15 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                         builder: (alertDialogContext) {
                                           return WebViewAware(
                                             child: AlertDialog(
-                                              title: const Text('Alert!'),
-                                              content: const Text(
+                                              title: Text('Alert!'),
+                                              content: Text(
                                                   'Tests will be conducted on our website'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: const Text('Ok'),
+                                                  child: Text('Ok'),
                                                 ),
                                               ],
                                             ),
@@ -204,7 +205,7 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                       logFirebaseEvent('Container_navigate_to');
 
                                       context.pushNamed(
-                                        'annualExamStart',
+                                        AnnualExamStartWidget.routeName,
                                         queryParameters: {
                                           'subjectid': serializeParam(
                                             getJsonField(
@@ -232,12 +233,12 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                             ParamType.String,
                                           ),
                                           'round': serializeParam(
-                                  getJsonField(
-                                    childrenItem,
-                                    r'''$.round''',
-                                  ).toString(),
-                                  ParamType.String,
-                                ),
+                                            getJsonField(
+                                              childrenItem,
+                                              r'''$.round''',
+                                            ).toString(),
+                                            ParamType.String,
+                                          ),
                                         }.withoutNulls,
                                       );
                                     }
@@ -260,47 +261,95 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
-                                           Align(
-      alignment: const AlignmentDirectional(0, 0),
-      child: Container(
-        width: MediaQuery.sizeOf(context).width,
-        height: 45,
-        decoration: BoxDecoration(
-          color: functions.jsontostringlist(getJsonField(
-                    childrenItem,
-                    r'''$.subscription_status''',
-                  )) ==
-                  'Subscribed'
-              ? const Color(0xFF9868FF)
-              : FlutterFlowTheme.of(context).alternate,
-          borderRadius: BorderRadius.circular(0),
-        ),
-        child: Align(
-          alignment: const AlignmentDirectional(0, 0),
-          child: Text(
-            getJsonField(
-              childrenItem,
-              r'''$.subscription_status''',
-            ).toString(),
-            textAlign: TextAlign.center,
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Poppins',
-                  color: functions.jsontostringlist(getJsonField(
-                            childrenItem,
-                            r'''$.subscription_status''',
-                          )) ==
-                          'Subscribed'
-                      ? FlutterFlowTheme.of(context).alternate
-                      : FlutterFlowTheme.of(context).secondaryText,
-                  fontSize: 16,
-                ),
-          ),
-        ),
-      ),
-    ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
+                                                AlignmentDirectional(0.0, 0.0),
+                                            child: Container(
+                                              width: MediaQuery.sizeOf(context)
+                                                      .width *
+                                                  1.0,
+                                              height: 45.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    functions.jsontostringlist(
+                                                                getJsonField(
+                                                              childrenItem,
+                                                              r'''$.subscription_status''',
+                                                            )) ==
+                                                            'Subscribed'
+                                                        ? Color(0xFF9868FF)
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .alternate,
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(0.0),
+                                                  bottomRight:
+                                                      Radius.circular(0.0),
+                                                  topLeft:
+                                                      Radius.circular(12.0),
+                                                  topRight:
+                                                      Radius.circular(12.0),
+                                                ),
+                                              ),
+                                              child: Align(
+                                                alignment: AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Text(
+                                                  getJsonField(
+                                                    childrenItem,
+                                                    r'''$.subscription_status''',
+                                                  ).toString(),
+                                                  textAlign: TextAlign.center,
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.poppins(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        color: functions.jsontostringlist(
+                                                                    getJsonField(
+                                                                  childrenItem,
+                                                                  r'''$.subscription_status''',
+                                                                )) ==
+                                                                'Subscribed'
+                                                            ? FlutterFlowTheme
+                                                                    .of(context)
+                                                                .alternate
+                                                            : FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                        fontSize: 16.0,
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0.0, 0.0),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
@@ -309,35 +358,88 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryBackground,
+                                                borderRadius: BorderRadius.only(
+                                                  bottomLeft:
+                                                      Radius.circular(12.0),
+                                                  bottomRight:
+                                                      Radius.circular(12.0),
+                                                  topLeft: Radius.circular(0.0),
+                                                  topRight:
+                                                      Radius.circular(0.0),
+                                                ),
                                               ),
                                               child: Column(
-  mainAxisSize: MainAxisSize.max,
-  children: [
-    ClipRRect(
-      borderRadius: BorderRadius.circular(8),
-      child: Image.network(
-        getJsonField(
-          childrenItem,
-          r'''$.subject_icon''',
-        ).toString(),
-        width: MediaQuery.sizeOf(context).width * 0.2,
-        height: MediaQuery.sizeOf(context).height * 0.1,
-        fit: BoxFit.cover,
-      ),
-    ),
-    Padding(
-      padding: const EdgeInsets.all(5),
-      child: Text(
-        getJsonField(
-          childrenItem,
-          r'''$.subject_name''',
-        ).toString(),
-        textAlign: TextAlign.center,
-        style: FlutterFlowTheme.of(context).bodyMedium,
-      ),
-    ),
-  ],
-)
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 15.0,
+                                                                0.0, 15.0),
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.network(
+                                                        getJsonField(
+                                                          childrenItem,
+                                                          r'''$.subject_icon''',
+                                                        ).toString(),
+                                                        width:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .width *
+                                                                1.0,
+                                                        height:
+                                                            MediaQuery.sizeOf(
+                                                                        context)
+                                                                    .height *
+                                                                0.1,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.all(5.0),
+                                                    child: Text(
+                                                      getJsonField(
+                                                        childrenItem,
+                                                        r'''$.subject_name''',
+                                                      ).toString(),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .readexPro(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -353,50 +455,60 @@ class _MonthlyexamWidgetState extends State<MonthlyexamWidget> {
                     );
                   },
                 ),
-                Align(
-                  alignment: const AlignmentDirectional(0.0, 1.0),
-                  child: Padding(
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.0, 1.0),
+                child: FFButtonWidget(
+                  onPressed: () async {
+                    logFirebaseEvent('MONTHLYEXAM_PAGE_BUY_NOW_BTN_ON_TAP');
+                    if (widget.choosenservice == 'summer-quiz-competition') {
+                      logFirebaseEvent('Button_navigate_to');
+
+                      context.pushNamed(SummerquizWidget.routeName);
+                    } else {
+                      logFirebaseEvent('Button_navigate_to');
+
+                      context.pushNamed(ProductsmenuWidget.routeName);
+                    }
+                  },
+                  text: FFLocalizations.of(context).getText(
+                    'wmg69ah6' /* Buy Now */,
+                  ),
+                  options: FFButtonOptions(
+                    width: 343.0,
+                    height: 48.0,
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
-                    child: FFButtonWidget(
-                      onPressed: () async {
-                        logFirebaseEvent('MONTHLYEXAM_PAGE_BUY_NOW_BTN_ON_TAP');
-                        if (widget.choosenservice == 'summer-quiz-competition') {
-          logFirebaseEvent('Button_navigate_to');
-          context.pushNamed('summerquiz');
-        } else {
-          logFirebaseEvent('Button_navigate_to');
-          context.pushNamed('productsmenu');
-        }
-      },
-                      text: FFLocalizations.of(context).getText(
-                        'wmg69ah6' /* Buy Now */,
-                      ),
-                      options: FFButtonOptions(
-                        width: 343.0,
-                        height: 48.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
-                            24.0, 0.0, 24.0, 0.0),
-                        iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                        color: FlutterFlowTheme.of(context).primary,
-                        textStyle:
-                            FlutterFlowTheme.of(context).titleSmall.override(
-                                  fontFamily: 'Readex Pro',
-                                  color: Colors.white,
-                                ),
-                        elevation: 3.0,
-                        borderSide: const BorderSide(
-                          color: Colors.transparent,
-                          width: 1.0,
+                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                    iconPadding:
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                    color: FlutterFlowTheme.of(context).primary,
+                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
+                          font: GoogleFonts.readexPro(
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .fontStyle,
+                          ),
+                          color: Colors.white,
+                          letterSpacing: 0.0,
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleSmall
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleSmall.fontStyle,
                         ),
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
+                    elevation: 3.0,
+                    borderSide: BorderSide(
+                      color: Colors.transparent,
+                      width: 1.0,
                     ),
+                    borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-              ].divide(const SizedBox(height: 10.0)).around(const SizedBox(height: 10.0)),
-            ),
+              ),
+            ].divide(SizedBox(height: 10.0)).around(SizedBox(height: 10.0)),
           ),
         ),
       ),

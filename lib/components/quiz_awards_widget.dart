@@ -2,7 +2,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'quiz_awards_model.dart';
 export 'quiz_awards_model.dart';
 
@@ -37,8 +37,6 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryBackground,
@@ -47,7 +45,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
             child: Container(
               width: 80.0,
               height: 7.0,
@@ -65,7 +63,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
             child: Container(
               decoration: BoxDecoration(
                 color: FlutterFlowTheme.of(context).primaryBackground,
@@ -83,7 +81,7 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                         size: 24.0,
                       ),
                       Container(
-                        decoration: const BoxDecoration(),
+                        decoration: BoxDecoration(),
                         child: Text(
                           FFLocalizations.of(context).getText(
                             'n88hbhxn' /* Top 10 ranking students in eac... */,
@@ -91,17 +89,32 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                           style: FlutterFlowTheme.of(context)
                               .bodyMedium
                               .override(
-                                fontFamily: 'Readex Pro',
+                                font: GoogleFonts.readexPro(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
                                 color:
                                     FlutterFlowTheme.of(context).secondaryText,
+                                letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
                               ),
                         ),
                       ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                     child: RichText(
+                      textScaler: MediaQuery.of(context).textScaler,
                       text: TextSpan(
                         children: [
                           TextSpan(
@@ -111,15 +124,40 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context).primary,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.bold,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           )
                         ],
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              font: GoogleFonts.readexPro(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
                       ),
-                      textAlign: TextAlign.center, textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ],
@@ -143,22 +181,37 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                       size: 24.0,
                     ),
                     Container(
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           '3in0d27x' /* The next 90 ranking students w... */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Readex Pro',
+                              font: GoogleFonts.readexPro(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
                               color: FlutterFlowTheme.of(context).secondaryText,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                     ),
                   ],
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                   child: RichText(
+                    textScaler: MediaQuery.of(context).textScaler,
                     text: TextSpan(
                       children: [
                         TextSpan(
@@ -167,15 +220,40 @@ class _QuizAwardsWidgetState extends State<QuizAwardsWidget> {
                           ),
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         )
                       ],
-                      style: FlutterFlowTheme.of(context).bodyMedium,
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            font: GoogleFonts.readexPro(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
                     ),
-                    textAlign: TextAlign.center, textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ],

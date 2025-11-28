@@ -6,9 +6,10 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/special_offershimeer_copy/special_offershimeer_copy_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'certificate_viewer_model.dart';
 export 'certificate_viewer_model.dart';
 
@@ -19,6 +20,9 @@ class CertificateViewerWidget extends StatefulWidget {
   });
 
   final String? resultId;
+
+  static String routeName = 'certificateViewer';
+  static String routePath = '/certificateViewer';
 
   @override
   State<CertificateViewerWidget> createState() =>
@@ -54,13 +58,14 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
       future: ViewCertificatesCall.call(
         resultId: widget.resultId,
         userId: FFAppState().userInfo.userId,
+        token: FFAppState().userInfo.token,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-            body: const SpecialOffershimeerCopyWidget(),
+            body: SpecialOffershimeerCopyWidget(),
           );
         }
         final certificateViewerViewCertificatesResponse = snapshot.data!;
@@ -78,13 +83,13 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
               automaticallyImplyLeading: false,
               leading: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
-                borderRadius: 30,
-                borderWidth: 1,
-                buttonSize: 60,
-                icon: const Icon(
+                borderRadius: 30.0,
+                borderWidth: 1.0,
+                buttonSize: 60.0,
+                icon: Icon(
                   Icons.arrow_back_rounded,
                   color: Color(0xFF272727),
-                  size: 30,
+                  size: 30.0,
                 ),
                 onPressed: () async {
                   logFirebaseEvent('CERTIFICATE_VIEWER_arrow_back_rounded_IC');
@@ -97,16 +102,23 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                   '4pyh4opt' /* Digital Certificate */,
                 ),
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Poppins',
-                      color: const Color(0xFF272727),
-                      fontSize: 18,
+                      font: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FlutterFlowTheme.of(context)
+                            .headlineMedium
+                            .fontStyle,
+                      ),
+                      color: Color(0xFF272727),
+                      fontSize: 18.0,
                       letterSpacing: 0.0,
                       fontWeight: FontWeight.w500,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                     ),
               ),
-              actions: const [],
+              actions: [],
               centerTitle: true,
-              elevation: 2,
+              elevation: 2.0,
             ),
             body: SafeArea(
               top: true,
@@ -115,17 +127,17 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(3),
+                      padding: EdgeInsets.all(3.0),
                       child: Container(
-                        width: 400,
-                        height: 260,
-                        decoration: const BoxDecoration(),
-                        child: SizedBox(
-                          width: MediaQuery.sizeOf(context).width,
+                        width: 400.0,
+                        height: 260.0,
+                        decoration: BoxDecoration(),
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width * 1.0,
                           child: Stack(
                             children: [
                               ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(8.0),
                                 child: Image.network(
                                   valueOrDefault<String>(
                                     ViewCertificatesCall.certificatepath(
@@ -134,20 +146,21 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                     ),
                                     'https://www.indiantalent.org/assets/user_assets/custom/img/digital_certificate/English.png',
                                   ),
-                                  width: MediaQuery.sizeOf(context).width,
-                                  height: MediaQuery.sizeOf(context).height,
+                                  width: MediaQuery.sizeOf(context).width * 1.0,
+                                  height:
+                                      MediaQuery.sizeOf(context).height * 1.0,
                                   fit: BoxFit.fill,
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(0, 0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          10, 12, 0, 0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 12.0, 0.0, 0.0),
                                       child: Text(
                                         getJsonField(
                                           ViewCertificatesCall.certificatedara(
@@ -159,18 +172,28 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Roboto Mono',
-                                              fontSize: 8,
+                                              font: GoogleFonts.robotoMono(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle: FontStyle.italic,
+                                              ),
+                                              fontSize: 8.0,
                                               letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
                                               fontStyle: FontStyle.italic,
                                             ),
                                       ),
                                     ),
                                     Align(
-                                      alignment: const AlignmentDirectional(0, 0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            30, 3, 0, 0),
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            30.0, 3.0, 0.0, 0.0),
                                         child: Text(
                                           getJsonField(
                                             ViewCertificatesCall
@@ -183,9 +206,20 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Roboto Mono',
-                                                fontSize: 8,
+                                                font: GoogleFonts.robotoMono(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                                fontSize: 8.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
                                                 fontStyle: FontStyle.italic,
                                               ),
                                         ),
@@ -197,11 +231,12 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Align(
-                                          alignment: const AlignmentDirectional(0, 0),
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 40, 0),
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 40.0, 0.0),
                                             child: Text(
                                               getJsonField(
                                                 ViewCertificatesCall
@@ -215,16 +250,31 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                       context)
                                                   .bodyMedium
                                                   .override(
-                                                    fontFamily: 'Roboto Mono',
-                                                    fontSize: 8,
+                                                    font:
+                                                        GoogleFonts.robotoMono(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FontStyle.italic,
+                                                    ),
+                                                    fontSize: 8.0,
                                                     letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
                                                     fontStyle: FontStyle.italic,
                                                   ),
                                             ),
                                           ),
                                         ),
                                         Align(
-                                          alignment: const AlignmentDirectional(0, 0),
+                                          alignment:
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             getJsonField(
                                               ViewCertificatesCall
@@ -237,9 +287,21 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Roboto Mono',
-                                                  fontSize: 8,
+                                                  font: GoogleFonts.robotoMono(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle: FontStyle.italic,
+                                                  ),
+                                                  fontSize: 8.0,
                                                   letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
                                                   fontStyle: FontStyle.italic,
                                                 ),
                                           ),
@@ -247,10 +309,10 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                       ],
                                     ),
                                     Align(
-                                      alignment: const AlignmentDirectional(0, 0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 3),
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 3.0),
                                         child: Text(
                                           getJsonField(
                                             ViewCertificatesCall
@@ -263,19 +325,30 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Roboto Mono',
-                                                fontSize: 8,
+                                                font: GoogleFonts.robotoMono(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                                fontSize: 8.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
                                                 fontStyle: FontStyle.italic,
                                               ),
                                         ),
                                       ),
                                     ),
                                     Align(
-                                      alignment: const AlignmentDirectional(0, 0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 53),
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0.0, 0.0, 0.0, 53.0),
                                         child: Text(
                                           getJsonField(
                                             ViewCertificatesCall
@@ -288,9 +361,20 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
-                                                fontFamily: 'Roboto Mono',
-                                                fontSize: 8,
+                                                font: GoogleFonts.robotoMono(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle: FontStyle.italic,
+                                                ),
+                                                fontSize: 8.0,
                                                 letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
                                                 fontStyle: FontStyle.italic,
                                               ),
                                         ),
@@ -305,13 +389,14 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 15, 0, 0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                       child: Card(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
-                        color: const Color(0xFF9868FF),
-                        elevation: 4,
+                        color: Color(0xFF9868FF),
+                        elevation: 4.0,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
@@ -323,23 +408,36 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .primaryBackground,
-                                    fontSize: 18,
+                                    fontSize: 18.0,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  20, 10, 20, 10),
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  20.0, 10.0, 20.0, 10.0),
                               child: Card(
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                elevation: 4,
+                                elevation: 4.0,
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -357,11 +455,23 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  color: const Color(0xFF9B51FF),
-                                                  fontSize: 20,
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0xFF9B51FF),
+                                                  fontSize: 20.0,
                                                   letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                           TextSpan(
@@ -369,14 +479,31 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                 .getText(
                                               'sb1pr095' /*  / per Subject */,
                                             ),
-                                            style: const TextStyle(),
+                                            style: TextStyle(),
                                           )
                                         ],
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ),
@@ -414,7 +541,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                           RoundedRectangleBorder(
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(4),
+                                                                .circular(4.0),
                                                       ),
                                                     ),
                                                     unselectedWidgetColor:
@@ -494,7 +621,7 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                                     .primaryBackground,
                                                               ),
                                                             ),
-                                                            duration: const Duration(
+                                                            duration: Duration(
                                                                 milliseconds:
                                                                     4000),
                                                             backgroundColor:
@@ -511,7 +638,8 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                               onPressed:
                                                                   () async {
                                                                 context.pushNamed(
-                                                                    'Cartvalue');
+                                                                    CartvalueWidget
+                                                                        .routeName);
                                                               },
                                                             ),
                                                           ),
@@ -579,13 +707,17 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                             .update(() {});
                                                       }
                                                     },
-                                                    side: BorderSide(
-                                                      width: 2,
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .secondaryText,
-                                                    ),
+                                                    side: (FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryText !=
+                                                            null)
+                                                        ? BorderSide(
+                                                            width: 2,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .secondaryText,
+                                                          )
+                                                        : null,
                                                     activeColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -605,9 +737,30 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                                           context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
+                                                        font: GoogleFonts
+                                                            .readexPro(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
                                                         letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
                                                       ),
                                                 ),
                                               ],
@@ -617,8 +770,8 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                       },
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0, 10, 0, 10),
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 10.0, 0.0, 10.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
                                           '3u6lvx2m' /* Certificates  + Covering Lette... */,
@@ -626,10 +779,27 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF9868FF),
-                                              fontSize: 10,
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF9868FF),
+                                              fontSize: 10.0,
                                               letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ),
@@ -642,37 +812,52 @@ class _CertificateViewerWidgetState extends State<CertificateViewerWidget> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
                               'CERTIFICATE_VIEWER_PROCEED_TO_CHECKOUT_B');
                           logFirebaseEvent('Button_navigate_to');
 
-                          context.pushNamed('productsmenu');
+                          context.pushNamed(ProductsmenuWidget.routeName);
                         },
                         text: FFLocalizations.of(context).getText(
                           '707ak4zc' /* Proceed to Checkout */,
                         ),
                         options: FFButtonOptions(
                           width: MediaQuery.sizeOf(context).width * 0.9,
-                          height: 60,
-                          padding: const EdgeInsetsDirectional.fromSTEB(24, 0, 24, 0),
-                          iconPadding:
-                              const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                          height: 60.0,
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
                                     letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
                                   ),
-                          elevation: 3,
-                          borderSide: const BorderSide(
+                          elevation: 3.0,
+                          borderSide: BorderSide(
                             color: Colors.transparent,
-                            width: 1,
+                            width: 1.0,
                           ),
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
                     ),

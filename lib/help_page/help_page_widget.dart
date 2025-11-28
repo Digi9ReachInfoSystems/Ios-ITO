@@ -2,16 +2,24 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import 'help_page_model.dart';
 export 'help_page_model.dart';
 
 class HelpPageWidget extends StatefulWidget {
   const HelpPageWidget({super.key});
+
+  static String routeName = 'helpPage';
+  static String routePath = '/helpPage';
 
   @override
   State<HelpPageWidget> createState() => _HelpPageWidgetState();
@@ -23,84 +31,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'containerOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 110.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 110.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation3': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 110.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-    'containerOnPageLoadAnimation4': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 600.ms,
-          begin: const Offset(0.0, 110.0),
-          end: const Offset(0.0, 0.0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -112,7 +43,86 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+
+    animationsMap.addAll({
+      'containerOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation3': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+      'containerOnPageLoadAnimation4': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: Offset(0.0, 110.0),
+            end: Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
     setupAnimations(
       animationsMap.values.where((anim) =>
           anim.trigger == AnimationTrigger.onActionTrigger ||
@@ -130,21 +140,11 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -153,13 +153,13 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
           automaticallyImplyLeading: false,
           leading: FlutterFlowIconButton(
             borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: const Icon(
+            borderRadius: 30,
+            borderWidth: 1,
+            buttonSize: 60,
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
-              size: 30.0,
+              size: 30,
             ),
             onPressed: () async {
               logFirebaseEvent('HELP_arrow_back_rounded_ICN_ON_TAP');
@@ -172,16 +172,22 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
               '38odbav4' /* Help Center */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
-                  color: const Color(0xFF272727),
-                  fontSize: 22.0,
+                  font: GoogleFonts.outfit(
+                    fontWeight: FontWeight.w500,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
+                  color: Color(0xFF272727),
+                  fontSize: 18,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
-          toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
-          elevation: 2.0,
+          elevation: 0.5,
         ),
         body: SafeArea(
           top: true,
@@ -189,17 +195,25 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0, 0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 10),
                   child: Text(
                     FFLocalizations.of(context).getText(
                       '1hfgohhe' /* How May We Help You ? */,
                     ),
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Poppins',
-                          fontSize: 22.0,
+                          font: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
+                          ),
+                          fontSize: 22,
+                          letterSpacing: 0.0,
                           fontWeight: FontWeight.w600,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
                   ),
                 ),
@@ -208,32 +222,49 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: const Alignment(0.0, 0),
+                      alignment: Alignment(0, 0),
                       child: TabBar(
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
                             FlutterFlowTheme.of(context).secondaryText,
-                        labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                        unselectedLabelStyle: const TextStyle(),
+                        labelStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
+                                ),
+                        unselectedLabelStyle: TextStyle(),
                         indicatorColor: FlutterFlowTheme.of(context).primary,
-                        padding: const EdgeInsets.all(4.0),
+                        padding: EdgeInsets.all(4),
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
                               'ogu8nqmx' /* Call Us */,
                             ),
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.call,
                               color: Color(0xFF009FE0),
                             ),
-                            iconMargin: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 10.0),
+                            iconMargin:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 10),
                           ),
                           Tab(
                             text: FFLocalizations.of(context).getText(
                               '781y8exd' /* Email Us */,
                             ),
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.email_sharp,
                               color: Color(0xFF009FE0),
                             ),
@@ -253,23 +284,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 8.0, 10.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10, 8, 10, 0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 500.0,
+                                  constraints: BoxConstraints(
+                                    maxWidth: 500,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                      color: const Color(0xFFE5E7EB),
-                                      width: 2.0,
+                                      color: Color(0xFFE5E7EB),
+                                      width: 2,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -282,16 +313,29 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color: const Color(0xFF15161E),
-                                                fontSize: 16.0,
+                                                font:
+                                                    GoogleFonts.plusJakartaSans(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF15161E),
+                                                fontSize: 16,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -316,18 +360,32 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                       context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: const Color(0xFF606A85),
-                                                    fontSize: 16.0,
+                                                    font: GoogleFonts.outfit(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF606A85),
+                                                    fontSize: 16,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -352,18 +410,32 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                       context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: const Color(0xFF606A85),
-                                                    fontSize: 16.0,
+                                                    font: GoogleFonts.outfit(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF606A85),
+                                                    fontSize: 16,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -388,10 +460,24 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                       context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: const Color(0xFF606A85),
-                                                    fontSize: 16.0,
+                                                    font: GoogleFonts.outfit(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF606A85),
+                                                    fontSize: 16,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
@@ -403,23 +489,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                     'containerOnPageLoadAnimation1']!),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 8.0, 10.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10, 8, 10, 0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 500.0,
+                                  constraints: BoxConstraints(
+                                    maxWidth: 500,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                      color: const Color(0xFFE5E7EB),
-                                      width: 2.0,
+                                      color: Color(0xFFE5E7EB),
+                                      width: 2,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -432,16 +518,29 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color: const Color(0xFF15161E),
-                                                fontSize: 16.0,
+                                                font:
+                                                    GoogleFonts.plusJakartaSans(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF15161E),
+                                                fontSize: 16,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -466,18 +565,32 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                       context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: const Color(0xFF606A85),
-                                                    fontSize: 16.0,
+                                                    font: GoogleFonts.outfit(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF606A85),
+                                                    fontSize: 16,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
                                           child: InkWell(
                                             splashColor: Colors.transparent,
                                             focusColor: Colors.transparent,
@@ -502,10 +615,24 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                                       context)
                                                   .labelMedium
                                                   .override(
-                                                    fontFamily: 'Outfit',
-                                                    color: const Color(0xFF606A85),
-                                                    fontSize: 16.0,
+                                                    font: GoogleFonts.outfit(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .labelMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF606A85),
+                                                    fontSize: 16,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
@@ -522,23 +649,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 8.0, 10.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10, 8, 10, 0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 500.0,
+                                  constraints: BoxConstraints(
+                                    maxWidth: 500,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                      color: const Color(0xFFE5E7EB),
-                                      width: 2.0,
+                                      color: Color(0xFFE5E7EB),
+                                      width: 2,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -551,16 +678,29 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color: const Color(0xFF15161E),
-                                                fontSize: 16.0,
+                                                font:
+                                                    GoogleFonts.plusJakartaSans(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF15161E),
+                                                fontSize: 16,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'ixq3t0l6' /* support@indiantalent.org */,
@@ -568,10 +708,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium
                                                 .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: const Color(0xFF606A85),
-                                                  fontSize: 20.0,
+                                                  font: GoogleFonts.outfit(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0xFF606A85),
+                                                  fontSize: 20,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -582,23 +735,23 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                     'containerOnPageLoadAnimation3']!),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 15.0, 10.0, 0.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    10, 15, 10, 0),
                                 child: Container(
                                   width: double.infinity,
-                                  constraints: const BoxConstraints(
-                                    maxWidth: 500.0,
+                                  constraints: BoxConstraints(
+                                    maxWidth: 500,
                                   ),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
-                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderRadius: BorderRadius.circular(12),
                                     border: Border.all(
-                                      color: const Color(0xFFE5E7EB),
-                                      width: 2.0,
+                                      color: Color(0xFFE5E7EB),
+                                      width: 2,
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       crossAxisAlignment:
@@ -611,16 +764,29 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
                                           style: FlutterFlowTheme.of(context)
                                               .bodyLarge
                                               .override(
-                                                fontFamily: 'Plus Jakarta Sans',
-                                                color: const Color(0xFF15161E),
-                                                fontSize: 16.0,
+                                                font:
+                                                    GoogleFonts.plusJakartaSans(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF15161E),
+                                                fontSize: 16,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyLarge
+                                                        .fontStyle,
                                               ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 10.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 10),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               'f86dokg3' /* Indian Talent is a part of
@@ -630,17 +796,30 @@ ITO... */
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium
                                                 .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: const Color(0xFF606A85),
-                                                  fontSize: 20.0,
+                                                  font: GoogleFonts.outfit(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0xFF606A85),
+                                                  fontSize: 20,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 4, 0, 0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '0lcdzdpc' /* No. 1005, Kailas Corporate Lou... */,
@@ -648,10 +827,23 @@ ITO... */
                                             style: FlutterFlowTheme.of(context)
                                                 .labelMedium
                                                 .override(
-                                                  fontFamily: 'Outfit',
-                                                  color: const Color(0xFF606A85),
-                                                  fontSize: 20.0,
+                                                  font: GoogleFonts.outfit(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .labelMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Color(0xFF606A85),
+                                                  fontSize: 20,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),

@@ -1,15 +1,19 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'payment_success_model.dart';
 export 'payment_success_model.dart';
 
 class PaymentSuccessWidget extends StatefulWidget {
   const PaymentSuccessWidget({super.key});
+
+  static String routeName = 'paymentSuccess';
+  static String routePath = '/paymentSuccess';
 
   @override
   State<PaymentSuccessWidget> createState() => _PaymentSuccessWidgetState();
@@ -31,13 +35,12 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('PAYMENT_SUCCESS_paymentSuccess_ON_INIT_S');
       logFirebaseEvent('paymentSuccess_update_app_state');
-      setState(() {
-        FFAppState().totalcart = [];
-        FFAppState().productids = [];
-        FFAppState().finalamount = 0.0;
-        FFAppState().cartvalue = 0.0;
-        FFAppState().deliveryfee = 0.0;
-      });
+      FFAppState().totalcart = [];
+      FFAppState().productids = [];
+      FFAppState().finalamount = 0.0;
+      FFAppState().cartvalue = 0.0;
+      FFAppState().deliveryfee = 0.0;
+      safeSetState(() {});
     });
   }
 
@@ -50,21 +53,13 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -76,13 +71,20 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
               'y5hzdxyl' /* Success */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
                   color: Colors.black,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -128,15 +130,24 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Poppins',
+                                  font: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   fontSize: 24.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 15.0, 20.0, 15.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -146,16 +157,30 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: const Color(0xFF272727),
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Color(0xFF272727),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 15.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -163,7 +188,8 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                                       'PAYMENT_SUCCESS_HOME_BTN_ON_TAP');
                                   logFirebaseEvent('Button_navigate_to');
 
-                                  context.pushNamed('Homepagelogin');
+                                  context
+                                      .pushNamed(HomepageloginWidget.routeName);
                                 },
                                 text: FFLocalizations.of(context).getText(
                                   'gbj1fom8' /* Home Page */,
@@ -172,20 +198,30 @@ class _PaymentSuccessWidgetState extends State<PaymentSuccessWidget> {
                                   width: MediaQuery.sizeOf(context).width * 0.9,
                                   height:
                                       MediaQuery.sizeOf(context).height * 0.05,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: const Color(0xFF004696),
+                                  color: Color(0xFF004696),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

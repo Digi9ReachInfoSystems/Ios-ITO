@@ -3,9 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class DataStruct extends FFFirebaseStruct {
@@ -33,49 +31,58 @@ class DataStruct extends FFFirebaseStruct {
   String? _merchantId;
   String get merchantId => _merchantId ?? '';
   set merchantId(String? val) => _merchantId = val;
+
   bool hasMerchantId() => _merchantId != null;
 
   // "merchantTransactionId" field.
   String? _merchantTransactionId;
   String get merchantTransactionId => _merchantTransactionId ?? '';
   set merchantTransactionId(String? val) => _merchantTransactionId = val;
+
   bool hasMerchantTransactionId() => _merchantTransactionId != null;
 
   // "transactionId" field.
   String? _transactionId;
   String get transactionId => _transactionId ?? '';
   set transactionId(String? val) => _transactionId = val;
+
   bool hasTransactionId() => _transactionId != null;
 
   // "amount" field.
   double? _amount;
   double get amount => _amount ?? 0.0;
   set amount(double? val) => _amount = val;
-  void incrementAmount(double amount) => _amount = amount + amount;
+
+  void incrementAmount(double amount) => amount = amount + amount;
+
   bool hasAmount() => _amount != null;
 
   // "state" field.
   String? _state;
   String get state => _state ?? '';
   set state(String? val) => _state = val;
+
   bool hasState() => _state != null;
 
   // "responseCode" field.
   String? _responseCode;
   String get responseCode => _responseCode ?? '';
   set responseCode(String? val) => _responseCode = val;
+
   bool hasResponseCode() => _responseCode != null;
 
   // "responseCodeDescription" field.
   String? _responseCodeDescription;
   String get responseCodeDescription => _responseCodeDescription ?? '';
   set responseCodeDescription(String? val) => _responseCodeDescription = val;
+
   bool hasResponseCodeDescription() => _responseCodeDescription != null;
 
   // "paymentInstrument" field.
   String? _paymentInstrument;
   String get paymentInstrument => _paymentInstrument ?? '';
   set paymentInstrument(String? val) => _paymentInstrument = val;
+
   bool hasPaymentInstrument() => _paymentInstrument != null;
 
   static DataStruct fromMap(Map<String, dynamic> data) => DataStruct(

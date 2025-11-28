@@ -4,6 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 class FFButtonOptions {
   const FFButtonOptions({
+    this.textAlign,
     this.textStyle,
     this.elevation,
     this.height,
@@ -15,6 +16,7 @@ class FFButtonOptions {
     this.splashColor,
     this.iconSize,
     this.iconColor,
+    this.iconAlignment,
     this.iconPadding,
     this.borderRadius,
     this.borderSide,
@@ -23,8 +25,11 @@ class FFButtonOptions {
     this.hoverTextColor,
     this.hoverElevation,
     this.maxLines,
+    this.focusBorderSide,
+    this.focusBorderRadius,
   });
 
+  final TextAlign? textAlign;
   final TextStyle? textStyle;
   final double? elevation;
   final double? height;
@@ -37,6 +42,7 @@ class FFButtonOptions {
   final Color? splashColor;
   final double? iconSize;
   final Color? iconColor;
+  final IconAlignment? iconAlignment;
   final EdgeInsetsGeometry? iconPadding;
   final BorderRadius? borderRadius;
   final BorderSide? borderSide;
@@ -44,6 +50,8 @@ class FFButtonOptions {
   final BorderSide? hoverBorderSide;
   final Color? hoverTextColor;
   final double? hoverElevation;
+  final BorderSide? focusBorderSide;
+  final BorderRadius? focusBorderRadius;
 }
 
 class FFButtonWidget extends StatefulWidget {
@@ -72,13 +80,15 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
   bool loading = false;
 
   int get maxLines => widget.options.maxLines ?? 1;
+  String? get text =>
+      widget.options.textStyle?.fontSize == 0 ? null : widget.text;
 
   @override
   Widget build(BuildContext context) {
     Widget textWidget = loading
         ? SizedBox(
             width: widget.options.width == null
-                ? _getTextWidth(widget.text, widget.options.textStyle, maxLines)
+                ? _getTextWidth(text, widget.options.textStyle, maxLines)
                 : null,
             child: Center(
               child: SizedBox(
@@ -86,15 +96,17 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
                 height: 23,
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(
-                    widget.options.textStyle!.color ?? Colors.white,
+                    widget.options.textStyle?.color ?? Colors.white,
                   ),
                 ),
               ),
             ),
           )
         : AutoSizeText(
-            widget.text,
-            style: widget.options.textStyle?.withoutColor(),
+            text ?? '',
+            style:
+                text == null ? null : widget.options.textStyle?.withoutColor(),
+            textAlign: widget.options.textAlign,
             maxLines: maxLines,
             overflow: TextOverflow.ellipsis,
           );
@@ -118,86 +130,123 @@ class _FFButtonWidgetState extends State<FFButtonWidget> {
         : null;
 
     ButtonStyle style = ButtonStyle(
-      shape: WidgetStateProperty.resolveWith<OutlinedBorder>(
-        (states) {
-          if (states.contains(WidgetState.hovered) &&
-              widget.options.hoverBorderSide != null) {
-            return RoundedRectangleBorder(
-              borderRadius:
-                  widget.options.borderRadius ?? BorderRadius.circular(8),
-              side: widget.options.hoverBorderSide!,
-            );
-          }
+      shape: WidgetStateProperty.resolveWith<OutlinedBorder>((states) {
+        if (states.contains(WidgetState.hovered) &&
+            widget.options.hoverBorderSide != null) {
           return RoundedRectangleBorder(
             borderRadius:
                 widget.options.borderRadius ?? BorderRadius.circular(8),
-            side: widget.options.borderSide ?? BorderSide.none,
+            side: widget.options.hoverBorderSide!,
           );
-        },
-      ),
-      foregroundColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.disabled) &&
-              widget.options.disabledTextColor != null) {
-            return widget.options.disabledTextColor;
-          }
-          if (states.contains(WidgetState.hovered) &&
-              widget.options.hoverTextColor != null) {
-            return widget.options.hoverTextColor;
-          }
-          return widget.options.textStyle?.color;
-        },
-      ),
-      backgroundColor: WidgetStateProperty.resolveWith<Color?>(
-        (states) {
-          if (states.contains(WidgetState.disabled) &&
-              widget.options.disabledColor != null) {
-            return widget.options.disabledColor;
-          }
-          if (states.contains(WidgetState.hovered) &&
-              widget.options.hoverColor != null) {
-            return widget.options.hoverColor;
-          }
-          return widget.options.color;
-        },
-      ),
+        }
+        if (states.contains(WidgetState.focused) &&
+            widget.options.focusBorderSide != null) {
+          return RoundedRectangleBorder(
+            borderRadius: widget.options.focusBorderRadius ??
+                widget.options.borderRadius ??
+                BorderRadius.circular(8),
+            side: widget.options.focusBorderSide!,
+          );
+        }
+        return RoundedRectangleBorder(
+          borderRadius: widget.options.borderRadius ?? BorderRadius.circular(8),
+          side: widget.options.borderSide ?? BorderSide.none,
+        );
+      }),
+      foregroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.disabled) &&
+            widget.options.disabledTextColor != null) {
+          return widget.options.disabledTextColor;
+        }
+        if (states.contains(WidgetState.hovered) &&
+            widget.options.hoverTextColor != null) {
+          return widget.options.hoverTextColor;
+        }
+        return widget.options.textStyle?.color ?? Colors.white;
+      }),
+      backgroundColor: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.disabled) &&
+            widget.options.disabledColor != null) {
+          return widget.options.disabledColor;
+        }
+        if (states.contains(WidgetState.hovered) &&
+            widget.options.hoverColor != null) {
+          return widget.options.hoverColor;
+        }
+        return widget.options.color;
+      }),
       overlayColor: WidgetStateProperty.resolveWith<Color?>((states) {
         if (states.contains(WidgetState.pressed)) {
           return widget.options.splashColor;
         }
         return widget.options.hoverColor == null ? null : Colors.transparent;
       }),
-      padding: WidgetStateProperty.all(widget.options.padding ??
-          const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0)),
-      elevation: WidgetStateProperty.resolveWith<double?>(
-        (states) {
-          if (states.contains(WidgetState.hovered) &&
-              widget.options.hoverElevation != null) {
-            return widget.options.hoverElevation!;
-          }
-          return widget.options.elevation;
-        },
+      padding: WidgetStateProperty.all(
+        widget.options.padding ??
+            const EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
       ),
+      elevation: WidgetStateProperty.resolveWith<double?>((states) {
+        if (states.contains(WidgetState.hovered) &&
+            widget.options.hoverElevation != null) {
+          return widget.options.hoverElevation!;
+        }
+        return widget.options.elevation ?? 2.0;
+      }),
+      iconColor: WidgetStateProperty.resolveWith<Color?>((states) {
+        if (states.contains(WidgetState.disabled) &&
+            widget.options.disabledTextColor != null) {
+          return widget.options.disabledTextColor;
+        }
+        if (states.contains(WidgetState.hovered) &&
+            widget.options.hoverTextColor != null) {
+          return widget.options.hoverTextColor;
+        }
+        return widget.options.iconColor;
+      }),
     );
 
     if ((widget.icon != null || widget.iconData != null) && !loading) {
+      Widget icon = widget.icon ??
+          FaIcon(
+            widget.iconData!,
+            size: widget.options.iconSize,
+            color: widget.options.iconColor,
+          );
+
+      if (text == null) {
+        return Container(
+          height: widget.options.height,
+          width: widget.options.width,
+          decoration: BoxDecoration(
+            border: Border.fromBorderSide(
+              widget.options.borderSide ?? BorderSide.none,
+            ),
+            borderRadius:
+                widget.options.borderRadius ?? BorderRadius.circular(8),
+          ),
+          child: IconButton(
+            splashRadius: 1.0,
+            icon: Padding(
+              padding: widget.options.iconPadding ?? EdgeInsets.zero,
+              child: icon,
+            ),
+            onPressed: onPressed,
+            style: style,
+          ),
+        );
+      }
       return SizedBox(
         height: widget.options.height,
         width: widget.options.width,
         child: ElevatedButton.icon(
           icon: Padding(
             padding: widget.options.iconPadding ?? EdgeInsets.zero,
-            child: widget.icon ??
-                FaIcon(
-                  widget.iconData,
-                  size: widget.options.iconSize,
-                  color: widget.options.iconColor ??
-                      widget.options.textStyle!.color,
-                ),
+            child: icon,
           ),
           label: textWidget,
           onPressed: onPressed,
           style: style,
+          iconAlignment: widget.options.iconAlignment ?? IconAlignment.start,
         ),
       );
     }
@@ -247,11 +296,86 @@ extension _WithoutColorExtension on TextStyle {
 }
 
 // Slightly hacky method of getting the layout width of the provided text.
-double _getTextWidth(String text, TextStyle? style, int maxLines) =>
-    (TextPainter(
-      text: TextSpan(text: text, style: style),
-      textDirection: TextDirection.ltr,
-      maxLines: maxLines,
-    )..layout())
-        .size
-        .width;
+double? _getTextWidth(String? text, TextStyle? style, int maxLines) =>
+    text != null
+        ? (TextPainter(
+            text: TextSpan(text: text, style: style),
+            textDirection: TextDirection.ltr,
+            maxLines: maxLines,
+          )..layout())
+            .size
+            .width
+        : null;
+
+class FFFocusIndicator extends StatefulWidget {
+  final Widget child;
+  final Border? border;
+  final BorderRadius? borderRadius;
+  final EdgeInsetsGeometry? padding;
+  final void Function()? onTap;
+  final void Function()? onLongPress;
+  final void Function()? onDoubleTap;
+
+  const FFFocusIndicator({
+    Key? key,
+    required this.child,
+    this.border,
+    this.borderRadius,
+    this.padding,
+    this.onTap,
+    this.onLongPress,
+    this.onDoubleTap,
+  }) : super(key: key);
+
+  @override
+  State<FFFocusIndicator> createState() => _FFFocusIndicatorState();
+}
+
+class _FFFocusIndicatorState extends State<FFFocusIndicator> {
+  late FocusNode _focusNode;
+  bool _hasFocus = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _focusNode.addListener(_onFocusChange);
+  }
+
+  @override
+  void dispose() {
+    _focusNode.removeListener(_onFocusChange);
+    _focusNode.dispose();
+    super.dispose();
+  }
+
+  void _onFocusChange() {
+    if (mounted) {
+      setState(() {
+        _hasFocus = _focusNode.hasFocus;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      padding: widget.padding,
+      decoration: BoxDecoration(
+        border: _hasFocus ? widget.border : null,
+        borderRadius: widget.borderRadius ?? BorderRadius.circular(4),
+      ),
+      child: InkWell(
+        splashColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        focusNode: _focusNode,
+        onTap: widget.onTap,
+        onLongPress: widget.onLongPress,
+        onDoubleTap: widget.onDoubleTap,
+        child: widget.child,
+      ),
+    );
+  }
+}

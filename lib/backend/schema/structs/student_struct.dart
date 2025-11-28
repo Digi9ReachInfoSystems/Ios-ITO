@@ -65,149 +65,178 @@ class StudentStruct extends FFFirebaseStruct {
   String? _studentName;
   String get studentName => _studentName ?? '';
   set studentName(String? val) => _studentName = val;
+
   bool hasStudentName() => _studentName != null;
 
   // "user_Id" field.
   String? _userId;
   String get userId => _userId ?? '';
   set userId(String? val) => _userId = val;
+
   bool hasUserId() => _userId != null;
 
   // "mobileNo" field.
   String? _mobileNo;
   String get mobileNo => _mobileNo ?? '';
   set mobileNo(String? val) => _mobileNo = val;
+
   bool hasMobileNo() => _mobileNo != null;
 
   // "password" field.
   String? _password;
   String get password => _password ?? '';
   set password(String? val) => _password = val;
+
   bool hasPassword() => _password != null;
 
   // "token" field.
   String? _token;
   String get token => _token ?? '';
   set token(String? val) => _token = val;
+
   bool hasToken() => _token != null;
 
   // "allowedServices" field.
   List<String>? _allowedServices;
   List<String> get allowedServices => _allowedServices ?? const [];
   set allowedServices(List<String>? val) => _allowedServices = val;
-  void updateAllowedServices(Function(List<String>) updateFn) =>
-      updateFn(_allowedServices ??= []);
+
+  void updateAllowedServices(Function(List<String>) updateFn) {
+    updateFn(_allowedServices ??= []);
+  }
+
   bool hasAllowedServices() => _allowedServices != null;
 
   // "parentName" field.
   String? _parentName;
   String get parentName => _parentName ?? '';
   set parentName(String? val) => _parentName = val;
+
   bool hasParentName() => _parentName != null;
 
   // "parentEmail" field.
   String? _parentEmail;
   String get parentEmail => _parentEmail ?? '';
   set parentEmail(String? val) => _parentEmail = val;
+
   bool hasParentEmail() => _parentEmail != null;
 
   // "address" field.
   String? _address;
   String get address => _address ?? '';
   set address(String? val) => _address = val;
+
   bool hasAddress() => _address != null;
 
   // "district" field.
   String? _district;
   String get district => _district ?? '';
   set district(String? val) => _district = val;
+
   bool hasDistrict() => _district != null;
 
   // "state" field.
   String? _state;
   String get state => _state ?? '';
   set state(String? val) => _state = val;
+
   bool hasState() => _state != null;
 
   // "city" field.
   String? _city;
   String get city => _city ?? '';
   set city(String? val) => _city = val;
+
   bool hasCity() => _city != null;
 
   // "pincode" field.
   String? _pincode;
   String get pincode => _pincode ?? '';
   set pincode(String? val) => _pincode = val;
+
   bool hasPincode() => _pincode != null;
 
   // "school_name" field.
   String? _schoolName;
   String get schoolName => _schoolName ?? '';
   set schoolName(String? val) => _schoolName = val;
+
   bool hasSchoolName() => _schoolName != null;
 
   // "school_state" field.
   String? _schoolState;
   String get schoolState => _schoolState ?? '';
   set schoolState(String? val) => _schoolState = val;
+
   bool hasSchoolState() => _schoolState != null;
 
   // "school_address" field.
   String? _schoolAddress;
   String get schoolAddress => _schoolAddress ?? '';
   set schoolAddress(String? val) => _schoolAddress = val;
+
   bool hasSchoolAddress() => _schoolAddress != null;
 
   // "school_city" field.
   String? _schoolCity;
   String get schoolCity => _schoolCity ?? '';
   set schoolCity(String? val) => _schoolCity = val;
+
   bool hasSchoolCity() => _schoolCity != null;
 
   // "school_pincode" field.
   String? _schoolPincode;
   String get schoolPincode => _schoolPincode ?? '';
   set schoolPincode(String? val) => _schoolPincode = val;
+
   bool hasSchoolPincode() => _schoolPincode != null;
 
   // "std_id" field.
   String? _stdId;
   String get stdId => _stdId ?? '';
   set stdId(String? val) => _stdId = val;
+
   bool hasStdId() => _stdId != null;
 
   // "old_id" field.
   int? _oldId;
   int get oldId => _oldId ?? 0;
   set oldId(int? val) => _oldId = val;
-  void incrementOldId(int amount) => _oldId = oldId + amount;
+
+  void incrementOldId(int amount) => oldId = oldId + amount;
+
   bool hasOldId() => _oldId != null;
 
   // "updated_id" field.
   int? _updatedId;
   int get updatedId => _updatedId ?? 0;
   set updatedId(int? val) => _updatedId = val;
-  void incrementUpdatedId(int amount) => _updatedId = updatedId + amount;
+
+  void incrementUpdatedId(int amount) => updatedId = updatedId + amount;
+
   bool hasUpdatedId() => _updatedId != null;
 
   // "username" field.
   String? _username;
   String get username => _username ?? '';
   set username(String? val) => _username = val;
+
   bool hasUsername() => _username != null;
 
   // "result" field.
   bool? _result;
   bool get result => _result ?? false;
   set result(bool? val) => _result = val;
+
   bool hasResult() => _result != null;
 
   // "showresult" field.
   int? _showresult;
   int get showresult => _showresult ?? 0;
   set showresult(int? val) => _showresult = val;
-  void incrementShowresult(int amount) => _showresult = showresult + amount;
+
+  void incrementShowresult(int amount) => showresult = showresult + amount;
+
   bool hasShowresult() => _showresult != null;
 
   static StudentStruct fromMap(Map<String, dynamic> data) => StudentStruct(
@@ -292,7 +321,7 @@ class StudentStruct extends FFFirebaseStruct {
         'allowedServices': serializeParam(
           _allowedServices,
           ParamType.String,
-          true,
+          isList: true,
         ),
         'parentName': serializeParam(
           _parentName,

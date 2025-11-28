@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'quizdetailscom_model.dart';
 export 'quizdetailscom_model.dart';
 
@@ -36,8 +36,6 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Material(
       color: Colors.transparent,
       elevation: 7.0,
@@ -50,7 +48,7 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Container(
                   width: 80.0,
                   height: 7.0,
@@ -68,7 +66,7 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                 color: FlutterFlowTheme.of(context).secondaryText,
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
@@ -86,7 +84,7 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                             size: 24.0,
                           ),
                           Container(
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 '5blvyhhq' /* There will be 5 categories acc... */,
@@ -95,9 +93,23 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryText,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -109,8 +121,9 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                         child: RichText(
+                          textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
                               TextSpan(
@@ -120,27 +133,55 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                               TextSpan(
                                 text: FFLocalizations.of(context).getText(
                                   'y1zq3bcg' /*  Class 1 and Class 2 */,
                                 ),
-                                style: const TextStyle(),
+                                style: TextStyle(),
                               )
                             ],
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                          ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
                         ),
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                         child: RichText(
+                          textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
                               TextSpan(
@@ -150,27 +191,55 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                               TextSpan(
                                 text: FFLocalizations.of(context).getText(
                                   '05gsgtxj' /*  Class 3 and Class 4 */,
                                 ),
-                                style: const TextStyle(),
+                                style: TextStyle(),
                               )
                             ],
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                          ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
                         ),
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                         child: RichText(
+                          textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
                               TextSpan(
@@ -180,27 +249,55 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                               TextSpan(
                                 text: FFLocalizations.of(context).getText(
                                   'deq29qut' /* Class 5 and Class 6 */,
                                 ),
-                                style: const TextStyle(),
+                                style: TextStyle(),
                               )
                             ],
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                          ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
                         ),
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                         child: RichText(
+                          textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
                               TextSpan(
@@ -210,27 +307,55 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                               TextSpan(
                                 text: FFLocalizations.of(context).getText(
                                   'h9a7j096' /* Class 7 and Class 8 */,
                                 ),
-                                style: const TextStyle(),
+                                style: TextStyle(),
                               )
                             ],
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                          ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
                         ),
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                         child: RichText(
+                          textScaler: MediaQuery.of(context).textScaler,
                           text: TextSpan(
                             children: [
                               TextSpan(
@@ -240,21 +365,48 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FontWeight.bold,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                               TextSpan(
                                 text: FFLocalizations.of(context).getText(
                                   'chnz17pj' /* Class 9 and Class 10 */,
                                 ),
-                                style: const TextStyle(),
+                                style: TextStyle(),
                               )
                             ],
-                            style: FlutterFlowTheme.of(context).bodyMedium,
-                          ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
+                                ),
+                          ),
                         ),
                       ),
                       Divider(
@@ -282,7 +434,7 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                           size: 24.0,
                         ),
                         Container(
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               'w7dw32zy' /* There will be 5 categories acc... */,
@@ -291,9 +443,23 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -301,8 +467,9 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 5.0),
                       child: RichText(
+                        textScaler: MediaQuery.of(context).textScaler,
                         text: TextSpan(
                           children: [
                             TextSpan(
@@ -312,26 +479,53 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                             TextSpan(
                               text: FFLocalizations.of(context).getText(
                                 'ij27vhs7' /*  50 Questions */,
                               ),
-                              style: const TextStyle(),
+                              style: TextStyle(),
                             )
                           ],
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                       child: RichText(
+                        textScaler: MediaQuery.of(context).textScaler,
                         text: TextSpan(
                           children: [
                             TextSpan(
@@ -341,26 +535,53 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                             TextSpan(
                               text: FFLocalizations.of(context).getText(
                                 'c3j7luoz' /*  50 Minutes */,
                               ),
-                              style: const TextStyle(),
+                              style: TextStyle(),
                             )
                           ],
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                       child: RichText(
+                        textScaler: MediaQuery.of(context).textScaler,
                         text: TextSpan(
                           children: [
                             TextSpan(
@@ -370,20 +591,46 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FontWeight.bold,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context).primary,
+                                    letterSpacing: 0.0,
                                     fontWeight: FontWeight.bold,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                             TextSpan(
                               text: FFLocalizations.of(context).getText(
                                 'vmohc2jc' /* 50 Marks (No Negative Marking) */,
                               ),
-                              style: const TextStyle(),
+                              style: TextStyle(),
                             )
                           ],
-                          style: FlutterFlowTheme.of(context).bodyMedium,
-                        ), textScaler: TextScaler.linear(MediaQuery.of(context).textScaleFactor),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
                       ),
                     ),
                     Divider(
@@ -405,7 +652,7 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               10.0, 0.0, 0.0, 0.0),
                           child: Icon(
                             Icons.filter_3_rounded,
@@ -414,7 +661,7 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                           ),
                         ),
                         Container(
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               'jwxlqj9f' /* Students participating in Quiz... */,
@@ -423,9 +670,23 @@ class _QuizdetailscomWidgetState extends State<QuizdetailscomWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),

@@ -1,19 +1,25 @@
-import 'package:flutter/scheduler.dart';
-
-import '../../backend/api_requests/api_calls.dart';
 import '/auth/firebase_auth/auth_util.dart';
+import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
+
 import 'profile_model.dart';
 export 'profile_model.dart';
 
 class ProfileWidget extends StatefulWidget {
   const ProfileWidget({super.key});
+
+  static String routeName = 'profile';
+  static String routePath = '/profile';
 
   @override
   State<ProfileWidget> createState() => _ProfileWidgetState();
@@ -33,6 +39,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       logFirebaseEvent('PROFILE_PAGE_profile_ON_INIT_STATE');
+      Function() _navigate = () {};
       logFirebaseEvent('profile_backend_call');
       _model.apiResult83f = await LoginOutsideCall.call(
         mobile: FFAppState().userInfo.mobileNo,
@@ -49,9 +56,55 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         );
         safeSetState(() {});
       }
+      logFirebaseEvent('profile_backend_call');
+      _model.validatetoken = await ValidateTokenCall.call(
+        token: FFAppState().userInfo.token,
+      );
+
+      if (!(_model.validatetoken?.succeeded ?? true)) {
+        logFirebaseEvent('profile_backend_call');
+        _model.getnewtoken = await GetNewTokenCall.call(
+          userID: FFAppState().userInfo.token,
+        );
+
+        if ((_model.getnewtoken?.succeeded ?? true)) {
+          logFirebaseEvent('profile_update_app_state');
+          FFAppState().updateUserInfoStruct(
+            (e) => e
+              ..token = getJsonField(
+                (_model.getnewtoken?.jsonBody ?? ''),
+                r'''$.jwt_token''',
+              ).toString(),
+          );
+          FFAppState().update(() {});
+        } else {
+          logFirebaseEvent('profile_show_snack_bar');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'Your session has expired. Please log in again to continue.',
+                style: TextStyle(
+                  color: FlutterFlowTheme.of(context).secondaryBackground,
+                ),
+              ),
+              duration: Duration(milliseconds: 4000),
+              backgroundColor: FlutterFlowTheme.of(context).primary,
+            ),
+          );
+          logFirebaseEvent('profile_auth');
+          GoRouter.of(context).prepareAuthEvent();
+          await authManager.signOut();
+          GoRouter.of(context).clearRedirectLocation();
+
+          _navigate = () =>
+              context.goNamedAuth(OnBoardingWidget.routeName, context.mounted);
+        }
+      }
+
+      _navigate();
     });
   }
-  
+
   @override
   void dispose() {
     _model.dispose();
@@ -61,21 +114,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -83,31 +128,34 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           title: Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
-              child: Text(
-                FFLocalizations.of(context).getText(
-                  '0zberw20' /* Profile */,
-                ),
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Poppins',
-                      color: Colors.black,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w500,
-                    ),
+            alignment: AlignmentDirectional(0, 0),
+            child: Text(
+              FFLocalizations.of(context).getText(
+                '0zberw20' /* Profile */,
               ),
+              style: FlutterFlowTheme.of(context).headlineMedium.override(
+                    font: GoogleFonts.poppins(
+                      fontWeight: FontWeight.w500,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                    ),
+                    color: Colors.black,
+                    fontSize: 22,
+                    letterSpacing: 0.0,
+                    fontWeight: FontWeight.w500,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
             ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
-          toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
-          elevation: 2.0,
+          elevation: 0.5,
         ),
         body: SafeArea(
           top: true,
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 16.0),
+            padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
             child: SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -115,13 +163,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   Container(
                     width: MediaQuery.sizeOf(context).width * 0.9,
                     height: MediaQuery.sizeOf(context).height * 0.18,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Material(
                           color: Colors.transparent,
-                          elevation: 5.0,
+                          elevation: 5,
                           shape: const CircleBorder(),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 0.3,
@@ -135,12 +183,12 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               ),
                             ),
                             child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0, 0),
                               child: Container(
                                 width: MediaQuery.sizeOf(context).width * 0.25,
                                 height: MediaQuery.sizeOf(context).width * 0.25,
                                 clipBehavior: Clip.antiAlias,
-                                decoration: const BoxDecoration(
+                                decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                 ),
                                 child: Image.asset(
@@ -152,38 +200,49 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0, 0),
                           child: Container(
                             width: MediaQuery.sizeOf(context).width * 0.6,
                             height: MediaQuery.sizeOf(context).height * 0.14,
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0, 0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 5.0, 0.0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 5, 5, 0),
                                       child: Text(
                                         FFAppState().userInfo.studentName,
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Poppins',
-                                              color: const Color(0xFF272727),
-                                              fontSize: 16.0,
+                                              font: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF272727),
+                                              fontSize: 16,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 5.0, 0.0),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 5, 0),
                                     child: Text(
                                       FFLocalizations.of(context).getText(
                                         'knsmhll4' /* Student */,
@@ -192,16 +251,34 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Poppins',
-                                            color: const Color(0xFFA4A4A4),
+                                            font: GoogleFonts.poppins(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: Color(0xFFA4A4A4),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0, 0),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 5.0, 0.0, 0.0),
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 5, 0, 0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent(
@@ -209,7 +286,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                           logFirebaseEvent(
                                               'Button_navigate_to');
 
-                                          context.pushNamed('editProfile');
+                                          context.pushNamed(
+                                              EditProfileWidget.routeName);
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(
@@ -223,27 +301,39 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                                   .height *
                                               0.04,
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  15.0, 0.0, 15.0, 0.0),
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  15, 0, 15, 0),
                                           iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: const Color(0xFF004696),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 0),
+                                          color: Color(0xFF004696),
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
+                                                color: Colors.white,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
+                                          elevation: 3,
+                                          borderSide: BorderSide(
                                             color: Colors.transparent,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(8.0),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
@@ -257,117 +347,180 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    alignment: AlignmentDirectional(-1, 0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         '9sklizon' /* School Name */,
                       ),
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Poppins',
-                            color: const Color(0xFF272727),
-                            fontSize: 16.0,
+                            font: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
+                            color: Color(0xFF272727),
+                            fontSize: 16,
+                            letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .fontStyle,
                           ),
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                       child: Text(
                         FFAppState().userInfo.schoolName,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Poppins',
-                              color: const Color(0xFF272727),
+                              font: GoogleFonts.poppins(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: Color(0xFF272727),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                     ),
                   ),
-                  const Divider(
-                    height: 1.0,
-                    thickness: 1.0,
+                  Divider(
+                    height: 1,
+                    thickness: 1,
                     color: Color(0xFFBBAACC),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'dxembudd' /* Standard */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Poppins',
-                              color: const Color(0xFF272727),
-                              fontSize: 16.0,
+                              font: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: Color(0xFF272727),
+                              fontSize: 16,
+                              letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                       child: Text(
                         FFAppState().userInfo.stdId,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Poppins',
-                              color: const Color(0xFF272727),
-                              fontSize: 16.0,
+                              font: GoogleFonts.poppins(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: Color(0xFF272727),
+                              fontSize: 16,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                     ),
                   ),
-                  const Divider(
-                    height: 1.0,
-                    thickness: 1.0,
+                  Divider(
+                    height: 1,
+                    thickness: 1,
                     color: Color(0xFFBBAACC),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           '7zh174zt' /* Mobile Number */,
                         ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Poppins',
-                              color: const Color(0xFF272727),
-                              fontSize: 16.0,
+                              font: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: Color(0xFF272727),
+                              fontSize: 16,
+                              letterSpacing: 0.0,
                               fontWeight: FontWeight.w600,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                     ),
                   ),
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    alignment: AlignmentDirectional(-1, 0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 2.0, 0.0, 0.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
                       child: Text(
                         FFAppState().userInfo.mobileNo,
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Poppins',
-                              color: const Color(0xFF272727),
-                              fontSize: 16.0,
+                              font: GoogleFonts.poppins(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              color: Color(0xFF272727),
+                              fontSize: 16,
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
                             ),
                       ),
                     ),
                   ),
-                  const Divider(
-                    height: 1.0,
-                    thickness: 1.0,
+                  Divider(
+                    height: 1,
+                    thickness: 1,
                     color: Color(0xFFBBAACC),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -380,23 +533,24 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           userId: FFAppState().userInfo.userId,
                           stdId: FFAppState().userInfo.stdId,
                         );
+
                         if ((_model.subApi?.succeeded ?? true)) {
                           logFirebaseEvent('Row_navigate_to');
 
                           context.pushNamed(
-                            'subscription',
+                            SubscriptionWidget.routeName,
                             queryParameters: {
                               'serviceName': serializeParam(
                                 SubcsriptionsCall.servicename(
                                   (_model.subApi?.jsonBody ?? ''),
-                                )?.first,
+                                )?.firstOrNull,
                                 ParamType.String,
                               ),
                             }.withoutNulls,
                           );
                         }
 
-                        setState(() {});
+                        safeSetState(() {});
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -408,11 +562,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.attach_money,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 22.0,
+                                size: 22,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    7.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(7, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'yasvhqa5' /* My Subscriptions */,
@@ -420,20 +574,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
@@ -441,8 +605,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -452,7 +615,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         logFirebaseEvent('PROFILE_PAGE_Row_f2pwr5fq_ON_TAP');
                         logFirebaseEvent('Row_navigate_to');
 
-                        context.pushNamed('myOrders');
+                        context.pushNamed(MyOrdersWidget.routeName);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -464,11 +627,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.shopping_bag_outlined,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 22.0,
+                                size: 22,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'qs4dh6nb' /* My Orders */,
@@ -476,41 +639,49 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  // s
                   if (FFAppState().userInfo.showresult == 1)
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
                         hoverColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () async {
-                          logFirebaseEvent('PROFILE_PAGE_Row_d4jht86a_ON_TAP');
+                          logFirebaseEvent('PROFILE_PAGE_Row_3kd7nkan_ON_TAP');
                           logFirebaseEvent('Row_navigate_to');
 
-                          context.pushNamed('results');
+                          context.pushNamed(ResultsWidget.routeName);
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -522,32 +693,43 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 Icon(
                                   Icons.book_outlined,
                                   color: FlutterFlowTheme.of(context).primary,
-                                  size: 22.0,
+                                  size: 22,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 2.0, 0.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10, 2, 0, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
-                                      'g2pzxgvl' /* My Results */,
+                                      'gxvk1k7f' /* My Results */,
                                     ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Poppins',
+                                          font: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.normal,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
                               ],
                             ),
-                            const Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 10.0, 0.0),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                               child: Icon(
                                 Icons.arrow_forward_ios,
                                 color: Color(0xFF272727),
-                                size: 22.0,
+                                size: 22,
                               ),
                             ),
                           ],
@@ -556,8 +738,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   if (FFAppState().userInfo.showresult == 2)
                     Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                       child: InkWell(
                         splashColor: Colors.transparent,
                         focusColor: Colors.transparent,
@@ -567,7 +748,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           logFirebaseEvent('PROFILE_PAGE_Row_cckkmhvf_ON_TAP');
                           logFirebaseEvent('Row_navigate_to');
 
-                          context.pushNamed('round2result');
+                          context.pushNamed(Round2resultWidget.routeName);
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
@@ -579,11 +760,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                 Icon(
                                   Icons.book_outlined,
                                   color: FlutterFlowTheme.of(context).primary,
-                                  size: 22.0,
+                                  size: 22,
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      10.0, 2.0, 0.0, 0.0),
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      10, 2, 0, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
                                       'gs4e99au' /* My Results */,
@@ -591,20 +772,31 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Poppins',
+                                          font: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.normal,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
                               ],
                             ),
-                            const Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 10.0, 0.0),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                               child: Icon(
                                 Icons.arrow_forward_ios,
                                 color: Color(0xFF272727),
-                                size: 22.0,
+                                size: 22,
                               ),
                             ),
                           ],
@@ -612,8 +804,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       ),
                     ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -623,7 +814,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         logFirebaseEvent('PROFILE_PAGE_Row_zpe4mvmm_ON_TAP');
                         logFirebaseEvent('Row_navigate_to');
 
-                        context.pushNamed('notices');
+                        context.pushNamed(NoticesWidget.routeName);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -635,11 +826,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.trending_up_rounded,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 22.0,
+                                size: 22,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'nht371of' /* Notice */,
@@ -647,20 +838,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
@@ -668,8 +869,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -679,7 +879,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         logFirebaseEvent('PROFILE_PAGE_Row_qu5cbfj4_ON_TAP');
                         logFirebaseEvent('Row_navigate_to');
 
-                        context.pushNamed('productsmenu');
+                        context.pushNamed(ProductsmenuWidget.routeName);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -691,11 +891,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.percent_rounded,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 22.0,
+                                size: 22,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     '72iq5qk6' /* Special Offers */,
@@ -703,34 +903,43 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  const Divider(
-                    height: 1.0,
-                    thickness: 1.0,
+                  Divider(
+                    height: 1,
+                    thickness: 1,
                     color: Color(0xFFBBAACC),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -740,7 +949,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         logFirebaseEvent('PROFILE_PAGE_Row_yhbukh11_ON_TAP');
                         logFirebaseEvent('Row_navigate_to');
 
-                        context.pushNamed('helpPage');
+                        context.pushNamed(HelpPageWidget.routeName);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -752,11 +961,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.help_outline,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 24.0,
+                                size: 24,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'onmqulq9' /* Help Center */,
@@ -764,20 +973,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
@@ -785,8 +1004,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -807,11 +1025,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.content_paste,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 22.0,
+                                size: 22,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'pml1uqgo' /* Terms And Conditions */,
@@ -819,20 +1037,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
@@ -840,8 +1068,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -862,11 +1089,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.privacy_tip_outlined,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 24.0,
+                                size: 24,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'i163r840' /* Privacy Policy */,
@@ -874,20 +1101,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
@@ -895,8 +1132,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -918,11 +1154,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.local_police_outlined,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 24.0,
+                                size: 24,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     'v5y9e6ft' /* Refund Policy */,
@@ -930,20 +1166,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
@@ -951,8 +1197,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 16.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -962,7 +1207,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                         logFirebaseEvent('PROFILE_PAGE_Row_nlhn4kfw_ON_TAP');
                         logFirebaseEvent('Row_navigate_to');
 
-                        context.pushNamed('Deletionofrequest');
+                        context.pushNamed(DeletionofrequestWidget.routeName);
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
@@ -974,11 +1219,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.delete_outlined,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 24.0,
+                                size: 24,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     '6gaztrpy' /* Request Deletion Of Account */,
@@ -986,20 +1231,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],
@@ -1007,8 +1262,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     ),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -1022,19 +1276,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               builder: (alertDialogContext) {
                                 return WebViewAware(
                                   child: AlertDialog(
-                                    title: const Text('Logout'),
-                                    content: const Text(
+                                    title: Text('Logout'),
+                                    content: Text(
                                         'Are You Sure You Want To Logout ?'),
                                     actions: [
                                       TextButton(
                                         onPressed: () => Navigator.pop(
                                             alertDialogContext, false),
-                                        child: const Text('Cancel'),
+                                        child: Text('Cancel'),
                                       ),
                                       TextButton(
                                         onPressed: () => Navigator.pop(
                                             alertDialogContext, true),
-                                        child: const Text('Confirm'),
+                                        child: Text('Confirm'),
                                       ),
                                     ],
                                   ),
@@ -1050,11 +1304,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
                           logFirebaseEvent('Row_navigate_to');
 
-                          context.goNamedAuth('Auth1Login', context.mounted);
+                          context.goNamedAuth(
+                              Auth1LoginWidget.routeName, context.mounted);
                         } else {
                           logFirebaseEvent('Row_navigate_to');
 
-                          context.pushNamedAuth('profile', context.mounted);
+                          context.pushNamedAuth(
+                              ProfileWidget.routeName, context.mounted);
                         }
                       },
                       child: Row(
@@ -1067,11 +1323,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                               Icon(
                                 Icons.logout_outlined,
                                 color: FlutterFlowTheme.of(context).primary,
-                                size: 24.0,
+                                size: 24,
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 2.0, 0.0, 0.0),
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(10, 2, 0, 0),
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     '838acrr5' /* Log Out */,
@@ -1079,20 +1335,30 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.normal,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.normal,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 10.0, 0.0),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
                             child: Icon(
                               Icons.arrow_forward_ios,
                               color: Color(0xFF272727),
-                              size: 22.0,
+                              size: 22,
                             ),
                           ),
                         ],

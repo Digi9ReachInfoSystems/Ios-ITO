@@ -19,12 +19,14 @@ class CouponStruct extends FFFirebaseStruct {
   String? _couponName;
   String get couponName => _couponName ?? '';
   set couponName(String? val) => _couponName = val;
+
   bool hasCouponName() => _couponName != null;
 
   // "savedAmount" field.
   String? _savedAmount;
   String get savedAmount => _savedAmount ?? '';
   set savedAmount(String? val) => _savedAmount = val;
+
   bool hasSavedAmount() => _savedAmount != null;
 
   static CouponStruct fromMap(Map<String, dynamic> data) => CouponStruct(

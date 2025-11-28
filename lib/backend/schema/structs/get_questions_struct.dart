@@ -35,60 +35,70 @@ class GetQuestionsStruct extends FFFirebaseStruct {
   String? _id;
   String get id => _id ?? '';
   set id(String? val) => _id = val;
+
   bool hasId() => _id != null;
 
   // "questionFormat" field.
   String? _questionFormat;
   String get questionFormat => _questionFormat ?? '';
   set questionFormat(String? val) => _questionFormat = val;
+
   bool hasQuestionFormat() => _questionFormat != null;
 
   // "question" field.
   String? _question;
   String get question => _question ?? '';
   set question(String? val) => _question = val;
+
   bool hasQuestion() => _question != null;
 
   // "questionImage" field.
   String? _questionImage;
   String get questionImage => _questionImage ?? '';
   set questionImage(String? val) => _questionImage = val;
+
   bool hasQuestionImage() => _questionImage != null;
 
   // "answer1" field.
   String? _answer1;
   String get answer1 => _answer1 ?? '';
   set answer1(String? val) => _answer1 = val;
+
   bool hasAnswer1() => _answer1 != null;
 
   // "answer2" field.
   String? _answer2;
   String get answer2 => _answer2 ?? '';
   set answer2(String? val) => _answer2 = val;
+
   bool hasAnswer2() => _answer2 != null;
 
   // "answer3" field.
   String? _answer3;
   String get answer3 => _answer3 ?? '';
   set answer3(String? val) => _answer3 = val;
+
   bool hasAnswer3() => _answer3 != null;
 
   // "answer4" field.
   String? _answer4;
   String get answer4 => _answer4 ?? '';
   set answer4(String? val) => _answer4 = val;
+
   bool hasAnswer4() => _answer4 != null;
 
   // "trueAnswer" field.
   String? _trueAnswer;
   String get trueAnswer => _trueAnswer ?? '';
   set trueAnswer(String? val) => _trueAnswer = val;
+
   bool hasTrueAnswer() => _trueAnswer != null;
 
   // "questionType" field.
   String? _questionType;
   String get questionType => _questionType ?? '';
   set questionType(String? val) => _questionType = val;
+
   bool hasQuestionType() => _questionType != null;
 
   static GetQuestionsStruct fromMap(Map<String, dynamic> data) =>
@@ -105,8 +115,9 @@ class GetQuestionsStruct extends FFFirebaseStruct {
         questionType: data['questionType'] as String?,
       );
 
-  static GetQuestionsStruct? maybeFromMap(dynamic data) =>
-      data is Map<String, dynamic> ? GetQuestionsStruct.fromMap(data) : null;
+  static GetQuestionsStruct? maybeFromMap(dynamic data) => data is Map
+      ? GetQuestionsStruct.fromMap(data.cast<String, dynamic>())
+      : null;
 
   Map<String, dynamic> toMap() => {
         'id': _id,

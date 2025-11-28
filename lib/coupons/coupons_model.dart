@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'coupons_widget.dart' show CouponsWidget;
 import 'package:flutter/material.dart';
 
@@ -14,21 +15,9 @@ class CouponsModel extends FlutterFlowModel<CouponsWidget> {
   void updateCouponcodesAtIndex(int index, Function(String) updateFn) =>
       couponcodes[index] = updateFn(couponcodes[index]);
 
-  ///  State fields for stateful widgets in this page.
-
-  final unfocusNode = FocusNode();
-
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
+  void dispose() {}
 }

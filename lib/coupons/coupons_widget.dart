@@ -1,14 +1,15 @@
-import '../backend/schema/structs/coupon_struct.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/testshimmer/testshimmer_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'coupons_model.dart';
@@ -16,6 +17,9 @@ export 'coupons_model.dart';
 
 class CouponsWidget extends StatefulWidget {
   const CouponsWidget({super.key});
+
+  static String routeName = 'Coupons';
+  static String routePath = '/coupons';
 
   @override
   State<CouponsWidget> createState() => _CouponsWidgetState();
@@ -43,21 +47,13 @@ class _CouponsWidgetState extends State<CouponsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -84,9 +80,21 @@ class _CouponsWidgetState extends State<CouponsWidget> {
             FFLocalizations.of(context).getText(
               'zjyulf79' /* Add Coupons */,
             ),
-            style: FlutterFlowTheme.of(context).headlineSmall,
+            style: FlutterFlowTheme.of(context).headlineSmall.override(
+                  font: GoogleFonts.outfit(
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineSmall.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineSmall.fontStyle,
+                  ),
+                  letterSpacing: 0.0,
+                  fontWeight:
+                      FlutterFlowTheme.of(context).headlineSmall.fontWeight,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineSmall.fontStyle,
+                ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           elevation: 0.0,
         ),
@@ -96,27 +104,29 @@ class _CouponsWidgetState extends State<CouponsWidget> {
               FFAppState().userInfo.stdId,
               '1',
             ),
+            token: FFAppState().userInfo.token,
           ),
           builder: (context, snapshot) {
             // Customize what your widget looks like when it's loading.
             if (!snapshot.hasData) {
-              return const TestshimmerWidget();
+              return TestshimmerWidget();
             }
             final columnGetAllProductsResponse = snapshot.data!;
+
             return SingleChildScrollView(
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Align(
-                    alignment: const AlignmentDirectional(0.0, 0.0),
+                    alignment: AlignmentDirectional(0.0, 0.0),
                     child: Container(
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 0.0, 0.0),
                             child: FaIcon(
                               FontAwesomeIcons.percentage,
@@ -125,9 +135,9 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            alignment: AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
@@ -136,11 +146,20 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Poppins',
+                                      font: GoogleFonts.poppins(
+                                        fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
                                       fontSize: 18.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FontWeight.w600,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),
@@ -151,23 +170,40 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 10.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(24.0, 10.0, 0.0, 0.0),
                     child: Text(
                       FFLocalizations.of(context).getText(
                         'zb0aja85' /* Apply Coupons */,
                       ),
-                      style: FlutterFlowTheme.of(context).labelMedium,
+                      style: FlutterFlowTheme.of(context).labelMedium.override(
+                            font: GoogleFonts.readexPro(
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .labelMedium
+                                  .fontStyle,
+                            ),
+                            letterSpacing: 0.0,
+                            fontWeight: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .fontWeight,
+                            fontStyle: FlutterFlowTheme.of(context)
+                                .labelMedium
+                                .fontStyle,
+                          ),
                     ),
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 44.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 44.0),
                     child: Builder(
                       builder: (context) {
                         final list = GetAllProductsCall.coupons(
                               columnGetAllProductsResponse.jsonBody,
                             )?.toList() ??
                             [];
+
                         return ListView.builder(
                           padding: EdgeInsets.zero,
                           primary: false,
@@ -177,7 +213,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                           itemBuilder: (context, listIndex) {
                             final listItem = list[listIndex];
                             return Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 4.0, 16.0, 8.0),
                               child: Container(
                                 width: double.infinity,
@@ -185,17 +221,20 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  boxShadow: const [
+                                  boxShadow: [
                                     BoxShadow(
                                       blurRadius: 4.0,
                                       color: Color(0x32000000),
-                                      offset: Offset(0.0, 2.0),
+                                      offset: Offset(
+                                        0.0,
+                                        2.0,
+                                      ),
                                     )
                                   ],
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       12.0, 0.0, 10.0, 0.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -205,7 +244,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 4.0, 0.0, 0.0),
                                         child: Text(
                                           getJsonField(
@@ -215,12 +254,24 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                           style: FlutterFlowTheme.of(context)
                                               .labelMedium
                                               .override(
-                                                fontFamily: 'Readex Pro',
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primaryText,
                                                 fontSize: 18.0,
+                                                letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
                                               ),
                                         ),
                                       ),
@@ -235,10 +286,28 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primary,
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                       Material(
@@ -257,7 +326,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     3.0, 3.0, 3.0, 3.0),
                                             child: Text(
                                               getJsonField(
@@ -268,12 +337,26 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                       context)
                                                   .bodyMedium
                                                   .override(
-                                                    fontFamily: 'Readex Pro',
+                                                    font: GoogleFonts.readexPro(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                                     color: FlutterFlowTheme.of(
                                                             context)
                                                         .secondaryText,
                                                     fontSize: 16.0,
+                                                    letterSpacing: 0.0,
                                                     fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
@@ -286,7 +369,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 1.0),
+                                            AlignmentDirectional(0.0, 1.0),
                                         child: FFButtonWidget(
                                           onPressed: (FFAppState()
                                                       .finalamount <=
@@ -317,16 +400,16 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                             (alertDialogContext) {
                                                           return WebViewAware(
                                                             child: AlertDialog(
-                                                              title: const Text(
+                                                              title: Text(
                                                                   'Invalid Coupon !!'),
-                                                              content: const Text(
+                                                              content: Text(
                                                                   'coupon Already applied'),
                                                               actions: [
                                                                 TextButton(
                                                                   onPressed: () =>
                                                                       Navigator.pop(
                                                                           alertDialogContext),
-                                                                  child: const Text(
+                                                                  child: Text(
                                                                       'Ok'),
                                                                 ),
                                                               ],
@@ -337,82 +420,65 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                     } else {
                                                       logFirebaseEvent(
                                                           'Button_update_app_state');
-                                                      setState(() {
-                                                        FFAppState()
-                                                                .couponscode =
-                                                            CouponStruct(
-                                                          couponName:
-                                                              getJsonField(
-                                                            listItem,
-                                                            r'''$.discount''',
-                                                          ).toString(),
-                                                          savedAmount:
-                                                              getJsonField(
-                                                            listItem,
-                                                            r'''$.coupon_name''',
-                                                          ).toString(),
-                                                        );
-                                                      });
+                                                      FFAppState().couponscode =
+                                                          CouponStruct(
+                                                        couponName:
+                                                            getJsonField(
+                                                          listItem,
+                                                          r'''$.discount''',
+                                                        ).toString(),
+                                                        savedAmount:
+                                                            getJsonField(
+                                                          listItem,
+                                                          r'''$.coupon_name''',
+                                                        ).toString(),
+                                                      );
+                                                      safeSetState(() {});
                                                       logFirebaseEvent(
                                                           'Button_update_app_state');
-                                                      setState(() {
-                                                        FFAppState()
-                                                                .finalamount =
-                                                            functions.doubletoString(functions.discountamount(
-                                                                FFAppState()
-                                                                    .couponscode
-                                                                    .couponName,
-                                                                FFAppState()
-                                                                    .finalamount
-                                                                    .toString()));
-                                                        FFAppState()
-                                                                .discountamount =
-                                                            functions.doubletoString(functions.yousaved(
-                                                                FFAppState()
-                                                                    .couponscode
-                                                                    .couponName,
-                                                                FFAppState()
-                                                                    .finalamount
-                                                                    .toString()));
-                                                        FFAppState()
-                                                            .addToApplied(
-                                                                listItem
-                                                                    .toString());
-                                                      });
+                                                      FFAppState().finalamount =
+                                                          functions.doubletoString(
+                                                              functions.discountamount(
+                                                                  FFAppState()
+                                                                      .couponscode
+                                                                      .couponName,
+                                                                  FFAppState()
+                                                                      .finalamount
+                                                                      .toString()));
+                                                      FFAppState()
+                                                              .discountamount =
+                                                          functions.doubletoString(
+                                                              functions.yousaved(
+                                                                  FFAppState()
+                                                                      .couponscode
+                                                                      .couponName,
+                                                                  FFAppState()
+                                                                      .finalamount
+                                                                      .toString()));
+                                                      FFAppState().addToApplied(
+                                                          listItem.toString());
+                                                      FFAppState()
+                                                          .update(() {});
                                                       logFirebaseEvent(
-                                                          'Button_show_snack_bar');
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'Coupon applied successfully!!',
-                                                            style: TextStyle(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                            ),
+                                                          'Button_navigate_to');
+
+                                                      context.goNamed(
+                                                        CartvalueWidget
+                                                            .routeName,
+                                                        extra: <String,
+                                                            dynamic>{
+                                                          kTransitionInfoKey:
+                                                              TransitionInfo(
+                                                            hasTransition: true,
+                                                            transitionType:
+                                                                PageTransitionType
+                                                                    .rightToLeft,
+                                                            duration: Duration(
+                                                                milliseconds:
+                                                                    100),
                                                           ),
-                                                          duration: const Duration(
-                                                              milliseconds:
-                                                                  4000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .primary,
-                                                        ),
+                                                        },
                                                       );
-                                                      logFirebaseEvent('Button_navigate_to');
-                context.goNamed(
-                  'Cartvalue',
-                  extra: <String, dynamic>{
-                    kTransitionInfoKey: const TransitionInfo(
-                      hasTransition: true,
-                      transitionType: PageTransitionType.fade,
-                      duration: Duration(milliseconds: 1500),
-                    ),
-                  },
-                );
                                                     }
                                                   } else {
                                                     logFirebaseEvent(
@@ -423,7 +489,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                           (alertDialogContext) {
                                                         return WebViewAware(
                                                           child: AlertDialog(
-                                                            title: const Text(
+                                                            title: Text(
                                                                 'Invalid Amount'),
                                                             content: Text(
                                                                 'min required amount is ${getJsonField(
@@ -436,7 +502,7 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                                     Navigator.pop(
                                                                         alertDialogContext),
                                                                 child:
-                                                                    const Text('Ok'),
+                                                                    Text('Ok'),
                                                               ),
                                                             ],
                                                           ),
@@ -454,10 +520,10 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                 1.0,
                                             height: 45.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
@@ -465,15 +531,28 @@ class _CouponsWidgetState extends State<CouponsWidget> {
                                                     context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Poppins',
+                                                  font: GoogleFonts.poppins(
+                                                    fontWeight: FontWeight.w500,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryBackground,
                                                   fontSize: 16.0,
+                                                  letterSpacing: 0.0,
                                                   fontWeight: FontWeight.w500,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                             elevation: 2.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),

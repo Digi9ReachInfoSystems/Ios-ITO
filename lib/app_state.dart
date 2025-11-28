@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:indian_talent_olympiad/backend/schema/structs/powercart_struct.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'backend/schema/structs/coupon_struct.dart';
 import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
@@ -182,6 +180,9 @@ class FFAppState extends ChangeNotifier {
       _finalamount = prefs.getDouble('ff_finalamount') ?? _finalamount;
     });
     _safeInit(() {
+      _deliveryfee = prefs.getDouble('ff_deliveryfee') ?? _deliveryfee;
+    });
+    _safeInit(() {
       _starttime = prefs.containsKey('ff_starttime')
           ? DateTime.fromMillisecondsSinceEpoch(prefs.getInt('ff_starttime')!)
           : _starttime;
@@ -235,6 +236,38 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _noofselected = prefs.getStringList('ff_noofselected') ?? _noofselected;
     });
+    _safeInit(() {
+      _powercart = prefs
+              .getStringList('ff_powercart')
+              ?.map((x) {
+                try {
+                  return PowercartStruct.fromSerializableMap(jsonDecode(x));
+                } catch (e) {
+                  print("Can't decode persisted data type. Error: $e.");
+                  return null;
+                }
+              })
+              .withoutNulls
+              .toList() ??
+          _powercart;
+    });
+    _safeInit(() {
+      _powercomboid = prefs.getStringList('ff_powercomboid') ?? _powercomboid;
+    });
+    _safeInit(() {
+      _powerdiscount = prefs.getDouble('ff_powerdiscount') ?? _powerdiscount;
+    });
+    _safeInit(() {
+      _powerfinalamount =
+          prefs.getDouble('ff_powerfinalamount') ?? _powerfinalamount;
+    });
+    _safeInit(() {
+      _powerId = prefs.getStringList('ff_powerId')?.map(int.parse).toList() ??
+          _powerId;
+    });
+    _safeInit(() {
+      _token = prefs.getString('ff_token') ?? _token;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -275,11 +308,7 @@ class FFAppState extends ChangeNotifier {
     _otp1 = value;
     prefs.setString('ff_otp1', value);
   }
-String _appcheck = '';
-  String get appcheck => _appcheck;
-  set appcheck(String value) {
-    _appcheck = value;
-  }
+
   SubscriptionsStruct _subs =
       SubscriptionsStruct.fromSerializableMap(jsonDecode('{}'));
   SubscriptionsStruct get subs => _subs;
@@ -330,19 +359,19 @@ String _appcheck = '';
   }
 
   void addToAllservices(ServicesStruct value) {
-    _allservices.add(value);
+    allservices.add(value);
     prefs.setStringList(
         'ff_allservices', _allservices.map((x) => x.serialize()).toList());
   }
 
   void removeFromAllservices(ServicesStruct value) {
-    _allservices.remove(value);
+    allservices.remove(value);
     prefs.setStringList(
         'ff_allservices', _allservices.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromAllservices(int index) {
-    _allservices.removeAt(index);
+    allservices.removeAt(index);
     prefs.setStringList(
         'ff_allservices', _allservices.map((x) => x.serialize()).toList());
   }
@@ -351,13 +380,13 @@ String _appcheck = '';
     int index,
     ServicesStruct Function(ServicesStruct) updateFn,
   ) {
-    _allservices[index] = updateFn(_allservices[index]);
+    allservices[index] = updateFn(_allservices[index]);
     prefs.setStringList(
         'ff_allservices', _allservices.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInAllservices(int index, ServicesStruct value) {
-    _allservices.insert(index, value);
+    allservices.insert(index, value);
     prefs.setStringList(
         'ff_allservices', _allservices.map((x) => x.serialize()).toList());
   }
@@ -366,24 +395,23 @@ String _appcheck = '';
   List<AnswersStruct> get answers => _answers;
   set answers(List<AnswersStruct> value) {
     _answers = value;
-    prefs.setStringList(
-        'ff_answers', value.map((x) => x.serialize()).toList());
+    prefs.setStringList('ff_answers', value.map((x) => x.serialize()).toList());
   }
 
   void addToAnswers(AnswersStruct value) {
-    _answers.add(value);
+    answers.add(value);
     prefs.setStringList(
         'ff_answers', _answers.map((x) => x.serialize()).toList());
   }
 
   void removeFromAnswers(AnswersStruct value) {
-    _answers.remove(value);
+    answers.remove(value);
     prefs.setStringList(
         'ff_answers', _answers.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromAnswers(int index) {
-    _answers.removeAt(index);
+    answers.removeAt(index);
     prefs.setStringList(
         'ff_answers', _answers.map((x) => x.serialize()).toList());
   }
@@ -392,13 +420,13 @@ String _appcheck = '';
     int index,
     AnswersStruct Function(AnswersStruct) updateFn,
   ) {
-    _answers[index] = updateFn(_answers[index]);
+    answers[index] = updateFn(_answers[index]);
     prefs.setStringList(
         'ff_answers', _answers.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInAnswers(int index, AnswersStruct value) {
-    _answers.insert(index, value);
+    answers.insert(index, value);
     prefs.setStringList(
         'ff_answers', _answers.map((x) => x.serialize()).toList());
   }
@@ -407,24 +435,23 @@ String _appcheck = '';
   List<TestsStruct> get testAll => _testAll;
   set testAll(List<TestsStruct> value) {
     _testAll = value;
-    prefs.setStringList(
-        'ff_testAll', value.map((x) => x.serialize()).toList());
+    prefs.setStringList('ff_testAll', value.map((x) => x.serialize()).toList());
   }
 
   void addToTestAll(TestsStruct value) {
-    _testAll.add(value);
+    testAll.add(value);
     prefs.setStringList(
         'ff_testAll', _testAll.map((x) => x.serialize()).toList());
   }
 
   void removeFromTestAll(TestsStruct value) {
-    _testAll.remove(value);
+    testAll.remove(value);
     prefs.setStringList(
         'ff_testAll', _testAll.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromTestAll(int index) {
-    _testAll.removeAt(index);
+    testAll.removeAt(index);
     prefs.setStringList(
         'ff_testAll', _testAll.map((x) => x.serialize()).toList());
   }
@@ -433,13 +460,13 @@ String _appcheck = '';
     int index,
     TestsStruct Function(TestsStruct) updateFn,
   ) {
-    _testAll[index] = updateFn(_testAll[index]);
+    testAll[index] = updateFn(_testAll[index]);
     prefs.setStringList(
         'ff_testAll', _testAll.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInTestAll(int index, TestsStruct value) {
-    _testAll.insert(index, value);
+    testAll.insert(index, value);
     prefs.setStringList(
         'ff_testAll', _testAll.map((x) => x.serialize()).toList());
   }
@@ -486,17 +513,17 @@ String _appcheck = '';
   }
 
   void addToImageslist(String value) {
-    _imageslist.add(value);
+    imageslist.add(value);
     prefs.setStringList('ff_imageslist', _imageslist);
   }
 
   void removeFromImageslist(String value) {
-    _imageslist.remove(value);
+    imageslist.remove(value);
     prefs.setStringList('ff_imageslist', _imageslist);
   }
 
   void removeAtIndexFromImageslist(int index) {
-    _imageslist.removeAt(index);
+    imageslist.removeAt(index);
     prefs.setStringList('ff_imageslist', _imageslist);
   }
 
@@ -504,12 +531,12 @@ String _appcheck = '';
     int index,
     String Function(String) updateFn,
   ) {
-    _imageslist[index] = updateFn(_imageslist[index]);
+    imageslist[index] = updateFn(_imageslist[index]);
     prefs.setStringList('ff_imageslist', _imageslist);
   }
 
   void insertAtIndexInImageslist(int index, String value) {
-    _imageslist.insert(index, value);
+    imageslist.insert(index, value);
     prefs.setStringList('ff_imageslist', _imageslist);
   }
 
@@ -551,14 +578,6 @@ String _appcheck = '';
     prefs.setBool('ff_isChecked', value);
   }
 
-  bool _isupdateAvailable = false;
-  bool get isupdateAvailable => _isupdateAvailable;
-  set isupdateAvailable(bool value) {
-    _isupdateAvailable = value;
-    prefs.setBool('ff_isupdateAvailable', value);
-  }
-
-
   List<TimelinedocumentStruct> _slot1 = [];
   List<TimelinedocumentStruct> get slot1 => _slot1;
   set slot1(List<TimelinedocumentStruct> value) {
@@ -566,26 +585,26 @@ String _appcheck = '';
   }
 
   void addToSlot1(TimelinedocumentStruct value) {
-    _slot1.add(value);
+    slot1.add(value);
   }
 
   void removeFromSlot1(TimelinedocumentStruct value) {
-    _slot1.remove(value);
+    slot1.remove(value);
   }
 
   void removeAtIndexFromSlot1(int index) {
-    _slot1.removeAt(index);
+    slot1.removeAt(index);
   }
 
   void updateSlot1AtIndex(
     int index,
     TimelinedocumentStruct Function(TimelinedocumentStruct) updateFn,
   ) {
-    _slot1[index] = updateFn(_slot1[index]);
+    slot1[index] = updateFn(_slot1[index]);
   }
 
   void insertAtIndexInSlot1(int index, TimelinedocumentStruct value) {
-    _slot1.insert(index, value);
+    slot1.insert(index, value);
   }
 
   List<TimelinedocumentStruct> _slot1annual = [];
@@ -595,26 +614,26 @@ String _appcheck = '';
   }
 
   void addToSlot1annual(TimelinedocumentStruct value) {
-    _slot1annual.add(value);
+    slot1annual.add(value);
   }
 
   void removeFromSlot1annual(TimelinedocumentStruct value) {
-    _slot1annual.remove(value);
+    slot1annual.remove(value);
   }
 
   void removeAtIndexFromSlot1annual(int index) {
-    _slot1annual.removeAt(index);
+    slot1annual.removeAt(index);
   }
 
   void updateSlot1annualAtIndex(
     int index,
     TimelinedocumentStruct Function(TimelinedocumentStruct) updateFn,
   ) {
-    _slot1annual[index] = updateFn(_slot1annual[index]);
+    slot1annual[index] = updateFn(_slot1annual[index]);
   }
 
   void insertAtIndexInSlot1annual(int index, TimelinedocumentStruct value) {
-    _slot1annual.insert(index, value);
+    slot1annual.insert(index, value);
   }
 
   List<TimelinedocumentStruct> _slot2annual = [];
@@ -626,19 +645,19 @@ String _appcheck = '';
   }
 
   void addToSlot2annual(TimelinedocumentStruct value) {
-    _slot2annual.add(value);
+    slot2annual.add(value);
     prefs.setStringList(
         'ff_slot2annual', _slot2annual.map((x) => x.serialize()).toList());
   }
 
   void removeFromSlot2annual(TimelinedocumentStruct value) {
-    _slot2annual.remove(value);
+    slot2annual.remove(value);
     prefs.setStringList(
         'ff_slot2annual', _slot2annual.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromSlot2annual(int index) {
-    _slot2annual.removeAt(index);
+    slot2annual.removeAt(index);
     prefs.setStringList(
         'ff_slot2annual', _slot2annual.map((x) => x.serialize()).toList());
   }
@@ -647,13 +666,13 @@ String _appcheck = '';
     int index,
     TimelinedocumentStruct Function(TimelinedocumentStruct) updateFn,
   ) {
-    _slot2annual[index] = updateFn(_slot2annual[index]);
+    slot2annual[index] = updateFn(_slot2annual[index]);
     prefs.setStringList(
         'ff_slot2annual', _slot2annual.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInSlot2annual(int index, TimelinedocumentStruct value) {
-    _slot2annual.insert(index, value);
+    slot2annual.insert(index, value);
     prefs.setStringList(
         'ff_slot2annual', _slot2annual.map((x) => x.serialize()).toList());
   }
@@ -667,19 +686,19 @@ String _appcheck = '';
   }
 
   void addToTotalcart(CartitemsStruct value) {
-    _totalcart.add(value);
+    totalcart.add(value);
     prefs.setStringList(
         'ff_totalcart', _totalcart.map((x) => x.serialize()).toList());
   }
 
   void removeFromTotalcart(CartitemsStruct value) {
-    _totalcart.remove(value);
+    totalcart.remove(value);
     prefs.setStringList(
         'ff_totalcart', _totalcart.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromTotalcart(int index) {
-    _totalcart.removeAt(index);
+    totalcart.removeAt(index);
     prefs.setStringList(
         'ff_totalcart', _totalcart.map((x) => x.serialize()).toList());
   }
@@ -688,13 +707,13 @@ String _appcheck = '';
     int index,
     CartitemsStruct Function(CartitemsStruct) updateFn,
   ) {
-    _totalcart[index] = updateFn(_totalcart[index]);
+    totalcart[index] = updateFn(_totalcart[index]);
     prefs.setStringList(
         'ff_totalcart', _totalcart.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInTotalcart(int index, CartitemsStruct value) {
-    _totalcart.insert(index, value);
+    totalcart.insert(index, value);
     prefs.setStringList(
         'ff_totalcart', _totalcart.map((x) => x.serialize()).toList());
   }
@@ -707,17 +726,17 @@ String _appcheck = '';
   }
 
   void addToProductids(String value) {
-    _productids.add(value);
+    productids.add(value);
     prefs.setStringList('ff_productids', _productids);
   }
 
   void removeFromProductids(String value) {
-    _productids.remove(value);
+    productids.remove(value);
     prefs.setStringList('ff_productids', _productids);
   }
 
   void removeAtIndexFromProductids(int index) {
-    _productids.removeAt(index);
+    productids.removeAt(index);
     prefs.setStringList('ff_productids', _productids);
   }
 
@@ -725,12 +744,12 @@ String _appcheck = '';
     int index,
     String Function(String) updateFn,
   ) {
-    _productids[index] = updateFn(_productids[index]);
+    productids[index] = updateFn(_productids[index]);
     prefs.setStringList('ff_productids', _productids);
   }
 
   void insertAtIndexInProductids(int index, String value) {
-    _productids.insert(index, value);
+    productids.insert(index, value);
     prefs.setStringList('ff_productids', _productids);
   }
 
@@ -739,12 +758,6 @@ String _appcheck = '';
   set finalamount(double value) {
     _finalamount = value;
     prefs.setDouble('ff_finalamount', value);
-  }
-    double _discountamount = 0.0;
-  double get discountamount => _discountamount;
-  set discountamount(double value) {
-    _discountamount = value;
-    prefs.setDouble('ff__discountamount', value);
   }
 
   double _cartvalue = 0.0;
@@ -757,6 +770,7 @@ String _appcheck = '';
   double get deliveryfee => _deliveryfee;
   set deliveryfee(double value) {
     _deliveryfee = value;
+    prefs.setDouble('ff_deliveryfee', value);
   }
 
   String _subtotal1 = '';
@@ -813,19 +827,19 @@ String _appcheck = '';
   }
 
   void addToTotalcombocart(Round2cartStruct value) {
-    _totalcombocart.add(value);
+    totalcombocart.add(value);
     prefs.setStringList('ff_totalcombocart',
         _totalcombocart.map((x) => x.serialize()).toList());
   }
 
   void removeFromTotalcombocart(Round2cartStruct value) {
-    _totalcombocart.remove(value);
+    totalcombocart.remove(value);
     prefs.setStringList('ff_totalcombocart',
         _totalcombocart.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromTotalcombocart(int index) {
-    _totalcombocart.removeAt(index);
+    totalcombocart.removeAt(index);
     prefs.setStringList('ff_totalcombocart',
         _totalcombocart.map((x) => x.serialize()).toList());
   }
@@ -834,13 +848,13 @@ String _appcheck = '';
     int index,
     Round2cartStruct Function(Round2cartStruct) updateFn,
   ) {
-    _totalcombocart[index] = updateFn(_totalcombocart[index]);
+    totalcombocart[index] = updateFn(_totalcombocart[index]);
     prefs.setStringList('ff_totalcombocart',
         _totalcombocart.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInTotalcombocart(int index, Round2cartStruct value) {
-    _totalcombocart.insert(index, value);
+    totalcombocart.insert(index, value);
     prefs.setStringList('ff_totalcombocart',
         _totalcombocart.map((x) => x.serialize()).toList());
   }
@@ -853,17 +867,17 @@ String _appcheck = '';
   }
 
   void addToComboid(String value) {
-    _comboid.add(value);
+    comboid.add(value);
     prefs.setStringList('ff_comboid', _comboid);
   }
 
   void removeFromComboid(String value) {
-    _comboid.remove(value);
+    comboid.remove(value);
     prefs.setStringList('ff_comboid', _comboid);
   }
 
   void removeAtIndexFromComboid(int index) {
-    _comboid.removeAt(index);
+    comboid.removeAt(index);
     prefs.setStringList('ff_comboid', _comboid);
   }
 
@@ -871,12 +885,12 @@ String _appcheck = '';
     int index,
     String Function(String) updateFn,
   ) {
-    _comboid[index] = updateFn(_comboid[index]);
+    comboid[index] = updateFn(_comboid[index]);
     prefs.setStringList('ff_comboid', _comboid);
   }
 
   void insertAtIndexInComboid(int index, String value) {
-    _comboid.insert(index, value);
+    comboid.insert(index, value);
     prefs.setStringList('ff_comboid', _comboid);
   }
 
@@ -907,17 +921,17 @@ String _appcheck = '';
   }
 
   void addToCertificateId(String value) {
-    _certificateId.add(value);
+    certificateId.add(value);
     prefs.setStringList('ff_certificateId', _certificateId);
   }
 
   void removeFromCertificateId(String value) {
-    _certificateId.remove(value);
+    certificateId.remove(value);
     prefs.setStringList('ff_certificateId', _certificateId);
   }
 
   void removeAtIndexFromCertificateId(int index) {
-    _certificateId.removeAt(index);
+    certificateId.removeAt(index);
     prefs.setStringList('ff_certificateId', _certificateId);
   }
 
@@ -925,16 +939,20 @@ String _appcheck = '';
     int index,
     String Function(String) updateFn,
   ) {
-    _certificateId[index] = updateFn(_certificateId[index]);
+    certificateId[index] = updateFn(_certificateId[index]);
     prefs.setStringList('ff_certificateId', _certificateId);
   }
 
   void insertAtIndexInCertificateId(int index, String value) {
-    _certificateId.insert(index, value);
+    certificateId.insert(index, value);
     prefs.setStringList('ff_certificateId', _certificateId);
   }
 
-
+  double _discountamount = 0.0;
+  double get discountamount => _discountamount;
+  set discountamount(double value) {
+    _discountamount = value;
+  }
 
   int _deliverablecount = 0;
   int get deliverablecount => _deliverablecount;
@@ -989,17 +1007,17 @@ String _appcheck = '';
   }
 
   void addToApplied(String value) {
-    _applied.add(value);
+    applied.add(value);
     prefs.setStringList('ff_applied', _applied);
   }
 
   void removeFromApplied(String value) {
-    _applied.remove(value);
+    applied.remove(value);
     prefs.setStringList('ff_applied', _applied);
   }
 
   void removeAtIndexFromApplied(int index) {
-    _applied.removeAt(index);
+    applied.removeAt(index);
     prefs.setStringList('ff_applied', _applied);
   }
 
@@ -1007,12 +1025,12 @@ String _appcheck = '';
     int index,
     String Function(String) updateFn,
   ) {
-    _applied[index] = updateFn(_applied[index]);
+    applied[index] = updateFn(_applied[index]);
     prefs.setStringList('ff_applied', _applied);
   }
 
   void insertAtIndexInApplied(int index, String value) {
-    _applied.insert(index, value);
+    applied.insert(index, value);
     prefs.setStringList('ff_applied', _applied);
   }
 
@@ -1036,17 +1054,17 @@ String _appcheck = '';
   }
 
   void addToNoofselected(String value) {
-    _noofselected.add(value);
+    noofselected.add(value);
     prefs.setStringList('ff_noofselected', _noofselected);
   }
 
   void removeFromNoofselected(String value) {
-    _noofselected.remove(value);
+    noofselected.remove(value);
     prefs.setStringList('ff_noofselected', _noofselected);
   }
 
   void removeAtIndexFromNoofselected(int index) {
-    _noofselected.removeAt(index);
+    noofselected.removeAt(index);
     prefs.setStringList('ff_noofselected', _noofselected);
   }
 
@@ -1054,14 +1072,15 @@ String _appcheck = '';
     int index,
     String Function(String) updateFn,
   ) {
-    _noofselected[index] = updateFn(_noofselected[index]);
+    noofselected[index] = updateFn(_noofselected[index]);
     prefs.setStringList('ff_noofselected', _noofselected);
   }
 
   void insertAtIndexInNoofselected(int index, String value) {
-    _noofselected.insert(index, value);
+    noofselected.insert(index, value);
     prefs.setStringList('ff_noofselected', _noofselected);
   }
+
   List<PowercartStruct> _powercart = [];
   List<PowercartStruct> get powercart => _powercart;
   set powercart(List<PowercartStruct> value) {
@@ -1071,19 +1090,19 @@ String _appcheck = '';
   }
 
   void addToPowercart(PowercartStruct value) {
-    _powercart.add(value);
+    powercart.add(value);
     prefs.setStringList(
         'ff_powercart', _powercart.map((x) => x.serialize()).toList());
   }
 
   void removeFromPowercart(PowercartStruct value) {
-    _powercart.remove(value);
+    powercart.remove(value);
     prefs.setStringList(
         'ff_powercart', _powercart.map((x) => x.serialize()).toList());
   }
 
   void removeAtIndexFromPowercart(int index) {
-    _powercart.removeAt(index);
+    powercart.removeAt(index);
     prefs.setStringList(
         'ff_powercart', _powercart.map((x) => x.serialize()).toList());
   }
@@ -1092,13 +1111,13 @@ String _appcheck = '';
     int index,
     PowercartStruct Function(PowercartStruct) updateFn,
   ) {
-    _powercart[index] = updateFn(_powercart[index]);
+    powercart[index] = updateFn(_powercart[index]);
     prefs.setStringList(
         'ff_powercart', _powercart.map((x) => x.serialize()).toList());
   }
 
   void insertAtIndexInPowercart(int index, PowercartStruct value) {
-    _powercart.insert(index, value);
+    powercart.insert(index, value);
     prefs.setStringList(
         'ff_powercart', _powercart.map((x) => x.serialize()).toList());
   }
@@ -1111,17 +1130,17 @@ String _appcheck = '';
   }
 
   void addToPowercomboid(String value) {
-    _powercomboid.add(value);
+    powercomboid.add(value);
     prefs.setStringList('ff_powercomboid', _powercomboid);
   }
 
   void removeFromPowercomboid(String value) {
-    _powercomboid.remove(value);
+    powercomboid.remove(value);
     prefs.setStringList('ff_powercomboid', _powercomboid);
   }
 
   void removeAtIndexFromPowercomboid(int index) {
-    _powercomboid.removeAt(index);
+    powercomboid.removeAt(index);
     prefs.setStringList('ff_powercomboid', _powercomboid);
   }
 
@@ -1129,12 +1148,12 @@ String _appcheck = '';
     int index,
     String Function(String) updateFn,
   ) {
-    _powercomboid[index] = updateFn(_powercomboid[index]);
+    powercomboid[index] = updateFn(_powercomboid[index]);
     prefs.setStringList('ff_powercomboid', _powercomboid);
   }
 
   void insertAtIndexInPowercomboid(int index, String value) {
-    _powercomboid.insert(index, value);
+    powercomboid.insert(index, value);
     prefs.setStringList('ff_powercomboid', _powercomboid);
   }
 
@@ -1157,41 +1176,65 @@ String _appcheck = '';
   set powercartvalue(double value) {
     _powercartvalue = value;
   }
-  List<String> _powerId = [];
-  List<String> get powerId => _powerId;
-  set powerId(List<String> value) {
+
+  List<int> _powerId = [];
+  List<int> get powerId => _powerId;
+  set powerId(List<int> value) {
     _powerId = value;
-    prefs.setStringList('ff_powerId', value);
+    prefs.setStringList('ff_powerId', value.map((x) => x.toString()).toList());
   }
 
-  void addToPowerId(String value) {
-    _powerId.add(value);
-    prefs.setStringList('ff_powerId', _powerId);
+  void addToPowerId(int value) {
+    powerId.add(value);
+    prefs.setStringList(
+        'ff_powerId', _powerId.map((x) => x.toString()).toList());
   }
 
-  void removeFromPowerId(String value) {
-    _powerId.remove(value);
-    prefs.setStringList('ff_powerId', _powerId);
+  void removeFromPowerId(int value) {
+    powerId.remove(value);
+    prefs.setStringList(
+        'ff_powerId', _powerId.map((x) => x.toString()).toList());
   }
 
   void removeAtIndexFromPowerId(int index) {
-    _powerId.removeAt(index);
-    prefs.setStringList('ff_powerId', _powerId);
+    powerId.removeAt(index);
+    prefs.setStringList(
+        'ff_powerId', _powerId.map((x) => x.toString()).toList());
   }
 
   void updatePowerIdAtIndex(
     int index,
-    String Function(String) updateFn,
+    int Function(int) updateFn,
   ) {
-    _powerId[index] = updateFn(_powerId[index]);
-    prefs.setStringList('ff_powerId', _powerId);
+    powerId[index] = updateFn(_powerId[index]);
+    prefs.setStringList(
+        'ff_powerId', _powerId.map((x) => x.toString()).toList());
   }
 
-  void insertAtIndexInPowerId(int index, String value) {
-    _powerId.insert(index, value);
-    prefs.setStringList('ff_powerId', _powerId);
+  void insertAtIndexInPowerId(int index, int value) {
+    powerId.insert(index, value);
+    prefs.setStringList(
+        'ff_powerId', _powerId.map((x) => x.toString()).toList());
   }
 
+  String _appcheck = 'isupdateAvailable';
+  String get appcheck => _appcheck;
+  set appcheck(String value) {
+    _appcheck = value;
+  }
+
+  bool _isupdatedAvailable = false;
+  bool get isupdatedAvailable => _isupdatedAvailable;
+  set isupdatedAvailable(bool value) {
+    _isupdatedAvailable = value;
+  }
+
+  String _token = '';
+  String get token => _token;
+  set token(String value) {
+    _token = value;
+    prefs.setString('ff_token', value);
+  }
 }
 
 void _safeInit(Function() initializeField) {

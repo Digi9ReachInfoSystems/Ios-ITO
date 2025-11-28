@@ -39,7 +39,7 @@ class FlutterFlowTimerController with ChangeNotifier {
 
 class FlutterFlowTimer extends StatefulWidget {
   const FlutterFlowTimer({
-    super.key,
+    Key? key,
     required this.initialTime,
     required this.controller,
     required this.getDisplayTime,
@@ -48,7 +48,7 @@ class FlutterFlowTimer extends StatefulWidget {
     this.onEnded,
     required this.textAlign,
     required this.style,
-  });
+  }) : super(key: key);
 
   final int initialTime;
   final FlutterFlowTimerController controller;
@@ -92,7 +92,9 @@ class _FlutterFlowTimerState extends State<FlutterFlowTimer> {
     widget.controller.timer.rawTime.listen((_) {
       _displayTime = widget.getDisplayTime(timerValue);
       widget.onChanged(timerValue, _displayTime, _shouldUpdate());
-      if (mounted) setState(() {});
+      if (mounted) {
+        setState(() {});
+      }
     });
     // Add listener for actions executed on timer.
     widget.controller.addListener(() => _initTimer(shouldUpdate: true));

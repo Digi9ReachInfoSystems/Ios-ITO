@@ -6,13 +6,16 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/ordersshimmer/ordersshimmer_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'my_orders_model.dart';
 export 'my_orders_model.dart';
 
 class MyOrdersWidget extends StatefulWidget {
   const MyOrdersWidget({super.key});
+
+  static String routeName = 'myOrders';
+  static String routePath = '/myOrders';
 
   @override
   State<MyOrdersWidget> createState() => _MyOrdersWidgetState();
@@ -40,21 +43,13 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -66,7 +61,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -82,13 +77,20 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
               '0qm8jz6b' /* My Orders */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
                   color: Colors.black,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -98,13 +100,15 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
           child: FutureBuilder<ApiCallResponse>(
             future: OrderssCall.call(
               userId: FFAppState().userInfo.userId,
+              token: FFAppState().userInfo.token,
             ),
             builder: (context, snapshot) {
               // Customize what your widget looks like when it's loading.
               if (!snapshot.hasData) {
-                return const OrdersshimmerWidget();
+                return OrdersshimmerWidget();
               }
               final containerOrderssResponse = snapshot.data!;
+
               return Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
                 height: MediaQuery.sizeOf(context).height * 0.9,
@@ -116,7 +120,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             10.0, 0.0, 10.0, 0.0),
                         child: Builder(
                           builder: (context) {
@@ -124,6 +128,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                   containerOrderssResponse.jsonBody,
                                 )?.toList() ??
                                 [];
+
                             return ListView.builder(
                               padding: EdgeInsets.zero,
                               primary: false,
@@ -133,7 +138,7 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                               itemBuilder: (context, transIndex) {
                                 final transItem = trans[transIndex];
                                 return Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 10.0, 0.0, 0.0),
                                   child: Container(
                                     width:
@@ -141,49 +146,66 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .secondaryBackground,
-                                      boxShadow: const [
+                                      boxShadow: [
                                         BoxShadow(
                                           blurRadius: 4.0,
                                           color: Color(0x33000000),
-                                          offset: Offset(0.0, 2.0),
+                                          offset: Offset(
+                                            0.0,
+                                            2.0,
+                                          ),
                                         )
                                       ],
                                       borderRadius: BorderRadius.circular(8.0),
                                     ),
                                     child: Align(
                                       alignment:
-                                          const AlignmentDirectional(-1.0, -1.0),
+                                          AlignmentDirectional(-1.0, -1.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 10.0, 10.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Text(
                                                 getJsonField(
                                                   transItem,
                                                   r'''$.order_id''',
                                                 ).toString(),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color: Colors.black,
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.poppins(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Colors.black,
+                                                      fontSize: 16.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                               ),
                                             ),
                                             Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   -1.0, -1.0),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 5.0, 0.0, 0.0),
                                                 child: Text(
@@ -195,17 +217,32 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                                           context)
                                                       .bodyMedium
                                                       .override(
-                                                        fontFamily: 'Poppins',
+                                                        font:
+                                                            GoogleFonts.poppins(
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
                                                         color:
-                                                            const Color(0xFF272727),
+                                                            Color(0xFF272727),
+                                                        letterSpacing: 0.0,
                                                         fontWeight:
                                                             FontWeight.w300,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
                                                       ),
                                                 ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 8.0, 0.0, 20.0),
                                               child: Row(
@@ -220,35 +257,85 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                                           'Button pressed ...');
                                                     },
                                                     text: getJsonField(
-    transItem,
-    r'''$.payment_status''',
-  ).toString(),
-  options: FFButtonOptions(
-    width: MediaQuery.sizeOf(context).width * 0.3,
-    height: MediaQuery.sizeOf(context).height * 0.04,
-    padding: const EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-    iconPadding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
-    color: functions.jsontostringlist(getJsonField(
-              transItem,
-              r'''$.payment_status''',
-            )) ==
-            'pending'
-        ? FlutterFlowTheme.of(context).warning
-        : const Color(0xFF198543),
-    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-          fontFamily: 'Poppins',
-          color: Colors.white,
-          fontSize: 12,
-        ),
-    elevation: 3,
-    borderSide: const BorderSide(
-      color: Colors.transparent,
-      width: 1,
-    ),
-    borderRadius: BorderRadius.circular(4),
-  ),
-  showLoadingIndicator: false,
-),
+                                                      transItem,
+                                                      r'''$.payment_status''',
+                                                    ).toString(),
+                                                    options: FFButtonOptions(
+                                                      width: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .width *
+                                                          0.3,
+                                                      height: MediaQuery.sizeOf(
+                                                                  context)
+                                                              .height *
+                                                          0.04,
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  8.0,
+                                                                  0.0,
+                                                                  8.0,
+                                                                  0.0),
+                                                      iconPadding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0,
+                                                                  0.0),
+                                                      color: functions
+                                                                  .jsontostringlist(
+                                                                      getJsonField(
+                                                                transItem,
+                                                                r'''$.payment_status''',
+                                                              )) ==
+                                                              'Pending'
+                                                          ? FlutterFlowTheme.of(
+                                                                  context)
+                                                              .warning
+                                                          : Color(0xFF198543),
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .override(
+                                                                font: GoogleFonts
+                                                                    .poppins(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .titleSmall
+                                                                    .fontStyle,
+                                                              ),
+                                                      elevation: 3.0,
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Colors.transparent,
+                                                        width: 1.0,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4.0),
+                                                    ),
+                                                    showLoadingIndicator: false,
+                                                  ),
                                                   Text(
                                                     getJsonField(
                                                       transItem,
@@ -258,12 +345,27 @@ class _MyOrdersWidgetState extends State<MyOrdersWidget> {
                                                             context)
                                                         .bodyMedium
                                                         .override(
-                                                          fontFamily: 'Poppins',
+                                                          font: GoogleFonts
+                                                              .poppins(
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                          ),
                                                           color:
-                                                              const Color(0xFF004696),
+                                                              Color(0xFF004696),
                                                           fontSize: 18.0,
+                                                          letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w600,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
                                                         ),
                                                   ),
                                                 ],

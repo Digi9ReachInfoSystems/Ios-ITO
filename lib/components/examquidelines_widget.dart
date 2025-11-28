@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'examquidelines_model.dart';
 export 'examquidelines_model.dart';
 
@@ -36,8 +36,6 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Material(
       color: Colors.transparent,
       elevation: 7.0,
@@ -50,7 +48,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Container(
                   width: 80.0,
                   height: 7.0,
@@ -68,7 +66,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                 color: FlutterFlowTheme.of(context).secondaryText,
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).primaryBackground,
@@ -86,7 +84,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                             size: 24.0,
                           ),
                           Container(
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 '8cc63upn' /* There will be only ONE ATTEMPT... */,
@@ -95,9 +93,23 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryText,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -128,7 +140,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           size: 24.0,
                         ),
                         Container(
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               '4q518lde' /* After you start the Quiz, Do n... */,
@@ -137,9 +149,23 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -169,10 +195,10 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           size: 24.0,
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 0.0, 0.0),
                           child: Container(
-                            decoration: const BoxDecoration(),
+                            decoration: BoxDecoration(),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 '1f6mzij7' /* Students who scroll the questi... */,
@@ -181,9 +207,23 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryText,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),
@@ -214,7 +254,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           size: 24.0,
                         ),
                         Container(
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               't5x7u9ah' /* In any case or for any reason ... */,
@@ -222,9 +262,23 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -249,7 +303,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               1.0, 0.0, 0.0, 0.0),
                           child: Icon(
                             Icons.filter_5,
@@ -258,7 +312,7 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                           ),
                         ),
                         Container(
-                          decoration: const BoxDecoration(),
+                          decoration: BoxDecoration(),
                           child: Text(
                             FFLocalizations.of(context).getText(
                               '5f1xtdnd' /* If because of the Internet con... */,
@@ -266,9 +320,23 @@ class _ExamquidelinesWidgetState extends State<ExamquidelinesWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                         ),

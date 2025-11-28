@@ -19,12 +19,14 @@ class TestsStruct extends FFFirebaseStruct {
   String? _testId;
   String get testId => _testId ?? '';
   set testId(String? val) => _testId = val;
+
   bool hasTestId() => _testId != null;
 
   // "testName" field.
   String? _testName;
   String get testName => _testName ?? '';
   set testName(String? val) => _testName = val;
+
   bool hasTestName() => _testName != null;
 
   static TestsStruct fromMap(Map<String, dynamic> data) => TestsStruct(

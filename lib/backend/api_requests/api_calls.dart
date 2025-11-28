@@ -1,12 +1,1231 @@
 import 'dart:convert';
 import '../cloud_functions/cloud_functions.dart';
 
+import 'package:flutter/foundation.dart';
+
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
 
 export 'api_manager.dart' show ApiCallResponse;
 
-const _kPrivateApiFunctionName = 'ffPrivateApiCall';
+const _kPrivateApiFunctionName = 'ffPrivateApiCallNew';
+
+/// Start OlympiadX Group Code
+
+class OlympiadXGroup {
+  static String getBaseUrl({
+    String? token = '',
+  }) =>
+      'https://www.olympiadx.com';
+  static Map<String, String> headers = {
+    'Authorization': 'Bearer [token]',
+  };
+  static ViewprofilexCall viewprofilexCall = ViewprofilexCall();
+  static GetallproductsxCall getallproductsxCall = GetallproductsxCall();
+  static EditProfilexCall editProfilexCall = EditProfilexCall();
+  static SubscriptionsxCall subscriptionsxCall = SubscriptionsxCall();
+  static OrderprrxCall orderprrxCall = OrderprrxCall();
+  static SubjectxCall subjectxCall = SubjectxCall();
+  static TestsxCall testsxCall = TestsxCall();
+  static GetQuestionxCall getQuestionxCall = GetQuestionxCall();
+  static SlotsxCall slotsxCall = SlotsxCall();
+  static OrdersssxCall ordersssxCall = OrdersssxCall();
+  static SchedulexCall schedulexCall = SchedulexCall();
+  static GetUsersxCall getUsersxCall = GetUsersxCall();
+  static SubmitanswerstobackendxCall submitanswerstobackendxCall =
+      SubmitanswerstobackendxCall();
+  static NoticesxCall noticesxCall = NoticesxCall();
+  static ProductsxCall productsxCall = ProductsxCall();
+  static ProductsSubscriptionxCall productsSubscriptionxCall =
+      ProductsSubscriptionxCall();
+  static TestingexamxCall testingexamxCall = TestingexamxCall();
+  static ResultsxCall resultsxCall = ResultsxCall();
+  static RoundregistrationxCall roundregistrationxCall =
+      RoundregistrationxCall();
+  static SubmitregistrationxCall submitregistrationxCall =
+      SubmitregistrationxCall();
+  static PhonecallbackxCall phonecallbackxCall = PhonecallbackxCall();
+  static StatusCheckxCall statusCheckxCall = StatusCheckxCall();
+  static SummerQuizxCall summerQuizxCall = SummerQuizxCall();
+  static MonthlyResultsxCall monthlyResultsxCall = MonthlyResultsxCall();
+  static RoundresultsxCall roundresultsxCall = RoundresultsxCall();
+  static ViewCertificatesxCall viewCertificatesxCall = ViewCertificatesxCall();
+  static PowerPackagesxCall powerPackagesxCall = PowerPackagesxCall();
+  static BannersxCall bannersxCall = BannersxCall();
+  static NotificationsxCall notificationsxCall = NotificationsxCall();
+  static GetquestionsoxxCall getquestionsoxxCall = GetquestionsoxxCall();
+  static SubmissionxCall submissionxCall = SubmissionxCall();
+}
+
+class ViewprofilexCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'viewprofilex',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/index',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetallproductsxCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "std_id": "${escapeStringForJson(stdId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getallproductsx',
+      apiUrl: '${baseUrl}/RESTapi/student/products/fetch_products_and_coupons',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class EditProfilexCall {
+  Future<ApiCallResponse> call({
+    String? studentName = '',
+    String? parentName = '',
+    String? address = '',
+    String? district = '',
+    String? state = '',
+    String? city = '',
+    String? pinCode = '',
+    String? schoolName = '',
+    String? schoolState = '',
+    String? schoolAddress = '',
+    String? schoolCity = '',
+    String? schoolPincode = '',
+    String? userName = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "student_name": "${escapeStringForJson(studentName)}",
+  "parent_name": "${escapeStringForJson(parentName)}",
+  "address": "${escapeStringForJson(address)}",
+  "district": "${escapeStringForJson(district)}",
+  "state": "${escapeStringForJson(state)}",
+  "city": "${escapeStringForJson(city)}",
+  "pin_code": "${escapeStringForJson(pinCode)}",
+  "school_name": "${escapeStringForJson(schoolName)}",
+  "school_state": "${escapeStringForJson(schoolState)}",
+  "school_address": "${escapeStringForJson(schoolAddress)}",
+  "school_city": "${escapeStringForJson(schoolCity)}",
+  "school_pin_code": "${escapeStringForJson(schoolPincode)}",
+  "username": "${escapeStringForJson(userName)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'editProfilex',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/index',
+      callType: ApiCallType.PUT,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SubscriptionsxCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'subscriptionsx',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/subscriptions',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class OrderprrxCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'orderprrx',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/orders',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SubjectxCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? userId = '',
+    String? serviceId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "std_id": "${escapeStringForJson(stdId)}",
+  "user_id": "${escapeStringForJson(userId)}",
+  "service_id": "${escapeStringForJson(serviceId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'subjectx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/index',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class TestsxCall {
+  Future<ApiCallResponse> call({
+    String? subjectId = '',
+    String? round = '',
+    String? stdId = '',
+    String? userId = '',
+    String? serviceId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"subject_id": "${escapeStringForJson(subjectId)}",
+  "round": "${escapeStringForJson(round)}",
+  "std_id": "${escapeStringForJson(stdId)}",
+  "user_id": "${escapeStringForJson(userId)}",
+  "service_id": "${escapeStringForJson(serviceId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'testsx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/get_tests',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetQuestionxCall {
+  Future<ApiCallResponse> call({
+    String? testId = '',
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"test_id": "${escapeStringForJson(testId)}",
+  "user_id": "${escapeStringForJson(userId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getQuestionx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/get_questions',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SlotsxCall {
+  Future<ApiCallResponse> call({
+    String? slot = '',
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"slot": "${escapeStringForJson(slot)}",
+  "user_id": "${escapeStringForJson(userId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'slotsx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/set_annual_slot',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class OrdersssxCall {
+  Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'ordersssx',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/orders',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SchedulexCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? serviceId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"std_id": "${escapeStringForJson(stdId)}",
+  "service_id": "${escapeStringForJson(serviceId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'schedulex',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/schedule',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetUsersxCall {
+  Future<ApiCallResponse> call({
+    String? testId = '',
+    String? attempted = '',
+    String? userId = '',
+    String? takenTime = '',
+    String? sessionId = '',
+    String? questionId = '',
+    String? userAnswer = '',
+    dynamic userAnswersJson,
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final userAnswers = _serializeJson(userAnswersJson, true);
+    final ffApiRequestBody = '''
+{
+  "test_id": "${escapeStringForJson(testId)}",
+  "attempted_questions": "${escapeStringForJson(attempted)}",
+  "user_id": "${escapeStringForJson(userId)}",
+  "taken_time": "${escapeStringForJson(takenTime)}",
+  "session_id": "${escapeStringForJson(sessionId)}",
+  "user_answers": [    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    },
+    {
+      "question_id": "${escapeStringForJson(questionId)}",
+      "user_answer": "${escapeStringForJson(userAnswer)}"
+    }
+  ]
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getUsersx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/exam_response',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SubmitanswerstobackendxCall {
+  Future<ApiCallResponse> call({
+    String? testId = '',
+    String? attemptedQuestions = '',
+    String? userId = '',
+    String? takenTime = '',
+    String? sessionId = '',
+    dynamic userAnswersJson,
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final userAnswers = _serializeJson(userAnswersJson, true);
+    final ffApiRequestBody = '''
+
+{
+  "test_id": "${escapeStringForJson(testId)}",
+  "attempted_questions": "${escapeStringForJson(attemptedQuestions)}",
+  "user_id": "${escapeStringForJson(userId)}",
+  "taken_time": "${escapeStringForJson(takenTime)}",
+  "session_id": "${escapeStringForJson(sessionId)}",
+  "user_answers": ${userAnswers}
+}
+''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Submitanswerstobackendx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/exam_response',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class NoticesxCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+ "std_id": "${escapeStringForJson(stdId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'noticesx',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/notices',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ProductsxCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"std_id": "${escapeStringForJson(stdId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'productsx',
+      apiUrl: '${baseUrl}/RESTapi/student/products/fetch_products',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ProductsSubscriptionxCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    List<String>? productsList,
+    String? payableAmount = '',
+    String? deliveryCharge = '',
+    String? powerpackid = '',
+    String? purchaseType = '',
+    List<int>? comboIdList,
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+    final products = _serializeList(productsList);
+    final comboId = _serializeList(comboIdList);
+
+    final ffApiRequestBody = '''
+{
+  "user_id": "${escapeStringForJson(userId)}",
+"products":${products},
+"payment_data":{
+  "payment_gateway": "ccavenue",
+        "currency": "INR",
+ "delivery_charge": "${escapeStringForJson(deliveryCharge)}",
+        "payable_amount": "${escapeStringForJson(payableAmount)}", 
+        "discount_amount": "0",
+        "coupon_code": "NULL",
+        "purchase_type" : "individual" ,
+"power_pack_id":"${escapeStringForJson(powerpackid)}",
+ "purchase_type" :"${escapeStringForJson(purchaseType)}",
+ 
+ "combo_id":"${comboId}"
+}
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'products Subscriptionx',
+      apiUrl: '${baseUrl}/RESTapi/student/register/get_selected_products',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class TestingexamxCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'testingexamx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/resultData',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'user_id': userId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ResultsxCall {
+  Future<ApiCallResponse> call({
+    String? mobile = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"mobile": "${escapeStringForJson(mobile)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'resultsx',
+      apiUrl: '${baseUrl}/RESTapi/student/Result',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class RoundregistrationxCall {
+  Future<ApiCallResponse> call({
+    String? mobileNo = '',
+    String? userId = '',
+    String? stdId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "mobile": "${escapeStringForJson(mobileNo)}",
+  "user_id": "${escapeStringForJson(userId)}",
+ 
+  "standard": "${escapeStringForJson(stdId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'roundregistrationx',
+      apiUrl: '${baseUrl}/RESTapi/student/products/fetch_round_two_combos',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SubmitregistrationxCall {
+  Future<ApiCallResponse> call({
+    String? userid = '',
+    List<String>? comboIdList,
+    List<String>? certificatesList,
+    String? payment = '',
+    String? slug = '',
+    String? totaldiscount = '',
+    String? finalamount = '',
+    String? deliverycharges = '',
+    int? isUpdated,
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+    final comboId = _serializeList(comboIdList);
+    final certificates = _serializeList(certificatesList);
+
+    final ffApiRequestBody = '''
+{
+  "user_id": "${escapeStringForJson(userid)}",
+  "selected_combo_ids": ${comboId},
+  "selected_certificates": ${certificates},
+  "payment_gateway": "${escapeStringForJson(payment)}",
+  "slug": "${escapeStringForJson(slug)}",
+  "total_discount": "${escapeStringForJson(totaldiscount)}",
+  "final_total_amount": "${escapeStringForJson(finalamount)}",
+"isUpdated":${isUpdated},
+  "delivery_charges_applied": "${escapeStringForJson(deliverycharges)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'submitregistrationx',
+      apiUrl: '${baseUrl}/RESTapi/student/Register/round_two',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PhonecallbackxCall {
+  Future<ApiCallResponse> call({
+    bool? success,
+    String? code = '',
+    String? message = '',
+    dynamic dataJson,
+    String? orderId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final data = _serializeJson(dataJson);
+
+    return ApiManager.instance.makeApiCall(
+      callName: 'phonecallbackx',
+      apiUrl: '${baseUrl}/RESTapi/student/payment/Phonepe_callback',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'success': success,
+        'code': code,
+        'message': message,
+        'data': data,
+        'order_id': orderId,
+      },
+      bodyType: BodyType.X_WWW_FORM_URL_ENCODED,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class StatusCheckxCall {
+  Future<ApiCallResponse> call({
+    String? trancastionid = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"merchantTransactionId": "${escapeStringForJson(trancastionid)}"
+
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'statusCheckx',
+      apiUrl: '${baseUrl}/RESTapi/student/payment/check_payment_status',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SummerQuizxCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+ "user_id": "${escapeStringForJson(userId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'summerQuizx',
+      apiUrl:
+          '${baseUrl}/RESTapi/student/Products/summer_quiz_product_and_coupons',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class MonthlyResultsxCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? subjectId = '',
+    String? stdId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+ "user_id": "${escapeStringForJson(userId)}",
+  "subject_id": "${escapeStringForJson(subjectId)}",
+  "std_id": "${escapeStringForJson(stdId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'monthlyResultsx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/test_attempts',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class RoundresultsxCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"user_id": "${escapeStringForJson(userId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'roundresultsx',
+      apiUrl: '${baseUrl}/RESTapi/student/result/get_round_2_results',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class ViewCertificatesxCall {
+  Future<ApiCallResponse> call({
+    String? resultId = '',
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+ "result_id": "${escapeStringForJson(resultId)}",
+  "user_id": "${escapeStringForJson(userId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'viewCertificatesx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/view_certificate',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PowerPackagesxCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+"std_id": "${escapeStringForJson(stdId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'powerPackagesx',
+      apiUrl: '${baseUrl}/RESTapi/student/products/fetch_packages',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class BannersxCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? displayFor = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+ "std_id": "${escapeStringForJson(stdId)}",
+  "display_for": "${escapeStringForJson(displayFor)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'bannersx',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/banners',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class NotificationsxCall {
+  Future<ApiCallResponse> call({
+    String? stdId = '',
+    String? displayFor = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "std_id": "${escapeStringForJson(stdId)}",
+  "display_for": "${escapeStringForJson(displayFor)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'notificationsx',
+      apiUrl: '${baseUrl}/RESTapi/student/profile/announcements',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetquestionsoxxCall {
+  Future<ApiCallResponse> call({
+    String? testId = '',
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "test_id": "${escapeStringForJson(testId)}",
+  "user_id": "${escapeStringForJson(userId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'getquestionsoxx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/get_questions',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class SubmissionxCall {
+  Future<ApiCallResponse> call({
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final baseUrl = OlympiadXGroup.getBaseUrl(
+      token: token,
+    );
+
+    final ffApiRequestBody = '''
+{
+  "user_id": "${escapeStringForJson(userId)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'submissionx',
+      apiUrl: '${baseUrl}/RESTapi/student/exam/check_submission',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+/// End OlympiadX Group Code
 
 class LoginOutsideCall {
   static Future<ApiCallResponse> call({
@@ -75,10 +1294,6 @@ class LoginOutsideCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  static String? token(dynamic response) => castToType<String>(getJsonField(
-        response,
-        r'''$.token''',
-      ));
   static String? schoolName(dynamic response) =>
       castToType<String>(getJsonField(
         response,
@@ -131,10 +1346,15 @@ class LoginOutsideCall {
         response,
         r'''$.session_data.school_pin_code''',
       ));
-  static dynamic schoolstate(dynamic response) => getJsonField(
+  static String? schoolstate(dynamic response) =>
+      castToType<String>(getJsonField(
         response,
         r'''$.session_data.school_state''',
-      );
+      ));
+  static String? token(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.token.firebase_token''',
+      ));
 }
 
 class ForgetPasswordCall {
@@ -166,6 +1386,7 @@ class ForgetPasswordCall {
 class VerifyOtpPhoneCall {
   static Future<ApiCallResponse> call({
     String? otp = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -173,6 +1394,7 @@ class VerifyOtpPhoneCall {
         'callName': 'VerifyOtpPhoneCall',
         'variables': {
           'otp': otp,
+          'token': token,
         },
       },
     );
@@ -252,6 +1474,7 @@ class ResetpasswordCall {
 class GetAllProductsCall {
   static Future<ApiCallResponse> call({
     String? std = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -259,6 +1482,7 @@ class GetAllProductsCall {
         'callName': 'GetAllProductsCall',
         'variables': {
           'std': std,
+          'token': token,
         },
       },
     );
@@ -313,6 +1537,7 @@ class EditprofileCall {
     String? schoolCity = '',
     String? schoolPincode = '',
     String? userName = '',
+    String? tokennew = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -333,6 +1558,7 @@ class EditprofileCall {
           'schoolCity': schoolCity,
           'schoolPincode': schoolPincode,
           'userName': userName,
+          'tokennew': tokennew,
         },
       },
     );
@@ -344,6 +1570,7 @@ class SubcsriptionsCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
     String? stdId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -352,6 +1579,7 @@ class SubcsriptionsCall {
         'variables': {
           'userId': userId,
           'stdId': stdId,
+          'token': token,
         },
       },
     );
@@ -420,6 +1648,7 @@ class SubcsriptionsCall {
 class OrderprCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -427,6 +1656,7 @@ class OrderprCall {
         'callName': 'OrderprCall',
         'variables': {
           'userId': userId,
+          'token': token,
         },
       },
     );
@@ -435,12 +1665,16 @@ class OrderprCall {
 }
 
 class GetServicesCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
       {
         'callName': 'GetServicesCall',
-        'variables': {},
+        'variables': {
+          'token': token,
+        },
       },
     );
     return ApiCallResponse.fromCloudCallResponse(response);
@@ -499,6 +1733,7 @@ class SubjectsCall {
     String? stdId = '',
     String? userId = '',
     String? serviceId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -508,6 +1743,7 @@ class SubjectsCall {
           'stdId': stdId,
           'userId': userId,
           'serviceId': serviceId,
+          'token': token,
         },
       },
     );
@@ -761,6 +1997,7 @@ class TestCall {
     String? stdId = '',
     String? userId = '',
     String? serviceId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -772,26 +2009,27 @@ class TestCall {
           'stdId': stdId,
           'userId': userId,
           'serviceId': serviceId,
+          'token': token,
         },
       },
     );
     return ApiCallResponse.fromCloudCallResponse(response);
   }
 
-  static dynamic testResults(dynamic response) => getJsonField(
+  static List? testResults(dynamic response) => getJsonField(
         response,
         r'''$.TestResults.*''',
         true,
-      );
+      ) as List?;
   static dynamic practise(dynamic response) => getJsonField(
         response,
         r'''$.TestResults.practise''',
       );
-  static dynamic status(dynamic response) => getJsonField(
+  static String? status(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.status''',
-      );
-  static dynamic testId(dynamic response) => (getJsonField(
+      ));
+  static List<String>? testId(dynamic response) => (getJsonField(
         response,
         r'''$.tests..testId''',
         true,
@@ -800,12 +2038,12 @@ class TestCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  static dynamic practiselist(dynamic response) => getJsonField(
+  static List? practiselist(dynamic response) => getJsonField(
         response,
         r'''$.tests.practise.*''',
         true,
-      );
-  static dynamic subjectName(dynamic response) => (getJsonField(
+      ) as List?;
+  static List<String>? subjectName(dynamic response) => (getJsonField(
         response,
         r'''$.tests..subject_name''',
         true,
@@ -814,12 +2052,12 @@ class TestCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  static dynamic allservices(dynamic response) => getJsonField(
+  static List? allservices(dynamic response) => getJsonField(
         response,
         r'''$.tests.*''',
         true,
-      );
-  static dynamic testicons(dynamic response) => (getJsonField(
+      ) as List?;
+  static List<String>? testicons(dynamic response) => (getJsonField(
         response,
         r'''$.tests..test_icon''',
         true,
@@ -828,7 +2066,7 @@ class TestCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  static dynamic testtime(dynamic response) => (getJsonField(
+  static List<String>? testtime(dynamic response) => (getJsonField(
         response,
         r'''$.tests.*.time''',
         true,
@@ -837,7 +2075,7 @@ class TestCall {
           .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
-  static dynamic monthlylist(dynamic response) => getJsonField(
+  static List? monthlylist(dynamic response) => getJsonField(
         response,
         r'''$.tests.final.*''',
         true,
@@ -858,6 +2096,7 @@ class GetquestionsCall {
   static Future<ApiCallResponse> call({
     String? testId = '',
     String? userId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -866,97 +2105,152 @@ class GetquestionsCall {
         'variables': {
           'testId': testId,
           'userId': userId,
+          'token': token,
         },
       },
     );
     return ApiCallResponse.fromCloudCallResponse(response);
   }
 
-  static dynamic questionId(dynamic response) => getJsonField(
+  static List<String>? questionId(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.questionId''',
         true,
-      );
-  static dynamic questionName(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? questionName(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.question''',
         true,
-      );
-  static dynamic answer1(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? answer1(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer1''',
         true,
-      );
-  static dynamic answer2(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? answer2(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer2''',
         true,
-      );
-  static dynamic answer3(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? answer3(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer3''',
         true,
-      );
-  static dynamic answer4(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? answer4(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer4''',
         true,
-      );
-  static dynamic trueanswer(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? trueanswer(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.true_answer''',
         true,
-      );
-  static dynamic subjectName(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static String? subjectName(dynamic response) =>
+      castToType<String>(getJsonField(
         response,
         r'''$.test_details.*.subject_name''',
-      );
-  static dynamic alias(dynamic response) => getJsonField(
+      ));
+  static String? alias(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.test_details.*.alias''',
-      );
-  static dynamic testQuestions(dynamic response) => getJsonField(
+      ));
+  static List? testQuestions(dynamic response) => getJsonField(
         response,
         r'''$.test_questions.*''',
         true,
-      );
-  static dynamic starttime(dynamic response) => getJsonField(
+      ) as List?;
+  static String? starttime(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.test_details.*.test_start_time''',
-      );
-  static dynamic endTime(dynamic response) => getJsonField(
+      ));
+  static String? endTime(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.test_details..test_end_time''',
-      );
-  static dynamic timer(dynamic response) => getJsonField(
+      ));
+  static String? timer(dynamic response) => castToType<String>(getJsonField(
         response,
         r'''$.test_details..time''',
-      );
-  static dynamic answerimage1(dynamic response) => getJsonField(
+      ));
+  static List<String>? answerimage1(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer_image1''',
         true,
-      );
-  static dynamic answerimage2(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? answerimage2(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer_image2''',
         true,
-      );
-  static dynamic anserimage3(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? anserimage3(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer_image3''',
         true,
-      );
-  static dynamic answerimage4(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? answerimage4(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.answer_image4''',
         true,
-      );
-  static dynamic questionimages(dynamic response) => getJsonField(
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? questionimages(dynamic response) => (getJsonField(
         response,
         r'''$.test_questions.*.question_image''',
         true,
-      );
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List? questions(dynamic response) => getJsonField(
+        response,
+        r'''$.test_questions.*''',
+        true,
+      ) as List?;
   static dynamic testdetails(dynamic response) => getJsonField(
         response,
         r'''$.test_details.*''',
@@ -967,6 +2261,7 @@ class SlotCall {
   static Future<ApiCallResponse> call({
     String? slot = '',
     String? userId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -975,6 +2270,7 @@ class SlotCall {
         'variables': {
           'slot': slot,
           'userId': userId,
+          'token': token,
         },
       },
     );
@@ -994,6 +2290,7 @@ class SlotCall {
 class OrderssCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1001,6 +2298,7 @@ class OrderssCall {
         'callName': 'OrderssCall',
         'variables': {
           'userId': userId,
+          'token': token,
         },
       },
     );
@@ -1018,6 +2316,7 @@ class ScheduleCall {
   static Future<ApiCallResponse> call({
     String? stdId = '',
     String? serviceId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1026,6 +2325,7 @@ class ScheduleCall {
         'variables': {
           'stdId': stdId,
           'serviceId': serviceId,
+          'token': token,
         },
       },
     );
@@ -1131,6 +2431,7 @@ class GetUsersCall {
     String? questionId = '',
     String? userAnswer = '',
     dynamic userAnswersJson,
+    String? token = '',
   }) async {
     final userAnswers = _serializeJson(userAnswersJson, true);
     final response = await makeCloudCall(
@@ -1146,6 +2447,7 @@ class GetUsersCall {
           'questionId': questionId,
           'userAnswer': userAnswer,
           'userAnswers': userAnswers,
+          'token': token,
         },
       },
     );
@@ -1161,6 +2463,7 @@ class SubmitanswerstobackendCall {
     String? takenTime = '',
     String? sessionId = '',
     dynamic userAnswersJson,
+    String? token = '',
   }) async {
     final userAnswers = _serializeJson(userAnswersJson, true);
     final response = await makeCloudCall(
@@ -1174,6 +2477,7 @@ class SubmitanswerstobackendCall {
           'takenTime': takenTime,
           'sessionId': sessionId,
           'userAnswers': userAnswers,
+          'token': token,
         },
       },
     );
@@ -1193,6 +2497,7 @@ class SubmitanswerstobackendCall {
 class NoticesCall {
   static Future<ApiCallResponse> call({
     String? stdId = '5',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1200,6 +2505,7 @@ class NoticesCall {
         'callName': 'NoticesCall',
         'variables': {
           'stdId': stdId,
+          'token': token,
         },
       },
     );
@@ -1226,6 +2532,7 @@ class NoticesCall {
 class ProductsCall {
   static Future<ApiCallResponse> call({
     String? stdId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1233,6 +2540,7 @@ class ProductsCall {
         'callName': 'ProductsCall',
         'variables': {
           'stdId': stdId,
+          'token': token,
         },
       },
     );
@@ -1341,9 +2649,8 @@ class ProductsSubscriptionCall {
     String? deliveryCharge = '',
     String? powerpackid = '',
     String? purchaseType = '',
-    String? productId = '',
-    int? isUpdated,
-    List<String>? comboIdList,
+    List<int>? comboIdList,
+    String? token = '',
   }) async {
     final products = _serializeList(productsList);
     final comboId = _serializeList(comboIdList);
@@ -1359,12 +2666,12 @@ class ProductsSubscriptionCall {
           'deliveryCharge': deliveryCharge,
           'powerpackid': powerpackid,
           'purchaseType': purchaseType,
-          'productId': productId,
           'comboId': comboId,
-          
+          'token': token,
         },
       },
     );
+    print(response);
     return ApiCallResponse.fromCloudCallResponse(response);
   }
 
@@ -1459,15 +2766,23 @@ class ProductsSubscriptionCall {
         response,
         r'''$.payment_data.pstatus.merchantTransactionId''',
       ));
+  static String? error(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.error''',
+      ));
 }
 
 class GetStandardsCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
       {
         'callName': 'GetStandardsCall',
-        'variables': {},
+        'variables': {
+          'token': token,
+        },
       },
     );
     return ApiCallResponse.fromCloudCallResponse(response);
@@ -1488,6 +2803,7 @@ class DeleteLogsCall {
   static Future<ApiCallResponse> call({
     String? testId = '',
     String? userid = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1496,6 +2812,7 @@ class DeleteLogsCall {
         'variables': {
           'testId': testId,
           'userid': userid,
+          'token': token,
         },
       },
     );
@@ -1506,6 +2823,7 @@ class DeleteLogsCall {
 class TestingexamCall {
   static Future<ApiCallResponse> call({
     String? userId = '299898',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1513,6 +2831,7 @@ class TestingexamCall {
         'callName': 'TestingexamCall',
         'variables': {
           'userId': userId,
+          'token': token,
         },
       },
     );
@@ -1523,6 +2842,7 @@ class TestingexamCall {
 class ResultsCall {
   static Future<ApiCallResponse> call({
     String? mobile = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1530,6 +2850,7 @@ class ResultsCall {
         'callName': 'ResultsCall',
         'variables': {
           'mobile': mobile,
+          'token': token,
         },
       },
     );
@@ -1548,6 +2869,7 @@ class RoundregistrationCall {
     String? mobileNo = '',
     String? userId = '',
     String? stdId = '',
+    String? token = '',
   }) async {
     final response = await makeCloudCall(
       _kPrivateApiFunctionName,
@@ -1557,6 +2879,7 @@ class RoundregistrationCall {
           'mobileNo': mobileNo,
           'userId': userId,
           'stdId': stdId,
+          'token': token,
         },
       },
     );
@@ -1598,6 +2921,15 @@ class RoundregistrationCall {
         r'''$.data.packages.*''',
         true,
       ) as List?;
+  static List<String>? amount(dynamic response) => (getJsonField(
+        response,
+        r'''$.data.packages[:].combos[:].inr_discount_amt''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
 }
 
 class SubmitregistrationCall {
@@ -1611,6 +2943,7 @@ class SubmitregistrationCall {
     String? finalamount = '',
     String? deliverycharges = '',
     int? isUpdated,
+    String? token = '',
   }) async {
     final comboId = _serializeList(comboIdList);
     final certificates = _serializeList(certificatesList);
@@ -1629,6 +2962,7 @@ class SubmitregistrationCall {
           'finalamount': finalamount,
           'deliverycharges': deliverycharges,
           'isUpdated': isUpdated,
+          'token': token,
         },
       },
     );
@@ -1639,35 +2973,6 @@ class SubmitregistrationCall {
       castToType<String>(getJsonField(
         response,
         r'''$.payment_data.merchantTransactionId''',
-      ));
-}
-class AppcheckCall {
-  static Future<ApiCallResponse> call({
-    String? appId = '',
-    String? platform = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'appcheck',
-      apiUrl: 'https://get-appversion.vercel.app/app-version',
-      callType: ApiCallType.GET,
-      headers: {},
-      params: {
-        'appId': appId,
-        'platform': platform,
-      },
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      isStreamingApi: false,
-      alwaysAllowBody: false,
-    );
-  }
-
-  static String? androidversion(dynamic response) =>
-      castToType<String>(getJsonField(
-        response,
-        r'''$.version''',
       ));
 }
 
@@ -1768,6 +3073,7 @@ class PhonecallbackCall {
     String? message = '',
     dynamic dataJson,
     String? orderId = '',
+    String? token = '',
   }) async {
     final data = _serializeJson(dataJson);
     final response = await makeCloudCall(
@@ -1780,6 +3086,7 @@ class PhonecallbackCall {
           'message': message,
           'data': data,
           'orderId': orderId,
+          'token': token,
         },
       },
     );
@@ -1811,17 +3118,20 @@ class PhonecallbackCall {
 class StatusCheckCall {
   static Future<ApiCallResponse> call({
     String? trancastionid = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "merchantTransactionId": "$trancastionid"
+  "merchantTransactionId": "${trancastionid}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'statusCheck',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/payment/check_payment_status',
+          'https://www.indiantalent.org/RESTapi/student-v1/payment/check_payment_status',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1829,6 +3139,7 @@ class StatusCheckCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1842,17 +3153,20 @@ class StatusCheckCall {
 class SummerQuizCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "user_id": "$userId"
+  "user_id": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'summerQuiz',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/Products/summer_quiz_product_and_coupons',
+          'https://www.indiantalent.org/RESTapi/student-v1/Products/summer_quiz_product_and_coupons',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1860,6 +3174,7 @@ class SummerQuizCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1900,18 +3215,22 @@ class MonthlyResultsCall {
     String? userId = '',
     String? subjectId = '',
     String? stdId = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "user_id": "$userId",
-  "subject_id": "$subjectId",
-  "std_id": "$stdId"
+  "user_id": "${userId}",
+  "subject_id": "${subjectId}",
+  "std_id": "${stdId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'monthlyResults',
-      apiUrl: 'https://www.indiantalent.org/RESTapi/student/exam/test_attempts',
+      apiUrl:
+          'https://www.indiantalent.org/RESTapi/student-v1/exam/test_attempts',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1919,6 +3238,7 @@ class MonthlyResultsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1933,17 +3253,20 @@ class MonthlyResultsCall {
 class RoundresultsCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "user_id": "$userId"
+  "user_id": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'roundresults',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/result/get_round_2_results',
+          'https://www.indiantalent.org/RESTapi/student-v1/result/get_round_2_results',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1951,6 +3274,7 @@ class RoundresultsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -1971,18 +3295,21 @@ class ViewCertificatesCall {
   static Future<ApiCallResponse> call({
     String? resultId = '',
     String? userId = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "result_id": "$resultId",
-  "user_id": "$userId"
+  "result_id": "${resultId}",
+  "user_id": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'viewCertificates',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/exam/view_certificate',
+          'https://www.indiantalent.org/RESTapi/student-v1/exam/view_certificate',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -1990,6 +3317,7 @@ class ViewCertificatesCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -2013,17 +3341,20 @@ class ViewCertificatesCall {
 class PowerPackagesCall {
   static Future<ApiCallResponse> call({
     String? stdId = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "std_id": "$stdId"
+  "std_id": "${stdId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'powerPackages',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/products/fetch_packages',
+          'https://www.indiantalent.org/RESTapi/student-v1/products/fetch_packages',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2031,6 +3362,7 @@ class PowerPackagesCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -2074,17 +3406,20 @@ class BannersCall {
   static Future<ApiCallResponse> call({
     String? stdId = '',
     String? displayFor = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "std_id": "$stdId",
-  "display_for": "$displayFor"
+  "std_id": "${stdId}",
+  "display_for": "${displayFor}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'banners',
-      apiUrl: 'https://www.indiantalent.org/RESTapi/student/profile/banners',
+      apiUrl: 'https://www.indiantalent.org/RESTapi/student-v1/profile/banners',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2092,6 +3427,7 @@ class BannersCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -2107,18 +3443,21 @@ class NotificationsCall {
   static Future<ApiCallResponse> call({
     String? stdId = '',
     String? displayFor = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "std_id": "$stdId",
-  "display_for": "$displayFor"
+  "std_id": "${stdId}",
+  "display_for": "${displayFor}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'notifications',
       apiUrl:
-          'https://www.indiantalent.org/RESTapi/student/profile/announcements',
+          'https://www.indiantalent.org/RESTapi/student-v1/profile/announcements',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2126,6 +3465,7 @@ class NotificationsCall {
       encodeBodyUtf8: false,
       decodeUtf8: false,
       cache: false,
+      isStreamingApi: false,
       alwaysAllowBody: false,
     );
   }
@@ -2146,17 +3486,21 @@ class GetquestionsoxCall {
   static Future<ApiCallResponse> call({
     String? testId = '',
     String? userId = '',
+    String? token = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "test_id": "$testId",
-  "user_id": "$userId"
+  "test_id": "${testId}",
+  "user_id": "${userId}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'getquestionsox',
-      apiUrl: 'https://www.indiantalent.org/RESTapi/student/exam/get_questions',
+      apiUrl:
+          'https://www.indiantalent.org/RESTapi/student-v1/exam/get_questions',
       callType: ApiCallType.POST,
-      headers: {},
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
       params: {},
       body: ffApiRequestBody,
       bodyType: BodyType.JSON,
@@ -2481,11 +3825,420 @@ class GetquestionsoxCall {
         response,
         r'''$.test_questions.tab3.question_format''',
       ));
-
-      static dynamic testdetails(dynamic response) => getJsonField(
+  static dynamic testdetails(dynamic response) => getJsonField(
         response,
         r'''$.test_details.*''',
       );
+}
+
+class SubmissionCall {
+  static Future<ApiCallResponse> call({
+    String? userId = '',
+    String? token = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "user_id": "${userId}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'submission',
+      apiUrl:
+          'https://www.indiantalent.org/RESTapi/student-v1/exam/check_submission',
+      callType: ApiCallType.POST,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List<String>? sectionAquestionId(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAquestions(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].question''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAquestionImage(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].question_image''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswer1(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer1''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswer2(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer2''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswer3(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer3''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswer4(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer4''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswerimage1(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer_image1''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswerimage2(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer_image2''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswerimage3(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer_image3''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionAanswerimage4(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab1.questions[:].answer_image4''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBquestionId(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBquestions(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].question''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBquestionImage(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].question_image''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswer1(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer1''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswer2(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer2''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswer3(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer3''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswer4(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer4''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswerImage1(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer_image1''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswerImage2(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer_image2''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswerImage3(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer_image3''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionBanswerImage4(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab2.questions[:].answer_image4''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCquestionId(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].id''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCquestions(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].question''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCquestionImage(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].question_image''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswer1(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer1''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswer2(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer2''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswer3(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer3''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswer4(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer4''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswerimage1(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer_image1''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswerimage2(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer_image2''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswerimage3(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer_image3''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? sectionCanswerimage4(dynamic response) => (getJsonField(
+        response,
+        r'''$.test_questions.tab3.questions[:].answer_image4''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static String? testformat1(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.test_questions.tab1.question_format''',
+      ));
+  static String? testformat2(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.test_questions.tab2.question_format''',
+      ));
+  static String? testformat3(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.test_questions.tab3.question_format''',
+      ));
+}
+
+class AppcheckCall {
+  static Future<ApiCallResponse> call({
+    String? appId = '',
+    String? platform = '',
+    String? token = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'appcheck',
+      apiUrl: 'https://get-appversion.vercel.app/app-version',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer ${token}',
+      },
+      params: {
+        'appId': appId,
+        'platform': platform,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? androidversion(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.version''',
+      ));
+}
+
+class ValidateTokenCall {
+  static Future<ApiCallResponse> call({
+    String? token = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'ValidateTokenCall',
+        'variables': {
+          'token': token,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
+}
+
+class GetNewTokenCall {
+  static Future<ApiCallResponse> call({
+    String? userID = '',
+  }) async {
+    final response = await makeCloudCall(
+      _kPrivateApiFunctionName,
+      {
+        'callName': 'GetNewTokenCall',
+        'variables': {
+          'userID': userID,
+        },
+      },
+    );
+    return ApiCallResponse.fromCloudCallResponse(response);
+  }
 }
 
 class ApiPagingParams {
@@ -2504,11 +4257,21 @@ class ApiPagingParams {
       'PagingParams(nextPageNumber: $nextPageNumber, numItems: $numItems, lastResponse: $lastResponse,)';
 }
 
+String _toEncodable(dynamic item) {
+  if (item is DocumentReference) {
+    return item.path;
+  }
+  return item;
+}
+
 String _serializeList(List? list) {
   list ??= <String>[];
   try {
-    return json.encode(list);
+    return json.encode(list, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("List serialization failed. Returning empty list.");
+    }
     return '[]';
   }
 }
@@ -2516,8 +4279,22 @@ String _serializeList(List? list) {
 String _serializeJson(dynamic jsonVar, [bool isList = false]) {
   jsonVar ??= (isList ? [] : {});
   try {
-    return json.encode(jsonVar);
+    return json.encode(jsonVar, toEncodable: _toEncodable);
   } catch (_) {
+    if (kDebugMode) {
+      print("Json serialization failed. Returning empty json.");
+    }
     return isList ? '[]' : '{}';
   }
+}
+
+String? escapeStringForJson(String? input) {
+  if (input == null) {
+    return null;
+  }
+  return input
+      .replaceAll('\\', '\\\\')
+      .replaceAll('"', '\\"')
+      .replaceAll('\n', '\\n')
+      .replaceAll('\t', '\\t');
 }

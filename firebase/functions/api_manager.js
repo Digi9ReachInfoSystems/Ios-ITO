@@ -667,7 +667,7 @@ async function _productsSubscriptionCall(context, ffVariables) {
         "purchase_type" : "individual" ,
 "power_pack_id":"${powerpackid}",
  "purchase_type" :"${purchaseType}",
- "product_id":"<product_id>",
+ 
  "combo_id":"${comboId}"
 }
 }`;
@@ -735,7 +735,7 @@ async function _testingexamCall(context, ffVariables) {
 
   var url = `https://www.indiantalent.org/RESTapi/student/exam/resultData`;
   var headers = {};
-  var params = { user_id: `299898` };
+  var params = { user_id: userId };
   var ffApiRequestBody = undefined;
 
   return makeApiRequest({
@@ -785,7 +785,8 @@ async function _roundregistrationCall(context, ffVariables) {
 {
   "mobile": "${mobileNo}",
   "user_id": "${userId}",
-  "standard": ${stdId}
+ 
+  "standard": "${stdId}"
 }`;
 
   return makeApiRequest({
@@ -812,6 +813,7 @@ async function _submitregistrationCall(context, ffVariables) {
   var totaldiscount = ffVariables["totaldiscount"];
   var finalamount = ffVariables["finalamount"];
   var deliverycharges = ffVariables["deliverycharges"];
+  var isUpdated = ffVariables["isUpdated"];
 
   var url = `https://www.indiantalent.org/RESTapi/student/Register/round_two`;
   var headers = {};
@@ -825,6 +827,7 @@ async function _submitregistrationCall(context, ffVariables) {
   "slug": "${slug}",
   "total_discount": "${totaldiscount}",
   "final_total_amount": "${finalamount}",
+"isUpdated":${isUpdated},
   "delivery_charges_applied": "${deliverycharges}"
 }`;
 
@@ -1027,6 +1030,16 @@ function createBody({ headers, params, body, bodyType }) {
       headers["Content-Type"] = "application/x-www-form-urlencoded";
       return qs.stringify(params);
   }
+}
+function escapeStringForJson(val) {
+  if (typeof val !== "string") {
+    return val;
+  }
+  return val
+    .replace(/[\\]/g, "\\\\")
+    .replace(/["]/g, '\\"')
+    .replace(/[\n]/g, "\\n")
+    .replace(/[\t]/g, "\\t");
 }
 
 module.exports = { makeApiCall };

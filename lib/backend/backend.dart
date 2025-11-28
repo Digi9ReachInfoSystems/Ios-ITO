@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:indian_talent_olympiad/backend/schema/update_alert_record.dart';
 import '../auth/firebase_auth/auth_util.dart';
 
 import '../flutter_flow/flutter_flow_util.dart';
@@ -8,15 +7,18 @@ import 'schema/util/firestore_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/deletionrequest_record.dart';
+import 'schema/update_alert_record.dart';
 
 export 'dart:async' show StreamSubscription;
-export 'package:cloud_firestore/cloud_firestore.dart';
+export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
+export 'package:firebase_core/firebase_core.dart';
 export 'schema/index.dart';
 export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/users_record.dart';
 export 'schema/deletionrequest_record.dart';
+export 'schema/update_alert_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
@@ -91,6 +93,8 @@ Future<List<DeletionrequestRecord>> queryDeletionrequestRecordOnce({
       limit: limit,
       singleRecord: singleRecord,
     );
+
+/// Functions to query UpdateAlertRecords (as a Stream and as a Future).
 Future<int> queryUpdateAlertRecordCount({
   Query Function(Query)? queryBuilder,
   int limit = -1,
@@ -126,6 +130,7 @@ Future<List<UpdateAlertRecord>> queryUpdateAlertRecordOnce({
       limit: limit,
       singleRecord: singleRecord,
     );
+
 Future<int> queryCollectionCount(
   Query collection, {
   Query Function(Query)? queryBuilder,
@@ -192,6 +197,15 @@ Future<List<T>> queryCollectionOnce<T>(
       .toList());
 }
 
+Filter filterIn(String field, List? list) => (list?.isEmpty ?? true)
+    ? Filter(field, whereIn: null)
+    : Filter(field, whereIn: list);
+
+Filter filterArrayContainsAny(String field, List? list) =>
+    (list?.isEmpty ?? true)
+        ? Filter(field, arrayContainsAny: null)
+        : Filter(field, arrayContainsAny: list);
+
 extension QueryExtension on Query {
   Query whereIn(String field, List? list) => (list?.isEmpty ?? true)
       ? where(field, whereIn: null)
@@ -236,7 +250,7 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
   } else {
     docSnapshot = await query.get();
   }
-  getDocs(QuerySnapshot s) => s.docs
+  final getDocs = (QuerySnapshot s) => s.docs
       .map(
         (d) => safeGet(
           () => recordBuilder(d),

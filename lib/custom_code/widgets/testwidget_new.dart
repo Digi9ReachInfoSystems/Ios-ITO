@@ -1,3 +1,4 @@
+// Automatic FlutterFlow imports
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -8,12 +9,14 @@ import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+import 'index.dart'; // Imports other custom widgets
 import 'package:widget_zoom/widget_zoom.dart';
 
-final GlobalKey<_TestWidgetNewState> testWidgetKey = GlobalKey();
+final GlobalKey<_TestwidgetNewState> testWidgetKey = GlobalKey();
 
-class TestWidgetNew extends StatefulWidget {
-  const TestWidgetNew({
+class TestwidgetNew extends StatefulWidget {
+  const TestwidgetNew({
     Key? key,
     this.width,
     this.height,
@@ -60,7 +63,8 @@ class TestWidgetNew extends StatefulWidget {
     this.testformat1,
     this.testformat2,
     this.testformat3,
-    required this.submit, // Submit function
+    // required this.submit, // Submit function
+    required this.istimeend,
   }) : super(key: key);
 
   final double? width;
@@ -110,10 +114,10 @@ class TestWidgetNew extends StatefulWidget {
   final String? testformat2;
   final String? testformat3;
 
-  final Future<dynamic> Function() submit;
-
+  // final Future<dynamic> Function() submit;
+  final bool istimeend;
   @override
-  _TestWidgetNewState createState() => _TestWidgetNewState();
+  _TestwidgetNewState createState() => _TestwidgetNewState();
 }
 
 class QuestionAnswer {
@@ -123,7 +127,7 @@ class QuestionAnswer {
   QuestionAnswer({this.selectedOptionIndex, this.isSkipped = false});
 }
 
-class _TestWidgetNewState extends State<TestWidgetNew>
+class _TestwidgetNewState extends State<TestwidgetNew>
     with SingleTickerProviderStateMixin {
   late final DateTime _startTime;
 
@@ -140,7 +144,7 @@ class _TestWidgetNewState extends State<TestWidgetNew>
   late List<Map<int, QuestionAnswer>> _sectionAnswers;
 
   late TabController _tabController;
-
+  bool _isNavigating = false;
   void submitTest() {
     _handleSubmit();
   }
@@ -294,33 +298,36 @@ class _TestWidgetNewState extends State<TestWidgetNew>
       );
     }
 
-    bool confirmSubmit = await showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: const Text("Confirm Submission"),
-              content:
-                  const Text("Are you sure you want to submit your answers?"),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('Cancel'),
-                  onPressed: () {
-                    Navigator.of(context).pop(false);
-                  },
-                ),
-                TextButton(
-                  child: const Text('Confirm'),
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                  },
-                ),
-              ],
-            );
-          },
-        ) ??
-        false;
+    bool confirmSubmit = widget.istimeend
+        ? true
+        : await showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: const Text("Confirm Submission"),
+                  content: const Text(
+                      "Are you sure you want to submit your answers?"),
+                  actions: <Widget>[
+                    TextButton(
+                      child: const Text('Cancel'),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Confirm'),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                    ),
+                  ],
+                );
+              },
+            ) ??
+            false;
 
-    if (confirmSubmit) {
+    if (confirmSubmit && !_isNavigating) {
+      _isNavigating = true;
       FFAppState().update(() {
         FFAppState().answers = updatedAnswers;
         FFAppState().timetaken = formattedTime;
@@ -373,6 +380,12 @@ class _TestWidgetNewState extends State<TestWidgetNew>
 
   @override
   Widget build(BuildContext context) {
+//Auto submit when timer ends
+    if (widget.istimeend == true) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _handleSubmit();
+      });
+    }
     List<String> sectionTitles = ['Subjective'];
     if (widget.questions2 != null && widget.questions2!.isNotEmpty) {
       sectionTitles.add('Logical');

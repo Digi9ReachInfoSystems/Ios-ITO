@@ -7,8 +7,7 @@ Future initializeFirebaseRemoteConfig() async {
       minimumFetchInterval: const Duration(hours: 1),
     ));
     await FirebaseRemoteConfig.instance.setDefaults(const {
-      'androidversion': '8.2.4',
-      'iosversion': '8.3.0',
+      'isUpdated': false,
     });
     await FirebaseRemoteConfig.instance.fetchAndActivate();
   } catch (error) {

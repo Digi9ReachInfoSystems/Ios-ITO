@@ -4,14 +4,16 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'deletionofrequest_model.dart';
 export 'deletionofrequest_model.dart';
 
 class DeletionofrequestWidget extends StatefulWidget {
   const DeletionofrequestWidget({super.key});
+
+  static String routeName = 'Deletionofrequest';
+  static String routePath = '/deletionofrequest';
 
   @override
   State<DeletionofrequestWidget> createState() =>
@@ -46,21 +48,11 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -72,7 +64,7 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -84,24 +76,31 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
             },
           ),
           title: Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
               child: Text(
                 FFLocalizations.of(context).getText(
                   't5llwjjy' /* Request Deletion  */,
                 ),
                 textAlign: TextAlign.start,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Poppins',
+                      font: GoogleFonts.poppins(
+                        fontWeight: FontWeight.w500,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
                       color: Colors.black,
                       fontSize: 22.0,
+                      letterSpacing: 0.0,
                       fontWeight: FontWeight.w500,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                     ),
               ),
             ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -112,14 +111,14 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
             key: _model.formKey,
             autovalidateMode: AutovalidateMode.always,
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                       child: TextFormField(
                         controller: _model.textController1,
                         focusNode: _model.textFieldFocusNode1,
@@ -129,14 +128,45 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
                           labelText: FFLocalizations.of(context).getText(
                             'b7rp3zds' /* Username/Phone */,
                           ),
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
                           hintText: FFLocalizations.of(context).getText(
                             'o2bf8mk3' /* Enter Username/Phone */,
                           ),
                           hintStyle:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -167,14 +197,30 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              font: GoogleFonts.readexPro(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
                         validator: _model.textController1Validator
                             .asValidator(context),
                       ),
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(8.0, 0.0, 8.0, 0.0),
                       child: TextFormField(
                         controller: _model.textController2,
                         focusNode: _model.textFieldFocusNode2,
@@ -184,14 +230,45 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
                           labelText: FFLocalizations.of(context).getText(
                             'xwjomczt' /* Reason */,
                           ),
-                          labelStyle: FlutterFlowTheme.of(context).labelMedium,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).labelMedium.override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelMedium
+                                        .fontStyle,
+                                  ),
                           hintText: FFLocalizations.of(context).getText(
                             'k0dihnb2' /* Enter reason */,
                           ),
                           hintStyle:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 16.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -222,7 +299,23 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium,
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              font: GoogleFonts.readexPro(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .fontStyle,
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .fontStyle,
+                            ),
                         maxLines: 4,
                         validator: _model.textController2Validator
                             .asValidator(context),
@@ -230,7 +323,7 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () async {
                           logFirebaseEvent(
@@ -254,14 +347,14 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
                             builder: (alertDialogContext) {
                               return WebViewAware(
                                 child: AlertDialog(
-                                  title: const Text('Request'),
-                                  content: const Text(
+                                  title: Text('Request'),
+                                  content: Text(
                                       'Submitted Your Request Successfully.'),
                                   actions: [
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pop(alertDialogContext),
-                                      child: const Text('Ok'),
+                                      child: Text('Ok'),
                                     ),
                                   ],
                                 ),
@@ -276,18 +369,32 @@ class _DeletionofrequestWidgetState extends State<DeletionofrequestWidget> {
                         ),
                         options: FFButtonOptions(
                           height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Readex Pro',
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
                                   ),
                           elevation: 3.0,
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                             color: Colors.transparent,
                             width: 1.0,
                           ),

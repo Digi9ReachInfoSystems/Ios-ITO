@@ -1,23 +1,32 @@
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'dosanddont_widget.dart' show DosanddontWidget;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
+import 'testpagetestingdummy_widget.dart' show TestpagetestingdummyWidget;
 import 'package:flutter/material.dart';
 
-class DosanddontModel extends FlutterFlowModel<DosanddontWidget> {
-  ///  State fields for stateful widgets in this component.
+class TestpagetestingdummyModel
+    extends FlutterFlowModel<TestpagetestingdummyWidget> {
+  ///  State fields for stateful widgets in this page.
 
   // State field(s) for Timer widget.
-  int timerMilliseconds = 60000;
+  final timerInitialTimeMs = 0;
+  int timerMilliseconds = 0;
   String timerValue = StopWatchTimer.getDisplayTime(
-    60000,
+    0,
     hours: false,
     milliSecond: false,
   );
   FlutterFlowTimerController timerController =
       FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countDown));
 
-  /// Initialization and disposal methods.
+  // State field(s) for PageView widget.
+  PageController? pageViewController;
+
+  int get pageViewCurrentIndex => pageViewController != null &&
+          pageViewController!.hasClients &&
+          pageViewController!.page != null
+      ? pageViewController!.page!.round()
+      : 0;
 
   @override
   void initState(BuildContext context) {}
@@ -26,8 +35,4 @@ class DosanddontModel extends FlutterFlowModel<DosanddontWidget> {
   void dispose() {
     timerController.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -6,14 +6,17 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'auth1register_model.dart';
 export 'auth1register_model.dart';
 
 class Auth1registerWidget extends StatefulWidget {
   const Auth1registerWidget({super.key});
+
+  static String routeName = 'Auth1register';
+  static String routePath = '/auth1register';
 
   @override
   State<Auth1registerWidget> createState() => _Auth1registerWidgetState();
@@ -36,7 +39,8 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
+    )..addListener(() => safeSetState(() {}));
+
     _model.textController1 ??= TextEditingController();
     _model.textFieldFocusNode1 ??= FocusNode();
 
@@ -77,21 +81,11 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -103,7 +97,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -119,13 +113,20 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
               '3bztodxi' /* Register */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
                   color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -139,15 +140,32 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: const Alignment(0.0, 0),
+                      alignment: Alignment(0.0, 0),
                       child: TabBar(
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
                             FlutterFlowTheme.of(context).secondaryText,
-                        labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                        unselectedLabelStyle: const TextStyle(),
+                        labelStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
+                                ),
+                        unselectedLabelStyle: TextStyle(),
                         indicatorColor: FlutterFlowTheme.of(context).primary,
-                        padding: const EdgeInsets.all(4.0),
+                        padding: EdgeInsets.all(4.0),
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
@@ -174,14 +192,14 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                             key: _model.formKey,
                             autovalidateMode: AutovalidateMode.always,
                             child: Padding(
-                              padding: const EdgeInsets.all(15.0),
+                              padding: EdgeInsets.all(15.0),
                               child: SingleChildScrollView(
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(-1.0, 0.0),
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: Text(
                                         FFLocalizations.of(context).getText(
                                           'zs6g6l15' /* Welcome to  */,
@@ -190,18 +208,29 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Poppins',
-                                              color: const Color(0xFF272727),
+                                              font: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF272727),
                                               fontSize: 24.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_q8c8'),
+                                        key: ValueKey('TextField_q8c8'),
                                         controller: _model.textController1,
                                         focusNode: _model.textFieldFocusNode1,
                                         autofocus: true,
@@ -211,16 +240,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             '1b6jbwbh' /* Student Name */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -263,13 +335,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController1Validator
@@ -277,10 +367,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_1w5e'),
+                                        key: ValueKey('TextField_1w5e'),
                                         controller: _model.textController2,
                                         focusNode: _model.textFieldFocusNode2,
                                         autofocus: true,
@@ -290,16 +380,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             'qa5ii1n8' /* Parent Name */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -342,13 +475,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController2Validator
@@ -356,10 +507,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_e33n'),
+                                        key: ValueKey('TextField_e33n'),
                                         controller: _model.textController3,
                                         focusNode: _model.textFieldFocusNode3,
                                         autofocus: true,
@@ -369,16 +520,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             '4f5v6rsr' /* Parent Email */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -421,13 +615,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController3Validator
@@ -435,10 +647,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_w3il'),
+                                        key: ValueKey('TextField_w3il'),
                                         controller: _model.textController4,
                                         focusNode: _model.textFieldFocusNode4,
                                         autofocus: true,
@@ -448,16 +660,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             'zi7x9w34' /* Mobile Number */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -500,13 +755,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         keyboardType: TextInputType.number,
                                         validator: _model
@@ -515,10 +788,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_x2g0'),
+                                        key: ValueKey('TextField_x2g0'),
                                         controller: _model.textController5,
                                         focusNode: _model.textFieldFocusNode5,
                                         autofocus: true,
@@ -528,16 +801,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             'smqeb8r0' /* Address */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -580,13 +896,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController5Validator
@@ -594,10 +928,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_b8tt'),
+                                        key: ValueKey('TextField_b8tt'),
                                         controller: _model.textController6,
                                         focusNode: _model.textFieldFocusNode6,
                                         autofocus: true,
@@ -607,16 +941,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             'wv36n2ps' /* School Name */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -659,13 +1036,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController6Validator
@@ -673,10 +1068,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_7sea'),
+                                        key: ValueKey('TextField_7sea'),
                                         controller: _model.textController7,
                                         focusNode: _model.textFieldFocusNode7,
                                         autofocus: true,
@@ -686,16 +1081,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             '3u5cpchn' /* State */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -738,13 +1176,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController7Validator
@@ -752,10 +1208,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_chcn'),
+                                        key: ValueKey('TextField_chcn'),
                                         controller: _model.textController8,
                                         focusNode: _model.textFieldFocusNode8,
                                         autofocus: true,
@@ -765,16 +1221,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             '59elty3l' /* City */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -817,13 +1316,31 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController8Validator
@@ -852,6 +1369,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                         }
                                         final containerGetStandardsResponse =
                                             snapshot.data!;
+
                                         return Container(
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
@@ -859,10 +1377,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     8.0, 10.0, 8.0, 10.0),
                                             child: FlutterFlowDropDown<String>(
-                                              key: const ValueKey('DropDown_0vrd'),
+                                              key: ValueKey('DropDown_0vrd'),
                                               controller: _model
                                                       .dropDownValueController ??=
                                                   FormFieldController<String>(
@@ -872,15 +1390,41 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 containerGetStandardsResponse
                                                     .jsonBody,
                                               )!,
-                                              onChanged: (val) => setState(() =>
-                                                  _model.dropDownValue = val),
+                                              onChanged: (val) => safeSetState(
+                                                  () => _model.dropDownValue =
+                                                      val),
                                               width: MediaQuery.sizeOf(context)
                                                       .width *
                                                   1.0,
                                               height: 50.0,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium,
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    font: GoogleFonts.readexPro(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
                                               hintText:
                                                   FFLocalizations.of(context)
                                                       .getText(
@@ -903,7 +1447,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                       .alternate,
                                               borderWidth: 2.0,
                                               borderRadius: 8.0,
-                                              margin: const EdgeInsetsDirectional
+                                              margin: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 4.0, 16.0, 4.0),
                                               hidesUnderline: true,
@@ -915,12 +1459,13 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       },
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_mbbb'),
+                                        key: ValueKey('TextField_mbbb'),
                                         controller: _model.textController9,
                                         focusNode: _model.textFieldFocusNode9,
+                                        autofocus: false,
                                         obscureText:
                                             !_model.passwordVisibility1,
                                         decoration: InputDecoration(
@@ -928,16 +1473,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             'z1f19rd6' /* Password */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -980,9 +1568,9 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model.passwordVisibility1 =
                                                   !_model.passwordVisibility1,
                                             ),
@@ -1003,8 +1591,26 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController9Validator
@@ -1012,10 +1618,10 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 0.0, 8.0, 10.0),
                                       child: TextFormField(
-                                        key: const ValueKey('TextField_l7dt'),
+                                        key: ValueKey('TextField_l7dt'),
                                         controller: _model.textController10,
                                         focusNode: _model.textFieldFocusNode10,
                                         autofocus: true,
@@ -1026,16 +1632,59 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               .getText(
                                             '0es8vf2p' /* Confirm Password */,
                                           ),
-                                          labelStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF323643),
-                                                  ),
-                                          hintStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .labelMedium,
+                                          labelStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF323643),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                          hintStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .labelMedium
+                                              .override(
+                                                font: GoogleFonts.readexPro(
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .labelMedium
+                                                          .fontStyle,
+                                                ),
+                                                letterSpacing: 0.0,
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
                                           enabledBorder: OutlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
@@ -1078,9 +1727,9 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           filled: true,
-                                          fillColor: const Color(0xFFF5F5F5),
+                                          fillColor: Color(0xFFF5F5F5),
                                           suffixIcon: InkWell(
-                                            onTap: () => setState(
+                                            onTap: () => safeSetState(
                                               () => _model.passwordVisibility2 =
                                                   !_model.passwordVisibility2,
                                             ),
@@ -1098,8 +1747,26 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
                                             .override(
-                                              fontFamily: 'Readex Pro',
-                                              color: const Color(0xFF323643),
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontWeight,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF323643),
+                                              letterSpacing: 0.0,
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
                                             ),
                                         validator: _model
                                             .textController10Validator
@@ -1107,9 +1774,9 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 15.0, 0.0, 0.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
@@ -1135,7 +1802,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                           .primaryBackground,
                                                     ),
                                                   ),
-                                                  duration: const Duration(
+                                                  duration: Duration(
                                                       milliseconds: 4000),
                                                   backgroundColor:
                                                       FlutterFlowTheme.of(
@@ -1172,6 +1839,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                   functions.convertstringtoint(
                                                       _model.dropDownValue!),
                                             );
+
                                             if ((_model
                                                     .apiResultd4x?.succeeded ??
                                                 true)) {
@@ -1188,7 +1856,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                           .primaryBackground,
                                                     ),
                                                   ),
-                                                  duration: const Duration(
+                                                  duration: Duration(
                                                       milliseconds: 4000),
                                                   backgroundColor:
                                                       FlutterFlowTheme.of(
@@ -1199,7 +1867,8 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               logFirebaseEvent(
                                                   'Button_navigate_to');
 
-                                              context.pushNamed('Auth1Login');
+                                              context.pushNamed(
+                                                  Auth1LoginWidget.routeName);
                                             } else {
                                               logFirebaseEvent(
                                                   'Button_show_snack_bar');
@@ -1219,7 +1888,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                           .primaryBackground,
                                                     ),
                                                   ),
-                                                  duration: const Duration(
+                                                  duration: Duration(
                                                       milliseconds: 4000),
                                                   backgroundColor:
                                                       FlutterFlowTheme.of(
@@ -1229,7 +1898,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               );
                                             }
 
-                                            setState(() {});
+                                            safeSetState(() {});
                                           },
                                           text: FFLocalizations.of(context)
                                               .getText(
@@ -1243,23 +1912,35 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                     .height *
                                                 0.05,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 24.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
-                                            color: const Color(0xFF004696),
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .titleSmall
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                    ),
+                                            color: Color(0xFF004696),
+                                            textStyle: FlutterFlowTheme.of(
+                                                    context)
+                                                .titleSmall
+                                                .override(
+                                                  font: GoogleFonts.readexPro(
+                                                    fontWeight: FontWeight.w600,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                                  color: Colors.white,
+                                                  letterSpacing: 0.0,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
                                             elevation: 3.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.transparent,
                                               width: 1.0,
                                             ),
@@ -1270,7 +1951,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                       ),
                                     ),
                                     Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
                                         focusColor: Colors.transparent,
@@ -1281,7 +1962,8 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               'AUTH1REGISTER_PAGE_Row_rjzpbybo_ON_TAP');
                                           logFirebaseEvent('Row_navigate_to');
 
-                                          context.pushNamed('Auth1Login');
+                                          context.pushNamed(
+                                              Auth1LoginWidget.routeName);
                                         },
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -1289,19 +1971,41 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               MainAxisAlignment.center,
                                           children: [
                                             Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, 0.0),
                                               child: Text(
                                                 FFLocalizations.of(context)
                                                     .getText(
                                                   'tipvfl1q' /* Already  a member */,
                                                 ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyMedium
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                        ),
+                                                style: FlutterFlowTheme.of(
+                                                        context)
+                                                    .bodyMedium
+                                                    .override(
+                                                      font: GoogleFonts.poppins(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
                                               ),
                                             ),
                                             FFButtonWidget(
@@ -1311,7 +2015,8 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                                 logFirebaseEvent(
                                                     'Button_navigate_to');
 
-                                                context.pushNamed('Auth1Login');
+                                                context.pushNamed(
+                                                    Auth1LoginWidget.routeName);
                                               },
                                               text: FFLocalizations.of(context)
                                                   .getText(
@@ -1319,27 +2024,40 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                                               ),
                                               options: FFButtonOptions(
                                                 height: 40.0,
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         5.0, 0.0, 5.0, 0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color: Colors.white,
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color:
-                                                              const Color(0xFF004696),
-                                                          fontSize: 14.0,
-                                                          fontWeight:
-                                                              FontWeight.normal,
-                                                        ),
+                                                textStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleSmall
+                                                    .override(
+                                                      font: GoogleFonts.poppins(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFF004696),
+                                                      fontSize: 14.0,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
                                                 elevation: 0.0,
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Colors.white,
                                                   width: 0.0,
                                                 ),
@@ -1357,7 +2075,7 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Text(
                               FFLocalizations.of(context).getText(
                                 'p9xbahvz' /* Please Fill the Register Form ... */,
@@ -1365,8 +2083,22 @@ class _Auth1registerWidgetState extends State<Auth1registerWidget>
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(
-                                    fontFamily: 'Readex Pro',
-                                    color: const Color(0xFF992A2A),
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    color: Color(0xFF992A2A),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                             ),
                           ),

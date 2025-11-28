@@ -1,6 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/index.dart';
 import 'auth1register_widget.dart' show Auth1registerWidget;
 import 'package:flutter/material.dart';
 
@@ -11,12 +12,13 @@ class Auth1registerModel extends FlutterFlowModel<Auth1registerWidget> {
 
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
+  int get tabBarPreviousIndex =>
+      tabBarController != null ? tabBarController!.previousIndex : 0;
 
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
@@ -208,8 +210,6 @@ class Auth1registerModel extends FlutterFlowModel<Auth1registerWidget> {
   // Stores action output result for [Backend Call - API (regiter)] action in Button widget.
   ApiCallResponse? apiResultd4x;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     textController1Validator = _textController1Validator;
@@ -228,7 +228,6 @@ class Auth1registerModel extends FlutterFlowModel<Auth1registerWidget> {
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     tabBarController?.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
@@ -260,8 +259,4 @@ class Auth1registerModel extends FlutterFlowModel<Auth1registerWidget> {
     textFieldFocusNode10?.dispose();
     textController10?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

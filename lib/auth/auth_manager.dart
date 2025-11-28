@@ -29,9 +29,9 @@ mixin AnonymousSignInManager on AuthManager {
   Future<BaseAuthUser?> signInAnonymously(BuildContext context);
 }
 
-// mixin AppleSignInManager on AuthManager {
-//   Future<BaseAuthUser?> signInWithApple(BuildContext context);
-// }
+mixin AppleSignInManager on AuthManager {
+  Future<BaseAuthUser?> signInWithApple(BuildContext context);
+}
 
 mixin GoogleSignInManager on AuthManager {
   Future<BaseAuthUser?> signInWithGoogle(BuildContext context);

@@ -20,37 +20,52 @@ class Round2cartStruct extends FFFirebaseStruct {
         _productamount = productamount,
         _discountamout = discountamout,
         _deliverablecount = deliverablecount,
+        _noOfitems = noOfitems,
         super(firestoreUtilData);
 
   // "product_id" field.
   String? _productId;
   String get productId => _productId ?? '';
   set productId(String? val) => _productId = val;
+
   bool hasProductId() => _productId != null;
 
   // "productname" field.
   String? _productname;
   String get productname => _productname ?? '';
   set productname(String? val) => _productname = val;
+
   bool hasProductname() => _productname != null;
 
   // "productamount" field.
   String? _productamount;
   String get productamount => _productamount ?? '';
   set productamount(String? val) => _productamount = val;
+
   bool hasProductamount() => _productamount != null;
 
   // "discountamout" field.
   String? _discountamout;
   String get discountamout => _discountamout ?? '';
   set discountamout(String? val) => _discountamout = val;
+
   bool hasDiscountamout() => _discountamout != null;
 
   // "deliverablecount" field.
   String? _deliverablecount;
   String get deliverablecount => _deliverablecount ?? '';
   set deliverablecount(String? val) => _deliverablecount = val;
+
   bool hasDeliverablecount() => _deliverablecount != null;
+
+  // "noOfitems" field.
+  int? _noOfitems;
+  int get noOfitems => _noOfitems ?? 0;
+  set noOfitems(int? val) => _noOfitems = val;
+
+  void incrementNoOfitems(int amount) => noOfitems = noOfitems + amount;
+
+  bool hasNoOfitems() => _noOfitems != null;
 
   static Round2cartStruct fromMap(Map<String, dynamic> data) =>
       Round2cartStruct(
@@ -59,6 +74,7 @@ class Round2cartStruct extends FFFirebaseStruct {
         productamount: data['productamount'] as String?,
         discountamout: data['discountamout'] as String?,
         deliverablecount: data['deliverablecount'] as String?,
+        noOfitems: castToType<int>(data['noOfitems']),
       );
 
   static Round2cartStruct? maybeFromMap(dynamic data) => data is Map
@@ -71,6 +87,7 @@ class Round2cartStruct extends FFFirebaseStruct {
         'productamount': _productamount,
         'discountamout': _discountamout,
         'deliverablecount': _deliverablecount,
+        'noOfitems': _noOfitems,
       }.withoutNulls;
 
   @override
@@ -94,6 +111,10 @@ class Round2cartStruct extends FFFirebaseStruct {
         'deliverablecount': serializeParam(
           _deliverablecount,
           ParamType.String,
+        ),
+        'noOfitems': serializeParam(
+          _noOfitems,
+          ParamType.int,
         ),
       }.withoutNulls;
 
@@ -124,6 +145,11 @@ class Round2cartStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
+        noOfitems: deserializeParam(
+          data['noOfitems'],
+          ParamType.int,
+          false,
+        ),
       );
 
   @override
@@ -136,12 +162,19 @@ class Round2cartStruct extends FFFirebaseStruct {
         productname == other.productname &&
         productamount == other.productamount &&
         discountamout == other.discountamout &&
-        deliverablecount == other.deliverablecount;
+        deliverablecount == other.deliverablecount &&
+        noOfitems == other.noOfitems;
   }
 
   @override
-  int get hashCode => const ListEquality().hash(
-      [productId, productname, productamount, discountamout, deliverablecount]);
+  int get hashCode => const ListEquality().hash([
+        productId,
+        productname,
+        productamount,
+        discountamout,
+        deliverablecount,
+        noOfitems
+      ]);
 }
 
 Round2cartStruct createRound2cartStruct({
@@ -150,6 +183,7 @@ Round2cartStruct createRound2cartStruct({
   String? productamount,
   String? discountamout,
   String? deliverablecount,
+  int? noOfitems,
   Map<String, dynamic> fieldValues = const {},
   bool clearUnsetFields = true,
   bool create = false,
@@ -161,6 +195,7 @@ Round2cartStruct createRound2cartStruct({
       productamount: productamount,
       discountamout: discountamout,
       deliverablecount: deliverablecount,
+      noOfitems: noOfitems,
       firestoreUtilData: FirestoreUtilData(
         clearUnsetFields: clearUnsetFields,
         create: create,

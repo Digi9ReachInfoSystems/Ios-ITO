@@ -21,18 +21,21 @@ class ResultsStruct extends FFFirebaseStruct {
   String? _attended;
   String get attended => _attended ?? '';
   set attended(String? val) => _attended = val;
+
   bool hasAttended() => _attended != null;
 
   // "incorrect" field.
   String? _incorrect;
   String get incorrect => _incorrect ?? '';
   set incorrect(String? val) => _incorrect = val;
+
   bool hasIncorrect() => _incorrect != null;
 
   // "correct" field.
   String? _correct;
   String get correct => _correct ?? '';
   set correct(String? val) => _correct = val;
+
   bool hasCorrect() => _correct != null;
 
   static ResultsStruct fromMap(Map<String, dynamic> data) => ResultsStruct(

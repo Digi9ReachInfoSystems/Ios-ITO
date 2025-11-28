@@ -3,8 +3,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'finalpaybutton_model.dart';
 export 'finalpaybutton_model.dart';
 
@@ -17,6 +16,9 @@ class FinalpaybuttonWidget extends StatefulWidget {
 
   final String? orderid;
   final double? finalamount;
+
+  static String routeName = 'finalpaybutton';
+  static String routePath = '/finalpaybutton';
 
   @override
   State<FinalpaybuttonWidget> createState() => _FinalpaybuttonWidgetState();
@@ -45,21 +47,11 @@ class _FinalpaybuttonWidgetState extends State<FinalpaybuttonWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -71,7 +63,7 @@ class _FinalpaybuttonWidgetState extends State<FinalpaybuttonWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -87,12 +79,22 @@ class _FinalpaybuttonWidgetState extends State<FinalpaybuttonWidget> {
               'drfoja51' /* finalpaying */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
-                  color: const Color(0xFF272727),
+                  font: GoogleFonts.poppins(
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
+                  color: Color(0xFF272727),
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
+                  fontWeight:
+                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           elevation: 2.0,
         ),
@@ -103,11 +105,35 @@ class _FinalpaybuttonWidgetState extends State<FinalpaybuttonWidget> {
             children: [
               Text(
                 widget.orderid!,
-                style: FlutterFlowTheme.of(context).bodyMedium,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      font: GoogleFonts.readexPro(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
+                      letterSpacing: 0.0,
+                      fontWeight:
+                          FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                    ),
               ),
               Text(
                 functions.convertdoubletostring(widget.finalamount!),
-                style: FlutterFlowTheme.of(context).bodyMedium,
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      font: GoogleFonts.readexPro(
+                        fontWeight:
+                            FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                      ),
+                      letterSpacing: 0.0,
+                      fontWeight:
+                          FlutterFlowTheme.of(context).bodyMedium.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).bodyMedium.fontStyle,
+                    ),
               ),
             ],
           ),

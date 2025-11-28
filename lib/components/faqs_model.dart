@@ -8,8 +8,6 @@ class FaqsModel extends FlutterFlowModel<FaqsWidget> {
   // State field(s) for Column widget.
   ScrollController? columnController;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {
     columnController = ScrollController();
@@ -19,8 +17,4 @@ class FaqsModel extends FlutterFlowModel<FaqsWidget> {
   void dispose() {
     columnController?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

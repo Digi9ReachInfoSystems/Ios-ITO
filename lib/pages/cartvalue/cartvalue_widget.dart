@@ -17,7 +17,8 @@ export 'cartvalue_model.dart';
 
 class CartvalueWidget extends StatefulWidget {
   const CartvalueWidget({super.key});
-
+  static String routeName = 'Cartvalue';
+  static String routePath = '/cartvalue';
   @override
   State<CartvalueWidget> createState() => _CartvalueWidgetState();
 }
@@ -97,16 +98,17 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
               color: Color(0xFF272727),
               size: 30.0,
             ),
-             onPressed: () async {
-    logFirebaseEvent('CARTVALUE_arrow_back_rounded_ICN_ON_TAP');
-    logFirebaseEvent('IconButton_navigate_to');
-    context.pushNamed('productsmenu');
-  },
+            onPressed: () async {
+              logFirebaseEvent('CARTVALUE_arrow_back_rounded_ICN_ON_TAP');
+              logFirebaseEvent('IconButton_navigate_to');
+              context.pushNamed('productsmenu');
+            },
           ),
           title: Align(
             alignment: const AlignmentDirectional(0.0, 0.0),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+              padding:
+                  const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
               child: Text(
                 "Cart",
                 textAlign: TextAlign.start,
@@ -270,7 +272,8 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: const AlignmentDirectional(1.0, 0.0),
+                                    alignment:
+                                        const AlignmentDirectional(1.0, 0.0),
                                     child: Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: FlutterFlowIconButton(
@@ -342,7 +345,6 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                                     FFAppState()
                                                         .discountamount)!;
                                           });
-                                         
                                         },
                                       ),
                                     ),
@@ -358,8 +360,8 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                   Align(
                     alignment: const AlignmentDirectional(-1.0, 0.0),
                     child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(
+                          10.0, 0.0, 0.0, 0.0),
                       child: Text(
                         FFLocalizations.of(context).getText(
                           'kbpx018a' /* Apply Coupons */,
@@ -404,7 +406,8 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(-1.0, 0.0),
+                                alignment:
+                                    const AlignmentDirectional(-1.0, 0.0),
                                 child: Padding(
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       10.0, 0.0, 0.0, 0.0),
@@ -434,119 +437,124 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                       ),
                     ),
                   if (FFAppState().applied.isNotEmpty)
-                Stack(
-                  children: [
-                    Container(
-                      width: MediaQuery.sizeOf(context).width,
-                      height: 70,
-                      decoration: const BoxDecoration(),
-                      child: Lottie.asset(
-                        'assets/lottie_animations/Animation_-_1708324297486.json',
-                        width: 150,
-                        height: 130,
-                        fit: BoxFit.cover,
-                        repeat: false,
-                        animate: true,
-                      ),
-                    ),
-                    if (FFAppState().applied.isNotEmpty)
-                      Container(
-                        width: MediaQuery.sizeOf(context).width,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context)
-                              .secondaryBackground,
-                          borderRadius: BorderRadius.circular(8),
+                    Stack(
+                      children: [
+                        Container(
+                          width: MediaQuery.sizeOf(context).width,
+                          height: 70,
+                          decoration: const BoxDecoration(),
+                          child: Lottie.asset(
+                            'assets/lottie_animations/Animation_-_1708324297486.json',
+                            width: 150,
+                            height: 130,
+                            fit: BoxFit.cover,
+                            repeat: false,
+                            animate: true,
+                          ),
                         ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
+                        if (FFAppState().applied.isNotEmpty)
+                          Container(
+                            width: MediaQuery.sizeOf(context).width,
+                            height: 70,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceEvenly,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                   "Whoo Hoo !!",
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: FlutterFlowTheme.of(context)
-                                            .error,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500,
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "Whoo Hoo !!",
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsetsDirectional.fromSTEB(
+                                              10, 0, 0, 0),
+                                      child: Text(
+                                        'You got ${FFAppState().couponscode.couponName} % off on your order',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.normal,
+                                            ),
                                       ),
+                                    ),
+                                  ],
                                 ),
-                                Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      10, 0, 0, 0),
-                                  child: Text(
-                                    'You got ${FFAppState().couponscode.couponName} % off on your order',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryText,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                        ),
+                                Align(
+                                  alignment: const AlignmentDirectional(-1, 0),
+                                  child: Padding(
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            10, 0, 10, 0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'CARTVALUE_PAGE_Text_mv11feey_ON_TAP');
+                                        logFirebaseEvent(
+                                            'Text_update_app_state');
+                                        setState(() {
+                                          FFAppState().couponscode =
+                                              CouponStruct();
+                                          FFAppState().applied = [];
+                                          FFAppState().discountamount = 0.0;
+                                          FFAppState().finalamount =
+                                              functions.minusdiscountamount(
+                                                  valueOrDefault<double>(
+                                                    functions.payableamount(
+                                                        FFAppState().cartvalue,
+                                                        FFAppState()
+                                                            .deliveryfee),
+                                                    0.0,
+                                                  ),
+                                                  FFAppState().discountamount)!;
+                                        });
+                                      },
+                                      child: Text(
+                                        "Remove",
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Poppins',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
-                            Align(
-                              alignment: const AlignmentDirectional(-1, 0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10, 0, 10, 0),
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    logFirebaseEvent(
-                                        'CARTVALUE_PAGE_Text_mv11feey_ON_TAP');
-                                    logFirebaseEvent('Text_update_app_state');
-                                    setState(() {
-                                      FFAppState().couponscode =
-                                          CouponStruct();
-                                      FFAppState().applied = [];
-                                      FFAppState().discountamount = 0.0;
-                                      FFAppState().finalamount =
-                                          functions.minusdiscountamount(
-                                              valueOrDefault<double>(
-                                                functions.payableamount(
-                                                    FFAppState().cartvalue,
-                                                    FFAppState().deliveryfee),
-                                                0.0,
-                                              ),
-                                              FFAppState().discountamount)!;
-                                    });
-                                    
-                                  },
-                                  child: Text(
-                                   "Remove",
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: FlutterFlowTheme.of(context)
-                                              .primary,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                  ],
-                ),
+                          ),
+                      ],
+                    ),
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -582,8 +590,8 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                         ),
                       ),
                       Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            0.0, 10.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -840,6 +848,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                     _model.apiResult3ma =
                                         await ProductsSubscriptionCall.call(
                                       userId: FFAppState().userInfo.userId,
+                                      token: FFAppState().userInfo.token,
                                       productsList: functions.convertint(
                                           FFAppState().productids.toList()),
                                       payableAmount: valueOrDefault<String>(
@@ -848,7 +857,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                       ),
                                       deliveryCharge:
                                           FFAppState().deliveryfee.toString(),
-                                          purchaseType: 'individual',
+                                      purchaseType: 'individual',
                                     );
                                     if ((_model.apiResult3ma?.succeeded ??
                                         true)) {
@@ -871,25 +880,24 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                             FFAppState().userInfo.userId,
                                             'indiantalentolympiad://indiantalentolympiad.com${GoRouterState.of(context).uri.toString()}',
                                             'REDIRECT',
-                                            'https://www.indiantalent.org/RESTapi/student/payment/Phonepe_callback',
+                                            'https://www.indiantalent.org/RESTapi/student-v1/payment/Phonepe_callback',
                                             FFAppState().userInfo.mobileNo)),
                                       );
                                       logFirebaseEvent('Button_backend_call');
                                       _model.payApi = await PhonepeCall.call(
                                         verify: _model.sha256,
-                                        base: functions.jsontobase64(
-                                            functions.createJson(
-                                                'M222Z8QFUNMKT',
-                                                FFAppState().merchantTranId,
-                                                functions.rupeestopaisa(
-                                                    FFAppState().finalamount),
-                                                FFAppState().userInfo.userId,
-                                                'indiantalentolympiad://indiantalentolympiad.com${GoRouterState.of(context).uri.toString()}',
-                                                'REDIRECT',
-                                                'https://www.indiantalent.org/RESTapi/student/payment/Phonepe_callback',
-                                                FFAppState()
-                                                    .userInfo
-                                                    .mobileNo)),
+                                        base: functions
+                                            .jsontobase64(functions.createJson(
+                                          'M222Z8QFUNMKT',
+                                          FFAppState().merchantTranId,
+                                          functions.rupeestopaisa(
+                                              FFAppState().finalamount),
+                                          FFAppState().userInfo.userId,
+                                          'indiantalentolympiad://indiantalentolympiad.com${GoRouterState.of(context).uri.toString()}',
+                                          'REDIRECT',
+                                          'https://www.indiantalent.org/RESTapi/student-v1/payment/Phonepe_callback',
+                                          FFAppState().userInfo.mobileNo,
+                                        )),
                                       );
                                       if ((_model.payApi?.succeeded ?? true)) {
                                         logFirebaseEvent(
@@ -905,8 +913,8 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                                                         .primaryText,
                                               ),
                                             ),
-                                            duration:
-                                                const Duration(milliseconds: 4000),
+                                            duration: const Duration(
+                                                milliseconds: 4000),
                                             backgroundColor:
                                                 FlutterFlowTheme.of(context)
                                                     .secondary,
@@ -980,9 +988,7 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
 
                                   setState(() {});
                                 },
-                          text: FFLocalizations.of(context).getText(
-                            'b5kuyiyw' /* Pay Now */,
-                          ),
+                          text: "Pay Now",
                           options: FFButtonOptions(
                             width: double.infinity,
                             height: 48.0,
@@ -1009,7 +1015,9 @@ class _CartvalueWidgetState extends State<CartvalueWidget> {
                       ),
                     ],
                   ),
-                ].divide(const SizedBox(height: 10.0)).around(const SizedBox(height: 10.0)),
+                ]
+                    .divide(const SizedBox(height: 10.0))
+                    .around(const SizedBox(height: 10.0)),
               ),
             ),
           ),

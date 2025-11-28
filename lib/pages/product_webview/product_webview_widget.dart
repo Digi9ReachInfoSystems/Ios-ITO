@@ -4,9 +4,10 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_web_view.dart';
 import '/flutter_flow/instant_timer.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'product_webview_model.dart';
 export 'product_webview_model.dart';
@@ -18,6 +19,9 @@ class ProductWebviewWidget extends StatefulWidget {
   });
 
   final String? payurl;
+
+  static String routeName = 'productWebview';
+  static String routePath = '/productWebview';
 
   @override
   State<ProductWebviewWidget> createState() => _ProductWebviewWidgetState();
@@ -40,12 +44,13 @@ class _ProductWebviewWidgetState extends State<ProductWebviewWidget> {
       logFirebaseEvent('PRODUCT_WEBVIEW_productWebview_ON_INIT_S');
       logFirebaseEvent('productWebview_start_periodic_action');
       _model.instantTimer = InstantTimer.periodic(
-        duration: const Duration(milliseconds: 5000),
+        duration: Duration(milliseconds: 5000),
         callback: (timer) async {
           logFirebaseEvent('productWebview_backend_call');
           _model.status = await StatusCheckCall.call(
             trancastionid: FFAppState().merchantTranId,
           );
+
           if ((_model.status?.succeeded ?? true)) {
             if (StatusCheckCall.code(
                   (_model.status?.jsonBody ?? ''),
@@ -55,16 +60,15 @@ class _ProductWebviewWidgetState extends State<ProductWebviewWidget> {
               _model.instantTimer?.cancel();
               logFirebaseEvent('productWebview_navigate_to');
 
-              context.pushNamed('paymentSuccess');
+              context.pushNamed(PaymentSuccessWidget.routeName);
 
               logFirebaseEvent('productWebview_update_app_state');
-              setState(() {
-                FFAppState().totalcart = [];
-                FFAppState().finalamount = 0.0;
-                FFAppState().cartvalue = 0.0;
-                FFAppState().deliveryfee = 0.0;
-                FFAppState().productids = [];
-              });
+              FFAppState().totalcart = [];
+              FFAppState().finalamount = 0.0;
+              FFAppState().cartvalue = 0.0;
+              FFAppState().deliveryfee = 0.0;
+              FFAppState().productids = [];
+              safeSetState(() {});
             } else if (StatusCheckCall.code(
                   (_model.status?.jsonBody ?? ''),
                 ) ==
@@ -74,7 +78,7 @@ class _ProductWebviewWidgetState extends State<ProductWebviewWidget> {
               _model.instantTimer?.cancel();
               logFirebaseEvent('productWebview_navigate_to');
 
-              context.pushNamed('productFailure');
+              context.pushNamed(ProductFailureWidget.routeName);
             }
           }
         },
@@ -92,21 +96,13 @@ class _ProductWebviewWidgetState extends State<ProductWebviewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -118,7 +114,7 @@ class _ProductWebviewWidgetState extends State<ProductWebviewWidget> {
             borderRadius: 30.0,
             borderWidth: 1.0,
             buttonSize: 60.0,
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: Color(0xFF272727),
               size: 30.0,
@@ -134,12 +130,22 @@ class _ProductWebviewWidgetState extends State<ProductWebviewWidget> {
               '8m08hc0c' /* Pay now */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
-                  color: const Color(0xFF272727),
+                  font: GoogleFonts.poppins(
+                    fontWeight:
+                        FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
+                  color: Color(0xFF272727),
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
+                  fontWeight:
+                      FlutterFlowTheme.of(context).headlineMedium.fontWeight,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           elevation: 2.0,
         ),

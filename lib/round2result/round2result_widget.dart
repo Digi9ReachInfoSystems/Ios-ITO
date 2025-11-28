@@ -5,7 +5,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'round2result_model.dart';
@@ -13,6 +15,9 @@ export 'round2result_model.dart';
 
 class Round2resultWidget extends StatefulWidget {
   const Round2resultWidget({super.key});
+
+  static String routeName = 'round2result';
+  static String routePath = '/round2result';
 
   @override
   State<Round2resultWidget> createState() => _Round2resultWidgetState();
@@ -46,26 +51,29 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
     return FutureBuilder<ApiCallResponse>(
       future: RoundresultsCall.call(
         userId: FFAppState().userInfo.userId,
+        token: FFAppState().userInfo.token,
       ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-            body: const CelebrationsWidget(),
+            body: CelebrationsWidget(),
           );
         }
         final round2resultRoundresultsResponse = snapshot.data!;
+
         return GestureDetector(
-          onTap: () => _model.unfocusNode.canRequestFocus
-              ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-              : FocusScope.of(context).unfocus(),
+          onTap: () {
+            FocusScope.of(context).unfocus();
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
           child: Scaffold(
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
             appBar: PreferredSize(
               preferredSize:
-                  Size.fromHeight(MediaQuery.sizeOf(context).height * 0.15),
+                  Size.fromHeight(MediaQuery.sizeOf(context).height * 0.1),
               child: AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
                 automaticallyImplyLeading: false,
@@ -86,7 +94,7 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                     context.pop();
                   },
                 ),
-                actions: const [],
+                actions: [],
                 flexibleSpace: FlexibleSpaceBar(
                   background: Container(
                     width: 100.0,
@@ -100,46 +108,91 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 20.0, 0.0, 0.0),
-                                child: Text(
-                                  "Congratulations",
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: const Color(0x97FF0101),
-                                        fontSize: 26.0,
-                                      ),
+                            if ((RoundresultsCall.results(
+                                          round2resultRoundresultsResponse
+                                              .jsonBody,
+                                        ) !=
+                                        null &&
+                                    (RoundresultsCall.results(
+                                      round2resultRoundresultsResponse.jsonBody,
+                                    ))!
+                                        .isNotEmpty) ==
+                                true)
+                              Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 10.0, 0.0, 0.0),
+                                  child: Text(
+                                    FFLocalizations.of(context).getText(
+                                      'hx34s5iu' /* Congratulations */,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          font: GoogleFonts.readexPro(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0x97FF0101),
+                                          fontSize: 25.0,
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
+                                  ),
                                 ),
                               ),
-                            ),
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 10.0),
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 10.0, 0.0, 0.0),
                                 child: Text(
                                   FFAppState().userInfo.studentName,
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
-                                        fontFamily: 'Readex Pro',
+                                        font: GoogleFonts.readexPro(
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
+                                        ),
                                         color: FlutterFlowTheme.of(context)
                                             .tertiary,
-                                        fontSize: 23.0,
+                                        fontSize: 18.0,
+                                        letterSpacing: 0.0,
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
                                       ),
                                 ),
                               ),
                             ),
-                            
                           ],
                         ),
                         Lottie.asset(
-                          'assets/lottie_animations/Animation_-_1709374341378.json',
+                          'assets/jsons/Animation_-_1709374341378.json',
                           width: MediaQuery.sizeOf(context).width * 1.0,
                           height: 200.0,
                           fit: BoxFit.cover,
@@ -161,6 +214,7 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                         round2resultRoundresultsResponse.jsonBody,
                       )?.toList() ??
                       [];
+
                   return FlutterFlowDataTable<dynamic>(
                     controller: _model.paginatedDataTableController,
                     data: results,
@@ -175,9 +229,23 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -194,10 +262,24 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
                                   fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -212,10 +294,24 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
                                   fontSize: 14.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -230,9 +326,23 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -247,9 +357,23 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                             style: FlutterFlowTheme.of(context)
                                 .labelLarge
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .fontStyle,
+                                  ),
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryText,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .labelLarge
+                                      .fontStyle,
                                 ),
                           ),
                         ),
@@ -265,78 +389,133 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                       ),
                       cells: [
                         Text(
-            getJsonField(
-                      resultsItem,
-                      r'''$.subject''',
-                    ) ==
-                    null
-                ? '  '
-                : getJsonField(
-                    resultsItem,
-                    r'''$.subject''',
-                  ).toString(),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Poppins',
-                  fontSize: 10,
-                  fontWeight: FontWeight.w300,
-                ),
-          ),
+                          getJsonField(
+                                    resultsItem,
+                                    r'''$.subject''',
+                                  ) ==
+                                  null
+                              ? '  '
+                              : getJsonField(
+                                  resultsItem,
+                                  r'''$.subject''',
+                                ).toString(),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w300,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 10.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FontWeight.w300,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
                         Text(
-            getJsonField(
-                      resultsItem,
-                      r'''$.round_1_score''',
-                    ) ==
-                    null
-                ? '  '
-                : getJsonField(
-                    resultsItem,
-                    r'''$.round_1_score''',
-                  ).toString(),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Poppins',
-                  fontSize: 10,
-                ),
-          ),
-                         Text(
-            getJsonField(
-                      resultsItem,
-                      r'''$.rank''',
-                    ) ==
-                    null
-                ? '  '
-                : getJsonField(
-                    resultsItem,
-                    r'''$.rank''',
-                  ).toString(),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Poppins',
-                  fontSize: 10,
-                ),
-          ),
-                         Text(
-            getJsonField(
-                      resultsItem,
-                      r'''$.award''',
-                    ) ==
-                    null
-                ? '  '
-                : getJsonField(
-                    resultsItem,
-                    r'''$.award''',
-                  ).toString(),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Poppins',
-                  fontSize: 10,
-                ),
-          ),
+                          getJsonField(
+                                    resultsItem,
+                                    r'''$.round_1_score''',
+                                  ) ==
+                                  null
+                              ? '  '
+                              : getJsonField(
+                                  resultsItem,
+                                  r'''$.round_1_score''',
+                                ).toString(),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.poppins(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 10.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
+                        Text(
+                          getJsonField(
+                                    resultsItem,
+                                    r'''$.rank''',
+                                  ) ==
+                                  null
+                              ? '  '
+                              : getJsonField(
+                                  resultsItem,
+                                  r'''$.rank''',
+                                ).toString(),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.poppins(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 10.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
+                        Text(
+                          getJsonField(
+                                    resultsItem,
+                                    r'''$.award''',
+                                  ) ==
+                                  null
+                              ? '  '
+                              : getJsonField(
+                                  resultsItem,
+                                  r'''$.award''',
+                                ).toString(),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    font: GoogleFonts.poppins(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    fontSize: 10.0,
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
+                        ),
                         FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'ROUND2RESULT_PAGE_CERTIFICATE_BTN_ON_TAP');
+                                'ROUND2RESULT_VIEW_CERTIFICATE_BTN_ON_TAP');
                             logFirebaseEvent('Button_navigate_to');
 
                             context.pushNamed(
-                              'certificateViewer',
+                              CertificateViewerWidget.routeName,
                               queryParameters: {
                                 'resultId': serializeParam(
                                   getJsonField(
@@ -349,24 +528,34 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                             );
                           },
                           text: FFLocalizations.of(context).getText(
-                            '2dk2arzo' /* Certificate */,
+                            '2dk2arzo' /* View Certificate */,
                           ),
                           options: FFButtonOptions(
                             height: 40.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 1.0, 0.0, 1.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                            iconPadding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 0.0),
                             color: FlutterFlowTheme.of(context).warning,
                             textStyle: FlutterFlowTheme.of(context)
                                 .titleSmall
                                 .override(
-                                  fontFamily: 'Readex Pro',
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FontWeight.normal,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
+                                  ),
                                   color: Colors.white,
-                                  fontSize: 10.0,
+                                  fontSize: 8.0,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.normal,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .fontStyle,
                                 ),
                             elevation: 3.0,
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1.0,
                             ),
@@ -389,8 +578,9 @@ class _Round2resultWidgetState extends State<Round2resultWidget> {
                         FlutterFlowTheme.of(context).secondaryBackground,
                     horizontalDividerThickness: 10.0,
                     addVerticalDivider: true,
-      verticalDividerColor: FlutterFlowTheme.of(context).alternate,
-      verticalDividerThickness: 1,
+                    verticalDividerColor:
+                        FlutterFlowTheme.of(context).alternate,
+                    verticalDividerThickness: 1.0,
                   );
                 },
               ),

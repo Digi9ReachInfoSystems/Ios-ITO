@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -78,18 +79,47 @@ class FFLocalizations {
   };
 }
 
+/// Used if the locale is not supported by GlobalMaterialLocalizations.
+class FallbackMaterialLocalizationDelegate
+    extends LocalizationsDelegate<MaterialLocalizations> {
+  const FallbackMaterialLocalizationDelegate();
+
+  @override
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
+
+  @override
+  Future<MaterialLocalizations> load(Locale locale) async =>
+      SynchronousFuture<MaterialLocalizations>(
+        const DefaultMaterialLocalizations(),
+      );
+
+  @override
+  bool shouldReload(FallbackMaterialLocalizationDelegate old) => false;
+}
+
+/// Used if the locale is not supported by GlobalCupertinoLocalizations.
+class FallbackCupertinoLocalizationDelegate
+    extends LocalizationsDelegate<CupertinoLocalizations> {
+  const FallbackCupertinoLocalizationDelegate();
+
+  @override
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
+
+  @override
+  Future<CupertinoLocalizations> load(Locale locale) =>
+      SynchronousFuture<CupertinoLocalizations>(
+        const DefaultCupertinoLocalizations(),
+      );
+
+  @override
+  bool shouldReload(FallbackCupertinoLocalizationDelegate old) => false;
+}
+
 class FFLocalizationsDelegate extends LocalizationsDelegate<FFLocalizations> {
   const FFLocalizationsDelegate();
 
   @override
-  bool isSupported(Locale locale) {
-    final language = locale.toString();
-    return FFLocalizations.languages().contains(
-      language.endsWith('_')
-          ? language.substring(0, language.length - 1)
-          : language,
-    );
-  }
+  bool isSupported(Locale locale) => _isSupportedLocale(locale);
 
   @override
   Future<FFLocalizations> load(Locale locale) =>
@@ -106,65 +136,26 @@ Locale createLocale(String language) => language.contains('_')
       )
     : Locale(language);
 
+bool _isSupportedLocale(Locale locale) {
+  final language = locale.toString();
+  return FFLocalizations.languages().contains(
+    language.endsWith('_')
+        ? language.substring(0, language.length - 1)
+        : language,
+  );
+}
+
 final kTranslationsMap = <Map<String, Map<String, String>>>[
   // schedule
   {
-    'u6rknuzx': {
-      'en': 'Annually',
+    '0lhtqklb': {
+      'en': 'Olympiad Exams',
       'hi': '',
       'kn': '',
       'mr': '',
     },
-    '4ty88jva': {
-      'en': 'Slot 1',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'i4ta3xs4': {
-      'en': 'Slot 1',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'cd3iwrym': {
-      'en': 'Slot 2',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'wzhklxll': {
-      'en': 'Slot 2',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'pjoyr1ma': {
-      'en': 'Monthly',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '8dlxc90l': {
-      'en': 'GK & Essay',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'dlhjtg0k': {
-      'en': 'English & Drawing',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'xad3ap9j': {
-      'en': 'Science',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'c6w79sqe': {
-      'en': 'Maths',
+    'xz4fot1o': {
+      'en': 'Saturday Tests',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -247,7 +238,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'g2pzxgvl': {
+    'gxvk1k7f': {
       'en': 'My Results',
       'hi': '',
       'kn': '',
@@ -596,14 +587,20 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'asrxykhq': {
+    'h0xjk98j': {
       'en': 'Start Test',
       'hi': '',
       'kn': '',
       'mr': '',
     },
-    'r7tc1czu': {
+    'vskxbwjm': {
       'en': 'Start Test',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'nu8m86pe': {
+      'en': 'Buy Now',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -857,186 +854,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'pgk7fr3c': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '27whi8f2': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'a445b34u': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'l31c0517': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'b4tk3n2i': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '09zmupii': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '43iel3wa': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'bfcg8dsx': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'n7tsejym': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '26ynj9jj': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '7h6zxecz': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'avh5vg8n': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'mtegqmk2': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '9vc969dk': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'wv9wpgrs': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'thcibk4c': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '1j1jmzun': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '4xamisn4': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '4uy3zefk': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '96g4v1ml': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '6uqt6j3u': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'jzqln023': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'f0qboxyw': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'fnhvcwi1': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '07s9tu7r': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'xghtu71g': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '7bov0g8w': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '12pp031s': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'sd4fmdsq': {
-      'en': 'Field is required',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'u0lz8ncl': {
-      'en': 'Please choose an option from the dropdown',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     'vh0yxfrz': {
       'en': 'Home',
       'hi': '',
@@ -1069,12 +886,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'r5v23md7': {
       'en': 'My Subscriptions',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'lxyzya2a': {
-      'en': 'Button',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -1496,6 +1307,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
+    'cd2w6etw': {
+      'en': 'View All',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
     '2jau4ht2': {
       'en': 'Home',
       'hi': '',
@@ -1507,6 +1324,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'jwu5nwmn': {
       'en': 'Submitting test',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'qvqfypux': {
+      'en': 'Woohoo! You’ve Made It! 🎊',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'v38dczqc': {
+      'en': 'We’re submitting your exam now',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '01gw6jiy': {
+      'en': 'Please don’t press the back button\n or\n close the app.',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2067,19 +1902,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   // Cartvalue
   {
     'yp9kbm7p': {
-      'en': 'Buy products for 2023-24',
+      'en': 'Cart',
       'hi': '',
       'kn': '',
       'mr': '',
     },
     'zkc8pwsc': {
       'en': 'Cart Items',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'ewx3s4ch': {
-      'en': 'Remove',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2092,6 +1921,18 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '8hlb008n': {
       'en': 'Select Coupons',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'y2wvf540': {
+      'en': 'Whoo Hoo !!',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'ewx3s4ch': {
+      'en': 'Remove',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2116,7 +1957,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'mr': '',
     },
     '1cbpysg2': {
-      'en': 'Discount ',
+      'en': 'You saved ',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2141,12 +1982,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '6c8ri30k': {
       'en': 'see more',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'b5kuyiyw': {
-      'en': 'Pay Now',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2246,6 +2081,24 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     '9wc3vk3m': {
       'en': '1 Year',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'o339ehv3': {
+      'en': 'Go to cart',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '1in3u6bk': {
+      'en': 'Go to cart',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'hayn8cia': {
+      'en': 'Continue',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2357,12 +2210,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'yc2qsnxk': {
-      'en': 'You are Qualified for Second Round',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     'tz0i2ur5': {
       'en': 'Topper',
       'hi': '',
@@ -2396,12 +2243,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // CartvalueCopy
   {
-    'edln77no': {
-      'en': 'Round 2 Cart',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     '3smopjnm': {
       'en': 'Cart Items',
       'hi': '',
@@ -2586,12 +2427,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    '4mc8w55x': {
-      'en': 'Option 1',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     '6lsofv2b': {
       'en': 'Select Standard...',
       'hi': '',
@@ -2600,6 +2435,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     's85tavls': {
       'en': 'Search for an item...',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '4mc8w55x': {
+      'en': 'Option 1',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2716,13 +2557,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'h6j5aptr': {
-      'en': 'Annual Exam',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '6pqnshc3': {
+    's76o7529': {
       'en': 'Home',
       'hi': '',
       'kn': '',
@@ -2765,8 +2600,8 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // round2result
   {
-    'w3orp2y9': {
-      'en': 'My Result',
+    'hx34s5iu': {
+      'en': 'Congratulations',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2834,13 +2669,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'u2p4vzbr': {
-      'en': 'Apply',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '51l568p7': {
+    'fkk67mk2': {
       'en': 'Home',
       'hi': '',
       'kn': '',
@@ -2868,13 +2697,13 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'mr': '',
     },
     '3u6lvx2m': {
-      'en': 'Certificates  + Covering Letter +PT USha Madam Letter ',
+      'en': 'Certificates  + Covering Letter + PT Usha Madam Letter ',
       'hi': '',
       'kn': '',
       'mr': '',
     },
     '707ak4zc': {
-      'en': 'Register for New Academic Year',
+      'en': 'Proceed to Checkout',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2894,12 +2723,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // powerProducts
   {
-    'xefeb1mt': {
-      'en': 'Power Packages',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     'xqiwpl1p': {
       'en': 'SELECT ANY 1 AND\nSAVE 5%',
       'hi': '',
@@ -2924,6 +2747,61 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
+    'julbjud0': {
+      'en':
+          'Note : Delivery Charges Will Be Applicable For Workbooks & Previous Year Question Paper ( Physical Copy Only )',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'lk77kwap': {
+      'en': 'Price Details',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'j8q7cm8o': {
+      'en': 'Cart value',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'n0uomveu': {
+      'en': 'You saved',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'ouqjcuzy': {
+      'en': 'Delivery Charges',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'vqx2rxsw': {
+      'en': 'Total Amount',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '5530nr4h': {
+      'en': 'I agree to Terms & Condition',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'm14uir75': {
+      'en': 'see more',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'mpia3tej': {
+      'en': 'Pay Now',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
     '44wry0zj': {
       'en': 'Home',
       'hi': '',
@@ -2933,14 +2811,26 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   },
   // notifications
   {
+    'ohe14bs0': {
+      'en': 'High Priority Announcements',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
     'dxc7z9p2': {
       'en': 'New Notifications',
       'hi': '',
       'kn': '',
       'mr': '',
     },
-    'ffs62fx2': {
-      'en': '2 hours ago',
+    '3jutqfh1': {
+      'en': 'Regular Announcement',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'uavdrpko': {
+      'en': 'New Notifications',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -2951,13 +2841,159 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'hc6s4kuk': {
+    'rp1ite9l': {
       'en': 'Home',
       'hi': '',
       'kn': '',
       'mr': '',
     },
-  }, // testDetails
+  },
+  // testpagetestingdummy
+  {
+    'c20ysz9w': {
+      'en': 'Home',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // powercart
+  {
+    'tnz8oyqe': {
+      'en': 'Cart',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'tuzqspm9': {
+      'en': 'Cart Items',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '3ebkb49c': {
+      'en':
+          'Note : Delivery Charges Will Be Applicable For Workbooks & Previous Year Question Paper ( Physical Copy Only )',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'cadp9vqa': {
+      'en': 'Price Details',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'ssri17sy': {
+      'en': 'Cart value',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'eo4kao5q': {
+      'en': 'You saved ',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'cqltccua': {
+      'en': 'Delivery Charges',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'wfiu7n99': {
+      'en': 'Total Amount',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'o7hx7g6d': {
+      'en': 'I agree to Terms & Condition',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'a7iarddc': {
+      'en': 'see more',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '8ti6y76k': {
+      'en': 'Pay Now',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'rq5xtkqq': {
+      'en': 'cart',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // powerwebview
+  {
+    'zzb4cpgy': {
+      'en': 'Pay now',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'wrcj9wko': {
+      'en': 'Home',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // powerfailure
+  {
+    'o4bvf6ti': {
+      'en': 'Failure!',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '2iyr60f7': {
+      'en': 'Sorry !! your payment failed please try again.',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'hidp557c': {
+      'en': 'Try Again',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'sv8coiyw': {
+      'en': 'Or Go to Homepage',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'l69l3d4y': {
+      'en': 'Homepage',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '51jg0u02': {
+      'en': 'Failure',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'ahtg8363': {
+      'en': 'Home',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // testDetails
   {
     'xynobkgw': {
       'en': 'Last Minute Instructions',
@@ -3176,12 +3212,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'em5aqqet': {
-      'en': 'Test Duration :',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     't2bjoghm': {
       'en': 'Subject :',
       'hi': '',
@@ -3190,6 +3220,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     's4inq60j': {
       'en': 'Standard :',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'em5aqqet': {
+      'en': 'Test Duration :',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -3206,20 +3242,150 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'l594zl98': {
-      'en': 'Hello World',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     'nq11d2k3': {
       'en': 'Start Test',
       'hi': '',
       'kn': '',
       'mr': '',
     },
-    'r2py6bwt': {
+    'gm7clnqf': {
       'en': 'Home',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // outOfversion
+  {
+    'd4ccmayf': {
+      'en': 'New Update Available !!!',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'zovutwke': {
+      'en': 'Please click on download to update \nthe app',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'ik8t35ia': {
+      'en': 'Download',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '6pqnshc3': {
+      'en': 'Home',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // monthlyexamCopy
+  {
+    'ub67qiyf': {
+      'en': 'Buy Now',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '3n5xjjyq': {
+      'en': 'Home',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // CartvalueCopyCopy
+  {
+    'yh366ar3': {
+      'en': 'Cart Items',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'c95igzuv': {
+      'en': 'Apply Coupons',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'aasfzfmf': {
+      'en': 'Select Coupons',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    's5nld5di': {
+      'en': 'Whoo Hoo !!',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'uu1shfiu': {
+      'en': 'Remove',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'yw4e34bv': {
+      'en':
+          'Note : Delivery Charges Will Be Applicable For Workbooks & Previous Year Question Paper ( Physical Copy Only )',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'udcaaday': {
+      'en': 'Price Details',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'lxhjg104': {
+      'en': 'Cart value',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'vvuzggxv': {
+      'en': 'Delivery Charges',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'zyswufon': {
+      'en': 'You saved',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'kqi7qo0d': {
+      'en': 'Total Amount',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'v8f1e20m': {
+      'en': 'I agree to Terms & Condition',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'smrdi1q9': {
+      'en': 'see more',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'jnm08cn2': {
+      'en': 'Pay Now',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '950y0g1p': {
+      'en': 'cart',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -3397,28 +3563,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'mr': '',
     },
   },
-
-  // After submit
-  {
-    'qvqfypux': {
-      'en': 'Woohoo! You’ve Made It! 🎊',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'v38dczqc': {
-      'en': 'We’re submitting your exam now',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '01gw6jiy': {
-      'en': 'Please don’t press the back button\nor\nclose the app.',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-  },
   // examquidelines
   {
     '8cc63upn': {
@@ -3506,7 +3650,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'ibydo1sw': {
       'en':
-          'Students can login in the student login by entering the registered\nmobile number and password. Click in the ‘SUMMER QUIZ’ tab \non the dashboard after login. Select the current class and click \non subscribe. Choose the payment mode to complete \nthe payment and registration.',
+          'Students can login in the student login by entering the \nregistered mobile number and password. Click in the \n‘SUMMER QUIZ’ tab on the dashboard after login.\nSelect the current class and click subscribe. Choose the \npayment mode to complete the payment and registration.',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -3519,7 +3663,7 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'whg2fpm4': {
       'en':
-          'The Summer Quiz comprises of 50 questions for each\nClass Categories. The questionnaire will be based on \nGeneral Knowledge prepared according to the class categories.',
+          'The Summer Quiz comprises of 50 questions for each\nClass Categories. The questionnaire will be based on \nGeneral Knowledge prepared according to the class \ncategories.',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -3529,6 +3673,27 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
   {
     'j6rmyozi': {
       'en': 'New Notications',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+  },
+  // upgrader
+  {
+    'gkb43sv2': {
+      'en': 'New Update Available !!!',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    '4ji4gz0o': {
+      'en': 'Please click on download to update \nthe app',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'awwpqvzz': {
+      'en': 'Download',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -3564,24 +3729,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'kn': '',
       'mr': '',
     },
-    'msgpzi4x': {
-      'en': '1 MINUTE PLEASE HOLD ON !!',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'msgpzi4x': {
-      'en': '1 MINUTE PLEASE HOLD ON !!',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'hayn8cia': {
-      'en': 'Continue',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
     'yncrfu64': {
       'en': '',
       'hi': '',
@@ -3596,18 +3743,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
     },
     'qigh63fo': {
       'en': '',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'pcslqnf9': {
-      'en': 'DO\'S',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    '60dnzx5k': {
-      'en': 'DON\'TS',
       'hi': '',
       'kn': '',
       'mr': '',
@@ -3649,6 +3784,12 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'mr': '',
     },
     '5ftey4c8': {
+      'en': '',
+      'hi': '',
+      'kn': '',
+      'mr': '',
+    },
+    'fz96q4je': {
       'en': '',
       'hi': '',
       'kn': '',
@@ -3715,12 +3856,6 @@ final kTranslationsMap = <Map<String, Map<String, String>>>[
       'mr': '',
     },
     'ya15r7ys': {
-      'en': '',
-      'hi': '',
-      'kn': '',
-      'mr': '',
-    },
-    'ewx3s4ch': {
       'en': '',
       'hi': '',
       'kn': '',

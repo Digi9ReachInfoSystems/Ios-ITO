@@ -1,16 +1,19 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart'
     as smooth_page_indicator;
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'on_boarding_model.dart';
 export 'on_boarding_model.dart';
 
 class OnBoardingWidget extends StatefulWidget {
   const OnBoardingWidget({super.key});
+
+  static String routeName = 'onBoarding';
+  static String routePath = '/onBoarding';
 
   @override
   State<OnBoardingWidget> createState() => _OnBoardingWidgetState();
@@ -38,21 +41,11 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -68,13 +61,13 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).secondaryBackground,
                   ),
-                  child: SizedBox(
+                  child: Container(
                     width: MediaQuery.sizeOf(context).width * 1.0,
                     height: MediaQuery.sizeOf(context).height * 1.0,
                     child: Stack(
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 40.0),
                           child: PageView(
                             controller: _model.pageViewController ??=
@@ -82,7 +75,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                             scrollDirection: Axis.horizontal,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
                                 child: Container(
                                   width: MediaQuery.sizeOf(context).width * 1.0,
@@ -97,16 +90,16 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(1.0, 0.0),
+                                            AlignmentDirectional(1.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Flexible(
                                               child: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     1.0, 0.0),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 5.0, 0.0),
                                                   child: FFButtonWidget(
@@ -117,7 +110,8 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                           'Button_navigate_to');
 
                                                       context.pushNamed(
-                                                          'walkThrough');
+                                                          WalkThroughWidget
+                                                              .routeName);
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -127,14 +121,14 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                     options: FFButtonOptions(
                                                       height: 40.0,
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   24.0,
                                                                   0.0,
                                                                   24.0,
                                                                   0.0),
                                                       iconPadding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -146,14 +140,33 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                                   context)
                                                               .bodySmall
                                                               .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: const Color(
+                                                                font: GoogleFonts
+                                                                    .poppins(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Color(
                                                                     0xFF272727),
                                                                 fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontStyle,
                                                               ),
                                                       elevation: 0.0,
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00F5F5F5),
                                                         width: 0.0,
@@ -181,10 +194,10 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Align(
-                                              alignment: const AlignmentDirectional(
+                                              alignment: AlignmentDirectional(
                                                   0.0, -0.8),
                                               child: Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         25.0, 0.0, 25.0, 0.0),
                                                 child: ClipRRect(
@@ -195,13 +208,13 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                     'assets/images/20230809121411_[fpdl_1.png',
                                                     fit: BoxFit.contain,
                                                     alignment:
-                                                        const Alignment(0.0, 0.0),
+                                                        Alignment(0.0, 0.0),
                                                   ),
                                                 ),
                                               ),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 16.0, 16.0, 0.0),
                                               child: Container(
@@ -224,7 +237,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   5.0,
                                                                   0.0,
@@ -242,24 +255,39 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                                 .of(context)
                                                             .bodyMedium
                                                             .override(
-                                                              fontFamily:
-                                                                  'Poppins',
-                                                              color: const Color(
+                                                              font: GoogleFonts
+                                                                  .poppins(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
+                                                              ),
+                                                              color: Color(
                                                                   0xFF004696),
                                                               fontSize: 20.0,
+                                                              letterSpacing:
+                                                                  0.0,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                             ),
                                                       ),
                                                     ),
                                                     Align(
                                                       alignment:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               0.0, -1.0),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     15.0,
                                                                     15.0,
@@ -277,10 +305,29 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                                   .of(context)
                                                               .bodyMedium
                                                               .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: const Color(
+                                                                font: GoogleFonts
+                                                                    .poppins(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Color(
                                                                     0xFF272727),
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
                                                               ),
                                                         ),
                                                       ),
@@ -295,10 +342,10 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(1.0, 1.0),
+                                              AlignmentDirectional(1.0, 1.0),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 19.0, 40.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
@@ -308,34 +355,56 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                     'Button_page_view');
                                                 await _model.pageViewController
                                                     ?.nextPage(
-                                                  duration: const Duration(
+                                                  duration: Duration(
                                                       milliseconds: 300),
                                                   curve: Curves.ease,
                                                 );
                                               },
                                               text: '',
-                                              icon: const Icon(
+                                              icon: Icon(
                                                 Icons.arrow_forward_outlined,
                                                 size: 20.0,
                                               ),
                                               options: FFButtonOptions(
                                                 width: 50.0,
                                                 height: 50.0,
-                                                padding: const EdgeInsets.all(0.0),
+                                                padding: EdgeInsets.all(0.0),
                                                 iconPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(12.0, 0.0,
                                                             5.0, 0.0),
-                                                color: const Color(0xFF004696),
-                                                textStyle:
-                                                    FlutterFlowTheme.of(context)
-                                                        .titleSmall
-                                                        .override(
-                                                          fontFamily:
-                                                              'Readex Pro',
-                                                          color: Colors.white,
-                                                        ),
-                                                borderSide: const BorderSide(
+                                                color: Color(0xFF004696),
+                                                textStyle: FlutterFlowTheme.of(
+                                                        context)
+                                                    .titleSmall
+                                                    .override(
+                                                      font:
+                                                          GoogleFonts.readexPro(
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                borderSide: BorderSide(
                                                   color: Colors.transparent,
                                                   width: 0.0,
                                                 ),
@@ -362,19 +431,19 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Align(
-                                      alignment: const AlignmentDirectional(1.0, 0.0),
+                                      alignment: AlignmentDirectional(1.0, 0.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 20.0, 0.0, 0.0),
                                         child: Row(
                                           mainAxisSize: MainAxisSize.max,
                                           children: [
                                             Flexible(
                                               child: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     1.0, 0.0),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 0.0, 5.0, 0.0),
                                                   child: FFButtonWidget(
@@ -385,7 +454,8 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                           'Button_navigate_to');
 
                                                       context.pushNamed(
-                                                          'walkThrough');
+                                                          WalkThroughWidget
+                                                              .routeName);
                                                     },
                                                     text: FFLocalizations.of(
                                                             context)
@@ -395,14 +465,14 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                     options: FFButtonOptions(
                                                       height: 40.0,
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   24.0,
                                                                   0.0,
                                                                   24.0,
                                                                   0.0),
                                                       iconPadding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -414,14 +484,33 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                                   context)
                                                               .bodySmall
                                                               .override(
-                                                                fontFamily:
-                                                                    'Poppins',
-                                                                color: const Color(
+                                                                font: GoogleFonts
+                                                                    .poppins(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodySmall
+                                                                      .fontStyle,
+                                                                ),
+                                                                color: Color(
                                                                     0xFF272727),
                                                                 fontSize: 16.0,
+                                                                letterSpacing:
+                                                                    0.0,
+                                                                fontWeight: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodySmall
+                                                                    .fontStyle,
                                                               ),
                                                       elevation: 0.0,
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00F5F5F5),
                                                         width: 0.0,
@@ -450,9 +539,9 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, -0.8),
+                                                AlignmentDirectional(0.0, -0.8),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       25.0, 0.0, 25.0, 0.0),
                                               child: ClipRRect(
@@ -462,14 +551,14 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                   'assets/images/onBoarding2.png',
                                                   fit: BoxFit.contain,
                                                   alignment:
-                                                      const Alignment(0.0, 0.0),
+                                                      Alignment(0.0, 0.0),
                                                 ),
                                               ),
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 16.0, 16.0, 0.0),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
@@ -488,7 +577,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 5.0, 0.0),
                                                     child: Text(
@@ -503,23 +592,38 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            color: const Color(
+                                                            font: GoogleFonts
+                                                                .poppins(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: Color(
                                                                 0xFF004696),
                                                             fontSize: 20.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w600,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
                                                           ),
                                                     ),
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, -1.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   15.0,
                                                                   15.0,
@@ -538,10 +642,29 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                                     context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  color: const Color(
+                                                                  font: GoogleFonts
+                                                                      .poppins(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: Color(
                                                                       0xFF272727),
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                                 ),
                                                       ),
                                                     ),
@@ -556,10 +679,10 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                     Flexible(
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(1.0, 1.0),
+                                            AlignmentDirectional(1.0, 1.0),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 19.0, 40.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -570,32 +693,53 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                               await _model.pageViewController
                                                   ?.nextPage(
                                                 duration:
-                                                    const Duration(milliseconds: 300),
+                                                    Duration(milliseconds: 300),
                                                 curve: Curves.ease,
                                               );
                                             },
                                             text: '',
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.arrow_forward_outlined,
                                               size: 20.0,
                                             ),
                                             options: FFButtonOptions(
                                               width: 50.0,
                                               height: 50.0,
-                                              padding: const EdgeInsets.all(0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              padding: EdgeInsets.all(0.0),
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       12.0, 0.0, 5.0, 0.0),
-                                              color: const Color(0xFF004696),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color: Colors.white,
-                                                      ),
-                                              borderSide: const BorderSide(
+                                              color: Color(0xFF004696),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font: GoogleFonts.readexPro(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                              borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 0.0,
                                               ),
@@ -619,7 +763,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    const Align(
+                                    Align(
                                       alignment: AlignmentDirectional(1.0, 0.0),
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -645,9 +789,9 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                         children: [
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, -0.8),
+                                                AlignmentDirectional(0.0, -0.8),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       25.0, 0.0, 25.0, 0.0),
                                               child: ClipRRect(
@@ -657,14 +801,14 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                   'assets/images/20230809115553_[fpdl_1.png',
                                                   fit: BoxFit.contain,
                                                   alignment:
-                                                      const Alignment(0.0, 0.0),
+                                                      Alignment(0.0, 0.0),
                                                 ),
                                               ),
                                             ),
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 16.0, 16.0, 0.0),
                                             child: Container(
                                               width: MediaQuery.sizeOf(context)
@@ -683,7 +827,7 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 5.0, 0.0),
                                                     child: Text(
@@ -698,23 +842,38 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                               .of(context)
                                                           .bodyMedium
                                                           .override(
-                                                            fontFamily:
-                                                                'Poppins',
-                                                            color: const Color(
+                                                            font: GoogleFonts
+                                                                .poppins(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              fontStyle:
+                                                                  FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
+                                                            ),
+                                                            color: Color(
                                                                 0xFF004696),
                                                             fontSize: 20.0,
+                                                            letterSpacing: 0.0,
                                                             fontWeight:
                                                                 FontWeight.w600,
+                                                            fontStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .fontStyle,
                                                           ),
                                                     ),
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             0.0, -1.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   12.0,
                                                                   15.0,
@@ -733,10 +892,29 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                                                     context)
                                                                 .bodyMedium
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Poppins',
-                                                                  color: const Color(
+                                                                  font: GoogleFonts
+                                                                      .poppins(
+                                                                    fontWeight: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontWeight,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .fontStyle,
+                                                                  ),
+                                                                  color: Color(
                                                                       0xFF272727),
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .bodyMedium
+                                                                      .fontStyle,
                                                                 ),
                                                       ),
                                                     ),
@@ -751,10 +929,10 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                     Flexible(
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(1.0, 1.0),
+                                            AlignmentDirectional(1.0, 1.0),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 19.0, 40.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -763,30 +941,52 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                                               logFirebaseEvent(
                                                   'Button_navigate_to');
 
-                                              context.pushNamed('walkThrough');
+                                              context.pushNamed(
+                                                  WalkThroughWidget.routeName);
                                             },
                                             text: '',
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.arrow_forward_outlined,
                                               size: 20.0,
                                             ),
                                             options: FFButtonOptions(
                                               width: 50.0,
                                               height: 50.0,
-                                              padding: const EdgeInsets.all(0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              padding: EdgeInsets.all(0.0),
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       12.0, 0.0, 5.0, 0.0),
-                                              color: const Color(0xFF004696),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        color: Colors.white,
-                                                      ),
-                                              borderSide: const BorderSide(
+                                              color: Color(0xFF004696),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    font: GoogleFonts.readexPro(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Colors.white,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .titleSmall
+                                                            .fontStyle,
+                                                  ),
+                                              borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 0.0,
                                               ),
@@ -804,9 +1004,9 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                           ),
                         ),
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.8),
+                          alignment: AlignmentDirectional(-1.0, 0.8),
                           child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 16.0, 0.0, 0.0, 16.0),
                             child: smooth_page_indicator.SmoothPageIndicator(
                               controller: _model.pageViewController ??=
@@ -816,11 +1016,12 @@ class _OnBoardingWidgetState extends State<OnBoardingWidget> {
                               onDotClicked: (i) async {
                                 await _model.pageViewController!.animateToPage(
                                   i,
-                                  duration: const Duration(milliseconds: 500),
+                                  duration: Duration(milliseconds: 500),
                                   curve: Curves.ease,
                                 );
+                                safeSetState(() {});
                               },
-                              effect: const smooth_page_indicator.SlideEffect(
+                              effect: smooth_page_indicator.SlideEffect(
                                 spacing: 8.0,
                                 radius: 24.0,
                                 dotWidth: 10.0,

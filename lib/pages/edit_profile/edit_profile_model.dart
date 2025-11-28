@@ -1,12 +1,12 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'edit_profile_widget.dart' show EditProfileWidget;
 import 'package:flutter/material.dart';
 
 class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;
   TextEditingController? textController1;
@@ -70,14 +70,11 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
   // Stores action output result for [Backend Call - API (editprofile)] action in Button widget.
   ApiCallResponse? apiResult34a;
 
-  /// Initialization and disposal methods.
-
   @override
   void initState(BuildContext context) {}
 
   @override
   void dispose() {
-    unfocusNode.dispose();
     textFieldFocusNode1?.dispose();
     textController1?.dispose();
 
@@ -123,8 +120,4 @@ class EditProfileModel extends FlutterFlowModel<EditProfileWidget> {
     textFieldFocusNode15?.dispose();
     textController15?.dispose();
   }
-
-  /// Action blocks are added here.
-
-  /// Additional helper methods are added here.
 }

@@ -21,18 +21,21 @@ class PiechartvaluesStruct extends FFFirebaseStruct {
   String? _totalquestions;
   String get totalquestions => _totalquestions ?? '';
   set totalquestions(String? val) => _totalquestions = val;
+
   bool hasTotalquestions() => _totalquestions != null;
 
   // "attemptedquestions" field.
   String? _attemptedquestions;
   String get attemptedquestions => _attemptedquestions ?? '';
   set attemptedquestions(String? val) => _attemptedquestions = val;
+
   bool hasAttemptedquestions() => _attemptedquestions != null;
 
   // "unatempted" field.
   String? _unatempted;
   String get unatempted => _unatempted ?? '';
   set unatempted(String? val) => _unatempted = val;
+
   bool hasUnatempted() => _unatempted != null;
 
   static PiechartvaluesStruct fromMap(Map<String, dynamic> data) =>

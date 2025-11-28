@@ -23,24 +23,28 @@ class CartitemsStruct extends FFFirebaseStruct {
   String? _productId;
   String get productId => _productId ?? '';
   set productId(String? val) => _productId = val;
+
   bool hasProductId() => _productId != null;
 
   // "productname" field.
   String? _productname;
   String get productname => _productname ?? '';
   set productname(String? val) => _productname = val;
+
   bool hasProductname() => _productname != null;
 
   // "productamount" field.
   String? _productamount;
   String get productamount => _productamount ?? '';
   set productamount(String? val) => _productamount = val;
+
   bool hasProductamount() => _productamount != null;
 
   // "producttypes" field.
   String? _producttypes;
   String get producttypes => _producttypes ?? '';
   set producttypes(String? val) => _producttypes = val;
+
   bool hasProducttypes() => _producttypes != null;
 
   static CartitemsStruct fromMap(Map<String, dynamic> data) => CartitemsStruct(

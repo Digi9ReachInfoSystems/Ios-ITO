@@ -1,4 +1,4 @@
-import '../custom_code/widgets/test_widget_new.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -8,7 +8,7 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'testpage_model.dart';
@@ -19,13 +19,16 @@ class TestpageWidget extends StatefulWidget {
     super.key,
     required this.testId,
     String? timer,
-  })  : timer = timer ?? '15';
+  }) : this.timer = timer ?? '15';
 
   final String? testId;
   final String timer;
 
+  static String routeName = 'testpage';
+  static String routePath = '/testpage';
+
   @override
-  _TestpageWidgetState createState() => _TestpageWidgetState();
+  State<TestpageWidget> createState() => _TestpageWidgetState();
 }
 
 class _TestpageWidgetState extends State<TestpageWidget> {
@@ -45,16 +48,16 @@ class _TestpageWidgetState extends State<TestpageWidget> {
       logFirebaseEvent('testpage_timer');
       _model.timerController.onStartTimer();
       logFirebaseEvent('testpage_update_app_state');
-      setState(() {
-        FFAppState().testid = valueOrDefault<String>(
-          widget.testId,
-          'abc',
-        );
-        FFAppState().starttime = getCurrentTimestamp;
-      });
+      FFAppState().testid = valueOrDefault<String>(
+        widget.testId,
+        'abc',
+      );
+      FFAppState().starttime = getCurrentTimestamp;
+      FFAppState().isfinished = false;
+      safeSetState(() {});
     });
 
-    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
+    WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
 
   @override
@@ -66,25 +69,15 @@ class _TestpageWidgetState extends State<TestpageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
-      child: WillPopScope(
-        onWillPop: () async {
-          return false;
-        },
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -92,200 +85,255 @@ class _TestpageWidgetState extends State<TestpageWidget> {
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             automaticallyImplyLeading: false,
             title: FlutterFlowTimer(
-              initialTime: functions.convertminutestomilliseconds(widget.timer),
+              initialTime:
+                  functions.convertminutestomilliseconds(widget.timer),
               getDisplayTime: (value) => StopWatchTimer.getDisplayTime(
                 value,
                 hours: false,
                 milliSecond: false,
               ),
               controller: _model.timerController,
-              updateStateInterval: const Duration(milliseconds: 1000),
+              updateStateInterval: Duration(milliseconds: 1000),
               onChanged: (value, displayTime, shouldUpdate) {
                 _model.timerMilliseconds = value;
                 _model.timerValue = displayTime;
-                if (shouldUpdate) setState(() {});
+                if (shouldUpdate) safeSetState(() {});
               },
               onEnded: () async {
-                testWidgetKey.currentState?.submitTest();
                 logFirebaseEvent('TESTTimer_1ecycrg6_ON_TIMER_END');
                 logFirebaseEvent('Timer_update_app_state');
-                setState(() {
-                  FFAppState().timetaken = widget.timer;
-                });
+                FFAppState().timetaken = widget.timer;
+                FFAppState().isfinished = true;
+                FFAppState().attemptedquestions =
+                    FFAppState().attemptedquestions;
+                FFAppState().answers =
+                    FFAppState().answers.toList().cast<AnswersStruct>();
+                safeSetState(() {});
+                logFirebaseEvent('Timer_update_page_state');
+                _model.istimerend = true;
+                safeSetState(() {});
                 logFirebaseEvent('Timer_alert_dialog');
                 await showDialog(
                   context: context,
                   builder: (alertDialogContext) {
                     return WebViewAware(
-                        child: AlertDialog(
-                      title: const Text('Time Up!!'),
-                      content: const Text('The Allocated Time Has Ended ! '),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(alertDialogContext),
-                          child: const Text('Ok'),
-                        ),
-                      ],
-                    ));
+                      child: AlertDialog(
+                        title: Text('Time Up!!'),
+                        content: Text('The Allocated Time Has Ended ! '),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(alertDialogContext),
+                            child: Text('Ok'),
+                          ),
+                        ],
+                      ),
+                    );
                   },
                 );
               },
               textAlign: TextAlign.start,
               style: FlutterFlowTheme.of(context).headlineSmall.override(
-                    fontFamily: 'Outfit',
-                    color: const Color(0xFFB82929),
+                    font: GoogleFonts.outfit(
+                      fontWeight: FontWeight.w600,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).headlineSmall.fontStyle,
+                    ),
+                    color: Color(0xFFB82929),
                     fontSize: 22.0,
+                    letterSpacing: 0.0,
                     fontWeight: FontWeight.w600,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineSmall.fontStyle,
                   ),
             ),
-            actions: const [],
+            actions: [],
             centerTitle: true,
             toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
             elevation: 2.0,
           ),
           body: SafeArea(
             top: true,
-            child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
-              child: SingleChildScrollView(
-                primary: false,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Align(
-                      alignment: const AlignmentDirectional(0.00, -1.00),
-                      child: Text(
-                        valueOrDefault<String>(
-                          FFAppState().subjectname,
-                          'Subject Name',
-                        ),
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Readex Pro',
-                              color: const Color(0xFF272727),
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.w500,
+            child: SingleChildScrollView(
+              primary: false,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                's359z0hh' /* Start time */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                             ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsetsDirectional.fromSTEB(
-                          10.0, 10.0, 10.0, 10.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  's359z0hh' /* Start time */,
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                            FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: dateTimeFormat(
+                                "jm",
+                                FFAppState().starttime,
+                                locale:
+                                    FFLocalizations.of(context).languageCode,
                               ),
-                              FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: dateTimeFormat(
-                                  'jm',
-                                  FFAppState().starttime,
-                                  locale:
-                                      FFLocalizations.of(context).languageCode,
-                                ),
-                                icon: const Icon(
-                                  Icons.access_time_sharp,
-                                  size: 12.0,
-                                ),
-                                options: FFButtonOptions(
-                                  width: 150.0,
-                                  height: 35.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      2.0, 0.0, 2.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: const Color(0xFF863DFF),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
-                                        fontSize: 1.0,
+                              icon: Icon(
+                                Icons.access_time_sharp,
+                                size: 12.0,
+                              ),
+                              options: FFButtonOptions(
+                                width: 150.0,
+                                height: 35.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    2.0, 0.0, 2.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: Color(0xFF863DFF),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      font: GoogleFonts.readexPro(
                                         fontWeight: FontWeight.w300,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
                                       ),
-                                  elevation: 3.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
+                                      color: Colors.white,
+                                      fontSize: 1.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w300,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              showLoadingIndicator: false,
+                            ),
+                          ],
+                        ),
+                        Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              FFLocalizations.of(context).getText(
+                                'prq5kn4s' /* End time */,
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    font: GoogleFonts.readexPro(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                showLoadingIndicator: false,
+                            ),
+                            FFButtonWidget(
+                              onPressed: () {
+                                print('Button pressed ...');
+                              },
+                              text: dateTimeFormat(
+                                "jm",
+                                functions.dynamicEnd(
+                                    FFAppState().time, FFAppState().starttime),
+                                locale:
+                                    FFLocalizations.of(context).languageCode,
                               ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Text(
-                                FFLocalizations.of(context).getText(
-                                  'prq5kn4s' /* End time */,
-                                ),
-                                style: FlutterFlowTheme.of(context).bodyMedium,
+                              icon: Icon(
+                                Icons.access_time_sharp,
+                                size: 12.0,
                               ),
-                              FFButtonWidget(
-                                onPressed: () {
-                                  print('Button pressed ...');
-                                },
-                                text: dateTimeFormat(
-                                  'jm',
-                                  functions.dynamicEnd(FFAppState().time,
-                                      FFAppState().starttime),
-                                  locale:
-                                      FFLocalizations.of(context).languageCode,
-                                ),
-                                icon: const Icon(
-                                  Icons.access_time_sharp,
-                                  size: 12.0,
-                                ),
-                                options: FFButtonOptions(
-                                  width: 150.0,
-                                  height: 35.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      2.0, 0.0, 2.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 0.0),
-                                  color: const Color(0xFFFF5858),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
-                                        fontSize: 1.0,
+                              options: FFButtonOptions(
+                                width: 150.0,
+                                height: 35.0,
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    2.0, 0.0, 2.0, 0.0),
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: Color(0xFFFF5858),
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      font: GoogleFonts.readexPro(
                                         fontWeight: FontWeight.w300,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
                                       ),
-                                  elevation: 3.0,
-                                  borderSide: const BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1.0,
-                                  ),
-                                  borderRadius: BorderRadius.circular(8.0),
+                                      color: Colors.white,
+                                      fontSize: 1.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w300,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
+                                elevation: 3.0,
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1.0,
                                 ),
-                                showLoadingIndicator: false,
+                                borderRadius: BorderRadius.circular(8.0),
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
+                              showLoadingIndicator: false,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      width: MediaQuery.sizeOf(context).width * 8.0,
-                      height: MediaQuery.sizeOf(context).height * 1.5,
-                      child: custom_widgets.TestWidgetNew(
-                        key: testWidgetKey,
-                         width: MediaQuery.sizeOf(context).width * 1.0,
+                  ),
+                  Card(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    elevation: 4.0,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Container(
+                      width: MediaQuery.sizeOf(context).width * 1.0,
+                      height: MediaQuery.sizeOf(context).height * 1.0,
+                      child: custom_widgets.TestwidgetNew(
+                        width: MediaQuery.sizeOf(context).width * 1.0,
                         height: MediaQuery.sizeOf(context).height * 1.0,
                         questions: FFAppState().questions.questionName,
                         questionimage: FFAppState().questions.questionimage,
@@ -327,12 +375,15 @@ class _TestpageWidgetState extends State<TestpageWidget> {
                         sectionCanswerimage3:
                             FFAppState().questions.section3answerimage3,
                         sectionCanswerimage4:
-                            FFAppState().questions.section3answerimage4,    
-                        submit: () async {},
+                            FFAppState().questions.section3answerimage4,
+                        testformat1: FFAppState().questions.format1,
+                        testformat2: FFAppState().questions.format2,
+                        testformat3: FFAppState().questions.format3,
+                        istimeend: _model.istimerend,
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

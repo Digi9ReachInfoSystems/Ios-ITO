@@ -1,7 +1,9 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'powerfailure_model.dart';
 export 'powerfailure_model.dart';
 
@@ -14,6 +16,9 @@ class PowerfailureWidget extends StatefulWidget {
 
   final String? payurl;
   final dynamic productid;
+
+  static String routeName = 'powerfailure';
+  static String routePath = '/powerfailure';
 
   @override
   State<PowerfailureWidget> createState() => _PowerfailureWidgetState();
@@ -43,9 +48,10 @@ class _PowerfailureWidgetState extends State<PowerfailureWidget> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -53,15 +59,24 @@ class _PowerfailureWidgetState extends State<PowerfailureWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           automaticallyImplyLeading: false,
           title: Text(
-           "Failure",
+            FFLocalizations.of(context).getText(
+              '51jg0u02' /* Failure */,
+            ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
                   color: Colors.black,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -101,38 +116,63 @@ class _PowerfailureWidgetState extends State<PowerfailureWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                           "Failure",
+                            FFLocalizations.of(context).getText(
+                              'o4bvf6ti' /* Failure! */,
+                            ),
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
-                                  fontFamily: 'Poppins',
+                                  font: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.w600,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
+                                  ),
                                   fontSize: 24.0,
+                                  letterSpacing: 0.0,
                                   fontWeight: FontWeight.w600,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .fontStyle,
                                 ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 15.0, 20.0, 15.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'r7ud2pyc' /* Sorry !! your payment failed p... */,
+                                  '2iyr60f7' /* Sorry !! your payment failed p... */,
                                 ),
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: const Color(0xFF272727),
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Color(0xFF272727),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 15.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -141,7 +181,7 @@ class _PowerfailureWidgetState extends State<PowerfailureWidget> {
                                   logFirebaseEvent('Button_navigate_to');
 
                                   context.pushNamed(
-                                    'powerProducts',
+                                    PowerProductsWidget.routeName,
                                     queryParameters: {
                                       'productId': serializeParam(
                                         widget.productid,
@@ -151,26 +191,36 @@ class _PowerfailureWidgetState extends State<PowerfailureWidget> {
                                   );
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  'mkf5yy3c' /* Try Again */,
+                                  'hidp557c' /* Try Again */,
                                 ),
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 0.9,
                                   height:
                                       MediaQuery.sizeOf(context).height * 0.05,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: const Color(0xFF004696),
+                                  color: Color(0xFF004696),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),
@@ -180,28 +230,42 @@ class _PowerfailureWidgetState extends State<PowerfailureWidget> {
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   20.0, 15.0, 20.0, 15.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
-                                  'frzirfa4' /* Or Go to Homepage */,
+                                  'sv8coiyw' /* Or Go to Homepage */,
                                 ),
                                 textAlign: TextAlign.center,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: const Color(0xFF272727),
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Color(0xFF272727),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),
                           ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 15.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
@@ -209,29 +273,40 @@ class _PowerfailureWidgetState extends State<PowerfailureWidget> {
                                       'POWERFAILURE_PAGE_HOMEPAGE_BTN_ON_TAP');
                                   logFirebaseEvent('Button_navigate_to');
 
-                                  context.pushNamed('Homepagelogin');
+                                  context
+                                      .pushNamed(HomepageloginWidget.routeName);
                                 },
                                 text: FFLocalizations.of(context).getText(
-                                  'kevxddk7' /* Homepage */,
+                                  'l69l3d4y' /* Homepage */,
                                 ),
                                 options: FFButtonOptions(
                                   width: MediaQuery.sizeOf(context).width * 0.9,
                                   height:
                                       MediaQuery.sizeOf(context).height * 0.05,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  iconPadding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 0.0),
-                                  color: const Color(0xFF004696),
+                                  color: Color(0xFF004696),
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
                                       .override(
-                                        fontFamily: 'Poppins',
+                                        font: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .titleSmall
+                                                  .fontStyle,
+                                        ),
                                         color: Colors.white,
+                                        letterSpacing: 0.0,
                                         fontWeight: FontWeight.w600,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .fontStyle,
                                       ),
                                   elevation: 3.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Colors.transparent,
                                     width: 1.0,
                                   ),

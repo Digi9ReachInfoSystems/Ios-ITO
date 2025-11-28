@@ -25,30 +25,35 @@ class SubscriptionsStruct extends FFFirebaseStruct {
   String? _userid;
   String get userid => _userid ?? '';
   set userid(String? val) => _userid = val;
+
   bool hasUserid() => _userid != null;
 
   // "category" field.
   String? _category;
   String get category => _category ?? '';
   set category(String? val) => _category = val;
+
   bool hasCategory() => _category != null;
 
   // "subjectname" field.
   String? _subjectname;
   String get subjectname => _subjectname ?? '';
   set subjectname(String? val) => _subjectname = val;
+
   bool hasSubjectname() => _subjectname != null;
 
   // "purchase" field.
   String? _purchase;
   String get purchase => _purchase ?? '';
   set purchase(String? val) => _purchase = val;
+
   bool hasPurchase() => _purchase != null;
 
   // "expiry" field.
   String? _expiry;
   String get expiry => _expiry ?? '';
   set expiry(String? val) => _expiry = val;
+
   bool hasExpiry() => _expiry != null;
 
   static SubscriptionsStruct fromMap(Map<String, dynamic> data) =>

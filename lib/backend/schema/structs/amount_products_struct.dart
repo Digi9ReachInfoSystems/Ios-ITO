@@ -3,9 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class AmountProductsStruct extends FFFirebaseStruct {
@@ -19,7 +17,9 @@ class AmountProductsStruct extends FFFirebaseStruct {
   int? _value;
   int get value => _value ?? 0;
   set value(int? val) => _value = val;
-  void incrementValue(int amount) => _value = value + amount;
+
+  void incrementValue(int amount) => value = value + amount;
+
   bool hasValue() => _value != null;
 
   static AmountProductsStruct fromMap(Map<String, dynamic> data) =>

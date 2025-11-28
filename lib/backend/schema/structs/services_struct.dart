@@ -25,30 +25,35 @@ class ServicesStruct extends FFFirebaseStruct {
   String? _serviceId;
   String get serviceId => _serviceId ?? '';
   set serviceId(String? val) => _serviceId = val;
+
   bool hasServiceId() => _serviceId != null;
 
   // "service_name" field.
   String? _serviceName;
   String get serviceName => _serviceName ?? '';
   set serviceName(String? val) => _serviceName = val;
+
   bool hasServiceName() => _serviceName != null;
 
   // "service_slug" field.
   String? _serviceSlug;
   String get serviceSlug => _serviceSlug ?? '';
   set serviceSlug(String? val) => _serviceSlug = val;
+
   bool hasServiceSlug() => _serviceSlug != null;
 
   // "service_type" field.
   String? _serviceType;
   String get serviceType => _serviceType ?? '';
   set serviceType(String? val) => _serviceType = val;
+
   bool hasServiceType() => _serviceType != null;
 
   // "service_icon" field.
   String? _serviceIcon;
   String get serviceIcon => _serviceIcon ?? '';
   set serviceIcon(String? val) => _serviceIcon = val;
+
   bool hasServiceIcon() => _serviceIcon != null;
 
   static ServicesStruct fromMap(Map<String, dynamic> data) => ServicesStruct(

@@ -3,9 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '/backend/schema/util/firestore_util.dart';
-import '/backend/schema/util/schema_util.dart';
 
-import 'index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
 class PowercartStruct extends FFFirebaseStruct {
@@ -14,7 +12,6 @@ class PowercartStruct extends FFFirebaseStruct {
     String? productname,
     String? productamount,
     String? producttypes,
-    String? packageId,
     String? deliverablecount,
     int? noofitems,
     FirestoreUtilData firestoreUtilData = const FirestoreUtilData(),
@@ -22,7 +19,6 @@ class PowercartStruct extends FFFirebaseStruct {
         _productname = productname,
         _productamount = productamount,
         _producttypes = producttypes,
-        _packageId = packageId,
         _deliverablecount = deliverablecount,
         _noofitems = noofitems,
         super(firestoreUtilData);
@@ -31,43 +27,44 @@ class PowercartStruct extends FFFirebaseStruct {
   String? _productId;
   String get productId => _productId ?? '';
   set productId(String? val) => _productId = val;
+
   bool hasProductId() => _productId != null;
 
   // "productname" field.
   String? _productname;
   String get productname => _productname ?? '';
   set productname(String? val) => _productname = val;
+
   bool hasProductname() => _productname != null;
 
   // "productamount" field.
   String? _productamount;
   String get productamount => _productamount ?? '';
   set productamount(String? val) => _productamount = val;
+
   bool hasProductamount() => _productamount != null;
 
   // "producttypes" field.
   String? _producttypes;
   String get producttypes => _producttypes ?? '';
   set producttypes(String? val) => _producttypes = val;
-  bool hasProducttypes() => _producttypes != null;
 
-  // "packageId" field.
-  String? _packageId;
-  String get packageId => _packageId ?? '';
-  set packageId(String? val) => _packageId = val;
-  bool hasPackageId() => _packageId != null;
+  bool hasProducttypes() => _producttypes != null;
 
   // "deliverablecount" field.
   String? _deliverablecount;
   String get deliverablecount => _deliverablecount ?? '';
   set deliverablecount(String? val) => _deliverablecount = val;
+
   bool hasDeliverablecount() => _deliverablecount != null;
 
   // "noofitems" field.
   int? _noofitems;
   int get noofitems => _noofitems ?? 0;
   set noofitems(int? val) => _noofitems = val;
-  void incrementNoofitems(int amount) => _noofitems = noofitems + amount;
+
+  void incrementNoofitems(int amount) => noofitems = noofitems + amount;
+
   bool hasNoofitems() => _noofitems != null;
 
   static PowercartStruct fromMap(Map<String, dynamic> data) => PowercartStruct(
@@ -75,7 +72,6 @@ class PowercartStruct extends FFFirebaseStruct {
         productname: data['productname'] as String?,
         productamount: data['productamount'] as String?,
         producttypes: data['producttypes'] as String?,
-        packageId: data['packageId'] as String?,
         deliverablecount: data['deliverablecount'] as String?,
         noofitems: castToType<int>(data['noofitems']),
       );
@@ -89,7 +85,6 @@ class PowercartStruct extends FFFirebaseStruct {
         'productname': _productname,
         'productamount': _productamount,
         'producttypes': _producttypes,
-        'packageId': _packageId,
         'deliverablecount': _deliverablecount,
         'noofitems': _noofitems,
       }.withoutNulls;
@@ -110,10 +105,6 @@ class PowercartStruct extends FFFirebaseStruct {
         ),
         'producttypes': serializeParam(
           _producttypes,
-          ParamType.String,
-        ),
-        'packageId': serializeParam(
-          _packageId,
           ParamType.String,
         ),
         'deliverablecount': serializeParam(
@@ -148,11 +139,6 @@ class PowercartStruct extends FFFirebaseStruct {
           ParamType.String,
           false,
         ),
-        packageId: deserializeParam(
-          data['packageId'],
-          ParamType.String,
-          false,
-        ),
         deliverablecount: deserializeParam(
           data['deliverablecount'],
           ParamType.String,
@@ -175,7 +161,6 @@ class PowercartStruct extends FFFirebaseStruct {
         productname == other.productname &&
         productamount == other.productamount &&
         producttypes == other.producttypes &&
-        packageId == other.packageId &&
         deliverablecount == other.deliverablecount &&
         noofitems == other.noofitems;
   }
@@ -186,7 +171,6 @@ class PowercartStruct extends FFFirebaseStruct {
         productname,
         productamount,
         producttypes,
-        packageId,
         deliverablecount,
         noofitems
       ]);
@@ -197,7 +181,6 @@ PowercartStruct createPowercartStruct({
   String? productname,
   String? productamount,
   String? producttypes,
-  String? packageId,
   String? deliverablecount,
   int? noofitems,
   Map<String, dynamic> fieldValues = const {},
@@ -210,7 +193,6 @@ PowercartStruct createPowercartStruct({
       productname: productname,
       productamount: productamount,
       producttypes: producttypes,
-      packageId: packageId,
       deliverablecount: deliverablecount,
       noofitems: noofitems,
       firestoreUtilData: FirestoreUtilData(

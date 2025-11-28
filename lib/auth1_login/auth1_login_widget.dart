@@ -4,15 +4,18 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
 import 'auth1_login_model.dart';
 export 'auth1_login_model.dart';
 
 class Auth1LoginWidget extends StatefulWidget {
   const Auth1LoginWidget({super.key});
+
+  static String routeName = 'Auth1Login';
+  static String routePath = '/auth1Login';
 
   @override
   State<Auth1LoginWidget> createState() => _Auth1LoginWidgetState();
@@ -34,11 +37,12 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
       vsync: this,
       length: 2,
       initialIndex: 0,
-    )..addListener(() => setState(() {}));
-    _model.emailAddressController ??= TextEditingController();
+    )..addListener(() => safeSetState(() {}));
+
+    _model.emailAddressTextController ??= TextEditingController();
     _model.emailAddressFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
   }
 
@@ -51,21 +55,11 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
 
   @override
   Widget build(BuildContext context) {
-    if (isiOS) {
-      SystemChrome.setSystemUIOverlayStyle(
-        SystemUiOverlayStyle(
-          statusBarBrightness: Theme.of(context).brightness,
-          systemStatusBarContrastEnforced: true,
-        ),
-      );
-    }
-
-    context.watch<FFAppState>();
-
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
+      },
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: Colors.white,
@@ -77,13 +71,20 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
               'gtx20gcr' /* Login */,
             ),
             style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Poppins',
+                  font: GoogleFonts.poppins(
+                    fontWeight: FontWeight.w500,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).headlineMedium.fontStyle,
+                  ),
                   color: FlutterFlowTheme.of(context).primaryText,
                   fontSize: 22.0,
+                  letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,
+                  fontStyle:
+                      FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                 ),
           ),
-          actions: const [],
+          actions: [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
           elevation: 2.0,
@@ -97,15 +98,32 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: const Alignment(0.0, 0),
+                      alignment: Alignment(0.0, 0),
                       child: TabBar(
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
                             FlutterFlowTheme.of(context).secondaryText,
-                        labelStyle: FlutterFlowTheme.of(context).titleMedium,
-                        unselectedLabelStyle: const TextStyle(),
+                        labelStyle:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  font: GoogleFonts.readexPro(
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleMedium
+                                        .fontStyle,
+                                  ),
+                                  letterSpacing: 0.0,
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleMedium
+                                      .fontStyle,
+                                ),
+                        unselectedLabelStyle: TextStyle(),
                         indicatorColor: FlutterFlowTheme.of(context).primary,
-                        padding: const EdgeInsets.all(4.0),
+                        padding: EdgeInsets.all(4.0),
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
@@ -129,12 +147,12 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                         controller: _model.tabBarController,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(15.0),
+                            padding: EdgeInsets.all(15.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                                  alignment: AlignmentDirectional(-1.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
                                       'ccm8817s' /* Welcome to  */,
@@ -143,15 +161,26 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Poppins',
-                                          color: const Color(0xFF272727),
+                                          font: GoogleFonts.poppins(
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFF272727),
                                           fontSize: 24.0,
+                                          letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       5.0, 5.0, 5.0, 0.0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
@@ -161,21 +190,40 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(
-                                          fontFamily: 'Poppins',
-                                          color: const Color(0xFF272727),
+                                          font: GoogleFonts.poppins(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
+                                          ),
+                                          color: Color(0xFF272727),
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .fontStyle,
                                         ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 16.0, 0.0, 16.0),
-                                  child: SizedBox(
+                                  child: Container(
                                     width: double.infinity,
                                     child: TextFormField(
-                                      controller: _model.emailAddressController,
+                                      controller:
+                                          _model.emailAddressTextController,
                                       focusNode: _model.emailAddressFocusNode,
                                       autofocus: true,
-                                      autofillHints: const [AutofillHints.email],
+                                      autofillHints: [AutofillHints.email],
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText:
@@ -185,13 +233,24 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium
                                             .override(
-                                              fontFamily: 'Plus Jakarta Sans',
-                                              color: const Color(0xFF57636C),
+                                              font: GoogleFonts.plusJakartaSans(
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF57636C),
                                               fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
                                             ),
                                         enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFFE0E3E7),
                                             width: 2.0,
                                           ),
@@ -199,7 +258,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFF4B39EF),
                                             width: 2.0,
                                           ),
@@ -207,7 +266,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -215,7 +274,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -224,32 +283,44 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         ),
                                         filled: true,
                                         fillColor: Colors.white,
-                                        contentPadding: const EdgeInsets.all(24.0),
+                                        contentPadding: EdgeInsets.all(24.0),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Plus Jakarta Sans',
-                                            color: const Color(0xFF101213),
+                                            font: GoogleFonts.plusJakartaSans(
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: Color(0xFF101213),
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                       keyboardType: TextInputType.emailAddress,
                                       validator: _model
-                                          .emailAddressControllerValidator
+                                          .emailAddressTextControllerValidator
                                           .asValidator(context),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 0.0, 16.0),
-                                  child: SizedBox(
+                                  child: Container(
                                     width: double.infinity,
                                     child: TextFormField(
-                                      controller: _model.passwordController,
+                                      controller: _model.passwordTextController,
                                       focusNode: _model.passwordFocusNode,
-                                      autofillHints: const [AutofillHints.password],
+                                      autofocus: false,
+                                      autofillHints: [AutofillHints.password],
                                       obscureText: !_model.passwordVisibility,
                                       decoration: InputDecoration(
                                         labelText:
@@ -259,13 +330,24 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         labelStyle: FlutterFlowTheme.of(context)
                                             .labelMedium
                                             .override(
-                                              fontFamily: 'Plus Jakarta Sans',
-                                              color: const Color(0xFF57636C),
+                                              font: GoogleFonts.plusJakartaSans(
+                                                fontWeight: FontWeight.w500,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .labelMedium
+                                                        .fontStyle,
+                                              ),
+                                              color: Color(0xFF57636C),
                                               fontSize: 14.0,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
                                             ),
                                         enabledBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFFE0E3E7),
                                             width: 2.0,
                                           ),
@@ -273,7 +355,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFF4B39EF),
                                             width: 2.0,
                                           ),
@@ -281,7 +363,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         errorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -289,7 +371,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               BorderRadius.circular(10.0),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
                                             width: 2.0,
                                           ),
@@ -298,9 +380,9 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         ),
                                         filled: true,
                                         fillColor: Colors.white,
-                                        contentPadding: const EdgeInsets.all(24.0),
+                                        contentPadding: EdgeInsets.all(24.0),
                                         suffixIcon: InkWell(
-                                          onTap: () => setState(
+                                          onTap: () => safeSetState(
                                             () => _model.passwordVisibility =
                                                 !_model.passwordVisibility,
                                           ),
@@ -310,7 +392,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             _model.passwordVisibility
                                                 ? Icons.visibility_outlined
                                                 : Icons.visibility_off_outlined,
-                                            color: const Color(0xFF57636C),
+                                            color: Color(0xFF57636C),
                                             size: 24.0,
                                           ),
                                         ),
@@ -318,13 +400,24 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
-                                            fontFamily: 'Plus Jakarta Sans',
-                                            color: const Color(0xFF101213),
+                                            font: GoogleFonts.plusJakartaSans(
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .fontStyle,
+                                            ),
+                                            color: Color(0xFF101213),
                                             fontSize: 14.0,
+                                            letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyMedium
+                                                    .fontStyle,
                                           ),
                                       validator: _model
-                                          .passwordControllerValidator
+                                          .passwordTextControllerValidator
                                           .asValidator(context),
                                     ),
                                   ),
@@ -360,16 +453,22 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                 ),
                                               ),
                                               unselectedWidgetColor:
-                                                  const Color(0xFFD9D9D9),
+                                                  Color(0xFFD9D9D9),
                                             ),
                                             child: Checkbox(
                                               value: _model.checkboxValue ??=
                                                   false,
                                               onChanged: (newValue) async {
-                                                setState(() => _model
+                                                safeSetState(() => _model
                                                     .checkboxValue = newValue!);
                                               },
-                                              activeColor: const Color(0xFF004696),
+                                              side: (Color(0xFFD9D9D9) != null)
+                                                  ? BorderSide(
+                                                      width: 2,
+                                                      color: Color(0xFFD9D9D9),
+                                                    )
+                                                  : null,
+                                              activeColor: Color(0xFF004696),
                                               checkColor:
                                                   FlutterFlowTheme.of(context)
                                                       .info,
@@ -377,7 +476,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               FFLocalizations.of(context)
@@ -389,8 +488,30 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                       context)
                                                   .bodyMedium
                                                   .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: const Color(0xFF272727),
+                                                    font: GoogleFonts.readexPro(
+                                                      fontWeight:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontWeight,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyMedium
+                                                              .fontStyle,
+                                                    ),
+                                                    color: Color(0xFF272727),
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
                                                   ),
                                             ),
                                           ),
@@ -399,15 +520,16 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                     ),
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(-1.0, 0.0),
+                                          AlignmentDirectional(-1.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent(
-                                              'AUTH1_LOGIN_FORGOT_PASSWORD_?_BTN_ON_TAP');
+                                              'AUTH1_LOGIN_FORGOT_PASSWORD__BTN_ON_TAP');
                                           logFirebaseEvent(
                                               'Button_navigate_to');
 
-                                          context.pushNamed('forgetPassword');
+                                          context.pushNamed(
+                                              ForgetPasswordWidget.routeName);
                                         },
                                         text:
                                             FFLocalizations.of(context).getText(
@@ -418,23 +540,34 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                               MediaQuery.sizeOf(context).width *
                                                   0.372,
                                           height: 43.0,
-                                          padding: const EdgeInsets.all(0.0),
+                                          padding: EdgeInsets.all(0.0),
                                           iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: Colors.white,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Poppins',
-                                                    color: const Color(0xFF004696),
-                                                    fontSize: 14.0,
-                                                    fontWeight:
-                                                        FontWeight.normal,
-                                                  ),
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                font: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.normal,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleSmall
+                                                          .fontStyle,
+                                                ),
+                                                color: Color(0xFF004696),
+                                                fontSize: 14.0,
+                                                letterSpacing: 0.0,
+                                                fontWeight: FontWeight.normal,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
                                           elevation: 0.0,
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -446,174 +579,155 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   ],
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 15.0, 0.0, 0.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         logFirebaseEvent(
                                             'AUTH1_LOGIN_PAGE_SIGN_IN_BTN_ON_TAP');
-                                        Function() navigate = () {};
+                                        Function() _navigate = () {};
                                         logFirebaseEvent('Button_backend_call');
                                         _model.apiResult3td =
                                             await LoginOutsideCall.call(
                                           mobile: valueOrDefault<String>(
-                                            _model.emailAddressController.text,
+                                            _model.emailAddressTextController
+                                                .text,
                                             '1221567333',
                                           ),
                                           password: valueOrDefault<String>(
-                                            _model.passwordController.text,
+                                            _model.passwordTextController.text,
                                             'my_password123',
                                           ),
                                         );
+
                                         if ((_model.apiResult3td?.succeeded ??
                                             true)) {
                                           logFirebaseEvent(
                                               'Button_update_app_state');
-                                          setState(() {
-                                            FFAppState().userInfo =
-                                                StudentStruct(
-                                              studentName: getJsonField(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.session_data.student_name''',
-                                              ).toString(),
-                                              mobileNo:
-                                                  LoginOutsideCall.mobileNo(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              userId: LoginOutsideCall.userId(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              token: LoginOutsideCall.token(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              allowedServices: LoginOutsideCall
-                                                  .allowedServices(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              parentName:
-                                                  LoginOutsideCall.parentName(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              parentEmail:
-                                                  LoginOutsideCall.parentEmail(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              stdId: LoginOutsideCall.stdId(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              oldId: LoginOutsideCall.oldId(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              updatedId:
-                                                  LoginOutsideCall.updatedStd(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              schoolName:
-                                                  LoginOutsideCall.schoolName(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              result: LoginOutsideCall.result(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              showresult: valueOrDefault<int>(
-                                                LoginOutsideCall.showResult(
-                                                  (_model.apiResult3td
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                ),
-                                                1,
-                                              ),
-                                              address: LoginOutsideCall.address(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              district:
-                                                  LoginOutsideCall.district(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              state: LoginOutsideCall.state(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              city: LoginOutsideCall.city(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              pincode: LoginOutsideCall.pincode(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              schoolAddress:
-                                                  LoginOutsideCall.schooladdres(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              schoolCity:
-                                                  LoginOutsideCall.schoolCity(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              schoolPincode: LoginOutsideCall
-                                                  .schoolpincode(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              username:
-                                                  LoginOutsideCall.username(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ),
-                                              password: _model.passwordController.text,
-                                              schoolState:
-                                                  LoginOutsideCall.schoolstate(
-                                                (_model.apiResult3td
-                                                        ?.jsonBody ??
-                                                    ''),
-                                              ).toString(),
-                                            );
-                                            FFAppState().userDetails =
-                                                getJsonField(
+                                          FFAppState().userInfo = StudentStruct(
+                                            studentName: getJsonField(
                                               (_model.apiResult3td?.jsonBody ??
                                                   ''),
                                               r'''$.session_data.student_name''',
-                                            ).toString();
-                                          });
+                                            ).toString(),
+                                            mobileNo: LoginOutsideCall.mobileNo(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            userId: LoginOutsideCall.userId(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            token: LoginOutsideCall.token(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            allowedServices: LoginOutsideCall
+                                                .allowedServices(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            parentName:
+                                                LoginOutsideCall.parentName(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            parentEmail:
+                                                LoginOutsideCall.parentEmail(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            stdId: LoginOutsideCall.stdId(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            oldId: LoginOutsideCall.oldId(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            updatedId:
+                                                LoginOutsideCall.updatedStd(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            schoolName:
+                                                LoginOutsideCall.schoolName(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            result: LoginOutsideCall.result(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            showresult: valueOrDefault<int>(
+                                              LoginOutsideCall.showResult(
+                                                (_model.apiResult3td
+                                                        ?.jsonBody ??
+                                                    ''),
+                                              ),
+                                              1,
+                                            ),
+                                            address: LoginOutsideCall.address(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            district: LoginOutsideCall.district(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            state: LoginOutsideCall.state(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            city: LoginOutsideCall.city(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            pincode: LoginOutsideCall.pincode(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            schoolAddress:
+                                                LoginOutsideCall.schooladdres(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            schoolCity:
+                                                LoginOutsideCall.schoolCity(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            schoolPincode:
+                                                LoginOutsideCall.schoolpincode(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            username: LoginOutsideCall.username(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            schoolState:
+                                                LoginOutsideCall.schoolstate(
+                                              (_model.apiResult3td?.jsonBody ??
+                                                  ''),
+                                            ),
+                                            password: _model
+                                                .passwordTextController.text,
+                                          );
+                                          FFAppState().userDetails =
+                                              getJsonField(
+                                            (_model.apiResult3td?.jsonBody ??
+                                                ''),
+                                            r'''$.session_data.student_name''',
+                                          ).toString();
+                                          FFAppState().token = getJsonField(
+                                            (_model.apiResult3td?.jsonBody ??
+                                                ''),
+                                            r'''$.token.firebase_token''',
+                                          ).toString();
+                                          safeSetState(() {});
                                           logFirebaseEvent('Button_auth');
                                           GoRouter.of(context)
                                               .prepareAuthEvent();
@@ -622,8 +736,9 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           if (user == null) {
                                             return;
                                           }
-                                          navigate = () => context.goNamedAuth(
-                                              'Homepagelogin', context.mounted);
+                                          _navigate = () => context.goNamedAuth(
+                                              HomepageloginWidget.routeName,
+                                              context.mounted);
                                         } else {
                                           logFirebaseEvent(
                                               'Button_alert_dialog');
@@ -632,15 +747,15 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             builder: (alertDialogContext) {
                                               return WebViewAware(
                                                 child: AlertDialog(
-                                                  title: const Text('Welcome'),
-                                                  content: const Text(
+                                                  title: Text('Welcome'),
+                                                  content: Text(
                                                       'Wrong Email id and Password,Check Your Credentials Once'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext),
-                                                      child: const Text('Ok'),
+                                                      child: Text('Ok'),
                                                     ),
                                                   ],
                                                 ),
@@ -649,9 +764,9 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           );
                                         }
 
-                                        navigate();
+                                        _navigate();
 
-                                        setState(() {});
+                                        safeSetState(() {});
                                       },
                                       text: FFLocalizations.of(context).getText(
                                         'gnq7xyn9' /* Sign in */,
@@ -663,22 +778,33 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         height:
                                             MediaQuery.sizeOf(context).height *
                                                 0.05,
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             24.0, 0.0, 24.0, 0.0),
                                         iconPadding:
-                                            const EdgeInsetsDirectional.fromSTEB(
+                                            EdgeInsetsDirectional.fromSTEB(
                                                 0.0, 0.0, 0.0, 0.0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
                                         textStyle: FlutterFlowTheme.of(context)
                                             .titleSmall
                                             .override(
-                                              fontFamily: 'Readex Pro',
+                                              font: GoogleFonts.readexPro(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .titleSmall
+                                                        .fontStyle,
+                                              ),
                                               color: Colors.white,
+                                              letterSpacing: 0.0,
                                               fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleSmall
+                                                      .fontStyle,
                                             ),
                                         elevation: 3.0,
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Colors.transparent,
                                           width: 1.0,
                                         ),
@@ -689,7 +815,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -700,7 +826,8 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           'AUTH1_LOGIN_PAGE_Row_f59rtzvr_ON_TAP');
                                       logFirebaseEvent('Row_navigate_to');
 
-                                      context.pushNamed('Auth1register');
+                                      context.pushNamed(
+                                          Auth1registerWidget.routeName);
                                     },
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -709,7 +836,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                       children: [
                                         Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
+                                              AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             FFLocalizations.of(context).getText(
                                               '1ho21nwk' /* Not a member */,
@@ -717,7 +844,29 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyMedium
                                                 .override(
-                                                  fontFamily: 'Poppins',
+                                                  font: GoogleFonts.poppins(
+                                                    fontWeight:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontWeight,
+                                                    fontStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyMedium
+                                                            .fontStyle,
+                                                  ),
+                                                  letterSpacing: 0.0,
+                                                  fontWeight:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontWeight,
+                                                  fontStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyMedium
+                                                          .fontStyle,
                                                 ),
                                           ),
                                         ),
@@ -728,7 +877,8 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             logFirebaseEvent(
                                                 'Button_navigate_to');
 
-                                            context.pushNamed('Auth1register');
+                                            context.pushNamed(
+                                                Auth1registerWidget.routeName);
                                           },
                                           text: FFLocalizations.of(context)
                                               .getText(
@@ -737,24 +887,38 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           options: FFButtonOptions(
                                             height: 40.0,
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 0.0, 5.0, 0.0),
                                             iconPadding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 0.0),
                                             color: Colors.white,
                                             textStyle:
                                                 FlutterFlowTheme.of(context)
                                                     .titleSmall
                                                     .override(
-                                                      fontFamily: 'Poppins',
-                                                      color: const Color(0xFF004696),
+                                                      font: GoogleFonts.poppins(
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .titleSmall
+                                                                .fontStyle,
+                                                      ),
+                                                      color: Color(0xFF004696),
                                                       fontSize: 14.0,
+                                                      letterSpacing: 0.0,
                                                       fontWeight:
                                                           FontWeight.normal,
+                                                      fontStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .titleSmall
+                                                              .fontStyle,
                                                     ),
                                             elevation: 0.0,
-                                            borderSide: const BorderSide(
+                                            borderSide: BorderSide(
                                               color: Colors.white,
                                               width: 0.0,
                                             ),
@@ -775,7 +939,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   '4c1m3un8' /* Please Fill the Register Form ... */,
@@ -783,8 +947,22 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: const Color(0xFF992A2A),
+                                      font: GoogleFonts.readexPro(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .fontStyle,
+                                      ),
+                                      color: Color(0xFF992A2A),
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
                                     ),
                               ),
                             ),
