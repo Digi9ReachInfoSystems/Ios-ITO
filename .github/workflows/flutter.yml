@@ -1,7 +1,7 @@
 name: Flutter Android CI/CD
 
 on:
- workflow_dispatch:
+  workflow_dispatch:
 
 jobs:
   build:
@@ -15,8 +15,8 @@ jobs:
       - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          distribution: "temurin"
+          java-version: "17"
 
       # 3. Setup Android SDK
       - name: Setup Android SDK
@@ -30,9 +30,9 @@ jobs:
       # 5. Install Flutter
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.22.0'
-          channel: 'stable'
-          
+          flutter-version: "3.22.0"
+          channel: "stable"
+
       - name: Decode Keystore
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/key.jks
@@ -47,7 +47,7 @@ jobs:
         run: flutter build apk --release
 
       # 7. Build Android App Bundle (for Play Store)
-      - name: Build Android App Bundle 
+      - name: Build Android App Bundle
         env:
           ANDROID_KEYSTORE_FILE: android/app/key.jks
           ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
@@ -73,8 +73,8 @@ jobs:
       - name: Upload to Play Store
         uses: r0adkll/upload-google-play@v1
         with:
-          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }} 
-          packageName: com.ito.onlineexam.app 
+          serviceAccountJsonPlainText: ${{ secrets.ANDROID_SERVICE_ACCOUNT }}
+          packageName: com.ito.onlineexam.app
           releaseFiles: build/app/outputs/bundle/release/app-release.aab
           track: internal
           status: completed
