@@ -1,0 +1,4 @@
+NSPhotoLibraryUsageDescription = "This app requires access to the photo library to  uplpoad profile photo";
+PermissionGroupNotification = "This app requires access to the photo library to  uplpoad profile photo";
+NSCameraUsageDescription = "This app requires access to camera.Be aware you are being monitored during your exams only";
+NSMicrophoneUsageDescription = "This app requires access to the Microphone. Be aware you are being monitored during your exams only";
