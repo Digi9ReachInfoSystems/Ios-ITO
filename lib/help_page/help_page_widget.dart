@@ -79,7 +79,7 @@ class _HelpPageWidgetState extends State<HelpPageWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: Offset(0.0, 110.0),
+            begin: Offset(0.0, 100.0),
             end: Offset(0.0, 0.0),
           ),
         ],
