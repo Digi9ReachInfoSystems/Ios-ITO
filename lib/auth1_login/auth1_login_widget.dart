@@ -4,10 +4,13 @@ import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:ui';
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:webviewx_plus/webviewx_plus.dart';
+
 import 'auth1_login_model.dart';
 export 'auth1_login_model.dart';
 
@@ -77,7 +80,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                         FlutterFlowTheme.of(context).headlineMedium.fontStyle,
                   ),
                   color: FlutterFlowTheme.of(context).primaryText,
-                  fontSize: 22.0,
+                  fontSize: 22,
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w500,
                   fontStyle:
@@ -87,7 +90,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
           actions: [],
           centerTitle: true,
           toolbarHeight: MediaQuery.sizeOf(context).height * 0.08,
-          elevation: 2.0,
+          elevation: 2,
         ),
         body: SafeArea(
           top: true,
@@ -98,7 +101,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: Alignment(0.0, 0),
+                      alignment: Alignment(0, 0),
                       child: TabBar(
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
@@ -123,7 +126,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                 ),
                         unselectedLabelStyle: TextStyle(),
                         indicatorColor: FlutterFlowTheme.of(context).primary,
-                        padding: EdgeInsets.all(4.0),
+                        padding: EdgeInsets.all(4),
                         tabs: [
                           Tab(
                             text: FFLocalizations.of(context).getText(
@@ -147,12 +150,12 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                         controller: _model.tabBarController,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(15.0),
+                            padding: EdgeInsets.all(15),
                             child: Column(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(-1.0, 0.0),
+                                  alignment: AlignmentDirectional(-1, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
                                       'ccm8817s' /* Welcome to  */,
@@ -169,7 +172,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                     .fontStyle,
                                           ),
                                           color: Color(0xFF272727),
-                                          fontSize: 24.0,
+                                          fontSize: 24,
                                           letterSpacing: 0.0,
                                           fontWeight: FontWeight.w600,
                                           fontStyle:
@@ -181,7 +184,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      5.0, 5.0, 5.0, 0.0),
+                                      5, 5, 5, 0),
                                   child: Text(
                                     FFLocalizations.of(context).getText(
                                       'gdxu3xyk' /* Please enter your mobile numbe... */,
@@ -215,7 +218,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 16.0, 0.0, 16.0),
+                                      0, 16, 0, 16),
                                   child: Container(
                                     width: double.infinity,
                                     child: TextFormField(
@@ -241,7 +244,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                         .fontStyle,
                                               ),
                                               color: Color(0xFF57636C),
-                                              fontSize: 14.0,
+                                              fontSize: 14,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
                                               fontStyle:
@@ -252,38 +255,38 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFE0E3E7),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF4B39EF),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         filled: true,
                                         fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.all(24.0),
+                                        contentPadding: EdgeInsets.all(24),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -296,7 +299,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                       .fontStyle,
                                             ),
                                             color: Color(0xFF101213),
-                                            fontSize: 14.0,
+                                            fontSize: 14,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                             fontStyle:
@@ -313,7 +316,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 0.0, 0.0, 16.0),
+                                      0, 0, 0, 16),
                                   child: Container(
                                     width: double.infinity,
                                     child: TextFormField(
@@ -338,7 +341,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                         .fontStyle,
                                               ),
                                               color: Color(0xFF57636C),
-                                              fontSize: 14.0,
+                                              fontSize: 14,
                                               letterSpacing: 0.0,
                                               fontWeight: FontWeight.w500,
                                               fontStyle:
@@ -349,38 +352,38 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFE0E3E7),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFF4B39EF),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFFF5963),
-                                            width: 2.0,
+                                            width: 2,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(10),
                                         ),
                                         filled: true,
                                         fillColor: Colors.white,
-                                        contentPadding: EdgeInsets.all(24.0),
+                                        contentPadding: EdgeInsets.all(24),
                                         suffixIcon: InkWell(
                                           onTap: () => safeSetState(
                                             () => _model.passwordVisibility =
@@ -393,7 +396,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                 ? Icons.visibility_outlined
                                                 : Icons.visibility_off_outlined,
                                             color: Color(0xFF57636C),
-                                            size: 24.0,
+                                            size: 24,
                                           ),
                                         ),
                                       ),
@@ -408,7 +411,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                       .fontStyle,
                                             ),
                                             color: Color(0xFF101213),
-                                            fontSize: 14.0,
+                                            fontSize: 14,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w500,
                                             fontStyle:
@@ -438,89 +441,12 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Theme(
-                                            data: ThemeData(
-                                              checkboxTheme: CheckboxThemeData(
-                                                visualDensity:
-                                                    VisualDensity.compact,
-                                                materialTapTargetSize:
-                                                    MaterialTapTargetSize
-                                                        .shrinkWrap,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          4.0),
-                                                ),
-                                              ),
-                                              unselectedWidgetColor:
-                                                  Color(0xFFD9D9D9),
-                                            ),
-                                            child: Checkbox(
-                                              value: _model.checkboxValue ??=
-                                                  false,
-                                              onChanged: (newValue) async {
-                                                safeSetState(() => _model
-                                                    .checkboxValue = newValue!);
-                                              },
-                                              side: (Color(0xFFD9D9D9) != null)
-                                                  ? BorderSide(
-                                                      width: 2,
-                                                      color: Color(0xFFD9D9D9),
-                                                    )
-                                                  : null,
-                                              activeColor: Color(0xFF004696),
-                                              checkColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .info,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 0.0, 0.0),
-                                            child: Text(
-                                              FFLocalizations.of(context)
-                                                  .getText(
-                                                'bj1tqg1e' /* Remember me */,
-                                              ),
-                                              textAlign: TextAlign.start,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyMedium
-                                                  .override(
-                                                    font: GoogleFonts.readexPro(
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    color: Color(0xFF272727),
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                            ),
-                                          ),
+                                          
                                         ],
                                       ),
                                     ),
                                     Align(
-                                      alignment:
-                                          AlignmentDirectional(-1.0, 0.0),
+                                      alignment: AlignmentDirectional(-1, 0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
                                           logFirebaseEvent(
@@ -539,11 +465,11 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                           width:
                                               MediaQuery.sizeOf(context).width *
                                                   0.372,
-                                          height: 43.0,
-                                          padding: EdgeInsets.all(0.0),
+                                          height: 43,
+                                          padding: EdgeInsets.all(0),
                                           iconPadding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
+                                                  0, 0, 0, 0),
                                           color: Colors.white,
                                           textStyle: FlutterFlowTheme.of(
                                                   context)
@@ -558,7 +484,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                           .fontStyle,
                                                 ),
                                                 color: Color(0xFF004696),
-                                                fontSize: 14.0,
+                                                fontSize: 14,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.normal,
                                                 fontStyle:
@@ -566,23 +492,23 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                         .titleSmall
                                                         .fontStyle,
                                               ),
-                                          elevation: 0.0,
+                                          elevation: 0,
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(8.0),
+                                              BorderRadius.circular(8),
                                         ),
                                       ),
                                     ),
                                   ],
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 15.0, 0.0, 0.0),
+                                        0, 15, 0, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         logFirebaseEvent(
@@ -779,10 +705,10 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                             MediaQuery.sizeOf(context).height *
                                                 0.05,
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 0.0, 24.0, 0.0),
+                                            24, 0, 24, 0),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
+                                                0, 0, 0, 0),
                                         color: FlutterFlowTheme.of(context)
                                             .primary,
                                         textStyle: FlutterFlowTheme.of(context)
@@ -803,98 +729,109 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                       .titleSmall
                                                       .fontStyle,
                                             ),
-                                        elevation: 3.0,
+                                        elevation: 3,
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
-                                          width: 1.0,
+                                          width: 1,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
                                     ),
                                   ),
                                 ),
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: InkWell(
-                                    splashColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    hoverColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: () async {
-                                      logFirebaseEvent(
-                                          'AUTH1_LOGIN_PAGE_Row_f59rtzvr_ON_TAP');
-                                      logFirebaseEvent('Row_navigate_to');
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 10, 0, 0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        logFirebaseEvent(
+                                            'AUTH1_LOGIN_PAGE_Row_f59rtzvr_ON_TAP');
+                                        logFirebaseEvent('Row_navigate_to');
 
-                                      context.pushNamed(
-                                          Auth1registerWidget.routeName);
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 0.0),
-                                          child: Text(
-                                            FFLocalizations.of(context).getText(
-                                              '1ho21nwk' /* Not a member */,
+                                        context.pushNamed(
+                                            Auth1registerWidget.routeName);
+                                      },
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Align(
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
+                                            child: Text(
+                                              FFLocalizations.of(context)
+                                                  .getText(
+                                                '1ho21nwk' /* Not a member */,
+                                              ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        font:
+                                                            GoogleFonts.poppins(
+                                                          fontWeight:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontWeight,
+                                                          fontStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyMedium
+                                                                  .fontStyle,
+                                                        ),
+                                                        letterSpacing: 0.0,
+                                                        fontWeight:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontWeight,
+                                                        fontStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .fontStyle,
+                                                      ),
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  font: GoogleFonts.poppins(
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyMedium
-                                                            .fontStyle,
-                                                  ),
-                                                  letterSpacing: 0.0,
-                                                  fontWeight:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontWeight,
-                                                  fontStyle:
-                                                      FlutterFlowTheme.of(
-                                                              context)
-                                                          .bodyMedium
-                                                          .fontStyle,
-                                                ),
                                           ),
-                                        ),
-                                        FFButtonWidget(
-                                          onPressed: () async {
-                                            logFirebaseEvent(
-                                                'AUTH1_LOGIN_PAGE_JOIN_NOW_BTN_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Button_navigate_to');
-
-                                            context.pushNamed(
-                                                Auth1registerWidget.routeName);
-                                          },
-                                          text: FFLocalizations.of(context)
-                                              .getText(
-                                            'a3hvf9hp' /* Join now */,
-                                          ),
-                                          options: FFButtonOptions(
-                                            height: 40.0,
+                                          Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    5.0, 0.0, 5.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: Colors.white,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
+                                                    10, 0, 0, 0),
+                                            child: FFButtonWidget(
+                                              onPressed: () async {
+                                                logFirebaseEvent(
+                                                    'AUTH1_LOGIN_PAGE_JOIN_NOW_BTN_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Button_navigate_to');
+
+                                                context.pushNamed(
+                                                    Auth1registerWidget
+                                                        .routeName);
+                                              },
+                                              text: FFLocalizations.of(context)
+                                                  .getText(
+                                                'a3hvf9hp' /* Join now */,
+                                              ),
+                                              options: FFButtonOptions(
+                                                height: 40,
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(15, 0, 15, 0),
+                                                iconPadding:
+                                                    EdgeInsetsDirectional
+                                                        .fromSTEB(0, 0, 0, 0),
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primary,
+                                                textStyle: FlutterFlowTheme.of(
+                                                        context)
                                                     .titleSmall
                                                     .override(
                                                       font: GoogleFonts.poppins(
@@ -906,8 +843,10 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                                 .titleSmall
                                                                 .fontStyle,
                                                       ),
-                                                      color: Color(0xFF004696),
-                                                      fontSize: 14.0,
+                                                      color: FlutterFlowTheme
+                                                              .of(context)
+                                                          .secondaryBackground,
+                                                      fontSize: 14,
                                                       letterSpacing: 0.0,
                                                       fontWeight:
                                                           FontWeight.normal,
@@ -917,16 +856,18 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                                               .titleSmall
                                                               .fontStyle,
                                                     ),
-                                            elevation: 0.0,
-                                            borderSide: BorderSide(
-                                              color: Colors.white,
-                                              width: 0.0,
+                                                elevation: 0,
+                                                borderSide: BorderSide(
+                                                  color: Colors.white,
+                                                  width: 0,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(8.0),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -939,7 +880,7 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                                   .secondaryBackground,
                             ),
                             child: Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0, 0),
                               child: Text(
                                 FFLocalizations.of(context).getText(
                                   '4c1m3un8' /* Please Fill the Register Form ... */,

@@ -1,3 +1,24 @@
+// -----------------------------------------
+// Updated for AGP 8.5.x (required for 16KB page support)
+// -----------------------------------------
+
+buildscript {
+    // Add repositories here to resolve the dependencies listed below (AGP, Google Services, Firebase)
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        // Upgrade AGP → REQUIRED for enable16KPageSupport
+        classpath 'com.android.tools.build:gradle:8.5.2'
+
+        // Keep your existing plugins (Firebase, etc.)
+        classpath 'com.google.gms:google-services:4.4.2'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.2'
+    }
+}
+
 allprojects {
     repositories {
         google()
@@ -12,6 +33,7 @@ rootProject.buildDir = '../build'
 
 subprojects {
     afterEvaluate { project ->
+        // This is a common requirement for Kotlin-based Flutter plugins
         if (project.hasProperty("kotlin")) {
             project.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
                 kotlinOptions {
@@ -27,21 +49,26 @@ subprojects {
         if (project.plugins.hasPlugin("com.android.application") ||
                 project.plugins.hasPlugin("com.android.library")) {
             project.android {
+                // Compile SDK Version 35 is now set for all Android projects
                 compileSdkVersion 35
             }
         }
         if (project.hasProperty('android')) {
-                project.android {
-                    if (namespace == null) {
-                        namespace project.group
-                    }
+            project.android {
+                if (namespace == null) {
+                    // Ensures all modules have a namespace defined
+                    namespace project.group
                 }
             }
+        }
     }
 }
+
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
+
+// Ensures all subprojects depend on the :app module's configuration
 subprojects {
     project.evaluationDependsOn(':app')
 }

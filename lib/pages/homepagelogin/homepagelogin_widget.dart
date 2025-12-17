@@ -285,14 +285,18 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
                                         (badgeNotificationsResponse.jsonBody !=
                                             null)
                                     ? functions.totalnotification(
-                                        NotificationsCall.highpriority(
-                                          badgeNotificationsResponse.jsonBody,
-                                        )!
-                                            .length,
-                                        NotificationsCall.announcements(
-                                          badgeNotificationsResponse.jsonBody,
-                                        )!
-                                            .length)
+                                        valueOrDefault<int>(
+                                          NotificationsCall.highpriority(
+                                            badgeNotificationsResponse.jsonBody,
+                                          )?.length,
+                                          0,
+                                        ),
+                                        valueOrDefault<int>(
+                                          NotificationsCall.announcements(
+                                            badgeNotificationsResponse.jsonBody,
+                                          )?.length,
+                                          0,
+                                        ))
                                     : '0',
                                 style: FlutterFlowTheme.of(context)
                                     .titleSmall

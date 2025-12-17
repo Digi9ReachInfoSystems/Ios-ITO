@@ -1,15 +1,22 @@
-
+import 'dart:io';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:integration_test/integration_test.dart';
-
+import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_drop_down.dart';
+import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_icon_button.dart';
+import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_radio_button.dart';
+import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_widgets.dart';
+import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_theme.dart';
+import 'package:indian_talent_olympiad/index.dart';
 import 'package:indian_talent_olympiad/main.dart';
 import 'package:indian_talent_olympiad/flutter_flow/flutter_flow_util.dart';
 
 import 'package:provider/provider.dart';
 import 'package:indian_talent_olympiad/backend/firebase/firebase_config.dart';
 import 'package:indian_talent_olympiad/auth/firebase_auth/auth_util.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -32,20 +39,29 @@ void main() async {
       create: (context) => FFAppState(),
       child: const MyApp(),
     ));
+    await GoogleFonts.pendingFonts();
 
-    await tester.enterText(find.byKey(const ValueKey('TextField_q8c8')), 'Megha');
-    await tester.enterText(find.byKey(const ValueKey('TextField_1w5e')), 'Honnappa');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_q8c8')), 'Megha');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_1w5e')), 'Honnappa');
     await tester.enterText(
         find.byKey(const ValueKey('TextField_e33n')), 'honnappa@gmail.com');
     await tester.enterText(
         find.byKey(const ValueKey('TextField_w3il')), '8088215512');
-    await tester.enterText(find.byKey(const ValueKey('TextField_x2g0')), 'Bangalore');
-    await tester.enterText(find.byKey(const ValueKey('TextField_b8tt')), 'PPEC');
-    await tester.enterText(find.byKey(const ValueKey('TextField_7sea')), 'Karnataka');
-    await tester.enterText(find.byKey(const ValueKey('TextField_chcn')), 'Bangalore');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_x2g0')), 'Bangalore');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_b8tt')), 'PPEC');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_7sea')), 'Karnataka');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_chcn')), 'Bangalore');
     await tester.tap(find.byKey(const ValueKey('DropDown_0vrd')));
-    await tester.enterText(find.byKey(const ValueKey('TextField_mbbb')), 'megha@123');
-    await tester.enterText(find.byKey(const ValueKey('TextField_l7dt')), 'megha@123');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_mbbb')), 'megha@123');
+    await tester.enterText(
+        find.byKey(const ValueKey('TextField_l7dt')), 'megha@123');
     await tester.pumpAndSettle();
     expect(find.text('Welcome back!'), findsWidgets);
   });
@@ -80,6 +96,11 @@ bool _shouldIgnoreError(String error) {
   }
   // These errors should be avoided, but they should not break the test.
   if (error.contains('setState() called after dispose()')) {
+    return true;
+  }
+  // Web-specific error when interacting with TextInputType.emailAddress
+  if (error.contains('setSelectionRange') &&
+      error.contains('HTMLInputElement')) {
     return true;
   }
 
