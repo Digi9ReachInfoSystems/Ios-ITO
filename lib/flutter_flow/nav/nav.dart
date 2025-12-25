@@ -1,6 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indian_talent_olympiad/school/bloc/auth/school_auth_bloc.dart';
+import 'package:indian_talent_olympiad/school/data/repositories/school_auth_repository.dart';
+import 'package:indian_talent_olympiad/school/data/services/school_api_service.dart';
+import 'package:indian_talent_olympiad/school/presentation/dashboard/school_dashboard_page.dart';
+import 'package:indian_talent_olympiad/school/presentation/login/school_login_page.dart';
 import 'package:provider/provider.dart';
 import '/backend/backend.dart';
 import '/backend/schema/structs/index.dart';
@@ -539,7 +545,37 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           name: CartvalueCopyCopyWidget.routeName,
           path: CartvalueCopyCopyWidget.routePath,
           builder: (context, params) => CartvalueCopyCopyWidget(),
-        )
+        ),
+
+        //School Navigation
+       FFRoute(
+  name: 'SchoolLogin',
+  path: '/school-login',
+  builder: (context, params) {
+    return RepositoryProvider(
+      create: (_) => SchoolApiService(),
+      child: RepositoryProvider(
+        create: (context) => SchoolAuthRepository(
+          apiService: context.read<SchoolApiService>(),
+        ),
+        child: BlocProvider(
+          create: (context) => SchoolAuthBloc(
+            repository: context.read<SchoolAuthRepository>(),
+          ),
+          child: const SchoolLoginPage(),
+        ),
+      ),
+    );
+  },
+),
+FFRoute(
+  name: 'SchoolDashboard',
+  path: '/school-dashboard',
+  builder: (context, params) => const SchoolDashboardPage(),
+),
+
+
+
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

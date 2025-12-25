@@ -1,3 +1,9 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indian_talent_olympiad/school/bloc/auth/school_auth_bloc.dart';
+import 'package:indian_talent_olympiad/school/data/repositories/school_auth_repository.dart';
+import 'package:indian_talent_olympiad/school/data/services/school_api_service.dart';
+import 'package:indian_talent_olympiad/school/presentation/login/school_login_page.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
@@ -874,40 +880,19 @@ class _Auth1LoginWidgetState extends State<Auth1LoginWidget>
                               ],
                             ),
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                            ),
-                            child: Align(
-                              alignment: AlignmentDirectional(0, 0),
-                              child: Text(
-                                FFLocalizations.of(context).getText(
-                                  '4c1m3un8' /* Please Fill the Register Form ... */,
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      font: GoogleFonts.readexPro(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .fontStyle,
-                                      ),
-                                      color: Color(0xFF992A2A),
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                              ),
-                            ),
-                          ),
+                          RepositoryProvider(
+  create: (_) => SchoolAuthRepository(
+    apiService: SchoolApiService(),
+  ),
+  child: BlocProvider(
+    create: (context) => SchoolAuthBloc(
+      repository: context.read<SchoolAuthRepository>(),
+    ),
+    child: const SchoolLoginPage(),
+    
+  ),
+),
+
                         ],
                       ),
                     ),
