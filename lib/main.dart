@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +16,7 @@ import 'flutter_flow/internationalization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'index.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,6 +54,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   Locale? _locale;
+ late StreamSubscription<ConnectivityResult> _connectivitySub;
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   ThemeMode _themeMode = ThemeMode.system;
 
@@ -89,6 +94,7 @@ class _MyAppState extends State<MyApp> {
       Duration(milliseconds: 1000),
       () => _appStateNotifier.stopShowingSplashImage(),
     );
+    
   }
 
   @override

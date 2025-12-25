@@ -13,21 +13,19 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '/backend/schema/structs/index.dart';
 import '/auth/firebase_auth/auth_util.dart';
 
-Color? color(int value) {
-  {
-    List<Color> colors = [
-      Color(0xFF6610F2), // Equivalent to Color.fromARGB(255, 233, 140, 134)
-      Color(0xFFFD7E14), // Equivalent to Color.fromARGB(255, 139, 225, 141)
-      Color(0xFFAFBE29), // Equivalent to Color.fromARGB(255, 139, 186, 224)
-      Color(0xFF0DCAF0),
-      Color(0xFF198754),
-      Color(0xFF863DFF),
-      // Equivalent to Color.fromARGB(255, 233, 226, 163)
-      // Add as many colors as you want
-    ];
+Color color(dynamic value) {
+  final index = int.tryParse(value.toString()) ?? 0;
 
-    return colors[value % colors.length];
-  }
+  List<Color> colors = [
+    Color(0xFF6610F2),
+    Color(0xFFFD7E14),
+    Color(0xFFAFBE29),
+    Color(0xFF0DCAF0),
+    Color(0xFF198754),
+    Color(0xFF863DFF),
+  ];
+
+  return colors[index % colors.length];
 }
 
 String images(int names) {
@@ -446,15 +444,13 @@ DateTime? dynamicEnd(
 }
 
 String removehyphen(String serviceslugspassed) {
+  if (serviceslugspassed.isEmpty) return '';
+
   String stringWithoutHyphen = serviceslugspassed.replaceAll('-', ' ');
-
-  // Capitalizing the first letter
-  String capitalizedString =
-      stringWithoutHyphen[0].toUpperCase() + stringWithoutHyphen.substring(1);
-
-  print(capitalizedString);
-  return capitalizedString; // This will print "Monthlytest"
+  return stringWithoutHyphen[0].toUpperCase() +
+      stringWithoutHyphen.substring(1);
 }
+
 
 DateTime addsec(String time) {
   // write a function to add 5 seconds in a date time format of  15 min time
@@ -594,14 +590,28 @@ String removeqoutation(String value) {
 
 String getServiceId(
   String serviceSlug,
-  List<dynamic> listOfServices,
+  dynamic listOfServices,
 ) {
-  // write a function to get a serviceId from a service slug
-  for (var service in listOfServices) {
-    if (service['service_slug'] == serviceSlug) {
-      return service['service_id'];
+  if (listOfServices == null) return '';
+
+  // Handle Map case
+  if (listOfServices is Map) {
+    for (var service in listOfServices.values) {
+      if (service['service_slug'] == serviceSlug) {
+        return service['service_id'].toString();
+      }
     }
   }
+
+  // Handle List case
+  if (listOfServices is List) {
+    for (var service in listOfServices) {
+      if (service['service_slug'] == serviceSlug) {
+        return service['service_id'].toString();
+      }
+    }
+  }
+
   return '';
 }
 

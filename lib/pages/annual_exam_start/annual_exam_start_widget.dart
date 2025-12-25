@@ -311,9 +311,11 @@ class _AnnualExamStartWidgetState extends State<AnnualExamStartWidget>
                                       return ShimmerserviceWidget();
                                     }
                                     final tabBarTestResponse = snapshot.data!;
+final bool isOnlineStudyMaterial = widget.serviceid == '8';
 
                                     return Column(
                                       children: [
+                                        if (!isOnlineStudyMaterial)
                                         Align(
                                           alignment: Alignment(0.0, 0),
                                           child: FlutterFlowButtonTabBar(

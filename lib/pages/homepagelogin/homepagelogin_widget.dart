@@ -1,3 +1,5 @@
+import 'package:indian_talent_olympiad/components/PriorityNotificationBanner.dart';
+
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
@@ -90,34 +92,41 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
 
           context.goNamedAuth(OutOfversionWidget.routeName, context.mounted);
         }
-        if ((_model.apiResulti35?.succeeded ?? true)) {
-          logFirebaseEvent('Homepagelogin_alert_dialog');
-          await showAlignedDialog(
-            context: context,
-            isGlobal: false,
-            avoidOverflow: true,
-            targetAnchor:
-                AlignmentDirectional(0, -1).resolve(Directionality.of(context)),
-            followerAnchor:
-                AlignmentDirectional(0, -1).resolve(Directionality.of(context)),
-            builder: (dialogContext) {
-              return Material(
-                color: Colors.transparent,
-                child: WebViewAware(
-                  child: GestureDetector(
-                    onTap: () {
-                      FocusScope.of(dialogContext).unfocus();
-                      FocusManager.instance.primaryFocus?.unfocus();
-                    },
-                    child: Container(
-                      height: 200,
-                      child: NotificationPopupWidget(),
-                    ),
-                  ),
-                ),
-              );
-            },
-          );
+        if ((_model.apiResulti35?.succeeded ?? true) &&
+    FFAppState().hasShownNotificationPopup == false) {
+
+  // mark as shown FIRST (important to avoid double dialogs)
+  // FFAppState().update(() {
+  //   FFAppState().hasShownNotificationPopup = true;
+  // });
+
+  // logFirebaseEvent('Homepagelogin_alert_dialog');
+  //         await showAlignedDialog(
+  //           context: context,
+  //           isGlobal: false,
+  //           avoidOverflow: true,
+  //           targetAnchor:
+  //               AlignmentDirectional(0, -1).resolve(Directionality.of(context)),
+  //           followerAnchor:
+  //               AlignmentDirectional(0, -1).resolve(Directionality.of(context)),
+  //           builder: (dialogContext) {
+  //             return Material(
+  //               color: Colors.transparent,
+  //               child: WebViewAware(
+  //                 child: GestureDetector(
+  //                   onTap: () {
+  //                     FocusScope.of(dialogContext).unfocus();
+  //                     FocusManager.instance.primaryFocus?.unfocus();
+  //                   },
+  //                   child: Container(
+  //                     height: 200,
+  //                     child: NotificationPopupWidget(),
+  //                   ),
+  //                 ),
+  //               ),
+  //             );
+  //           },
+  //         );
 
           logFirebaseEvent('Homepagelogin_custom_action');
           _model.servicer = await actions.jsontodata(
@@ -133,26 +142,27 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
             (_model.newversion?.jsonBody ?? ''),
           )!;
           safeSetState(() {});
-        } else {
-          logFirebaseEvent('Homepagelogin_alert_dialog');
-          await showDialog(
-            context: context,
-            builder: (alertDialogContext) {
-              return WebViewAware(
-                child: AlertDialog(
-                  title: Text('message'),
-                  content: Text('Check Your Internet Connection'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext),
-                      child: Text('Ok'),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
-        }
+    }
+        // else {
+        //   logFirebaseEvent('Homepagelogin_alert_dialog');
+        //   await showDialog(
+        //     context: context,
+        //     builder: (alertDialogContext) {
+        //       return WebViewAware(
+        //         child: AlertDialog(
+        //           title: Text('message'),
+        //           content: Text('Check Your Internet Connection'),
+        //           actions: [
+        //             TextButton(
+        //               onPressed: () => Navigator.pop(alertDialogContext),
+        //               child: Text('Ok'),
+        //             ),
+        //           ],
+        //         ),
+        //       );
+        //     },
+        //   );
+        // }
       } else {
         logFirebaseEvent('Homepagelogin_backend_call');
         _model.getnewtoken = await GetNewTokenCall.call(
@@ -280,45 +290,23 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
                             final badgeNotificationsResponse = snapshot.data!;
 
                             return badges.Badge(
-                              badgeContent: Text(
-                                badgeNotificationsResponse.succeeded &&
-                                        (badgeNotificationsResponse.jsonBody !=
-                                            null)
-                                    ? functions.totalnotification(
-                                        valueOrDefault<int>(
-                                          NotificationsCall.highpriority(
-                                            badgeNotificationsResponse.jsonBody,
-                                          )?.length,
-                                          0,
-                                        ),
-                                        valueOrDefault<int>(
-                                          NotificationsCall.announcements(
-                                            badgeNotificationsResponse.jsonBody,
-                                          )?.length,
-                                          0,
-                                        ))
-                                    : '0',
-                                style: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      font: GoogleFonts.readexPro(
-                                        fontWeight: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontWeight,
-                                        fontStyle: FlutterFlowTheme.of(context)
-                                            .titleSmall
-                                            .fontStyle,
-                                      ),
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                              ),
+  badgeContent: Builder(
+    builder: (_) {
+      final announcementCount =
+          NotificationsCall.announcements(
+                badgeNotificationsResponse.jsonBody,
+              )?.length ??
+              0;
+
+      return Text(
+        announcementCount.toString(),
+        style: FlutterFlowTheme.of(context).titleSmall.override(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+      );
+    },
+  ),
                               showBadge: true,
                               shape: badges.BadgeShape.circle,
                               badgeColor: FlutterFlowTheme.of(context).primary,
@@ -394,23 +382,14 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
+                          PriorityNotificationBanner(),
+
                           Align(
                             alignment: AlignmentDirectional(-1, 0),
                             child: Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  logFirebaseEvent(
-                                      'HOMEPAGELOGIN_PAGE_Text_wqjcu7if_ON_TAP');
-                                  logFirebaseEvent('Text_navigate_to');
-
-                                  context.pushNamed(SummerquizWidget.routeName);
-                                },
+                                  EdgeInsetsDirectional.fromSTEB(10, 8, 0, 0),
+                              
                                 child: Text(
                                   FFLocalizations.of(context).getText(
                                     '1mqf9cgg' /* Welcome back! */,
@@ -435,7 +414,7 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
                                             .fontStyle,
                                       ),
                                 ),
-                              ),
+                             
                             ),
                           ),
                           Row(
@@ -708,6 +687,7 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
                                           'HOMEPAGELOGIN_Container_azr8mu5t_ON_TAP');
                                       if ((userServicesItem ==
                                               'monthly-test') ||
+                                               (userServicesItem == 'online-test-bank') ||
                                           (userServicesItem ==
                                               'summer-quiz-competition') ||
                                           (userServicesItem == 'neet') ||
@@ -741,10 +721,7 @@ class _HomepageloginWidgetState extends State<HomepageloginWidget> {
 
                                         context.pushNamed(
                                             ProductsmenuWidget.routeName);
-                                      } else if ((userServicesItem ==
-                                              'annual-exam') ||
-                                          (userServicesItem ==
-                                              'online-study-material')) {
+                                      } else if (userServicesItem == 'annual-exam') {
                                         logFirebaseEvent(
                                             'Container_navigate_to');
 

@@ -38,7 +38,6 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
   @override
   void dispose() {
     _model.dispose();
-
     super.dispose();
   }
 
@@ -53,19 +52,19 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
         token: FFAppState().userInfo.token,
       ),
       builder: (context, snapshot) {
-        // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
           return Scaffold(
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Center(
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 70.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0, 70, 0, 0),
                 child: OrdersshimmerWidget(),
               ),
             ),
           );
         }
-        final notificationsNotificationsResponse = snapshot.data!;
+
+        final notificationsResponse = snapshot.data!;
 
         return GestureDetector(
           onTap: () {
@@ -80,266 +79,144 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
               automaticallyImplyLeading: false,
               leading: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
-                borderRadius: 30.0,
-                borderWidth: 1.0,
-                buttonSize: 60.0,
-                icon: Icon(
+                borderRadius: 30,
+                borderWidth: 1,
+                buttonSize: 60,
+                icon: const Icon(
                   Icons.chevron_left_rounded,
                   color: Color(0xFF272727),
-                  size: 30.0,
+                  size: 30,
                 ),
-                onPressed: () async {
-                  logFirebaseEvent('NOTIFICATIONS_chevron_left_rounded_ICN_O');
-                  logFirebaseEvent('IconButton_navigate_back');
-                  context.pop();
-                },
+                onPressed: () => context.pop(),
               ),
               title: Text(
-                FFLocalizations.of(context).getText(
-                  'hox76tk8' /* Notifications */,
-                ),
+                'Notifications',
                 style: FlutterFlowTheme.of(context).headlineLarge.override(
-                      font: GoogleFonts.outfit(
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FlutterFlowTheme.of(context)
-                            .headlineLarge
-                            .fontStyle,
-                      ),
-                      fontSize: 18.0,
-                      letterSpacing: 0.0,
-                      fontWeight: FontWeight.w500,
-                      fontStyle:
-                          FlutterFlowTheme.of(context).headlineLarge.fontStyle,
+                      font: GoogleFonts.outfit(fontWeight: FontWeight.w500),
+                      fontSize: 18,
                     ),
               ),
-              actions: [],
               centerTitle: true,
               elevation: 0.5,
             ),
             body: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 10.0, 0.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: SingleChildScrollView(
                 child: Column(
-                  mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    /// REGULAR ANNOUNCEMENTS ONLY
                     Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
                       child: Text(
-                        FFLocalizations.of(context).getText(
-                          'ohe14bs0' /* High Priority Announcements */,
-                        ),
+                        'Announcement',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               font: GoogleFonts.readexPro(
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              fontSize: 15.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
+                                  fontWeight: FontWeight.w500),
+                              fontSize: 15,
                             ),
                       ),
                     ),
                     Builder(
                       builder: (context) {
-                        final notifications = NotificationsCall.highpriority(
-                              notificationsNotificationsResponse.jsonBody,
-                            )?.toList() ??
-                            [];
+                        final notifications =
+                            NotificationsCall.announcements(
+                                  notificationsResponse.jsonBody,
+                                )?.toList() ??
+                                [];
+
                         if (notifications.isEmpty) {
-                          return Center(
+                          return const Center(
                             child: EmptyWidgetWidget(
-                              datatype: 'High Priority Announcements',
+                              datatype: 'Announcement',
                             ),
                           );
                         }
 
                         return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: List.generate(notifications.length,
-                              (notificationsIndex) {
-                            final notificationsItem =
-                                notifications[notificationsIndex];
+                          children: List.generate(notifications.length, (index) {
+                            final item = notifications[index];
                             return Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
                               color: FlutterFlowTheme.of(context)
                                   .secondaryBackground,
-                              elevation: 0.0,
+                              elevation: 0,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(10.0),
+                                padding: const EdgeInsets.all(10),
                                 child: Row(
-                                  mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 10.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: Container(
-                                                    width: 10.0,
-                                                    height: 10.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                  ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                width: 10,
+                                                height: 10,
+                                                decoration: BoxDecoration(
+                                                  color:
+                                                      FlutterFlowTheme.of(context)
+                                                          .primary,
+                                                  shape: BoxShape.circle,
                                                 ),
-                                                Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'dxc7z9p2' /* New Notifications */,
-                                                  ),
-                                                  maxLines: 1,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .readexPro(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontStyle,
-                                                      ),
-                                                ),
-                                              ],
-                                            ),
-                                            Text(
-                                              valueOrDefault<String>(
-                                                functions.notificationtime(
+                                              ),
+                                              const SizedBox(width: 10),
+                                            Expanded(
+  child: Text(
+    getJsonField(item, r'''$.title''').toString(),
+    maxLines: 2,
+    overflow: TextOverflow.ellipsis,
+    style: FlutterFlowTheme.of(context).labelMedium.override(
+          fontWeight: FontWeight.w600, // bold
+          fontSize: 14,
+        ),
+  ),
+),
+
+                                            ],
+                                          ),
+                                          const SizedBox(height: 4),
+                                          Text(
+                                            functions.notificationtime(
                                                     functions.jsontoTime(
                                                         getJsonField(
-                                                  notificationsItem,
-                                                  r'''$.created_on''',
-                                                ).toString())),
+                                              item,
+                                              r'''$.created_on''',
+                                            ).toString())) ??
                                                 '0',
-                                              ),
-                                              maxLines: 1,
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .labelMedium
-                                                  .override(
-                                                    font: GoogleFonts.readexPro(
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    color: Color(0xFFB6B6B6),
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontStyle,
-                                                  ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 2.0, 0.0, 0.0),
-                                              child: Text(
-                                                getJsonField(
-                                                  notificationsItem,
-                                                  r'''$.content''',
-                                                ).toString(),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .labelMedium
-                                                    .override(
-                                                      font:
-                                                          GoogleFonts.readexPro(
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontStyle,
-                                                    ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium
+                                                .override(
+                                                  color:
+                                                      const Color(0xFFB6B6B6),
+                                                ),
+                                          ),
+                                          const SizedBox(height: 2),
+                                          Text(
+                                            getJsonField(
+                                              item,
+                                              r'''$.content''',
+                                            ).toString(),
+                                            style: FlutterFlowTheme.of(context)
+                                                .labelMedium,
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    if (getJsonField(
-                                          notificationsItem,
-                                          r'''$.link''',
-                                        ) !=
+                                    if (getJsonField(item, r'''$.link''') !=
                                         null)
                                       ClipRRect(
                                         borderRadius:
-                                            BorderRadius.circular(8.0),
+                                            BorderRadius.circular(8),
                                         child: Image.network(
-                                          getJsonField(
-                                            notificationsItem,
-                                            r'''$.link''',
-                                          ).toString(),
-                                          width: 100.0,
-                                          height: 100.0,
+                                          getJsonField(item, r'''$.link''')
+                                              .toString(),
+                                          width: 100,
+                                          height: 100,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -347,235 +224,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget> {
                                 ),
                               ),
                             );
-                          }).divide(SizedBox(height: 5.0)),
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 10.0),
-                      child: Text(
-                        FFLocalizations.of(context).getText(
-                          '3jutqfh1' /* Regular Announcement */,
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              font: GoogleFonts.readexPro(
-                                fontWeight: FontWeight.w500,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .fontStyle,
-                              ),
-                              fontSize: 15.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .fontStyle,
-                            ),
-                      ),
-                    ),
-                    Builder(
-                      builder: (context) {
-                        final notifications = NotificationsCall.announcements(
-                              notificationsNotificationsResponse.jsonBody,
-                            )?.toList() ??
-                            [];
-                        if (notifications.isEmpty) {
-                          return Center(
-                            child: EmptyWidgetWidget(
-                              datatype: 'Regular Announcement',
-                            ),
-                          );
-                        }
-
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: List.generate(notifications.length,
-                              (notificationsIndex) {
-                            final notificationsItem =
-                                notifications[notificationsIndex];
-                            return Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              elevation: 0.0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 0.0, 10.0, 0.0),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: [
-                                                Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 10.0, 0.0),
-                                                  child: Container(
-                                                    width: 10.0,
-                                                    height: 10.0,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primary,
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                  ),
-                                                ),
-                                                Text(
-                                                  FFLocalizations.of(context)
-                                                      .getText(
-                                                    'uavdrpko' /* New Notifications */,
-                                                  ),
-                                                  maxLines: 1,
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        font: GoogleFonts
-                                                            .readexPro(
-                                                          fontWeight:
-                                                              FontWeight.w500,
-                                                          fontStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyLarge
-                                                                  .fontStyle,
-                                                        ),
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyLarge
-                                                                .fontStyle,
-                                                      ),
-                                                ),
-                                              ],
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(0.0, 0.0, 0.0, 2.0),
-                                              child: Text(
-                                                valueOrDefault<String>(
-                                                  functions.notificationtime(
-                                                      functions.jsontoTime(
-                                                          getJsonField(
-                                                    notificationsItem,
-                                                    r'''$.created_on''',
-                                                  ).toString())),
-                                                  '0',
-                                                ),
-                                                maxLines: 1,
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .labelMedium
-                                                    .override(
-                                                      font:
-                                                          GoogleFonts.readexPro(
-                                                        fontWeight:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontWeight,
-                                                        fontStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .labelMedium
-                                                                .fontStyle,
-                                                      ),
-                                                      color: Color(0xFFB6B6B6),
-                                                      letterSpacing: 0.0,
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontStyle,
-                                                    ),
-                                              ),
-                                            ),
-                                            Text(
-                                              getJsonField(
-                                                notificationsItem,
-                                                r'''$.content''',
-                                              ).toString(),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .labelMedium
-                                                  .override(
-                                                    font: GoogleFonts.readexPro(
-                                                      fontWeight:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontWeight,
-                                                      fontStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .labelMedium
-                                                              .fontStyle,
-                                                    ),
-                                                    letterSpacing: 0.0,
-                                                    fontWeight:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontWeight,
-                                                    fontStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .labelMedium
-                                                            .fontStyle,
-                                                  ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    if (getJsonField(
-                                          notificationsItem,
-                                          r'''$.link''',
-                                        ) !=
-                                        null)
-                                      ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: Image.network(
-                                          getJsonField(
-                                            notificationsItem,
-                                            r'''$.link''',
-                                          ).toString(),
-                                          width: 100.0,
-                                          height: 100.0,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            );
-                          }).divide(SizedBox(height: 5.0)),
+                          }).divide(const SizedBox(height: 5)),
                         );
                       },
                     ),

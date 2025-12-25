@@ -570,6 +570,8 @@ class FFAppState extends ChangeNotifier {
     updateFn(_timeline);
     prefs.setString('ff_timeline', _timeline.serialize());
   }
+bool hasShownNotificationPopup = false;
+bool hasShownNoInternetPopup = false;
 
   bool _isChecked = false;
   bool get isChecked => _isChecked;
